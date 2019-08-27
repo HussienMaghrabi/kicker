@@ -1,0 +1,167 @@
+
+.sections,
+.right-side {
+  background: #f2e8da;
+  margin-bottom: 5%;
+  padding-bottom: 3%;
+  height: fit-content;
+}
+
+.sections h2 {
+  font-size: 30px;
+  margin-bottom: 3%;
+}
+
+.sections h2 img {
+  width: 50px !important;
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+.sections .div-title {
+  background: #efefef;
+  padding: 5px 10px 5px 10px;
+  margin: 0;
+  text-align: center;
+}
+
+.sections .div-value {
+  font-size: 46px;
+  font-weight: 600;
+  margin: 0;
+  background-color: white;
+  text-align: center;
+}
+
+.sections .div-footer {
+  background-color: white;
+  text-align: center;
+}
+
+#scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+#scroll::-webkit-scrollbar-track {
+  background: #9e6800;
+}
+
+#scroll::-webkit-scrollbar-thumb {
+  background: #333333;
+}
+
+#scroll::-webkit-scrollbar-thumb:hover {
+  background: black;
+}
+
+.fc-scroller .fc-day-grid-container {
+  height: 308px !important;
+}
+
+.edit-bar {
+  width: 400px;
+  margin-bottom: 30px;
+  margin-left: 350px;
+  padding: 4px;
+  background: #e2d8ce;
+  border-radius: 5px;
+  margin-top: 3px;
+  -webkit-box-shadow: inset 0 0 10px #f1d5b9;
+  box-shadow: inset 0 0 10px #92887d;
+  padding-bottom: 3%;
+}
+
+.editBtn {
+  background: rgba(244, 244, 244, 0) !important;
+  color: white;
+  display: inline-block;
+  margin-bottom: 0;
+  font-size: 20px;
+  padding-top: 2%;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.editBtn:hover {
+  color: black;
+}
+
+.fa-calendar {
+  font-family: FontAwesome !important;
+}
+
+#reportrange {
+  background: rgb(158, 105, 0);
+  color: white;
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid rgb(204, 204, 204);
+  min-width: 300px;
+  margin-top: -7%;
+  float: right;
+}
+
+@media screen and (max-width: 1087px) {
+  .edit-bar {
+    margin-left: 4% !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .left-side-dash-col {
+    width: 100% !important;
+    margin: 3% !important;
+  }
+
+  .right-side {
+    width: 100% !important;
+    margin: 3% !important;
+  }
+
+  .edit-bar {
+    height: 57px !important;
+    width: 93%;
+  }
+
+  #reportrange {
+    margin-top: 0% !important;
+    width: 85% !important;
+    min-width: unset !important;
+    height: 47px !important;
+  }
+
+  .mx-datepicker-range {
+    width: 94% !important
+  }
+}
+
+/* loading css */
+
+/* #loading
+{
+  margin-left: 35%;
+  margin-top: 10%;
+}
+.overlaySec
+{
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+  z-index: 99999;
+  position: fixed;
+  top: 0;
+} */

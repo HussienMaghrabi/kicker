@@ -1,0 +1,26 @@
+.header-menu-icon,
+.header-menu-item,
+.fa-users,
+.fa-user,
+.menu-icon,
+.menu-div ul li a,
+.filter-title,
+.filter-title i,
+.unit-details-value,
+.unit-rooms-value,
+.footer-btns:hover {
+  color: #9e6900 !important;
+}
+
+.menu-div ul li a:hover {
+  color: black !important;
+}
+
+.unit-filter-btn {
+  background: #9e6900a6 !important;
+}
+
+.resale-btn {
+  border: 1px solid #9e6900 !important;
+}
+/*# sourceMappingURL=main-colors.css.map */

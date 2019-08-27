@@ -1,0 +1,37 @@
+                                            <div class="property_item heading_space">
+                                                <div class="image" style="height: 33.5rem">
+                                                    <a href="{{ url('project/'.$project->id) }}"><img style="height: 33.5rem" src="{{ url('uploads/'.$project->cover) }}" alt="latest property" class="img-responsive"></a>
+                                                    <div class="price clearfix">
+                                                    </div>
+                                                    <span class="tag_l"><img src="{{ url('uploads/'.$project->logo) }}" style="width: 8rem;height: 7rem;"></span>
+                                                </div>
+                                                <div class="logaAt">
+                                                    <h3>{{ $project->{app()->getLocale().'_name'} }}</h3>
+                                                    <span><img src="{{ url('/website_style/images/location.png') }}" />&nbsp&nbsp{{ @App\Location::find($project->location_id)->{app()->getLocale().'_name'} }}</span>
+                                                </div>
+                                                @if(count(@App\Phase::where('project_id',$project->id)->get()) > 0)
+                                                <div class="proerty_content">
+                                                    <div class="property_meta transparent New_property_meta_style">
+                                                        @foreach(@App\Phase::where('project_id',$project->id)->get() as $phase)
+                                                            @foreach(@App\Phase_Facilities::where('phase_id',$phase->id)->get() as $fac)
+                                                                @foreach(@App\Facility::where('id',$fac->facility_id)->get() as $icon)
+                                                                    <span><img src="{{ url('uploads/'.@App\Icon::where('id',$icon->icon)->first()->icon) }}" width="20px"></span>
+                                                                @endforeach
+                                                            @endforeach
+                                                        @endforeach
+                                                    </div>
+
+                                                    <div class="toggle_share collapse" id="proj{{ $project->id }}">
+                                                        <ul>
+                                                            <li><a href="#." class="facebook"><i class="icon-facebook-1"></i> Facebook</a></li>
+                                                            <li><a href="#." class="twitter"><i class="icon-twitter-1"></i> Twitter</a></li>
+                                                            <li><a href="#." class="vimo"><i class="icon-vimeo3"></i> Vimeo</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                @else
+                                                <div class="proerty_content New_property_meta_style">
+                                                    <h3 style="color:black;padding:.5rem">{{ $project->{app()->getLocale().'_name'} }}</h3>
+                                                </div>
+                                                @endif
+                                            </div>

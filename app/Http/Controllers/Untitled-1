@@ -1,0 +1,148 @@
+            <div class="container" style="padding: 350px 0px 80px 0px;">
+            <!-- header of text div  -->
+                <div class="row">
+                    <div class="col-xs-12 text-center p-1" style="margin-top:20px;">
+                        <h2 class="uppercase blu-color" style="color:white !important;">{{ __('admin.featured_projects') }}</h2>
+                    </div>
+                </div>
+
+                <!-- end header of div -->
+
+                <!-- start content slider -->
+                <div class="carouselContent">
+                    <div class="owl-carousel">
+                        @foreach(@App\Project::where('show_website',1)->orderby('featured_priority')->limit('9')->get() as $project)
+                            <div class="dwrber">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="{{ url(app()->getLocale().'/project/'.slug($project->{app()->getLocale().'_name'}).'-'.$project->id) }}">
+                                            <img src="{{ url('uploads/'.$project->cover) }}" alt="latest property" class="img-responsive">
+                                        </a>
+                                        <div class="devloperlogoholder">
+                                            <img src="{{ url('uploads/'.$project->logo) }}" class="home-project-logo">
+                                        </div>
+                                    </div>
+                                    <!-- name of project -->
+                                        <div class="col-md-12 projectlogo">
+                                            <span><img class="developer-logo"  src="{{ url('uploads/'.$project->developer->logo) }}"></span>
+                                        </div>
+                                        <div class="col-md-12 projectName">
+                                            <span><p>{{ $project->{app()->getLocale().'_name'} }}</p></span>
+                                        </div>
+                                    <!-- end name of project -->
+                                    <!--  project details -->
+                                        <div class="col-md-6 text-det">
+                                            <span> <bold>{{ __('admin.down_payment') }}  :</bold>   <b>{{ @$project->down_payment }}%</b></span>
+                                            <br>
+                                            <br>
+                                            <span> <bold>{{ __('admin.delivery_date') }}  :</bold>   <b>{{ @$project->delivery_date }}</b></span>
+                                        </div>
+                                        <div class="col-md-6 text-det">
+                                            <span> <bold>{{ __('admin.installment') }}  :</bold>   <b>{{ @$project->installment_year }} {{ __('admin.years') }}</b></span>
+                                            <br>
+                                            <br>
+                                            <span> <bold>starting area  :</bold>   <b>{{ @$project->area }}</b></span>
+                                        </div>
+                                        
+                                    <!--  endproject details -->
+                                    <hr>
+                                    <!-- red more -->
+                                    <div class="col-md-12">
+                                        <div class="redmorediv text-center">
+                                            <a href="{{ url(app()->getLocale().'/project/'.slug($project->{app()->getLocale().'_name'}).'-'.$project->id) }}" class="btn  btn-block botread">{{ __('admin.read_more') }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <!--  content slider -->
+
+
+                <!-- <div class="row center">
+                        @foreach(@App\Project::where('show_website',1)->orderby('featured_priority')->limit('9')->get() as $project)
+                        <div class="col-sm-6 col-md-4 feature-home">
+                        <span><img class="developer-logo"  src="{{ url('uploads/'.$project->developer->logo) }}"></span>
+                            <a href="{{ url('project/'.slug($project->{app()->getLocale().'_name'}).'-'.$project->id) }}">
+                            <div class="property_item heading_space home-project" style="min-height:240px;">
+                                {{--<div class="project-head">--}}
+                                    {{--<h4 class="text-center">{{ $project->{app()->getLocale().'_name'} }}</h4>--}}
+                                {{--</div>--}}
+                                <img src="{{ url('uploads/'.$project->logo) }}" class="home-project-logo">
+                                <div class="image">
+                                    
+                                    <span class="tag_t">{{ \App\Location::find($project->location_id)->{app()->getLocale().'_name'} }}</span>
+                                <img src="{{ url('uploads/'.$project->cover) }}" alt="latest property" class="img-responsive">
+
+
+                                </div>
+                                <div class="project-bb">
+                                    <span style="padding-left:20px;">
+                                                <div style="margin-right:10px;float:left;">
+                                                    @if(isset($project->down_payment))
+                                                            <bold>{{ __('admin.down_payment') }}</bold>
+                                                            <h4> {{ @$project->down_payment }}%</h4>
+                                                    @endif
+                                                </div>
+                                                <div >
+                                                    @if(isset($project->installment_year))
+                                                            <bold>{{ __('admin.installment') }}</bold>
+                                                            <h4>{{ @$project->installment_year }} {{ __('admin.years') }}</h4>
+                                                    @endif
+                                                </div>
+                                    </span>
+                                    <span style="padding-left:30px;">
+                                                    @if(isset($project->delivery_date))
+                                                            <bold>{{ __('admin.delivery_date') }}</bold>
+                                                            <h4>{{ @$project->delivery_date }}</h4>
+                                                    @endif
+                                    </span>
+                                    <button type="submit" class=" project-btn">{{ __('admin.read_more') }}</button>
+                                </div>
+
+
+                            </div>
+                            </a>
+                        </div>
+
+                    @endforeach
+                </div> -->
+            </div>
+==========================================
+
+
+
+
+                                    <!-- name of project -->
+                                    <div class="main-projec-de" style="background-color:white">
+                                        <div class="col-md-12 projectlogo">
+                                            <span><img class="developer-logo"  src="{{ url('uploads/'.$project->developer->logo) }}"></span>
+                                        </div>
+                                        <div class="col-md-12 projectName">
+                                            <span><p>{{ $project->{app()->getLocale().'_name'} }}</p></span>
+                                        </div>
+                                    <!-- end name of project -->
+                                    <!--  project details -->
+                                        <div class="col-md-6 text-det">
+                                            <span> <bold>{{ __('admin.down_payment') }}  :</bold>   <b>{{ @$project->down_payment }}%</b></span>
+                                            <br>
+                                            <br>
+                                            <span> <bold>{{ __('admin.delivery_date') }}  :</bold>   <b>{{ @$project->delivery_date }}</b></span>
+                                        </div>
+                                        <div class="col-md-6 text-det">
+                                            <span> <bold>{{ __('admin.installment') }}  :</bold>   <b>{{ @$project->installment_year }} {{ __('admin.years') }}</b></span>
+                                            <br>
+                                            <br>
+                                            <span> <bold>starting area  :</bold>   <b>{{ @$project->area }}</b></span>
+                                        </div>
+                                    </div>
+                                    <!--  endproject details -->
+                                    <hr>
+                                    <!-- red more -->
+                                    <div class="col-md-12">
+                                        <div class="redmorediv text-center">
+                                            <a href="{{ url(app()->getLocale().'/project/'.slug($project->{app()->getLocale().'_name'}).'-'.$project->id) }}" class="btn  btn-block botread">{{ __('admin.read_more') }}</a>
+                                        </div>
+                                    </div>
+                                </div>

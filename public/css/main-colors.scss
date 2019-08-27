@@ -1,0 +1,29 @@
+$main-website-color: #9e6900;
+$main-website-color-opacity-lesser: #9e6900a6;
+$hover-color: black;
+
+.header-menu-icon,
+.header-menu-item,
+.fa-users,
+.fa-user,
+.menu-icon,
+.menu-div ul li a,
+.filter-title,
+.filter-title i,
+.unit-details-value,
+.unit-rooms-value,
+.footer-btns:hover{
+    color: $main-website-color !important; 
+}
+
+.menu-div ul li a:hover{
+    color: $hover-color !important; 
+}
+
+.unit-filter-btn{
+    background: $main-website-color-opacity-lesser !important;
+}
+
+.resale-btn{
+    border: 1px solid $main-website-color !important;
+}

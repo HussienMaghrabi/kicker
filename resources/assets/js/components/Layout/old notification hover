@@ -1,0 +1,75 @@
+        <div class="navbar-item has-dropdown is-hoverable notification-div">
+          <a class="navbar-link" @click="openNotification" style="padding-right: 0.5rem;">
+            <img src="/icon/header-bill.png">
+            <span class="label label-danger" v-if="numOfNotifications > 0" id="num">{{ numOfNotifications }}</span>
+          </a>
+
+          <div class="navbar-dropdown notifications" id="notifications" style="height: 347px; overflow: scroll;">
+            <div v-for="notification in notifications" :key="notification.id" v-if="notification.status == 0" style="background-color:#edf2fa">
+              <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'lead'" class="navbar-item notification"
+                v-bind:url="'/admin/vue/showleadDetals/' + notification.id" v-bind:href="'/admin/vue/showleadDetals/' + notification.id">
+                <img v-bind:src="'/images/'+ notification.icon">
+                {{notification.title}}
+                <br>
+                <span class="date">{{notification.diff}}</span>
+              </a>
+              <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'lead'" class="navbar-item notification"
+                v-bind:url="'/admin/vue/showleadDetals/' + notification.id" v-bind:href="'/admin/vue/showleadDetals/' + notification.id">
+                <img v-bind:src="'/images/'+ notification.icon">
+                {{notification.title}}
+                <br>
+                <span class="date">{{notification.diff}}</span>
+              </a>
+              <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'meeting' " class="navbar-item notification"
+                v-bind:url="'/admin/vue/Allmeetings/'" v-bind:href="'/admin/vue/Allmentngs/'">
+                <img v-bind:src="'/images/'+ notification.icon">
+                {{notification.title}}
+                <br>
+                <span class="date">{{notification.diff}}</span>
+              </a>
+              <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'call' " class="navbar-item notification">
+                <img v-bind:src="'/images/'+ notification.icon">
+                {{notification.title}}
+                <br>
+                <span class="date">{{notification.diff}}</span>
+              </a>
+              <hr class="navbar-divider">
+            </div>
+            <div v-for="notification in notifications" :key="notification.id" v-if="notification.status == 1" style="background-color:#FFF">
+              <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'lead'" class="navbar-item notification"
+                v-bind:url="'/admin/vue/showleadDetals/' + notification.id" v-bind:href="'/admin/vue/showleadDetals/' + notification.id">
+                <img v-bind:src="'/images/'+ notification.icon">
+                {{notification.title}}
+                <br>
+                <span class="date">{{notification.diff}}</span>
+              </a>
+              <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'lead'" class="navbar-item notification"
+                v-bind:url="'/admin/vue/showleadDetals/' + notification.id" v-bind:href="'/admin/vue/showleadDetals/' + notification.id">
+                <img v-bind:src="'/images/'+ notification.icon">
+                {{notification.title}}
+                <br>
+                <span class="date">{{notification.diff}}</span>
+              </a>
+              <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'meeting' " class="navbar-item notification"
+                v-bind:url="'/admin/vue/Allmeetings/'" v-bind:href="'/admin/vue/Allmentngs/'">
+                <img v-bind:src="'/images/'+ notification.icon">
+                {{notification.title}}
+                <br>
+                <span class="date">{{notification.diff}}</span>
+              </a>
+              <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'call' " class="navbar-item notification">
+                <img v-bind:src="'/images/'+ notification.icon">
+                {{notification.title}}
+                <br>
+                <span class="date">{{notification.diff}}</span>
+              </a>
+              <!-- <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'cil' " class="navbar-item notification">
+                <img v-bind:src="'/images/'+ notification.icon">
+                {{notification.title}}
+                <br>
+                <span class="date">{{notification.diff}}</span>
+              </a> -->
+              <hr class="navbar-divider">
+            </div>
+          </div>
+        </div>

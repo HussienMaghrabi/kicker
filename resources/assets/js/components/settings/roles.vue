@@ -1,0 +1,1196 @@
+<template>
+    <section>
+        <div class="container">
+        <b-field grouped group-multiline>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        Roles
+                    </div>
+                </div>
+                <div class="card-body">
+                    <button size="is-medium" @click="AddnewModal = true" class="button field is-info">
+                        <b-icon icon="file"></b-icon>
+                        <span>Add new</span>
+                    </button>
+                </div>
+            </div>
+        </b-field>
+            <b-field grouped group-multiline>
+            </b-field>
+            <b-table
+                :data="Roles"
+                :paginated="isPaginated"
+                :per-page="perPage"
+                :current-page.sync="currentPage"
+                :pagination-simple="isPaginationSimple"
+                :pagination-position="paginationPosition"
+                :default-sort-direction="defaultSortDirection"
+                default-sort="user.first_name"
+                aria-next-label="Next page"
+                aria-previous-label="Previous page"
+                aria-page-label="Page"
+                aria-current-label="Current page">
+
+                <template slot-scope="props">
+                    <b-table-column field="Roles.id" label="ID" width="40" sortable numeric>
+                        {{ props.row.id }}
+                    </b-table-column>
+
+                    <b-table-column field="Roles.name" label="Name" sortable>
+                        {{ props.row.name }}
+                </b-table-column>
+
+                    <b-table-column field="show" label="Show">
+                        <router-link :to="'Show_Roles/'+props.row.id">
+                            <b-button type="is-info">Show</b-button>
+                        </router-link>
+                    </b-table-column>
+
+                    <!-- <b-table-column field="edit" label="Edit">
+                        <b-button type="is-success" @click="OpenEditModal(props.row.id)" >Edit</b-button>
+                    </b-table-column> -->
+
+                    <b-table-column field="edit" label="Delete">
+                        <b-button @click="UnitdeleteElementById(props.row.id)" type="is-danger">Delete</b-button>
+                    </b-table-column>
+
+                </template>
+            </b-table>
+        </div>
+        <!-- loding  -->
+        <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="false"></b-loading>
+        <!-- end loding -->
+        <!-- begin add new -->
+            <b-modal :active.sync="AddnewModal" full-screen has-modal-card :can-cancel="false">
+                <div class="modal-card" style="width: auto">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Add Role</p>
+                    </header>
+                    <section class="modal-card-body text-center">
+                            <div class="column col-md-12" style="margin-bottom:1rem">
+                                <b-field label="English name">
+                                    <b-input v-model="rolename" placeholder="Unit English name" ></b-input>
+                                </b-field>
+                            </div>
+                            <!-- get new column by v-for -->
+
+                        <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add leads">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_leads" true-value="1" false-value="0">
+                                                {{ addroles.add_leads }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Hard delete leads">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.hard_delete_leads" true-value="1" false-value="0">
+                                                {{ addroles.hard_delete_leads }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="soft delete leads">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.soft_delete_leads" true-value="1" false-value="0">
+                                                {{ addroles.soft_delete_leads }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="switch leads">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.switch_leads" true-value="1" false-value="0">
+                                                {{ addroles.switch_leads }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="edit leads">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_leads" true-value="1" false-value="0">
+                                                {{ addroles.edit_leads }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="show all leads">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_all_leads" true-value="1" false-value="0">
+                                                {{ addroles.show_all_leads }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                        </div>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Send cils">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.send_cil" true-value="1" false-value="0">
+                                                {{ addroles.send_cil }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="export excel">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.export_excel" true-value="1" false-value="0">
+                                                {{ addroles.export_excel }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                        </div>
+                        <hr>
+                        <!-- <label for=""> Leads actions </label> -->
+                        <div class="columns">
+                            <div class="column is-2">
+                                <b-field label="calls">
+                                    <div class="field">
+                                        <b-switch v-model="addroles.calls" true-value="1" false-value="0">
+                                            {{ addroles.calls }}
+                                        </b-switch>
+                                    </div>
+                                </b-field>
+                            </div>
+                            <div class="column is-2">
+                                <b-field label="Mettings">
+                                    <div class="field">
+                                        <b-switch v-model="addroles.meetings" true-value="1" false-value="0">
+                                            {{ addroles.meetings }}
+                                        </b-switch>
+                                    </div>
+                                </b-field>
+                            </div>
+                            <div class="column is-2">
+                                <b-field label="Requests">
+                                    <div class="field">
+                                        <b-switch v-model="addroles.requests" true-value="1" false-value="0">
+                                            {{ addroles.requests }}
+                                        </b-switch>
+                                    </div>
+                                </b-field>
+                            </div>
+                        </div>
+                        <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add developers">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_developers" true-value="1" false-value="0">
+                                                {{ addroles.add_developers }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="edit developers">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_developers" true-value="1" false-value="0">
+                                                {{ addroles.edit_developers }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="delete developers">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.delete_developers" true-value="1" false-value="0">
+                                                {{ addroles.delete_developers }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="delete developers">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_developers" true-value="1" false-value="0">
+                                                {{ addroles.show_developers }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                        </div>
+                        <hr>
+                            <div class="columns">
+
+                                <div class="column is-2">
+                                    <b-field label="Add Project">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_projects" true-value="1" false-value="0">
+                                                {{ addroles.add_projects }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="edit Project">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_projects" true-value="1" false-value="0">
+                                                {{ addroles.edit_projects }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+
+                                <div class="column is-2">
+                                    <b-field label="delte Project">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.delete_projects" true-value="1" false-value="0">
+                                                {{ addroles.delete_projects }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+
+                                <div class="column is-2">
+                                    <b-field label="Show Project">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_projects" true-value="1" false-value="0">
+                                                {{ addroles.show_projects }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add Phase">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_phases" true-value="1" false-value="0">
+                                                {{ addroles.add_phases }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="edit Phase">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_phases" true-value="1" false-value="0">
+                                                {{ addroles.edit_phases }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="delete Phase">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.delete_phases" true-value="1" false-value="0">
+                                                {{ addroles.delete_phases }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="show Phase">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_phases" true-value="1" false-value="0">
+                                                {{ addroles.show_phases }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add Properties">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_properties" true-value="1" false-value="0">
+                                                {{ addroles.add_properties }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="edit Properties">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_properties" true-value="1" false-value="0">
+                                                {{ addroles.edit_properties }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="delete Properties">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.delete_properties" true-value="1" false-value="0">
+                                                {{ addroles.delete_properties }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Show Properties">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_properties" true-value="1" false-value="0">
+                                                {{ addroles.show_properties }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add Units">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_resale_units" true-value="1" false-value="0">
+                                                {{ addroles.add_resale_units }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Edit Units">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_resale_units" true-value="1" false-value="0">
+                                                {{ addroles.edit_resale_units }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="delete Units">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.delete_resale_units" true-value="1" false-value="0">
+                                                {{ addroles.delete_resale_units }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="show Units">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_resale_units" true-value="1" false-value="0">
+                                                {{ addroles.show_resale_units }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add rental">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_rental_units" true-value="1" false-value="0">
+                                                {{ addroles.add_rental_units }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Edit rental">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_rental_units" true-value="1" false-value="0">
+                                                {{ addroles.edit_rental_units }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Delete rental">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.delete_rental_units" true-value="1" false-value="0">
+                                                {{ addroles.delete_rental_units }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Show rental">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_rental_units" true-value="1" false-value="0">
+                                                {{ addroles.show_rental_units }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add lands">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_lands" true-value="1" false-value="0">
+                                                {{ addroles.add_lands }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+
+                                <div class="column is-2">
+                                    <b-field label="Edit lands">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_lands" true-value="1" false-value="0">
+                                                {{ addroles.edit_lands }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+
+                                <div class="column is-2">
+                                    <b-field label="Delete lands">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.delete_lands" true-value="1" false-value="0">
+                                                {{ addroles.delete_lands }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+
+                                <div class="column is-2">
+                                    <b-field label="Show lands">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_lands" true-value="1" false-value="0">
+                                                {{ addroles.show_lands }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Marketing">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.marketing" true-value="1" false-value="0">
+                                                {{ addroles.marketing }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Proposals">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.proposals" true-value="1" false-value="0">
+                                                {{ addroles.proposals }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Deals">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.deals" true-value="1" false-value="0">
+                                                {{ addroles.deals }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Finance">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.finance" true-value="1" false-value="0">
+                                                {{ addroles.finance }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Reports">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.reports" true-value="1" false-value="0">
+                                                {{ addroles.reports }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Settings">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.settings" true-value="1" false-value="0">
+                                                {{ addroles.settings }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add Job category">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_job_categories" true-value="1" false-value="0">
+                                                {{ addroles.add_job_categories }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Edit Job category">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_job_categories" true-value="1" false-value="0">
+                                                {{ addroles.edit_job_categories }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Delete Job category">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.delete_job_categories" true-value="1" false-value="0">
+                                                {{ addroles.delete_job_categories }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Show Job category">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_job_categories" true-value="1" false-value="0">
+                                                {{ addroles.show_job_categories }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add Job title">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_job_titles" true-value="1" false-value="0">
+                                                {{ addroles.add_job_titles }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Edit Job title">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_job_titles" true-value="1" false-value="0">
+                                                {{ addroles.edit_job_titles }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Delete Job title">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.delete_job_titles" true-value="1" false-value="0">
+                                                {{ addroles.delete_job_titles }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Show Job title">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_job_titles" true-value="1" false-value="0">
+                                                {{ addroles.show_job_titles }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add Vacancies">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_vacancies" true-value="1" false-value="0">
+                                                {{ addroles.add_vacancies }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Edit Vacancies">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_vacancies" true-value="1" false-value="0">
+                                                {{ addroles.edit_vacancies }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Delete Vacancies">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.delete_vacancies" true-value="1" false-value="0">
+                                                {{ addroles.delete_vacancies }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Show Vacancies">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_vacancies" true-value="1" false-value="0">
+                                                {{ addroles.show_vacancies }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add Applications">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_applications" true-value="1" false-value="0">
+                                                {{ addroles.add_applications }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Edit Applications">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_applications" true-value="1" false-value="0">
+                                                {{ addroles.edit_applications }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Delete Applications">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.delete_applications" true-value="1" false-value="0">
+                                                {{ addroles.delete_applications }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Show Applications">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_applications" true-value="1" false-value="0">
+                                                {{ addroles.show_applications }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add Employees">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_employees" true-value="1" false-value="0">
+                                                {{ addroles.add_employees }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Edit employees">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_employees" true-value="1" false-value="0">
+                                                {{ addroles.edit_employees }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Delete employees">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.delete_employees" true-value="1" false-value="0">
+                                                {{ addroles.delete_employees }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Show employees">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_employees" true-value="1" false-value="0">
+                                                {{ addroles.show_employees }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Employee Dashboard">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.emp_dashboard" true-value="1" false-value="0">
+                                                {{ addroles.emp_dashboard }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add salary">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_salaries" true-value="1" false-value="0">
+                                                {{ addroles.add_salaries }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Edit salary">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_salaries" true-value="1" false-value="0">
+                                                {{ addroles.edit_salaries }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Delete salary">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.delete_salaries" true-value="1" false-value="0">
+                                                {{ addroles.delete_salaries }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Show salary">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_salaries" true-value="1" false-value="0">
+                                                {{ addroles.show_salaries }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add salary deal">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_salaries_details" true-value="1" false-value="0">
+                                                {{ addroles.add_salaries_details }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Edit salary deal">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_salaries_details" true-value="1" false-value="0">
+                                                {{ addroles.edit_salaries_details }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Delete salary deal">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.delete_salaries_details" true-value="1" false-value="0">
+                                                {{ addroles.delete_salaries_details }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Show salary deal">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_salaries_details" true-value="1" false-value="0">
+                                                {{ addroles.show_salaries_details }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add Vacations">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_vacations" true-value="1" false-value="0">
+                                                {{ addroles.add_vacations }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Edit Vacations">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.edit_vacations" true-value="1" false-value="0">
+                                                {{ addroles.edit_vacations }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Delete Vacations">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.delete_vacations" true-value="1" false-value="0">
+                                                {{ addroles.delete_vacations }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Show Vacations">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.show_vacations" true-value="1" false-value="0">
+                                                {{ addroles.show_vacations }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Add Attendance">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.xattendance" true-value="1" false-value="0">
+                                                {{ addroles.xattendance }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="HR Settings">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.hr_settings" true-value="1" false-value="0">
+                                                {{ addroles.hr_settings }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Rates">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.rates" true-value="1" false-value="0">
+                                                {{ addroles.rates }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Add Rates">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_rates" true-value="1" false-value="0">
+                                                {{ addroles.add_rates }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <div class="columns">
+                                <div class="column is-2">
+                                    <b-field label="Custodies">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.custodies" true-value="1" false-value="0">
+                                                {{ addroles.custodies }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                                <div class="column is-2">
+                                    <b-field label="Add Custodies">
+                                        <div class="field">
+                                            <b-switch v-model="addroles.add_custodies" true-value="1" false-value="0">
+                                                {{ addroles.add_custodies }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+
+                    </section>
+                    <footer class="modal-card-foot">
+                        <button class="button" type="button" @click="AddnewModal = false">Close</button>
+                        <button class="button is-primary" @click="saveNewRole">save</button>
+                    </footer>
+                </div>
+            </b-modal>
+        <!-- end add new -->
+        <!-- edit modal -->
+        <!-- end edit model -->
+    </section>
+</template>
+<style>
+    .card{
+        width:100%;
+    }
+    .card-body{
+        padding:2rem
+    }
+</style>
+
+
+<script>
+import{
+    getrouls,
+    NewAddRole,
+    getAllRolesArray,
+    deleteRole,
+    // getunitbyid,
+    // updateUnit,
+} from './../../calls'
+    export default {
+        data() {
+            return {
+                addroles:
+                    {
+                    add_leads:0,
+                    hard_delete_leads:0,
+                    soft_delete_leads:0,
+                    switch_leads:0,
+                    edit_leads:0,
+                    show_all_leads:0,
+                    send_cil:0,
+                    export_excel:0,
+                    calls:0,
+                    meetings:0,
+                    requests:0,
+                    add_developers:0,
+                    edit_developers:0,
+                    delete_developers:0,
+                    show_developers:0,
+                    add_projects:0,
+                    edit_projects:0,
+                    delete_projects:0,
+                    show_projects:0,
+                    add_phases:0,
+                    edit_phases:0,
+                    delete_phases:0,
+                    show_phases:0,
+                    add_properties:0,
+                    edit_properties:0,
+                    delete_properties:0,
+                    show_properties:0,
+                    add_resale_units:0,
+                    edit_resale_units:0,
+                    delete_resale_units:0,
+                    show_resale_units:0,
+                    add_rental_units:0,
+                    edit_rental_units:0,
+                    delete_rental_units:0,
+                    show_rental_units:0,
+                    add_lands:0,
+                    edit_lands:0,
+                    delete_lands:0,
+                    show_lands:0,
+                    marketing:0,
+                    proposals:0,
+                    deals:0,
+                    finance:0,
+                    reports:0,
+                    settings:0,
+                    add_job_categories:0,
+                    edit_job_categories:0,
+                    delete_job_categories:0,
+                    show_job_categories:0,
+                    add_job_titles:0,
+                    edit_job_titles:0,
+                    delete_job_titles:0,
+                    show_job_titles:0,
+                    add_vacancies:0,
+                    edit_vacancies:0,
+                    delete_vacancies:0,
+                    show_vacancies:0,
+                    add_applications:0,
+                    edit_applications:0,
+                    delete_applications:0,
+                    show_applications:0,
+                    add_employees:0,
+                    edit_employees:0,
+                    delete_employees:0,
+                    show_employees:0,
+                    emp_dashboard:0,
+                    add_salaries:0,
+                    edit_salaries:0,
+                    delete_salaries:0,
+                    show_salaries:0,
+                    add_salaries_details:0,
+                    edit_salaries_details:0,
+                    delete_salaries_details:0,
+                    show_salaries_details:0,
+                    add_vacations:0,
+                    edit_vacations:0,
+                    delete_vacations:0,
+                    show_vacations:0,
+                    xattendance:0,
+                    hr_settings:0,
+                    rates:0,
+                    add_rates:0,
+                    custodies:0,
+                    add_custodies:0,
+                    },
+                errors: [],
+                getrolsfileds:[],
+                rolename:null,
+                AddnewModal:false,
+                isFullPage:null,
+                UnitTypes:[],
+                UnitByid:{
+                    unit_id:null,
+                    enName:null,
+                    arName:null,
+                    onShow:false,
+                    selectTypr:null,
+                },
+                Roles:[],
+                isPaginated: true,
+                isPaginationSimple: false,
+                paginationPosition: 'bottom',
+                defaultSortDirection: null,
+                currentPage: null,
+                perPage: null,
+                total:null,
+                isLoading:true,
+            }
+        },
+        created(){
+            this.$router.replace({hash: '#/1'});
+        },
+        mounted(){
+            this.getAllRouls()
+            this.getAllfilds()
+        },
+        methods:{
+            getAllfilds(){
+                getAllRolesArray().then(response=>{
+                    console.log(response)
+                    this.getrolsfileds = response.data.data
+                    console.log('getrolsfileds',getrolsfileds)
+                })
+            },
+            getAllRouls(){
+                getrouls().then(response=>{
+                    this.Roles = response.data.data
+                    this.isLoading = false
+                    console.log('all roles',response)
+                    this.perPage = response.data.per_page
+                    this.currentPage = response.data.current_page
+                    // console.log('per page',this.perPage)
+                let currentTotal = response.data.total
+                if (response.data.total / this.perPage > 1000) {
+                    currentTotal = this.perPage * 1000
+                }
+                this.total = currentTotal
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+            OpenEditModal(id){
+                getunitbyid(id).then(response=>{
+                    this.UnitByid.id = response.data.id
+                    this.UnitByid.enName = response.data.en_name
+                    this.UnitByid.arName = response.data.ar_name
+                    this.UnitByid.onShow = response.data.on_show
+                    this.UnitByid.selectTypr = response.data.usage
+                    console.log('en name',this.UnitByid.enName)
+                    console.log('data of id only',response)
+                    this.EditModal = true
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+            saveNewRole(){
+            if (!this.rolename) {
+                this.errors.push('Name required.');
+            }
+            const bodyFormData = new FormData();
+                for (let key in this.addroles) {
+                    const value = this.addroles[key];
+                    bodyFormData.append("roles" + "[" + key + "]", this.addroles[key]);
+                    // bodyFormData.set(key, value);
+                }
+                bodyFormData.append('name',this.rolename)
+                // console.log(bodyFormData)
+                console.log(this.addroles)
+                NewAddRole(bodyFormData).then(response=>{
+                    this.AddnewModal = false
+                    this.isLoading = true
+                    this.getAllRouls()
+                    this.alertsuccess('Add new role')
+                })
+            },
+            saveEditUnit(){
+                const bodyFormData = new FormData();
+                for (let key in this.UnitByid) {
+                    const value = this.UnitByid[key];
+                }
+                bodyFormData.append('id',this.UnitByid.id)
+                bodyFormData.append('en_name',this.UnitByid.enName)
+                bodyFormData.append('ar_name',this.UnitByid.arName)
+                bodyFormData.append('type',this.UnitByid.selectTypr)
+                bodyFormData.append('on_Show',this.UnitByid.onShow)
+                updateUnit(bodyFormData).then(response=>{
+                this.EditModal = false
+                this.isLoading = true
+                    this.getAllUnit()
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+            UnitdeleteElementById(id){
+                this.$dialog.confirm({
+                    title: 'Deleting',
+                    message: 'Are you sure you want to <b>delete</b> this Role?',
+                    confirmText: 'Delete',
+                    type: 'is-danger',
+                    hasIcon: true,
+                    onConfirm: () => this.deleteElementById(id)
+                })
+            },
+            deleteElementById(id){
+                deleteRole(id).then(response=>{
+                    this.isLoading = true
+                    this.getAllRouls()
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+            alertsuccess(massege){
+                this.$toast.open({
+                    message: massege,
+                    position: 'is-bottom',
+                    type: 'is-success'
+                })
+            },
+            alerterror(massege){
+                this.$toast.open({
+                    message: massege,
+                    position: 'is-bottom',
+                    type: 'is-danger'
+                })
+            }
+        }
+    }
+</script>

@@ -1,0 +1,191 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</head>
+<style>
+    body{
+        /* background-image : url("/uploads/".$setting->backgroundRequest); */
+        background-repeat: no-repeat;
+        background-position : center;
+        background-size : cover;
+        color:white;
+        }
+        label {
+            color:white
+        }
+        hr{
+            color:white
+        }
+        input{
+            background-color:transparent !important;
+            border-color: transparent !important;
+        }
+        textarea{
+            background-color:transparent !important;
+            border-color: transparent !important;
+        }
+        select{
+            background-color:#b07d12 !important;
+            color:white !important;
+        }
+        .Newstyle{
+            padding:2rem;
+            float:left;
+            margin-top:1rem;
+            background-image:linear-gradient(#c48200,#9e6900);
+            width:30%;
+            margin-left:2rem;
+        }
+        li{
+            float:left;
+            list-style-type:upper-alpha;
+            padding: 5rem;
+        }
+        .rButton{
+            float:left;
+        }
+</style>
+<body style="background-image:url('/uploads/{{ $setting->backgroundRequest }}')">
+<div class="container">
+    <div class="text-center padding">
+        <img src="{{ url('/uploads/'.$setting->logoRequest) }}" height="200px" alt="">
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+        @if(Session::has('success'))
+            <div class="alert alert-success">
+                {{ Session::get('success')}}
+            </div>
+        @endif
+
+            <form method="POST" action="{{ url('/sendsubrequest') }}">
+            {{ csrf_field() }}
+            <div class="col-md-12 form-group" style="margin-bottom:7rem">
+                <h4 for="intrested"> Location you are intrested in *</h4>
+                @foreach($locations as $location)
+                    <div class="Newstyle">
+                        <input type="radio" name="location_id" class="rButton" value="{{ $location->id }}">{{ $location->en_name }}
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="col-md-12" style="margin-bottom:7rem">
+                <h4 for="Unit_type"> Unit type you are intrested in * </h4>
+                    @foreach($unitTypes as $type)
+                        <div class="Newstyle">
+                            <input type="radio" name="unit_type_id" class="rButton" value="{{ $type->id }}">{{ $type->en_name }}
+                        </div>
+                    @endforeach
+            </div>
+
+            <div class="col-md-12 form-group">
+                <div class="form-group @if($errors->has('en_name')) has-error @endif">
+                <label for="Name"> Your name * </label>
+                <input type="text" name="fullName" value="{{ old('fullName') }}" class="form-control" placeholder="full name">
+                </div>
+                <label for="Name"> Email * </label>
+                <input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="email account">
+                <label for="Name"> Your phone number * </label>
+                <input type="number" name="phone" placeholder="Phone number" value="{{ old('phone') }}" class="form-control" required>
+                <label for="Massage">Massage</label>
+                <textarea name="massage" id="" rows="10" class="form-control" required></textarea>
+            </div>
+                @if(!auth('lead')->guest())
+                    <input type="hidden" value="{{ auth('lead')->user()->id }}" name="user">
+                @endif
+                <button style="background-image:linear-gradient(#c48200,#9e6900)" class="btn btn-block btn-info"> Send <i class="fa fa-send"></i> </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+=====================================================================================================
+
+
+
+    <form method="POST" action="{{ url('/sendsubrequest') }}">
+            {{ csrf_field() }}
+        <div class="form-group">
+        <h4 for="intrested"> Location you are intrested in *</h4>
+            <div class="center-align">
+            @foreach($locations as $location)
+                <input type="radio" name="location_id" value="{{ $location->id }}" />
+                <label>{{ $location->en_name }}</label>
+            @endforeach
+            </div>
+        </div>
+  </div>
+  <div class="box box_2 under">
+    <div class="container">
+        <div class="padding">
+            <img class="logo" src="{{ url('/uploads/'.$setting->logoRequest) }}" height="200px" alt="">
+        </div>
+    </div>
+    <form method="POST" action="{{ url('/sendsubrequest') }}">
+            {{ csrf_field() }}
+        <div class="form-group">
+        <h4 for="Unit_type"> Unit type you are intrested in * </h4>
+            <div class="center-align">
+            @foreach($unitTypes as $type)
+                <input type="radio" name="unit_type_id" value="{{ $type->id }}" />
+                <label>{{ $type->en_name}}</label>
+            @endforeach
+            </div>
+        </div>
+    </form>
+  </div>
+<div class="box box_3 under">
+<div class="container">
+    <div class="padding">
+            <img class="logo" src="{{ url('/uploads/'.$setting->logoRequest) }}" height="200px" alt="">
+    </div>
+</div>
+
+    <div class="col-md-6 form-group" style="margin-top: 10rem;">
+        <div class="form-group @if($errors->has('en_name')) has-error @endif">
+        <h4 for="Name"> Your name * </h4>
+        <input type="text" name="fullName" value="{{ old('fullName') }}" class="form-control" placeholder="full name">
+        </div>
+        <h4 for="Name"> Email * </h4>
+        <input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="email account">
+        <h4 for="Name"> Your phone number * </h4>
+        <input type="number" name="phone" placeholder="Phone number" value="{{ old('phone') }}" class="form-control" required>
+    </div>
+</div>
+<div class="box box_4 under">
+    <div class="container">
+        <div class="padding">
+                <img class="logo" src="{{ url('/uploads/'.$setting->logoRequest) }}" height="200px" alt="">
+        </div>
+    </div>
+    <div class="col-md-6 form-group" style="margin-top: 10rem;">
+    <div>
+        <h4 for="Massage">Massage</h4>
+        <textarea name="massage" id="" rows="10" class="form-control" required></textarea>
+    </div>
+    <br>
+    <div>
+        <button class="btn btn-block bb" type="submit"> Send <i class="fa fa-send"></i> </button>
+    </div>
+    </div>
+</form>
+
+</div>
+</form>

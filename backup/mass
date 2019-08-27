@@ -1,0 +1,304 @@
+<template>
+  <div>
+
+                             
+                                  
+                                    <div class="column is-2">
+                                        <label class="label">Location</label>
+                                        <div class="field has-addons">
+                                            
+                                            <div class="control is-expanded"> 
+                                                <div class="select is-fullwidth">
+                                                    <select v-model="filter.location">
+                                                        <option v-for="location in locations" :key="location.id" :value="location.id">{{location.en_name}}</option>
+                                                 </select>
+                                                </div>
+                                          </div>
+                                          
+                                        </div>
+                                        
+                                    </div>
+                                    <br>
+                                    <div class="column is-2">
+                                        <label class="label">projects</label>
+                                        <div class="field has-addons">
+                                          
+<!--                                             <div v-for="project in test">{{ project.en_name }}</div>
+ -->                                            <div class="control is-expanded"> 
+                                                <div class="select is-fullwidth">
+                                                    <select v-model="filter.test">
+                                                        <option v-for="project in test"> 
+                                                         {{project.ar_name}}
+                                                        </option>
+                                                 </select>
+                                                </div>
+                                          </div>
+                                           
+                                        </div>
+                                        
+                                    </div>
+                                    <br> 
+                                    <div class="column is-2">
+                                        <label class="label">unit_type</label>
+                                        <div class="field has-addons">
+<!--                                             <div v-for="project in test">{{ project.en_name }}</div>
+ -->                                            <div class="control is-expanded"> 
+                                                <div class="select is-fullwidth">
+                                                    <select v-model="filter.unit_type">
+                                                        <option v-for="unit_typee in unit_type"> 
+                                                         {{unit_typee.ar_name}}
+                                                        </option>
+                                                 </select>
+                                                </div>
+                                          </div>
+                                         <div class="control">
+                                                <a class="button is-success" @click="filterLeads">Get</a>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                
+</div>
+</template>
+
+
+        <template slot-scope="props"
+                <b-table-column field="id" label="ID" sortable>
+                    {{props.row.id}}
+                </b-table-column>
+
+              
+
+                <b-table-column field="Image" label="Image" sortable>
+                    <img :src="'/uploads/'+props.row.image" width="160px">
+                </b-table-column>
+                
+                <b-table-column field="leadProbability" label="Availabity" sortable>
+                    {{props.row.availability}}
+                </b-table-column>
+
+                <b-table-column field="first_name" label="price" sortable>
+                    {{props.row.price}}
+                </b-table-column>
+
+           
+
+                <b-table-column field="phone" label="Location" sortable>
+                     {{props.row.location}}
+                 
+
+                </b-table-column>
+
+                <b-table-column field="requestLocation" label="Rooms" sortable>
+                    {{roow.props.rooms}}
+                </b-table-column>
+
+                <b-table-column field="projectName" label="Bathrooms" sortable>
+                    {{props.row.bathrooms}}
+                </b-table-column>
+
+                <b-table-column field="created_at" label="Area" sortable>
+                    {{props.row.area}} KM ^ 2
+                </b-table-column>
+
+                <b-table-column field="created_at" label="Delivery Date" sortable>
+                    {{props.row.delivery_date}}
+                </b-table-column>
+
+                <b-table-column field="created_at" label="Created At" sortable>
+                    {{props.row.created_at}}
+                </b-table-column>
+
+             
+
+
+</template>
+
+
+<script>
+
+import {getPublicData,newResaleFilter} from './../../calls'
+    export default {
+      data() {
+            return {
+                newCallData: {date: new Date()},
+                leadsCurrentNumber: 0,
+                leadsTotalNumber: 0,
+                getLeadsByAgent: [],
+                leadSources: [],
+                // leads: [],
+                isEmpty: false,
+                isLoading: true,
+                hasMobileCards: true,
+                isPaginated: true,
+                isPaginationSimple: false,
+                defaultSortDirection: 'desc',
+                roow:[],
+                total: 0,
+                page: 1,
+                perPage: 10,
+ 
+                isLoading: true,
+                isFullPage: true,
+                searchInput: '',
+                selectedLeads: [],
+                
+                ShowHint: false,
+                hintId: '',
+                callStatus: [],
+                projects: [],
+                meetingStatus:[],
+                filter: {},
+                startFilter: false,
+               
+                switchLeadModel: false,
+                bulkActionModel: false,
+                switchLeadData: {},
+                leadsIds: [],
+                commercialAgents: [],
+                residentialAgents: [],
+                permArray: [],
+                reloadData: false,
+                //
+                unit_type:[],
+                locations: [],
+                test:{},
+                //projects:[],
+                //project:{
+                 // en_name:'',
+                  //id:'',
+                //},
+                
+                
+                token: window.auth_user.csrf,
+                userId: window.auth_user.id,
+                userType: window.auth_user.type,
+              
+        
+      }},    created() {
+        
+              //this.getSources()
+              //this.newResaleFilter()
+              this.getPublic()
+        },
+
+         methods: {
+
+          filterLeads(scrollSwitch = false){
+                //this.isLoading = true
+                //this.fitlerFlag = true
+                var data ={
+                    //'leadSources':this.filter.sourceId,
+                    'location':this.filter.location,
+                    //'meetingStatus':this.filter.meeting_status_id,
+                    //'callStatus':this.filter.call_status_id,
+                    //'dateTo':this.parsedDateTo,
+                    //'dateFrom':this.parsedDateFrom,
+                    '_token':this.token,
+                    'agent_id':this.userId,
+                };
+                newResaleFilter(this.page,data).then(response=>{
+                    this.roow = response.data.data[0]
+                    this.leadsCurrentNumber = this.roow.length
+                    this.leadsTotalNumber = response.data.total
+                    
+                    if(this.roow.length == 0){
+                        this.isEmpty = true
+                    }
+                    let currentTotal = response.data.total
+                        if (response.data.total / this.perPage > 1000) {
+                            currentTotal = this.perPage * 1000
+                        }
+                    this.total = currentTotal
+                    this.isLoading = false
+                    
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            },
+            // onPageChange(page) {
+            //     this.page = page
+            //     this.$router.replace({ name: "MyLeads", params: {page: page} })
+            //      if(this.fitlerFlag){
+            //         this.filterLeads()
+            //     }else {
+            //         this.getData()
+            //     }
+            // },
+            // getData(loading = true){
+            //   //console.log('sadsadsadsadsadsaddsaddsdsadsad'),
+            //     this.isLoading = loading
+            //     getMyLeads(this.page).then(response=>{
+                    
+            //         console.log('this.leads = response.data.data')
+            //         console.log(response.data.total)
+                    
+            //         this.leads = response.data.data
+            //         this.leadsCurrentNumber = this.leads.length
+            //         this.leadsTotalNumber = response.data.total
+                    
+            //         if(this.leads.length == 0){
+            //             this.isEmpty = true
+            //         }
+            //         let currentTotal = response.data.total
+            //         if (response.data.total / this.perPage > 1000) {
+            //             currentTotal = this.perPage * 1000
+            //         }
+                    
+            //         this.total = currentTotal
+            //         this.isLoading = false
+            //         this.getPublic()
+            //         //console.log(response.data)
+                    
+            //     })
+            //     .catch(error => {
+            //         console.log(error)
+            //     })
+            // },
+            getPublic(){
+              console.log('55');
+                getPublicData().then(response=>{
+                    //console.log(typeof(response.data))
+
+                    
+                    
+                    //this.unit_type = response.data
+
+                    console.log(this.projects)
+                    // for (var i =0 ; i <this.test.length; i++) {
+                    //   console.log(this.test[i]['en_name'])
+                    // }
+                    this.locations = response.data.locations
+                    this.unit_type = response.data.unit_type
+                    this.test = response.data.projects
+                    //this.unit_type = response.data.unit_type
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            },
+           
+            // filterLeads(scrollSwitch = false){
+            //     this.isLoading = true
+            //     this.fitlerFlag = true
+            //     var data ={
+            //         'leadSources':this.filter.sourceId,
+            //         'location':this.filter.location,
+            //         'meetingStatus':this.filter.meeting_status_id,
+            //         'callStatus':this.filter.call_status_id,
+            //         'dateTo':this.parsedDateTo,
+            //         'dateFrom':this.parsedDateFrom,
+            //         '_token':this.token,
+            //         'agent_id':this.userId,
+            //     };
+                
+                    
+                
+     },
+        }
+      // }
+    
+</script>
+
+

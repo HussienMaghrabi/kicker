@@ -1,0 +1,488 @@
+                    <div class="columns">
+                        <!-- end card -->
+                        <!-- begin card -->
+                        <div class="deve-card column is-3" style="padding-top: 0;">
+                            <ul class="deve-icon">
+                                <li><a><router-link to="/admin/vue/websiteView" class="far fa-eye"></router-link></a></li>
+                            </ul>
+                            <div class="columns is-multiline is-mobile" style="margin: 0">
+                                <div class="column is-12" style="padding-top: 0">
+                                    <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                    <p><span class="icon-style fa fa-at"></span></p>
+                                </div>
+                                <div class="column is-12 dev-footer">
+                                    <div class="columns is-multiline is-mobile" style="margin: 0">
+                                        <div class="column is-12" style="display: grid">
+                                            <b-button class="dev-btn">Website</b-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card -->
+
+                         <!-- begin card -->
+                         <div class="deve-card column is-3" style="padding-top: 0;">
+                            <ul class="deve-icon">
+                                <li><a><router-link to="/admin/vue/leadSource" class="far fa-eye"></router-link></a></li>
+                            </ul>
+                            <div class="columns is-multiline is-mobile" style="margin: 0">
+                                <div class="column is-12" style="padding-top: 0">
+                                    <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                    <p><span class="icon-style fa fa-user"></span></p>
+                                </div>
+                                <div class="column is-12 dev-footer">
+                                    <div class="columns is-multiline is-mobile" style="margin: 0">
+                                        <div class="column is-12" style="display: grid">
+                                            <b-button class="dev-btn">Lead Source</b-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <!-- end card-->
+                         <!-- begin card -->
+                        <div class="deve-card column is-3" style="padding-top: 0;">
+                            <ul class="deve-icon">
+                                <li><a><router-link to="/admin/vue/agents" class="far fa-eye"></router-link></a></li>
+                            </ul>
+                            <div class="columns is-multiline is-mobile" style="margin: 0">
+                                <div class="column is-12" style="padding-top: 0">
+                                    <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                    <p><span class="icon-style fa fa-users"></span></p>
+                                </div>
+                                <div class="column is-12 dev-footer">
+                                    <div class="columns is-multiline is-mobile" style="margin: 0">
+                                        <div class="column is-12" style="display: grid">
+                                            <b-button class="dev-btn">Agents</b-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card -->
+
+                         <!-- begin card -->
+                             <div class="deve-card column is-3" style="padding-top: 0;">
+                            <ul class="deve-icon">
+                                <li><a><router-link to="/admin/vue/dailyReport" class="far fa-eye"></router-link></a></li>
+                            </ul>
+                            <div class="columns is-multiline is-mobile" style="margin: 0">
+                                <div class="column is-12" style="padding-top: 0">
+                                    <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                  
+                                    <p><span class="icon-style fa fa-id-card"></span></p>
+                                </div>
+                                <div class="column is-12 dev-footer">
+                                    <div class="columns is-multiline is-mobile" style="margin: 0">
+                                        <div class="column is-12" style="display: grid">
+                                            <b-button class="dev-btn">Daily Reports</b-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns"> 
+                                 <!-- end card -->
+                        <!-- begin card -->
+                        <div class="deve-card column is-3" style="padding-top: 0;">
+                            <ul class="deve-icon">
+                                <li><a><router-link to="/admin/vue/agent_type" class="far fa-eye"></router-link></a></li>
+                            </ul>
+                            <div class="columns is-multiline is-mobile" style="margin: 0">
+                                <div class="column is-12" style="padding-top: 0">
+                                    <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                    <p><span class="icon-style fa fa-id-card"></span></p>
+                                </div>
+                                <div class="column is-12 dev-footer">
+                                    <div class="columns is-multiline is-mobile" style="margin: 0">
+                                        <div class="column is-12" style="display: grid">
+                                            <b-button class="dev-btn">Agent Types</b-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card -->
+
+                        <!-- begin card -->
+                              <div class="deve-card column is-3" style="padding-top: 0;">
+                            <ul class="deve-icon">
+                                <li><a><router-link to="/admin/vue/task" class="far fa-eye"></router-link></a></li>
+                            </ul>
+                            <div class="columns is-multiline is-mobile" style="margin: 0">
+                                <div class="column is-12" style="padding-top: 0">
+                                    <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                    <p><i class="fas fa-tasks"></i></p>
+                                </div>
+                                <div class="column is-12 dev-footer">
+                                    <div class="columns is-multiline is-mobile" style="margin: 0">
+                                        <div class="column is-12" style="display: grid">
+                                            <b-button class="dev-btn">Tasks</b-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                <!-- end card -->
+                        <!-- begin card -->
+                        <div class="deve-card column is-3" style="padding-top: 0;">
+                            <ul class="deve-icon">
+                                <li><a><router-link to="/admin/vue/facilities" class="far fa-eye"></router-link></a></li>
+                            </ul>
+                            <div class="columns is-multiline is-mobile" style="margin: 0">
+                                <div class="column is-12" style="padding-top: 0">
+                                    <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                    <p><span class="icon-style fa fa-bars"></span></p>
+                                </div>
+                                <div class="column is-12 dev-footer">
+                                    <div class="columns is-multiline is-mobile" style="margin: 0">
+                                        <div class="column is-12" style="display: grid">
+                                            <b-button class="dev-btn">Facilities</b-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card -->
+                        <!-- begin card -->
+                             <div class="deve-card column is-3" style="padding-top: 0;">
+                            <ul class="deve-icon">
+                                <li><a><router-link to="/admin/vue/competitors" class="far fa-eye"></router-link></a></li>
+                            </ul>
+                            <div class="columns is-multiline is-mobile" style="margin: 0">
+                                <div class="column is-12" style="padding-top: 0">
+                                    <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                    <p><i class="fas fa-handshake"></i></p>
+                                </div>
+                                <div class="column is-12 dev-footer">
+                                    <div class="columns is-multiline is-mobile" style="margin: 0">
+                                        <div class="column is-12" style="display: grid">
+                                            <b-button class="dev-btn">Competitors</b-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card -->     
+                    </div>
+                    <div class="columns">
+                         <!-- begin card -->
+                        <div class="deve-card column is-3" style="padding-top: 0;">
+                            <ul class="deve-icon">
+                                <li><a><router-link to="/admin/vue/tags" class="far fa-eye"></router-link></a></li>
+                            </ul>
+                            <div class="columns is-multiline is-mobile" style="margin: 0">
+                                <div class="column is-12" style="padding-top: 0">
+                                    <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                    <p><span class="icon-style fa fa-tags"></span></p>
+                                </div>
+                                <div class="column is-12 dev-footer">
+                                    <div class="columns is-multiline is-mobile" style="margin: 0">
+                                        <div class="column is-12" style="display: grid">
+                                            <b-button class="dev-btn">Tags</b-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card -->
+
+                        <!-- begin card -->
+                           <div class="deve-card column is-3" style="padding-top: 0;">
+                            <ul class="deve-icon">
+                                <li><a><router-link to="/admin/vue/titles" class="far fa-eye"></router-link></a></li>
+                            </ul>
+                            <div class="columns is-multiline is-mobile" style="margin: 0">
+                                <div class="column is-12" style="padding-top: 0">
+                                    <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                    <p><span class="icon-style fa fa-address-book"></span></p>
+                                </div>
+                                <div class="column is-12 dev-footer">
+                                    <div class="columns is-multiline is-mobile" style="margin: 0">
+                                        <div class="column is-12" style="display: grid">
+                                            <b-button class="dev-btn">Titles </b-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card --> 
+                         <!-- begin card -->
+                        <div class="deve-card column is-3" style="padding-top: 0;">
+                            <ul class="deve-icon">
+                                <li><a><router-link to="/admin/vue/outcome_category" class="far fa-eye"></router-link></a></li>
+                            </ul>
+                            <div class="columns is-multiline is-mobile" style="margin: 0">
+                                <div class="column is-12" style="padding-top: 0">
+                                    <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                    <p><span class="icon-style fa fa-money"></span></p>
+                                </div>
+                                <div class="column is-12 dev-footer">
+                                    <div class="columns is-multiline is-mobile" style="margin: 0">
+                                        <div class="column is-12" style="display: grid">
+                                            <b-button class="dev-btn">Outcome Category</b-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card --> 
+                         <!-- begin card -->
+                        <div class="deve-card column is-3" style="padding-top: 0;">
+                            <ul class="deve-icon">
+                                <li><a><router-link to="/admin/vue/sub_categories" class="far fa-eye"></router-link></a></li>
+                            </ul>
+                            <div class="columns is-multiline is-mobile" style="margin: 0">
+                                <div class="column is-12" style="padding-top: 0">
+                                    <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                    <p><span class="icon-style fa fa-money"></span></p>
+                                </div>
+                                <div class="column is-12 dev-footer">
+                                    <div class="columns is-multiline is-mobile" style="margin: 0">
+                                        <div class="column is-12" style="display: grid">
+                                            <b-button class="dev-btn">Outcome Sub-Category</b-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card -->  
+                    </div>
+                    <div class="columns">
+                            <!-- begin card -->
+                            <div class="deve-card column is-3" style="padding-top: 0;">
+                                <ul class="deve-icon">
+                                    <li><a><router-link to="/admin/vue/action_logs" class="far fa-eye"></router-link></a></li>
+                                </ul>
+                                <div class="columns is-multiline is-mobile" style="margin: 0">
+                                    <div class="column is-12" style="padding-top: 0">
+                                        <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                        <p><span class="icon-style fa fa-exchange"></span></p>
+                                    </div>
+                                    <div class="column is-12 dev-footer">
+                                        <div class="columns is-multiline is-mobile" style="margin: 0">
+                                            <div class="column is-12" style="display: grid">
+                                                <b-button class="dev-btn">Action Logs</b-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->            
+                            <!-- begin card -->
+                            <div class="deve-card column is-3" style="padding-top: 0;">
+                                <ul class="deve-icon">
+                                    <li><a><router-link to="/admin/vue/meeting_status" class="far fa-eye"></router-link></a></li>
+                                </ul>
+                                <div class="columns is-multiline is-mobile" style="margin: 0">
+                                    <div class="column is-12" style="padding-top: 0">
+                                        <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                        <p><span class="icon-style fa fa-handshake-o"></span></p>
+                                    </div>
+                                    <div class="column is-12 dev-footer">
+                                        <div class="columns is-multiline is-mobile" style="margin: 0">
+                                            <div class="column is-12" style="display: grid">
+                                                <b-button class="dev-btn">Meeting Status</b-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+
+                            <!-- begin card -->
+                                    <div class="deve-card column is-3" style="padding-top: 0;">
+                                <ul class="deve-icon">
+                                    <li><a><router-link to="/admin/vue/target" class="far fa-eye"></router-link></a></li>
+                                </ul>
+                                <div class="columns is-multiline is-mobile" style="margin: 0">
+                                    <div class="column is-12" style="padding-top: 0">
+                                        <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                        <p><span class="icon-style fa fa-line-chart"></span></p>
+                                    </div>
+                                    <div class="column is-12 dev-footer">
+                                        <div class="columns is-multiline is-mobile" style="margin: 0">
+                                            <div class="column is-12" style="display: grid">
+                                                <b-button class="dev-btn">Targets</b-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->   
+                            <!-- begin card -->
+                            <div class="deve-card column is-3" style="padding-top: 0;">
+                                <ul class="deve-icon">
+                                    <li><a><router-link to="/admin/vue/callstatus" class="far fa-eye"></router-link></a></li>
+                                </ul>
+                                <div class="columns is-multiline is-mobile" style="margin: 0">
+                                    <div class="column is-12" style="padding-top: 0">
+                                        <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                        <p><span class="icon-style fa fa-phone"></span></p>
+                                    </div>
+                                    <div class="column is-12 dev-footer">
+                                        <div class="columns is-multiline is-mobile" style="margin: 0">
+                                            <div class="column is-12" style="display: grid">
+                                                <b-button class="dev-btn">Call Status</b-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                    </div>
+                    <div class="columns">
+                            <!-- begin card -->
+                                <div class="deve-card column is-3" style="padding-top: 0;">
+                                <ul class="deve-icon">
+                                    <li><a><router-link to="/admin/vue/pusher" class="far fa-eye"></router-link></a></li>
+                                </ul>
+                                <div class="columns is-multiline is-mobile" style="margin: 0">
+                                    <div class="column is-12" style="padding-top: 0">
+                                        <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                        <p><span class="icon-style fa fa-globe"></span></p>
+                                    </div>
+                                    <div class="column is-12 dev-footer">
+                                        <div class="columns is-multiline is-mobile" style="margin: 0">
+                                            <div class="column is-12" style="display: grid">
+                                                <b-button class="dev-btn">Pusher </b-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <!-- end card -->  
+                            
+
+                            <!-- begin card -->
+                            <div class="deve-card column is-3" style="padding-top: 0;">
+                                <ul class="deve-icon">
+                                    <li><a><router-link to="/admin/vue/LeadSummaries" class="far fa-eye"></router-link></a></li>
+                                </ul>
+                                <div class="columns is-multiline is-mobile" style="margin: 0">
+                                    <div class="column is-12" style="padding-top: 0">
+                                        <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                        <p><span class="icon-style fa fa-list-alt"></span></p>
+                                    </div>
+                                    <div class="column is-12 dev-footer">
+                                        <div class="columns is-multiline is-mobile" style="margin: 0">
+                                            <div class="column is-12" style="display: grid">
+                                                <b-button class="dev-btn">Lead Summaries</b-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->       
+                            <!-- begin card -->
+                            <div class="deve-card column is-3" style="padding-top: 0;">
+                                <ul class="deve-icon">
+                                    <li><a><router-link to="/admin/vue/DuplicatedLeads" class="far fa-eye"></router-link></a></li>
+                                </ul>
+                                <div class="columns is-multiline is-mobile" style="margin: 0">
+                                    <div class="column is-12" style="padding-top: 0">
+                                        <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                        <p><span class="icon-style fa fa-clone"></span></p>
+                                    </div>
+                                    <div class="column is-12 dev-footer">
+                                        <div class="columns is-multiline is-mobile" style="margin: 0">
+                                            <div class="column is-12" style="display: grid">
+                                                <b-button class="dev-btn">Duplicated Leads</b-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->       
+                            <!-- begin card -->
+
+                                <div class="deve-card column is-3" style="padding-top: 0;">
+                                <ul class="deve-icon">
+                                    <li><a><router-link to="/admin/vue/task" class="far fa-eye"></router-link></a></li>
+                                </ul>
+                                <div class="columns is-multiline is-mobile" style="margin: 0">
+                                    <div class="column is-12" style="padding-top: 0">
+                                        <p><span class="icon-style fa fa-tasks"></span></p>
+                                    </div>
+                                    <div class="column is-12 dev-footer">
+                                        <div class="columns is-multiline is-mobile" style="margin: 0">
+                                            <div class="column is-12" style="display: grid">
+                                                <b-button class="dev-btn">Tasks</b-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                        <!-- end card -->
+                    </div>
+                    <div class="columns">
+                            <!-- begin card -->
+                            <div class="deve-card column is-3" style="padding-top: 0;">
+                                <ul class="deve-icon">
+                                    <li><a><router-link to="/admin/vue/Locations" class="far fa-eye"></router-link></a></li>
+                                </ul>
+                                <div class="columns is-multiline is-mobile" style="margin: 0">
+                                    <div class="column is-12" style="padding-top: 0">
+                                        <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                        <p><i class="fas fa-map-marker"></i></p>
+                                    </div>
+                                    <div class="column is-12 dev-footer">
+                                        <div class="columns is-multiline is-mobile" style="margin: 0">
+                                            <div class="column is-12" style="display: grid">
+                                                <b-button class="dev-btn">Locations</b-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->  
+                            <!-- begin card -->
+                            <div class="deve-card column is-3" style="padding-top: 0;">
+                                <ul class="deve-icon">
+                                    <li><a><router-link to="/admin/vue/filterLeadsToDelete" class="far fa-eye"></router-link></a></li>
+                                </ul>
+                                <div class="columns is-multiline is-mobile" style="margin: 0">
+                                    <div class="column is-12" style="padding-top: 0">
+                                        <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                        <p><span class="icon-style fa fa-trash"></span></p>
+                                    </div>
+                                    <div class="column is-12 dev-footer">
+                                        <div class="columns is-multiline is-mobile" style="margin: 0">
+                                            <div class="column is-12" style="display: grid">
+                                                <b-button class="dev-btn">Filter And Delete Leads </b-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->  
+                            <!-- begin card -->
+                            <div class="deve-card column is-3" style="padding-top: 0;">
+                                <ul class="deve-icon">
+                                    <li><a><router-link to="/admin/vue/cils_mail_settings" class="far fa-eye"></router-link></a></li>
+                                </ul>
+                                <div class="columns is-multiline is-mobile" style="margin: 0">
+                                    <div class="column is-12" style="padding-top: 0">
+                                        <!-- <img class="dev-img" :src="'logo.png'"> -->
+                                        <p><span class="icon-style fa fa-tasks"></span></p>
+                                    </div>
+                                    <div class="column is-12 dev-footer">
+                                        <div class="columns is-multiline is-mobile" style="margin: 0">
+                                            <div class="column is-12" style="display: grid">
+                                                <!-- <b-button class="dev-btn">Pusher</b-button> -->
+                                                <b-button class="dev-btn">Cil Mail Settings</b-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                        </div>
+
+                            <!-- end -->
+                            <!-- end card -->
+                    </div>

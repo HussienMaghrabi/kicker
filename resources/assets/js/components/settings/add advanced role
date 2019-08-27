@@ -1,0 +1,290 @@
+<template>
+    <section>
+        <div class="container">
+        <b-field grouped group-multiline>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        Roles
+                    </div>
+                </div>
+                <div class="card-body">
+                    <button size="is-medium" @click="OpenAddModel" class="button field is-info">
+                        <b-icon icon="file"></b-icon>
+                        <span>Add new</span>
+                    </button>
+                </div>
+            </div>
+        </b-field>
+            <b-field grouped group-multiline>
+            </b-field>
+            <b-table
+                :data="Roles"
+                :paginated="isPaginated"
+                :per-page="perPage"
+                :current-page.sync="currentPage"
+                :pagination-simple="isPaginationSimple"
+                :pagination-position="paginationPosition"
+                :default-sort-direction="defaultSortDirection"
+                default-sort="user.first_name"
+                aria-next-label="Next page"
+                aria-previous-label="Previous page"
+                aria-page-label="Page"
+                aria-current-label="Current page">
+
+                <template slot-scope="props">
+                    <b-table-column field="Roles.id" label="ID" width="40" sortable numeric>
+                        {{ props.row.id }}
+                    </b-table-column>
+
+                    <b-table-column field="Roles.name" label="Name" sortable>
+                        {{ props.row.name }}
+                </b-table-column>
+
+                    <b-table-column field="show" label="Show">
+                        <router-link :to="'Show_Roles/'+props.row.id">
+                            <b-button type="is-info">Show</b-button>
+                        </router-link>
+                    </b-table-column>
+
+                    <!-- <b-table-column field="edit" label="Edit">
+                        <b-button type="is-success" @click="OpenEditModal(props.row.id)" >Edit</b-button>
+                    </b-table-column> -->
+
+                    <b-table-column field="edit" label="Delete">
+                        <b-button @click="UnitdeleteElementById(props.row.id)" type="is-danger">Delete</b-button>
+                    </b-table-column>
+
+                </template>
+            </b-table>
+        </div>
+        <!-- loding  -->
+        <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="false"></b-loading>
+        <!-- end loding -->
+        <!-- begin add new -->
+            <b-modal :active.sync="AddnewModal" full-screen has-modal-card :can-cancel="false">
+                <div class="modal-card" style="width: auto">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Add Role</p>
+                    </header>
+                    <section class="modal-card-body text-center">
+                            <div class="column col-md-12" style="margin-bottom:1rem">
+                                <b-field label="English name">
+                                    <b-input v-model="rolename" placeholder="Unit English name" ></b-input>
+                                </b-field>
+                            </div>
+                            <!-- get new column by v-for -->
+                            <div class="columns">
+                                <div class="column is-2" v-for="role in AllRoles" :key="role">
+                                    <b-field :label="role">
+                                        <div class="field">
+                                            <b-switch v-model="role.role" true-value="1" false-value="0">
+                                                {{ role }}
+                                            </b-switch>
+                                        </div>
+                                    </b-field>
+                                </div>
+                            </div>
+                                <footer class="modal-card-foot">
+                                    <button class="button" type="button" @click="AddnewModal = false">Close</button>
+                                    <button class="button is-primary" @click="saveNewRole">save</button>
+                                </footer>
+                    </section>
+                </div>
+            </b-modal>
+        <!-- end add new -->
+        <!-- edit modal -->
+        <!-- end edit model -->
+    </section>
+</template>
+<style>
+    .card{
+        width:100%;
+    }
+    .card-body{
+        padding:2rem
+    }
+</style>
+
+
+<script>
+import{
+    getrouls,
+    NewAddRole,
+    getAllRolesArray,
+    deleteRole,
+    getCustomeRoles,
+    // getunitbyid,
+    // updateUnit,
+} from './../../calls'
+    export default {
+        data() {
+            return {
+                addroles:[],
+                mainroles:[],
+                errors: [],
+                getrolsfileds:[],
+                rolename:null,
+                AddnewModal:false,
+                isFullPage:null,
+                UnitTypes:[],
+                UnitByid:{
+                    unit_id:null,
+                    enName:null,
+                    arName:null,
+                    onShow:false,
+                    selectTypr:null,
+                },
+                AllRoles:[],
+                Roles:[],
+                isPaginated: true,
+                isPaginationSimple: false,
+                paginationPosition: 'bottom',
+                defaultSortDirection: null,
+                currentPage: null,
+                perPage: null,
+                total:null,
+                isLoading:true,
+            }
+        },
+        created(){
+            this.$router.replace({hash: '#/1'});
+        },
+        mounted(){
+            this.getAllRouls()
+            this.getAllfilds()
+        },
+        methods:{
+            getAllfilds(){
+                getAllRolesArray().then(response=>{
+                    console.log(response)
+                    this.getrolsfileds = response.data.data
+                    // console.log('getrolsfileds',getrolsfileds)
+                })
+            },
+            getAllRouls(){
+                getrouls().then(response=>{
+                    this.Roles = response.data.data
+                    this.isLoading = false
+                    // console.log('all roles',response)
+                    this.perPage = response.data.per_page
+                    this.currentPage = response.data.current_page
+                    // console.log('per page',this.perPage)
+                let currentTotal = response.data.total
+                if (response.data.total / this.perPage > 1000) {
+                    currentTotal = this.perPage * 1000
+                }
+                this.total = currentTotal
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+            getCustomrole(){
+                getCustomeRoles().then(response=>{
+                    // this.AllRoles = response.data
+                    // console.log('all response',this.AllRoles)
+                    this.mainroles = response.data
+                    const tt = this.mainroles
+                    var roles = []
+                    Object.keys(tt).forEach(function(key,index) {
+                        for(var i=0;i<tt[key].length;i++){
+                            roles.push(tt[key][i])
+                        }
+                    });
+                    this.AllRoles = roles
+                    console.log('get all data',this.AllRoles)
+                }).catch(error=>{
+                    console.log(error)
+                })
+            },
+            OpenAddModel(){
+                this.AddnewModal = true
+                this.getCustomrole()
+            },
+            OpenEditModal(id){
+                getunitbyid(id).then(response=>{
+                    this.UnitByid.id = response.data.id
+                    this.UnitByid.enName = response.data.en_name
+                    this.UnitByid.arName = response.data.ar_name
+                    this.UnitByid.onShow = response.data.on_show
+                    this.UnitByid.selectTypr = response.data.usage
+                    console.log('en name',this.UnitByid.enName)
+                    console.log('data of id only',response)
+                    this.EditModal = true
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+            saveNewRole(){
+            if (!this.rolename) {
+                this.errors.push('Name required.');
+            }
+            const bodyFormData = new FormData();
+                for (let key in this.role) {
+                    const value = this.role[key];
+                    bodyFormData.append("roles" + "[" + key + "]", this.role[key]);
+                    // bodyFormData.set(key, value);
+                }
+                bodyFormData.append('name',this.rolename)
+                // console.log(bodyFormData)
+                console.log(this.addroles)
+                NewAddRole(bodyFormData).then(response=>{
+                    this.AddnewModal = false
+                    this.isLoading = true
+                    this.getAllRouls()
+                    this.alertsuccess('Add new role')
+                })
+            },
+            saveEditUnit(){
+                const bodyFormData = new FormData();
+                for (let key in this.UnitByid) {
+                    const value = this.UnitByid[key];
+                }
+                bodyFormData.append('id',this.UnitByid.id)
+                bodyFormData.append('en_name',this.UnitByid.enName)
+                bodyFormData.append('ar_name',this.UnitByid.arName)
+                bodyFormData.append('type',this.UnitByid.selectTypr)
+                bodyFormData.append('on_Show',this.UnitByid.onShow)
+                updateUnit(bodyFormData).then(response=>{
+                this.EditModal = false
+                this.isLoading = true
+                    this.getAllUnit()
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+            UnitdeleteElementById(id){
+                this.$dialog.confirm({
+                    title: 'Deleting',
+                    message: 'Are you sure you want to <b>delete</b> this Role?',
+                    confirmText: 'Delete',
+                    type: 'is-danger',
+                    hasIcon: true,
+                    onConfirm: () => this.deleteElementById(id)
+                })
+            },
+            deleteElementById(id){
+                deleteRole(id).then(response=>{
+                    this.isLoading = true
+                    this.getAllRouls()
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+            alertsuccess(massege){
+                this.$toast.open({
+                    message: massege,
+                    position: 'is-bottom',
+                    type: 'is-success'
+                })
+            },
+            alerterror(massege){
+                this.$toast.open({
+                    message: massege,
+                    position: 'is-bottom',
+                    type: 'is-danger'
+                })
+            }
+        }
+    }
+</script>
