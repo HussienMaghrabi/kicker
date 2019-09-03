@@ -172,6 +172,11 @@ import ShowDeal from './components/deals/show-deals.vue'
 import CreateProposal from './components/Proposal/create-proposal.vue'
 import ShowProposal from './components/Proposal/show-proposal.vue'
 import EditProposal from './components/Proposal/edit-proposal.vue'
+import trello from './components/trello/trello.vue'
+import trelloTasks from './components/trelloTasks/trelloTasks.vue'
+
+
+
 
 
 
@@ -1479,6 +1484,23 @@ export const routes = [
             title: ' finance Settings ',
         }
     },
+    {
+        path: '/admin/vue/trello',
+        name: 'trello',
+        component: trello,
+        meta: {
+            title: ' Trello ',
+        }
+    },
+    {
+        path: '/admin/vue/trelloTasks',
+        name: 'trelloTasks',
+        component: trelloTasks,
+        meta: {
+            title: ' Trello Tasks',
+        }
+    },
+  
  
 
 ];

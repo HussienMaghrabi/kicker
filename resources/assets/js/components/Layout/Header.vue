@@ -161,6 +161,14 @@
                     </div>
                   </b-dropdown-item>
                   <hr style="padding: 0px; margin: 8px 0px;">
+                  <b-dropdown-item aria-role="listitem">
+                    <p>
+                      <img src="/icon/header-closed-deals.png">
+                      <router-link to="/admin/vue/trello" @mouseover="resethover" class="header-menu-item" >
+                          Traffic
+                      </router-link>
+                    </p>
+                  </b-dropdown-item>
                 </div>
                 <div id="hr-drop-menu">
               

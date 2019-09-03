@@ -277,6 +277,8 @@ import ProjectSection from "./components/ProjectSection";
 import CallByCallSection from "./components/CallByCallSection";
 import AchievementsSection from "./components/AchievementsSection";
 import TeamAchievementsSection from "./components/TeamAchievementsSection";
+import pipeline from "../pipeline/pipeline";
+
 
 import FollowUp from "./components/FollowUp";
 import Assistant from "./components/Assistant";
@@ -556,7 +558,8 @@ export default {
     Multiselect,
     Assistant,
     teamCalendarSection,
-    yourCalendarSection
+    yourCalendarSection,
+    'pipeline': pipeline
   },
   computed: {
     format() {
