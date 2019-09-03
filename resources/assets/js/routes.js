@@ -183,8 +183,8 @@ import ShowDeal from './components/deals/show-deals.vue'
 import CreateProposal from './components/Proposal/create-proposal.vue'
 import ShowProposal from './components/Proposal/show-proposal.vue'
 import EditProposal from './components/Proposal/edit-proposal.vue'
-import trello from './components/trello/trello.vue'
-import trelloTasks from './components/trelloTasks/trelloTasks.vue'
+import traffic from './components/traffic/traffic.vue'
+import trafficTasks from './components/trafficTasks/trafficTasks.vue'
 
 
 
@@ -1584,19 +1584,19 @@ export const routes = [
         }
     },
     {
-        path: '/admin/vue/trello',
-        name: 'trello',
-        component: trello,
+        path: '/admin/vue/traffic',
+        name: 'traffic',
+        component: traffic,
         meta: {
-            title: ' Trello ',
+            title: ' Traffic ',
         }
     },
     {
-        path: '/admin/vue/trelloTasks',
-        name: 'trelloTasks',
-        component: trelloTasks,
+        path: '/admin/vue/trafficTasks',
+        name: 'trafficTasks',
+        component: trafficTasks,
         meta: {
-            title: ' Trello Tasks',
+            title: ' Traffic Tasks',
         }
     },
   

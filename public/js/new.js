@@ -61,14 +61,19 @@
 /******/
 /******/ 	// Load entry module and return exports
 <<<<<<< HEAD
+<<<<<<< HEAD
 /******/ 	return __webpack_require__(__webpack_require__.s = 1460);
 =======
 /******/ 	return __webpack_require__(__webpack_require__.s = 1487);
 >>>>>>> pc5
+=======
+/******/ 	return __webpack_require__(__webpack_require__.s = 1458);
+>>>>>>> pc4
 /******/ })
 /************************************************************************/
 /******/ ({
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /***/ 1460:
 /***/ (function(module, exports, __webpack_require__) {
@@ -80,15 +85,25 @@ module.exports = __webpack_require__(1461);
 
 module.exports = __webpack_require__(1488);
 >>>>>>> pc5
+=======
+/***/ 1458:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(1459);
+>>>>>>> pc4
 
 
 /***/ }),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***/ 1461:
 =======
 /***/ 1488:
 >>>>>>> pc5
+=======
+/***/ 1459:
+>>>>>>> pc4
 /***/ (function(module, exports) {
 
 

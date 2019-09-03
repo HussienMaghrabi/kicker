@@ -175,7 +175,7 @@
                   <b-dropdown-item aria-role="listitem">
                     <p>
                       <img src="/icon/header-closed-deals.png">
-                      <router-link to="/admin/vue/trello" @mouseover="resethover" class="header-menu-item" >
+                      <router-link to="/admin/vue/traffic" @mouseover="resethover" class="header-menu-item" >
                           Traffic
                       </router-link>
                     </p>
