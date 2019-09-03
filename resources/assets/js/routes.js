@@ -1,6 +1,14 @@
 import LeadsIndex from './components/Leads/LeadsIndex.vue';
 
 import MyLeads from './components/Leads/MyLeads.vue'
+import Leads from './components/Leads/Leads.vue'
+import allContract from './components/contract/allContract.vue'
+import showContract from './components/contract/showContract.vue'
+import allInvoices from './components/invoices/allInvoices.vue'
+import showInvoice from './components/invoices/showInvoice.vue'
+import newInvoice from './components/invoices/newInvoice.vue'
+import newLead from './components/Leads/newLead.vue'
+import showLead from './components/Leads/showLead.vue'
 import IndividualLeads from './components/Leads/IndividualLeads.vue'
 import TeamLeads from './components/Leads/TeamLeads.vue'
 import OwnedUnits from './components/Leads/OwnedUnits.vue'
@@ -28,6 +36,9 @@ import DevIndex from './components/Developer/index.vue'
 import addDeveloper from './components/Developer/addDeveloper.vue'
 import ProIndex from './components/Project/index.vue'
 import PropIndex from './components/Proposal/index.vue';
+import allProposals from './components/Proposal/allProposals.vue';
+import newProposal from './components/Proposal/newProposal.vue';
+import showProposal from './components/Proposal/showProposal.vue';
 import LeadData from './components/Leads/LeadData.vue';
 import showlead from './components/Leads/show-lead.vue';
 
@@ -197,6 +208,22 @@ export const routes = [
         component: LeadsIndex,
         children: [
             {
+                path: '/admin/vue/Leads',
+                name: 'Leads',
+                component: Leads,
+                meta: {
+                    title: 'My Leads',
+                }
+            },
+            {
+                path: '/admin/vue/showLead/:id',
+                name: 'showLead',
+                component: showLead,
+                meta: {
+                    title: 'show Lead',
+                }
+            },
+            {
                 path: '/admin/vue/MyLeads',
                 name: 'MyLeads',
                 component: MyLeads,
@@ -295,6 +322,38 @@ export const routes = [
         ]
     },
     {
+        path: '/admin/vue/showInvoice/:id',
+        name: 'showInvoice',
+        component: showInvoice,
+        meta: {
+            title: 'show Invoice',
+        }
+    },
+    {
+        path: '/admin/vue/newInvoice',
+        name: 'newInvoice',
+        component: newInvoice,
+        meta: {
+            title: 'New Invoice',
+        }
+    },
+    {
+        path: '/admin/vue/showProposal/:id',
+        name: 'showProposal',
+        component: showProposal,
+        meta: {
+            title: 'show Proposal',
+        }
+    },
+    {
+        path: '/admin/vue/newLead',
+        name: 'newLead',
+        component: newLead,
+        meta: {
+            title: 'New Lead',
+        }
+    },
+    {
         path: '/admin/vue/showleadDetals/:id',
         name: 'showleadDetals',
         component: showlead,
@@ -315,6 +374,14 @@ export const routes = [
                 }        
             },
         ]
+    },
+    {
+        path: '/admin/vue/allInvoices',
+        name: 'allInvoices',
+        component: allInvoices,
+        meta: {
+            title: 'All Invoices',
+        }
     },
     {
         path: '/admin/vue/Admin_Settings',
@@ -522,6 +589,22 @@ export const routes = [
         }
     },
     {
+        path: '/admin/vue/allContract',
+        name: 'allContract',
+        component: allContract,
+        meta: {
+            title: 'All Contract',
+        }
+    },
+    {
+        path: '/admin/vue/showContract/:id',
+        name: 'showContract',
+        component: showContract,
+        meta: {
+            title: 'Show Contract',
+        }
+    },
+    {
         path: '/admin/vue/createUnit',
         name: 'Create',
         component: Create,
@@ -598,6 +681,22 @@ export const routes = [
         path: '/admin/vue/proposals',
         name: 'proposals',
         component: PropIndex,
+    },
+    {
+        path: '/admin/vue/allProposals',
+        name: 'allProposals',
+        component: allProposals,
+        meta: {
+            title: 'All Proposals',
+        }
+    },
+    {
+        path: '/admin/vue/newProposal',
+        name: 'newProposal',
+        component: newProposal,
+        meta: {
+            title: 'new Proposal',
+        }
     },
     {
         path: '/admin/vue/lead_data',

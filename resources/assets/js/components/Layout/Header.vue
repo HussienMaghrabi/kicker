@@ -30,7 +30,7 @@
 
                   <div id="lead-drop-menu" style="">
                     <router-link  class="navbar-item is-child" 
-                                  to="/admin/vue/leads"
+                                  to="/admin/vue/Leads"
                     >All Leads</router-link>
                     <hr style="padding: 0px; margin: 8px 0px;">
       
@@ -124,8 +124,19 @@
                   <b-dropdown-item aria-role="listitem">
                     <p>
                       <img src="/icon/header-proposals.png">
-                      <router-link to="/admin/vue/proposals" @mouseover="resethover" class="header-menu-item">
+                      <router-link to="/admin/vue/allProposals" @mouseover="resethover" class="header-menu-item">
                           Proposals
+                      </router-link>
+                    </p>
+                  </b-dropdown-item>
+                  <hr style="padding: 0px; margin: 8px 0px;">
+                </div>
+                   <div>
+                  <b-dropdown-item aria-role="listitem">
+                    <p>
+                      <img src="/icon/header-proposals.png">
+                      <router-link to="/admin/vue/allInvoices" @mouseover="resethover" class="header-menu-item">
+                          Invoices
                       </router-link>
                     </p>
                   </b-dropdown-item>

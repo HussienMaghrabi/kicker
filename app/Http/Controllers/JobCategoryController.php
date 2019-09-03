@@ -30,7 +30,7 @@ class JobCategoryController extends Controller
     {
         $categories = DB::table('job_categories as category')
                         ->leftjoin('job_titles as title','category.id','=','title.job_category_id')
-                        ->groupBy('title.job_category_id')
+                        ->groupBy('category.id')
                         ->select('category.id','category.en_name','category.en_description',DB::raw('count(title.job_category_id) as jobtitles'))
                         ->paginate(100);
         return response()->json($categories);

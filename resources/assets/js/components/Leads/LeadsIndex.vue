@@ -19,9 +19,9 @@
                                     Import From Excel
                                 </router-link>
                                 <!-- <a class="button is-success is-meduim mr-10" href="/admin/leads/create">Add</a> -->
-                                <a @click="showAddLead = true" class="button is-success is-meduim mr-10">
+                                <router-link :to="'/admin/vue/newLead'"  @click="showAddLead = true" class="button is-success is-meduim mr-10">
                                     <span> Add new... </span>
-                                </a>
+                                </router-link>
                             </div>
                         </div>
 

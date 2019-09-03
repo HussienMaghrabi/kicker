@@ -45,6 +45,7 @@
     "vue-context": "^3.4.0",
     "vue-datetime": "^1.0.0-beta.6",
     "vue-drag-tree": "^1.1.8",
+    "vue-draggable": "^2.0.2",
     "vue-easy-slider": "^5.2.7",
     "vue-flickity": "^1.1.2",
     "vue-form-wizard": "^0.8.4",
