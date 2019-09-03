@@ -18,20 +18,20 @@
             <div class="column is-9 parent">
                 <div class="boards"><i class="far fa-user"></i> <h1 style="display:inline">Your Team Boards</h1></div>
                 
-                   <router-link to="/admin/vue/trelloTasks">
+                   <router-link to="/admin/vue/trafficTasks">
                        <div class="tasks">
                              <h3 class="task">Tasks</h3>
                        </div>
                 </router-link> 
-                <router-link to="/admin/vue/trelloTasks">
+                <router-link to="/admin/vue/trafficTasks">
                        <div class="tasks">
                              <h3 class="task">Tasks</h3>
                        </div>
-                </router-link>  <router-link to="/admin/vue/trelloTasks">
+                </router-link>  <router-link to="/admin/vue/trafficTasks">
                        <div class="tasks">
                              <h3 class="task">Tasks</h3>
                        </div>
-                </router-link>  <router-link to="/admin/vue/trelloTasks">
+                </router-link>  <router-link to="/admin/vue/trafficTasks">
                        <div class="tasks">
                              <h3 class="task">Tasks</h3>
                        </div>
