@@ -226,8 +226,12 @@
                     <teamCalendarSection/>
 
                   </div>
+
                 </div>
+
               </b-collapse>
+                                      <img src="/images/Screen Shot2019-09-04 at6.37.55PM.png" />
+
             </div>
           </div>
         </div>
@@ -277,10 +281,6 @@ import ProjectSection from "./components/ProjectSection";
 import CallByCallSection from "./components/CallByCallSection";
 import AchievementsSection from "./components/AchievementsSection";
 import TeamAchievementsSection from "./components/TeamAchievementsSection";
-<<<<<<< HEAD
-=======
-
->>>>>>> 3e3613d94bc4dcb0e3da7331f7f109472657f480
 
 
 import FollowUp from "./components/FollowUp";
@@ -562,10 +562,6 @@ export default {
     Assistant,
     teamCalendarSection,
     yourCalendarSection,
-<<<<<<< HEAD
-=======
-    
->>>>>>> 3e3613d94bc4dcb0e3da7331f7f109472657f480
   },
   computed: {
     format() {
