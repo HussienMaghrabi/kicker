@@ -7,13 +7,13 @@
             src="/icon/Follow up-05.png"
             style="width: 30px; margin-right: 15px; margin-left: 15px; margin-top: 15px;"
           >
-          <h2 style="float: right; margin-top: 8%; font-size: 25px; font-weight: bold;">FOLLOW UP</h2>
+          <h2 style="float: right; margin-top: 8%; font-size: 25px; font-weight: bold;">Tasks</h2>
         </div>
       </label>
 
       <div class="columns"  :key="reloadKey">
         <div class="column">
-        <h2 style="margin-left: 4%; font-size: 22px; font-weight: bold;">Today Follow Up</h2>
+        <h2 style="margin-left: 4%; font-size: 22px; font-weight: bold;">Today Tasks</h2>
           <div class="rows" id="scroll" style="height: 268px; overflow: auto;">
             <div
               v-for="todayFollowUp in todayFollowUpEvents"
@@ -53,7 +53,7 @@
         </div>
 
         <div class="column">
-          <h2 style="margin-left: 4%; font-size: 22px; font-weight: bold;">Previous Follow Up</h2>
+          <h2 style="margin-left: 4%; font-size: 22px; font-weight: bold;">Delayed Tasks</h2>
           <div class="rows" id="scroll" style="height: 268px; overflow: auto;">
             <div
               v-for="prevFollowUp in prevFollowUpEvents"
