@@ -42,7 +42,7 @@
           <slide style="padding-top: 1%;" v-for="team in teamAchievement" :key="team.id">
             <div class="columns is-multiline" style="padding: 2%">
               <div class="column is-4">
-                <img class="profile-img" :src="profileImg(team)">
+                <img class="profile-img" src="/icon/header-profile.png">
                 <span class="profile-name">{{ team.name }}</span>
               </div>
               <div class="column is-8 img-content">
