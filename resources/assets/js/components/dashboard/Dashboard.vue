@@ -226,8 +226,12 @@
                     <teamCalendarSection/>
 
                   </div>
+
                 </div>
+
               </b-collapse>
+                                      <img src="/images/Screen Shot2019-09-04 at6.37.55PM.png" />
+
             </div>
           </div>
         </div>

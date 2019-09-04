@@ -114,6 +114,7 @@
     </b-modal>
         <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="false"></b-loading>
     </div>
+    
 </template>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
