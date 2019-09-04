@@ -4,6 +4,7 @@ import MyLeads from './components/Leads/MyLeads.vue'
 import Leads from './components/Leads/Leads.vue'
 import allContract from './components/contract/allContract.vue'
 import showContract from './components/contract/showContract.vue'
+import newContract from './components/contract/newContract.vue'
 import allInvoices from './components/invoices/allInvoices.vue'
 import showInvoice from './components/invoices/showInvoice.vue'
 import newInvoice from './components/invoices/newInvoice.vue'
@@ -607,6 +608,14 @@ export const routes = [
         component: showContract,
         meta: {
             title: 'Show Contract',
+        }
+    },
+    {
+        path: '/admin/vue/newContract',
+        name: 'newContract',
+        component: newContract,
+        meta: {
+            title: 'New Contract',
         }
     },
     {

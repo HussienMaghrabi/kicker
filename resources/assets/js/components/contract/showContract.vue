@@ -1,7 +1,7 @@
 <template>
     <div class="container" style="background-color:#fff;padding:3%">
         <h3 style="font-size:21px;margin-bottom:32px">Contract</h3>
-
+         
         <div class="columns is-12" style="border-bottom: solid 1px lightgray;padding-bottom: 28px;">
             <h4 style="color:#9A9A9A;border-bottom:#solid 1px #000;margin-left:3%">Contract Data</h4>
         </div>
@@ -9,6 +9,28 @@
         <div class="columns is-12" style="margin-top:10px;padding-bottom:15px">
           <div class="column is-1"></div>
             <div class="column is-5">
+                 <b-field style="margin-bottom:6%">
+                   <label  class="column is-4">Approval Members</label>
+                    <img class="profile" src="/images/s-33756__340.png" v-on:click="show = !show"/>
+                    <img class="profile" src="/images/s-33756__340.png" v-on:click="show = !show"/>
+                    <img class="profile" src="/images/s-33756__340.png" v-on:click="show = !show"/>
+                    <img class="profile" src="/images/s-33756__340.png" v-on:click="show = !show"/>  
+                </b-field>
+
+                 <div v-if="show" class="columns is-12" style="background-color:whitesmoke">
+                    <div class="column is-1"></div>
+                    <div class="column is-1"><img src="/images/s-33756__340.png" v-on:click="show = !show"/></div>
+                    <div class=" column is-9" style="margin-left:2%"><h2> Christeena </h2>
+                        <div>
+                            <p>Email : ChriteenaBekheet@gmail.com</p>
+                            <p>Position : CEO</p>
+                        </div>
+                    </div>
+                    <div class="column is-2"><i v-on:click="show = !show" class="fas fa-times"></i></div>
+                    
+                 </div>
+
+
                 <b-field>
                    <label  class="column is-4">*Proposed Company</label>
                    <div class="select" style="width:100%">
@@ -31,13 +53,24 @@
                     </div>
                 </b-field>
 
-                <b-field>
+               <b-field>
                     <label class="column is-4">Contact</label>
-                    <b-select expanded>
+                    <b-select expanded style="margin-right:1%" v-model="newConract">
                         <option value="Contact">Contact</option>
                         <option value="2">Mrs.</option>
                         <option value="3">Ms.</option>
                     </b-select>
+                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addContractField"></span> 
+                </b-field>
+
+                <b-field v-if="indexContract > 0" v-for="(contract, indexContract) in contracts" :key="indexContract">
+                    <label class="column is-4">Contact</label>
+                    <b-select expanded style="margin-right:1%" v-model="newConract">
+                        <option value="Contact">Contact</option>
+                        <option value="2">Mrs.</option>
+                        <option value="3">Ms.</option>
+                    </b-select>
+                          <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeContractField(indexContract,contract)"></span> 
                 </b-field>
 
                 <b-field>
@@ -113,11 +146,29 @@
                 </b-modal>
 
                 
-                <draggable  @start="drag=true" @end="drag=false" group="contract"  ghost-class="ghost">
-                <div style="background-color:#ECECEC;padding:5px;;margin-bottom:2%;border:2px solid #e6e6e6">
+                <draggable  @start="drag=true" @end="drag=false" group="contract"  ghost-class="ghost" :move="cardMoved">
+                <div style="background-color:#ECECEC;padding:5px;margin-bottom:2%;border:2px solid #e6e6e6">
                     <b style="display:initial;margin-left: 44%;border-bottom: 1px #000 solid">البندالأول</b>
                     <i class="fas fa-edit" style="float:right;cursor:pointer" @click="openContractModal"></i> 
                     <p style="text-align:center;margin-top:5%">يعتبرالتمهيد السابق جزء مكمل و متمم لهذا العقد.</p>
+                    <b-button type="is-success" style="margin-top:5%"><i class="far fa-thumbs-up"></i>&nbsp Approve</b-button>&nbsp
+                    <b-button v-on:click="showComment = !showComment" type="is-danger" style="margin-top:5%"><i class="far fa-comments"></i>&nbsp Comment</b-button>
+                </div>
+
+                <div v-if="showComment" style="background-color:#ECECEC;margin-bottom:2%;margin-left:0%" class="columns is-12">
+                   <div class="column is-1" style="margin-top:5%"> <img style="width:50px;height:50px;padding: 5px;border-radius: 50%;background-color:#fff" src="/images/s-33756__340.png"/></div>
+                   <div class="column is-9">
+                       <b-field>
+                          <b-input type="textarea" placeholder="Leave a Comment..."></b-input>
+                       </b-field>
+                   </div>
+                   <div class="column is-1"></div>
+                   <div class="column is-1">
+                       <i v-on:click="showComment = !showComment" class="fas fa-times"></i>
+                   </div>
+                   <!-- <div class="column is-2">
+                       <b-button type="is-info"><i class="fas fa-paper-plane"></i>&nbsp Send</b-button>
+                   </div> -->
                 </div>
 
                 <div style="background-color:#ECECEC;padding:5px;margin-bottom:2%;border:2px solid #e6e6e6">
@@ -128,7 +179,11 @@
                     <p style="text-align:center;margin-top:2%">الإنترنتوعمل حساب بريد إلكترونى خاص بها و ذلك من خلال ما هو متاح لدى الطرف الأول,فقدإتفق</p>
                     <p style="text-align:center;margin-top:2%">الطرفان علىأن يقوم الطرف الأول بتصميم و إستضافة الموقع الخاص بالطرف الثانى فى الحدود والشروط</p>
                     <span  style="text-align:center;margin-top:2%">                                 التى يتضمنها هذا العقد</span>
+                    <!-- <b-button type="is-success" style="margin-top:5%"><i class="far fa-thumbs-up"></i>&nbsp Approve</b-button>&nbsp
+                    <b-button v-on:click="showComment = !showComment" type="is-danger" style="margin-top:5%"><i class="far fa-comments"></i>&nbsp Comment</b-button> -->
                 </div>
+
+                
 
                 <div style="background-color:#ECECEC;padding:5px;margin-bottom:2%;border:2px solid #e6e6e6">
                     <b style="display:initial;margin-left: 44%;border-bottom: 1px #000 solid">البندالخامس</b>
@@ -227,7 +282,12 @@ export default {
 data() {
     return {
         isComponentModalActive: false,
-        isComponentEditContractActive: false
+        isComponentEditContractActive: false,
+        contracts:[{
+                newContract:''
+            }],
+        show:false,
+        showComment:false
         }},
 mounted() {
 },
@@ -239,7 +299,22 @@ methods: {
     },
     openContractModal(){
         this.isComponentEditContractActive = true
-    }
+    },
+    addContractField(){
+            this.contracts.push({
+            newConract: '',
+        });
+    },
+    removeContractField(indexContract,contract){
+        var idx = this.contracts.indexOf(contract);
+        console.log(idx, indexContract);
+        if (idx > -1) {
+            this.contracts.splice(idx, 1);
+        }
+    },
+    // cardMoved:function(event){
+    //     console.log("eveeeent",event)
+    // }
 }
 }
 </script>
@@ -251,5 +326,15 @@ methods: {
 }
 body{
     color:#000;
+}
+.profile
+{
+    border-radius: 50%;
+    display: inline;
+    width: 30px;
+    height: 30px;
+    background-color: gray;
+    margin-right: 1%;
+    cursor: pointer;
 }
 </style>

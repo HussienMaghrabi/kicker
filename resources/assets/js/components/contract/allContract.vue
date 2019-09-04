@@ -3,7 +3,7 @@
         <div class="level mb-5">
             <div class="level">
                 <div class="level-item">
-
+                  
                 </div>
             </div>
 
@@ -29,14 +29,19 @@
             </div>
             </div>
 
+
             <div class="level">
                 <div class="level-item filters">
                     <div class="field  mr-10">
                         <div class="control">
-                            <input class="input is-meduim mt-10" type="text" placeholder="Search" v-model="searchInput" @input="search" style="width:100%;margin-bottom: 23px;">
+                            <input class="input is-meduim mt-10" type="text" placeholder="Search" v-model="searchInput" @input="search" style="width:70%;margin-bottom: 23px;">
+                            <b-button type="is-info" style="margin-top:8px"><i class="fas fa-plus"></i>&nbsp
+                                <router-link  :to="'/admin/vue/newContract'" style="color:#fff">
+                                  New
+                                </router-link>
+                             </b-button>
                         </div>
                     </div>
-                    
                 </div>
             </div>
 

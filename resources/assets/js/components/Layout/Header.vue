@@ -131,6 +131,17 @@
                   </b-dropdown-item>
                   <hr style="padding: 0px; margin: 8px 0px;">
                 </div>
+                  <div>
+                  <b-dropdown-item aria-role="listitem">
+                    <p>
+                      <img src="/icon/header-proposals.png">
+                      <router-link to="/admin/vue/allContract" @mouseover="resethover" class="header-menu-item">
+                          Contracts
+                      </router-link>
+                    </p>
+                  </b-dropdown-item>
+                  <hr style="padding: 0px; margin: 8px 0px;">
+                </div>
                    <div>
                   <b-dropdown-item aria-role="listitem">
                     <p>

@@ -338,7 +338,7 @@ export default {
                 total: '',
                 discount: ''
             });   
-       },
+        },
         deleteRow(index, invoice) {
             var idx = this.invoices.indexOf(invoice);
             console.log(idx, index);
