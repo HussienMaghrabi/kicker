@@ -132,12 +132,11 @@
                 
             </b-table>
             
-            <div class="leads-number">{{leadsCurrentNumber + ' / ' + leadsTotalNumber}}
-                  <div class="buttons">
-                    <b-button type="is-success"><i class="fas fa-envelope"></i>  Send Email</b-button>
-                    <b-button type="is-danger"><i class="fas fa-trash-alt"></i> Delete</b-button>
-                    <b-button type="is-info"><i class="fas fa-print"></i>  Print</b-button>
-                  </div>
+            <div class="leads-number">{{leadsCurrentNumber + ' / ' + leadsTotalNumber}} </div>
+            <div class="buttons">
+                <b-button type="is-success"><i class="fas fa-envelope"></i>  Send Email</b-button>
+                <b-button type="is-danger"><i class="fas fa-trash-alt"></i> Delete</b-button>
+                <b-button type="is-info"><i class="fas fa-print"></i>  Print</b-button>
             </div>
 
             <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="true"></b-loading>
@@ -672,10 +671,14 @@ changeLeadFav
 .leads-number
 {
     position: absolute;
-    bottom: 36px;
+    bottom: 122px;
 
 }
-
+@media screen and (max-width: 767px) {
+.leads-number{
+    margin-bottom: 17%;
+}
+}
 @media screen and (max-width: 767px) {
     .filters {
         display: block;

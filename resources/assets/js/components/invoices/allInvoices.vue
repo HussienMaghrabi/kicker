@@ -13,7 +13,7 @@
                         <div class="control">
                             <input class="input is-meduim mt-10" type="text" placeholder="Search" v-model="searchInput" @input="search" style="width:70%;margin-bottom: 23px;">
                             <b-button type="is-info" style="margin-top:8px"><i class="fas fa-plus"></i>&nbsp
-                                <router-link  :to="'/admin/vue/newProposal'" style="color:#fff">
+                                <router-link  :to="'/admin/vue/newInvoice'" style="color:#fff">
                                   New
                                 </router-link>
                              </b-button>
@@ -110,12 +110,11 @@
                 
             </b-table>
             
-            <div class="leads-number">{{leadsCurrentNumber + ' / ' + leadsTotalNumber}}
-                  <div class="buttons">
-                    <b-button type="is-success"><i class="fas fa-envelope"></i>  Send Email</b-button>
-                    <b-button type="is-danger"><i class="fas fa-trash-alt"></i> Delete</b-button>
-                    <b-button type="is-info"><i class="fas fa-print"></i>  Print</b-button>
-                  </div>
+            <div class="leads-number">{{leadsCurrentNumber + ' / ' + leadsTotalNumber}}</div>
+             <div class="buttons">
+                <b-button type="is-success"><i class="fas fa-envelope"></i>  Send Email</b-button>
+                <b-button type="is-danger"><i class="fas fa-trash-alt"></i> Delete</b-button>
+                <b-button type="is-info"><i class="fas fa-print"></i>  Print</b-button>
             </div>
 
             <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="true"></b-loading>
@@ -653,7 +652,6 @@ changeLeadFav
     bottom: 36px;
 
 }
-
 @media screen and (max-width: 767px) {
     .filters {
         display: block;
@@ -668,6 +666,8 @@ changeLeadFav
         right: 10% !important;
         bottom: 10px !important;
         left: unset !important;
+        margin-bottom: 17%;
+        margin-right: 73%; 
     }
 
     .filter-content{

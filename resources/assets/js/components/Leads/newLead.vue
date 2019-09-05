@@ -2,7 +2,7 @@
     <div class="container" style="background-color:#fff;padding:3%">
        <div class="columns is-12 is-mobile" style="margin-bottom:3%">
            <div class="column is-2">
-               <b style="font-size:18px">New Lead</b>
+               <b class="newlead" style="font-size:18px">New Lead</b>
            </div>
            <div class="column is-8">
                <div class="select">
@@ -13,10 +13,10 @@
                     </select>
                 </div>
            </div>
-           <div class="column is-1">
+           <div class="column is-1 save">
                <b-button type="is-info">Save</b-button>
            </div>
-           <div  class="column is-1">
+           <div  class="column is-1 cancel">
                <b-button type="is-danger">Cancel</b-button>
            </div>
        </div>
@@ -31,14 +31,14 @@
            <hr>
        </div>
 
-        <div class="columns is-12 is-mobile" style="border-bottom: solid 1px lightgray;padding-bottom: 28px;">
+        <div class="columns is-12" style="border-bottom: solid 1px lightgray;padding-bottom: 28px;">
                <h4 style="color:#9A9A9A;border-bottom:#solid 1px #000">Comapany Data</h4>
         </div>
 
         <div class="columns is-12" style="margin-top:10px;padding-bottom:15px">
             <div class="column is-2">
                 <b-field style="padding-right: 6px;">
-                    <b-upload v-model="dropFiles"
+                    <b-upload v-model="dropFiles" 
                         multiple
                         drag-drop>
                         <section class="section">
@@ -60,12 +60,12 @@
                  
                 <b-field>
                     <label class="column is-4">Company Name</label>
-                    <b-input  type="text" style="margin-left:5%;"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;"></b-input>
                 </b-field>   
 
                 <b-field>
                       <label class="column is-4">Phone</label>
-                      <b-input type="number" style="margin-left:5%;" v-model="newPhone"></b-input>
+                      <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="newPhone"></b-input>
                       <div class="column is-1">
                           <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addPhoneField"></span> 
                       </div>
@@ -73,7 +73,7 @@
 
                  <b-field v-if="index > 0" v-for="(phone, index) in phones" :key="index">
                       <label class="column is-4">Phone</label>
-                      <b-input type="number" style="margin-left:5%;" v-model="newPhone"></b-input>
+                      <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="newPhone"></b-input>
                       <div class="column is-1">
                           <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removePhoneField(index,phone)"></span> 
                       </div>
@@ -81,7 +81,7 @@
 
                 <b-field>
                     <label class="column is-4">Mobile</label>
-                    <b-input type="number" style="margin-left:5%;" v-model="newMobile"></b-input>
+                    <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="newMobile"></b-input>
                     <div class="column is-1">
                           <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addMobileField"></span> 
                     </div>
@@ -89,7 +89,7 @@
 
                  <b-field v-if="indexMob > 0" v-for="(mobile, indexMob) in mobiles" :key="indexMob">
                     <label class="column is-4">Mobile</label>
-                    <b-input type="number" style="margin-left:5%;" v-model="newMobile"></b-input>
+                    <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="newMobile"></b-input>
                     <div class="column is-1">
                           <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeMobileField(indexMob,mobile)"></span> 
                     </div>
@@ -97,7 +97,7 @@
 
                 <b-field>
                     <label class="column is-4">Email</label>
-                    <b-input type="email" style="margin-left:5%;" v-model="newMail"></b-input>
+                    <b-input class="Leaad" type="email" style="margin-left:5%;" v-model="newMail"></b-input>
                     <div class="column is-1">
                           <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addMailField"></span> 
                     </div>
@@ -105,7 +105,7 @@
 
                 <b-field v-if="indexMail > 0" v-for="(email, indexMail) in emails" :key="indexMail">
                     <label class="column is-4">Email</label>
-                    <b-input type="email" style="margin-left:5%;" v-model="newMail"></b-input>
+                    <b-input class="Leaad" type="email" style="margin-left:5%;" v-model="newMail"></b-input>
                     <div class="column is-1">
                           <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeMailField(indexMail,email)"></span> 
                     </div>
@@ -113,7 +113,7 @@
 
                 <b-field>
                     <label class="column is-4">Fax</label>
-                    <b-input  style="margin-left:5%;" v-model="newFax"></b-input>
+                    <b-input  class="Leaad" style="margin-left:5%;" v-model="newFax"></b-input>
                     <div class="column is-1">
                           <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addFaxField"></span> 
                     </div>
@@ -121,7 +121,7 @@
 
                 <b-field v-if="indexFax > 0" v-for="(fax, indexFax) in faxes" :key="indexFax">
                     <label class="column is-4">Fax</label>
-                    <b-input  style="margin-left:5%;" v-model="newFax"></b-input>
+                    <b-input class="Leaad" style="margin-left:5%;" v-model="newFax"></b-input>
                     <div class="column is-1">
                           <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeFaxField(indexFax,fax)"></span> 
                     </div>
@@ -135,27 +135,27 @@
             <div class="column is-4">
                 <b-field>
                     <label class="column is-4">Lead Source</label>
-                    <b-input  type="text" style="margin-left:5%;"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;"></b-input>
                 </b-field>       
 
                 <b-field>
                     <label class="column is-4">Industry</label>
-                    <b-input type="text" style="margin-left:5%;"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;"></b-input>
                 </b-field>
 
                 <b-field>
                     <label class="column is-4">Annual revenu</label>
-                    <b-input style="margin-left:5%;"></b-input>
+                    <b-input class="Leaad" style="margin-left:5%;"></b-input>
                 </b-field>
 
                 <b-field>
                     <label class="column is-4">#Employees</label>
-                    <b-input type="number" style="margin-left:5%;"></b-input>
+                    <b-input class="Leaad" type="number" style="margin-left:5%;"></b-input>
                 </b-field>
 
                 <b-field>
                     <label  class="column is-4">Rating</label>
-                    <b-select expanded>
+                    <b-select expanded class="Leaad2">
                         <option value="Rate" selected>Rate</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -170,7 +170,7 @@
         </div>
 
         
-        <div class="columns is-12 is-mobile" style="padding-bottom: 28px;border-bottom: solid 1px lightgray;">
+        <div class="columns is-12 plusSign" style="padding-bottom: 28px;border-bottom: solid 1px lightgray;">
             <h4 style="color:#9A9A9A">Address</h4>
             <div class="column is-1">
                 <span><img src="/images/add.png" style="cursor:pointer" @click="addAddress"></span> 
@@ -180,29 +180,29 @@
         <div style="margin-top:10px;padding-bottom:15px" 
          v-for="(address, indexAddress) in addresses" :key="indexAddress">
 
-            <div v-if="indexAddress > 0" class="columns is-12 is-mobile" style="padding-bottom: 28px;border-bottom: solid 1px lightgray;">
+            <div v-if="indexAddress > 0" class="columns is-12 plusSign" style="padding-bottom: 28px;border-bottom: solid 1px lightgray;">
                <h4 style="color:#9A9A9A">Address</h4>
                <div class="column is-1">
                    <span><img src="/images/remove.png" style="cursor:pointer" @click="removeAddressfield(indexAddress,address)"></span> 
                </div>
             </div>
 
-         <div class="columns is-12  is-mobile">
+         <div class="columns is-12">
             <div class="column is-2" style="margin-top:5%"></div>
             <div class="column is-5" style="margin-top:5%">
                 <b-field>
                     <label class="column is-4">Street</label>
-                    <b-input type="text" style="margin-left:5%;" v-model="street"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="street"></b-input>
                 </b-field> 
 
                 <b-field>
                     <label class="column is-4">State</label>
-                    <b-input type="text" style="margin-left:5%;" v-model="state"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="state"></b-input>
                 </b-field>
 
                 <b-field>
                     <label  class="column is-4">Country</label>
-                    <b-select expanded placeholder="Select Country" v-model="country">
+                    <b-select class="Leaad2" expanded placeholder="Select Country" v-model="country">
                         <option value="egypt">Egypt</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -215,7 +215,7 @@
             <div class="column is-5" style="margin-top:5%">
                  <b-field>
                     <label  class="column is-4">City</label>
-                    <b-select expanded v-model="city">
+                    <b-select class="Leaad2" expanded v-model="city">
                         <option value="egypt">Egypt</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -226,7 +226,7 @@
 
                 <b-field>
                     <label class="column is-4">Zip Code</label>
-                    <b-input type="text" style="margin-left:5%;" v-model="zipCode"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="zipCode"></b-input>
                 </b-field>
 
             </div>
@@ -234,7 +234,7 @@
         </div>
 
     
-        <div class="columns is-12  is-mobile" style="border-bottom: solid 1px lightgray;padding-bottom: 28px;">
+        <div class="columns is-12 plusSign contact" style="border-bottom: solid 1px lightgray;padding-bottom: 28px;">
             <h4 style="color:#9A9A9A">Contact Person</h4>
             <div class="column is-1">
                 <span><img src="/images/add.png" style="cursor:pointer" @click="addContact"></span> 
@@ -244,19 +244,19 @@
         <div style="margin-top:10px;padding-bottom:15px"
         v-for="(contact, indexContact) in contacts" :key="indexContact">
 
-        <div  v-if="indexContact > 0" class="columns is-12  is-mobile" style="border-bottom: solid 1px lightgray;padding-bottom: 28px;">
+        <div  v-if="indexContact > 0" class="columns is-12 plusSign" style="border-bottom: solid 1px lightgray;padding-bottom: 28px;">
                <h4 style="color:#9A9A9A">Contact Person</h4>
                <div class="column is-1">
                    <span><img src="/images/remove.png" style="cursor:pointer" @click="removeContactfield(indexContact,contact)"></span> 
                </div>
         </div>
 
-        <div class="columns is-12  is-mobile">
+        <div class="columns is-12">
           <div class="column is-2" style="margin-top:6%"></div>
             <div class="column is-5"  style="margin-top:6%">
                 <b-field>
                     <label  class="column is-4">Title</label>
-                    <b-select expanded v-model="title">
+                    <b-select class="Leaad2" expanded v-model="title">
                         <option value="egypt">Mr.</option>
                         <option value="2">Mrs.</option>
                         <option value="3">Ms.</option>
@@ -265,22 +265,22 @@
 
                 <b-field>
                     <label class="column is-4">First Name</label>
-                    <b-input type="text" style="margin-left:5%;" v-model="firstName"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="firstName"></b-input>
                 </b-field>
 
                 <b-field>
                     <label class="column is-4">Last Name</label>
-                    <b-input type="text" style="margin-left:5%;" v-model="lastName"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="lastName"></b-input>
                 </b-field>
 
                 <b-field>
                     <label class="column is-4">Email</label>
-                    <b-input type="email" style="margin-left:5%;" v-model="email"></b-input>
+                    <b-input class="Leaad" type="email" style="margin-left:5%;" v-model="email"></b-input>
                 </b-field>
 
                 <b-field>
                     <label  class="column is-4">Nationality</label>
-                    <b-select expanded v-model="nationality">
+                    <b-select class="Leaad2" expanded v-model="nationality">
                         <option value="egyptian">Egyptian</option>
                         <option value="2">Mrs.</option>
                         <option value="3">Ms.</option>
@@ -291,34 +291,33 @@
             <div class="column is-5"  style="margin-top:6%">
                 <b-field>
                       <label class="column is-4">Phone</label>
-                      <b-input type="number" style="margin-left:5%;" v-model="phone"></b-input>
+                      <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="phone"></b-input>
                 </b-field>
 
                 <b-field>
                     <label class="column is-4">Mobile</label>
-                    <b-input type="number" style="margin-left:5%;" v-model="mobile"></b-input>
+                    <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="mobile"></b-input>
                 </b-field>
 
                 <b-field>
                     <label  class="column is-4">Lead Status</label>
-                    <div class="select" style="width:100%">
-                        <select style="width:100%" v-model="leadStatus">
-                            <option value="contacted" selected>Contacted</option>
-                            <option value="not_contacted">Not Contacted</option>
-                        </select>
-                    </div>
+                     <b-select class="Leaad2" expanded v-model="leadStatus">
+                        <option value="Contacted">Contacted</option>
+                        <option value="2">Not Contacted</option>
+                        <option value="3">Ms.</option>
+                    </b-select>
                 </b-field>
 
                 <b-field>
                       <label class="column is-4">Position</label>
-                      <b-input type="text" style="margin-left:5%;" v-model="position"></b-input>
+                      <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="position"></b-input>
                 </b-field>
 
             </div>
         </div>
         </div>
 
-        <div class="columns is-12  is-mobile" style="border-bottom: solid 1px lightgray;padding-bottom: 28px;">
+        <div class="columns is-12 plusSign contact" style="border-bottom: solid 1px lightgray;padding-bottom: 28px;">
             <h4 style="color:#9A9A9A;border-bottom:#solid 1px #000">Additional info</h4>
             <div class="column is-1">
                 <span><img src="/images/add.png" style="cursor:pointer"></span> 
@@ -331,7 +330,7 @@
 
          <div class="columns is-12">
               <div class="column is-2"></div>
-              <b-field class="column is-9">
+              <b-field  class="column is-9">
                  <label class="column is-1">Description</label>
                  <b-input type="textarea" style="margin-left:5%;" class="column is-9"></b-input>
               </b-field>
@@ -474,5 +473,27 @@ export default {
 </script>
 
 <style>
-
+@media screen and (max-width: 767px) {
+.save{
+    margin-right: 11%;
+}
+.cancel{
+    margin-left: -45%;
+}
+.Leaad{
+    width: 58%;
+}
+.Leaad2{
+    width: 19%;
+}
+.plusSign{
+    display: flex;
+}
+.contact{
+    margin-top: 5%;
+}
+.newlead{
+    font-size: 11.5px !important;
+}
+}
 </style>

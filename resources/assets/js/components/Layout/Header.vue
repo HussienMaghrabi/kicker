@@ -62,16 +62,7 @@
                     <!-- <a @click="redirectRoute(6)" class="navbar-item is-child">Requests Broadcast</a> -->
                   </div>
                 </b-dropdown-item>
-                <hr style="padding: 0px; margin: 8px 0px;">
 
-                <b-dropdown-item :custom="true" aria-role="listitem" class="header-menu-item-hover">
-                  <div>
-                    <p>
-                      <img src="/icon/header-inventory.png">
-                      <a @mouseover="openInventoryMenu" class="header-menu-item has-child">Inventory</a>
-                    </p>
-                  </div>
-                </b-dropdown-item>
                 <hr style="padding: 0px; margin: 8px 0px;">
                 <div id="inventory-drop-menu">
                   <router-link class="navbar-item is-child"

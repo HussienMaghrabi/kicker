@@ -320,6 +320,14 @@ methods: {
 </script>
 
 <style>
+@media screen and (max-width: 767px)
+{
+   .field.has-addons 
+   {
+       display:unset;
+   }
+
+}
 .ghost {
   opacity: 0.2;
   background-color: #7ad0f8;

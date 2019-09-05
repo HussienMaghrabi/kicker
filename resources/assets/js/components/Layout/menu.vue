@@ -34,7 +34,7 @@
                             || permArray.meetings == 1
                             || permArray.requests == 1
                             || userType == 'admin'"
-                             to="/admin/vue/leads">
+                             to="/admin/vue/Leads">
                     <b-menu-item icon="user" label="All leads"></b-menu-item>
                 </router-link>
                 <router-link to="/admin/vue/AllMeeting" v-if="permArray.meetings == 1 || userType == 'admin'">
@@ -132,8 +132,14 @@
                     <b-menu-item icon="users" label="Forms" disabled></b-menu-item>
                 </router-link>
             </b-menu-item>
-            <router-link to="/admin/vue/proposals">
+            <router-link to="/admin/vue/allProposals">
                 <b-menu-item  v-if="permArray.marketing == 1 || userType == 'admin'" icon="information-outline" label="Proposals"></b-menu-item>
+            </router-link>
+            <router-link to="/admin/vue/allContract">
+                <b-menu-item  v-if="permArray.marketing == 1 || userType == 'admin'" icon="information-outline" label="Contracts"></b-menu-item>
+            </router-link>
+            <router-link to="/admin/vue/allInvoices">
+                <b-menu-item  v-if="permArray.marketing == 1 || userType == 'admin'" icon="information-outline" label="Invoices"></b-menu-item>
             </router-link>
             <router-link to="deals">
                 <b-menu-item v-if="permArray.deals == 1 || userType == 'admin'" icon="information-outline" label="Closed Deals"></b-menu-item>
@@ -181,7 +187,7 @@
         </div>
         <div class="wui-content">
         <div class="wui-content-header">
-            <a href="#" class="wui-side-menu-trigger"><i class="fa fa-bars"></i></a>
+            <a href="#" class="wui-side-menu-trigger"><i class="fa fa-bars  menu"></i></a>
         </div> 
         </div>
         <div class="wui-overlay"></div>
@@ -189,6 +195,11 @@
 </template>
 
 <style>
+@media screen and (max-width: 767px) {
+    .menu{
+        margin-left: -100px;
+    }
+}
 @media only screen and (max-width: 600px){
     .sidebar-menu-responsev{
         display: block !important
@@ -197,6 +208,7 @@
         display: none
     }
 }
+
 .sidebar-menu-responsev{
     display: none;
 }

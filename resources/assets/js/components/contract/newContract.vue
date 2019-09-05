@@ -4,14 +4,14 @@
            <div class="columns is-12">
             <div class="column is-10"></div>
            <div class="column is-1">
-               <b-button type="is-info"><i class="fas fa-save"></i>&nbsp Save</b-button>
+               <b-button class="save" type="is-info"><i class="fas fa-save"></i>&nbsp; Save</b-button>
            </div>
            <div  class="column is-1">
-               <b-button type="is-danger" style="margin-right:2%"><i class="fas fa-ban"></i>&nbsp Cancel</b-button>
+               <b-button class="cancel" type="is-danger" style="margin-right:2%"><i class="fas fa-ban"></i>&nbsp; Cancel</b-button>
            </div>
         </div>
         <div class="columns is-12" style="border-bottom: solid 1px lightgray;padding-bottom: 28px;">
-            <h4 style="color:#9A9A9A;border-bottom:#solid 1px #000;margin-left:3%">Contract Data</h4>
+            <h4 style="color:#9A9A9A;border-bottom:#solid 1px #000;margin-left:3%" class="newcontract">Contract Data</h4>
         </div>
 
         <div class="columns is-12" style="margin-top:10px;padding-bottom:15px">
@@ -106,10 +106,10 @@
         <div class="columns is-12" style="float:right">
             <div class="column is-10"></div>
            <div class="column is-1">
-               <b-button type="is-info"><i class="fas fa-save"></i>&nbsp Save</b-button>
+               <b-button class="save2" type="is-info"><i class="fas fa-save"></i>&nbsp; Save</b-button>
            </div>
            <div  class="column is-1">
-               <b-button type="is-danger" style="margin-right:2%"><i class="fas fa-ban"></i>&nbsp Cancel</b-button>
+               <b-button class="cancel2" type="is-danger" style="margin-right:2%"><i class="fas fa-ban"></i>&nbsp; Cancel</b-button>
            </div>
         </div>
 
@@ -117,6 +117,37 @@
 </template>
 
 <style>
+@media screen and (max-width: 767px)
+{
+   .newcontract
+   {
+       margin-top: 50px;
+   }
+   .field.has-addons 
+   {
+       display:unset;
+   }
+   .save
+   {
+       float: right;
+   }
+   .cancel{
+       margin-left: 45%;
+       margin-top: -1%;
+   }
+   .save2
+   {
+       float: right;
+       margin-bottom: 20px;
+   }
+   .cancel2
+   {
+       margin-left: 46%;
+       margin-top: -1%;
+   }
+
+
+}
 .ghost {
   opacity: 0.2;
   background-color: #7ad0f8;

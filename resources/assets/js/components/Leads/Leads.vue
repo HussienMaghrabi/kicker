@@ -32,7 +32,7 @@
 
                                     <div class="field">
                                     <div class="control has-icons-left">
-                                        <div class="select">
+                                        <div class="select  contacts">
                                         <select>
                                             <option value="Contacted" selected>Contacted</option>
                                             <option value="Not Contacted">Not Contacted</option>
@@ -314,11 +314,11 @@
             
            
 
-            <div class="leads-number">{{leadsCurrentNumber + ' / ' + leadsTotalNumber}}
-                  <div class="buttons">
+            <div class="leads-number btns-leads">{{leadsCurrentNumber + ' / ' + leadsTotalNumber}}</div>
+
+            <div class="buttons">
                     <b-button type="is-success"><i class="fas fa-envelope"></i>  Send Email</b-button>
                     <b-button type="is-info"><i class="fas fa-print"></i>  Print</b-button>
-                  </div>
             </div>
 
             <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="true"></b-loading>
@@ -1027,7 +1027,14 @@ changeLeadFav
     bottom: 36px;
 
 }
-
+@media screen and (max-width: 767px) {
+.contacts{
+    margin-bottom: 6%;
+}
+.btns-leads{
+   margin-bottom: 50%; 
+}
+}
 @media screen and (max-width: 767px) {
     .filters {
         display: block;
