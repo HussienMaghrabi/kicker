@@ -205,10 +205,10 @@ export const routes = [
         }
     },
     {
-        path: '/*/admin',
-        redirect: '/admin/vue/dashboard',
-        name: 'Dashboard',
-        component: Dashboard,
+        // path: '/*/admin',
+        // redirect: '/admin/vue/dashboard',
+        // name: 'Dashboard',
+        // component: Dashboard,
     },
     {
         path: '/admin/vue/leads',

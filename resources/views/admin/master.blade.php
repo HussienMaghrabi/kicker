@@ -26,7 +26,7 @@
                 'numOfCil'     => @\App\Cil::where('seen', '0')->count(),
                 'token'     => auth()->user()->agentToken->token,
                 'locale'     => app()->getLocale(),
-                'numOfNotifications'     => @\App\AdminNotification::where('assigned_to',auth()->user()->id)->where('status',0)->count(),
+                // 'numOfNotifications'     => @\App\AdminNotification::where('assigned_to',auth()->user()->id)->where('status',0)->count(),
                 'profileUrl'     => url(adminPath().'/employees/'. \App\Employee::where('id', Auth()->user()->employee_id)->first()->id),
                 'agentType'     => @App\AgentType::find(auth()->user()->agent_type_id)->name,
                 'image'     => auth()->user()->image,

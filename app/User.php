@@ -38,7 +38,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Request::class);
     }
-
+    
     public function role()
     {
         return  $this->belongsTo('App\Role');
