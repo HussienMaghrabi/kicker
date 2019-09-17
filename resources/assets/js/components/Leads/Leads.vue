@@ -221,7 +221,7 @@
                         </b-table-column>
 
                         <b-table-column field="leadProbability" label="Mobile" sortable>
-                            {{props.row.leadProbability}}
+                            {{props.row.phone}}
                         </b-table-column>
 
                         <b-table-column field="first_name" label="Email" sortable>
@@ -265,7 +265,7 @@
 
                         <b-table-column field="type" label="Type" sortable >
                             <span v-if="props.row.type">{{props.row.type}}</span>
-                            <span v-else>N/A</span>
+                            <span v-else>N/A</span>Leads
                         </b-table-column>
 
                         <b-table-column field="favorite" label="Favorite" centered sortable>
@@ -509,7 +509,11 @@ changeLeadFav
                 leadsTotalNumber: 0,
                 getLeadsByAgent: [],
                 leadSources: [],
-                leads: [],
+                // leads: [
+                //     {first_name:'ahmed',},
+                //     {last_name:'Ali',},
+                //     {phone:'01228861551',},
+                //     ],
                 isEmpty: false,
                 isLoading: true,
                 hasMobileCards: true,

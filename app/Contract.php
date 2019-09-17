@@ -15,4 +15,9 @@ class Contract extends Model
     {
         return $this->belongsTo('App\Lead');
     }
+    
+    public function contract_Sections(){
+         return $this->hasMany('App\Contract_Sections');
+    }
 }
+
