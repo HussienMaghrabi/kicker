@@ -649,7 +649,7 @@ changeLeadFav
 .leads-number
 {
     position: absolute;
-    bottom: 36px;
+    bottom: 120px;
 
 }
 @media screen and (max-width: 767px) {

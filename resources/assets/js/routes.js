@@ -3,6 +3,7 @@ import LeadsIndex from './components/Leads/LeadsIndex.vue';
 import MyLeads from './components/Leads/MyLeads.vue'
 import Leads from './components/Leads/Leads.vue'
 import allContract from './components/contract/allContract.vue'
+import allCompanies from './components/compaines/allCompanies.vue'
 import showContract from './components/contract/showContract.vue'
 import newContract from './components/contract/newContract.vue'
 import allInvoices from './components/invoices/allInvoices.vue'
@@ -186,6 +187,8 @@ import ShowProposal from './components/Proposal/show-proposal.vue'
 import EditProposal from './components/Proposal/edit-proposal.vue'
 import traffic from './components/traffic/traffic.vue'
 import trafficTasks from './components/trafficTasks/trafficTasks.vue'
+import newCompany from './components/newCompany/newCompany.vue'
+import showCompany from './components/showCompany/showCompany.vue'
 
 
 
@@ -202,10 +205,10 @@ export const routes = [
         }
     },
     {
-        path: '/*/admin',
-        redirect: '/admin/vue/dashboard',
-        name: 'Dashboard',
-        component: Dashboard,
+        // path: '/*/admin',
+        // redirect: '/admin/vue/dashboard',
+        // name: 'Dashboard',
+        // component: Dashboard,
     },
     {
         path: '/admin/vue/leads',
@@ -1606,6 +1609,30 @@ export const routes = [
         component: trafficTasks,
         meta: {
             title: ' Traffic Tasks',
+        }
+    },
+    {
+        path: '/admin/vue/allCompanies',
+        name: 'allCompanies',
+        component: allCompanies,
+        meta: {
+            title: ' All Companies',
+        }
+    },
+    {
+        path: '/admin/vue/newCompany',
+        name: 'newCompany',
+        component: newCompany,
+        meta: {
+            title: ' New Company',
+        }
+    },
+    {
+        path: '/admin/vue/showCompany',
+        name: 'showCompany',
+        component: showCompany,
+        meta: {
+            title: ' Show Company',
         }
     },
   
