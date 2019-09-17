@@ -110,6 +110,19 @@
                           <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeMailField(indexMail,email)"></span> 
                     </div>
                 </b-field>
+                <!-- <b-field>
+                    <label class="column is-4">fady</label>
+                    <b-input class="Leaad" type="email" style="margin-left:5%;" v-model="newfady"></b-input>
+                    <div class="column is-1">
+                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addfady"></span> 
+                    </div>
+                </b-field>
+                <b-field v-if="indexMail > 0" v-for="(fady, indexMail) in fadys" :key="indexMail">
+                    <label class="column is-4">fady</label>
+                    <b-input class="Leaad" type="email" style="margin-left:5%;" v-model="newMail"></b-input>
+
+                  
+                </b-field> -->
 
                 <b-field>
                     <label class="column is-4">Fax</label>
@@ -298,6 +311,7 @@
                     <label class="column is-4">Mobile</label>
                     <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="mobile"></b-input>
                 </b-field>
+                
 
                 <b-field>
                     <label  class="column is-4">Lead Status</label>
@@ -357,6 +371,9 @@ export default {
             faxes:[{
                 newFax:''
             }],
+            fadys:[{
+                newfady:''
+            }],
             addresses:[{
                 street:'',
                 state:'',
@@ -386,6 +403,14 @@ export default {
                 this.addresses.splice(idx, 1);
             }
         },
+        // addfady(){{
+        //     this.fady.push({
+        //         newfady:'',
+        //      });
+ 
+        //     }
+        
+        // },
         removeContactfield(indexContact,contact){
             var idx = this.contacts.indexOf(contact);
             console.log(idx, indexContact);
@@ -428,7 +453,14 @@ export default {
              this.phones.push({
                newPhone: '',
             });
+
         },
+        // addfady(){
+        //      this.fadys.push({
+        //         newfady: '',
+        //     });
+            
+        // },
         addMobileField(){
              this.mobiles.push({
                newMobile: '',
