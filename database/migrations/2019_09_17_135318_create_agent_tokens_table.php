@@ -15,7 +15,7 @@ class CreateAgentTokensTable extends Migration
     {
         Schema::create('agent_tokens', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('user_id');
             $table->string('token');
             $table->tinyInteger('login'); 
             $table->timestamps();
