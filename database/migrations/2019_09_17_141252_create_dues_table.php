@@ -15,6 +15,7 @@ class CreateDuesTable extends Migration
     {
         Schema::create('dues', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('outcome_id');
             $table->foreign('outcome_id')->references('id')->on('outcomes')->onDelete('cascade');
             $table->string('name');
             $table->string('description');

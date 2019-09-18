@@ -15,6 +15,8 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('proposal_id');
+            $table->unsignedInteger('collection_id');
             $table->foreign('proposal_id')->references('id')->on('proposals')->onDelete('cascade');
             $table->foreign('collection_id')->references('id')->on('collections')->onDelete('cascade');
             $table->date('date');

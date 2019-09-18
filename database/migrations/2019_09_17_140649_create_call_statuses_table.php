@@ -15,7 +15,7 @@ class CreateCallStatusesTable extends Migration
     {
         Schema::create('call_statuses', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('user_id');
             $table->string('name');
             $table->tinyInteger('has_next_action');
             $table->timestamps();
