@@ -18,6 +18,7 @@ class CreateListsTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
+            $table->unsignedinteger('card_id');
             $table->foreign('card_id')->references('id')->on('cards');
             $table->timestamps();
             

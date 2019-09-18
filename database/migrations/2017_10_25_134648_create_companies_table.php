@@ -29,12 +29,11 @@ class CreateCompaniesTable extends Migration
             $table->string('policy');          
             $table->enum('leadstatus', ['online', 'offline']);
             $table->string('activity');
-            $table->string('company_type');
+            $table->enum('company_type',['lead','proposed_Company']);
             $table->integer('sub_id');
             $table->integer('invoice_id');
             $table->integer('currency_id');
             $table->integer('tax_bill');
-            $table->integer('user_id');
             $table->timestamps();
         });
     }

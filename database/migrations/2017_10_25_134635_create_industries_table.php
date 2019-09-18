@@ -18,7 +18,7 @@ class CreateIndustriesTable extends Migration
             $table->string('name');
             $table->text('notes')->nullable();
             $table->integer('user_id');
-            $table->timestamps('created_at');
+            $table->timestamps();
         });
     }
 
