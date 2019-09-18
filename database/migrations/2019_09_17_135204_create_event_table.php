@@ -26,7 +26,7 @@ class CreateEventTable extends Migration
             $table->integer('user_id');
             $table->text('meta_keywords');
             $table->text('meta_description');
-            $table->timestamps('created_at');
+            $table->timestamps();
         });
     }
 

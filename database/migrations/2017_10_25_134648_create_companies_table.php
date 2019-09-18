@@ -34,7 +34,6 @@ class CreateCompaniesTable extends Migration
             $table->integer('invoice_id');
             $table->integer('currency_id');
             $table->integer('tax_bill');
-            $table->integer('user_id');
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ class CreateContactsTable extends Migration
         Schema::create('contacts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('relation')->nullable();
-            $table->string('name');//fullname
+            $table->string('name');
             $table->integer('lead_id');
             $table->integer('title_id')->nullable();
             $table->integer('nationality')->nullable();//nationaltyid
@@ -28,7 +28,7 @@ class CreateContactsTable extends Migration
             $table->string('position')->nullable();
             $table->integer('company_id')->nullable();
             $table->enum('leadstatus', ['online', 'offline']);
-            $table->timestamps('created_at');
+            $table->timestamps();
         });
     }
 

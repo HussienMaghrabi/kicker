@@ -15,6 +15,7 @@ class CreateCollectionsTable extends Migration
     {
         Schema::create('collections', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('income_id');
             $table->foreign('income_id')->references('id')->on('incomes')->onDelete('cascade');
             $table->string('name');
             $table->string('description');
