@@ -16,8 +16,9 @@ class CreateListsTable extends Migration
         Schema::create('lists', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->stirng('email');
+            $table->string('email');
             $table->string('phone');
+            $table->unsignedinteger('card_id');
             $table->foreign('card_id')->references('id')->on('cards');
             $table->timestamps();
             

@@ -22,14 +22,11 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('agent_type_id');
             $table->unsignedInteger('user_id');
             $table->string('image');
-            $table->string('remember_token', 100);
             $table->string('commission')->nullable();
             $table->text('email_password')->nullable();
             $table->enum('type',['admin','agent']);
             $table->integer('role_id');
-            $table->integer('last_seen_dash')->nullable();
-            $table->integer('last_seen_mob')->nullable();
-            $table->text('refresh_token')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }
