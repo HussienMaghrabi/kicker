@@ -5,15 +5,15 @@
                 <b style="margin-bottom:2%">Proposal No. 272</b>
             </div>
            <div class="column is-1">
-               <b-button type="is-info">Save</b-button>
+               <b-button type="is-info" class="save">Save</b-button>
            </div>
            <div  class="column is-1">
-               <b-button type="is-danger">Cancel</b-button>
+               <b-button type="is-danger" class="cancel">Cancel</b-button>
            </div>
         </div>
         <div class="columns is-12" style="padding-left:10%">
             <div class="column is-12" style="display:-webkit-inline-box;margin-bottom:2%">
-                <h6 style="color:red;margin-right:5%">*Proposed Company</h6>
+                <h6 style="color:red;margin-right:5%" class="headerInput">*Proposed Company</h6>
                 <div class="field column is-5">
                     <div class="select" style="width:100%">
                         <select expanded style="width:100%">
@@ -386,6 +386,18 @@ th{
     padding: 1rem;
     display: flex;
     align-items: center;
+}
+@media screen and (max-width: 767px) {
+    .save{
+        margin-left: 62%;
+    }
+    .cancel{
+        margin-top: -11%;
+        margin-left: 81%;
+    }
+    .headerInput{
+        display: contents !important;
+    }
 }
 
 </style>

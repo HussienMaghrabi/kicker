@@ -42,9 +42,9 @@ class CreateProjectsTable extends Migration
             $table->text('watermarked_image');
             $table->text('resale_units')->nullable();
             $table->text('meta_keywords')->nullable();
-            $table->text('meta_description	')->nullable();
+            $table->text('meta_description')->nullable();
             $table->string('map_marker')->nullable();
-            $table->text('website_slider	')->nullable();
+            $table->text('website_slider')->nullable();
             $table->enum('type',['commercial','personal']);
 			$table->timestamps();
         });

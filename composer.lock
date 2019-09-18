@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "313a14aa49004d9ca18ec644c7ab9caa",
+    "content-hash": "15faeb4721b869e4ddf798499b63a04d",
     "packages": [
         {
             "name": "berkayk/onesignal-laravel",
@@ -589,6 +589,7 @@
         },
         {
             "name": "google/apiclient",
+<<<<<<< HEAD
             "version": "v2.4.0",
             "source": {
                 "type": "git",
@@ -599,6 +600,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/cd3c37998020d91ae4eafca4f26a92da4dabba83",
                 "reference": "cd3c37998020d91ae4eafca4f26a92da4dabba83",
+=======
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/googleapis/google-api-php-client.git",
+                "reference": "ea5c94d975c150b6eb892abb5536d24205376d4e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/ea5c94d975c150b6eb892abb5536d24205376d4e",
+                "reference": "ea5c94d975c150b6eb892abb5536d24205376d4e",
+>>>>>>> 4baa857b0187d039dfa538d8416a62dd15f92b8a
                 "shasum": ""
             },
             "require": {
@@ -646,6 +659,7 @@
             "keywords": [
                 "google"
             ],
+<<<<<<< HEAD
             "time": "2019-09-11T17:38:10+00:00"
         },
         {
@@ -660,6 +674,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/22746bfd8d8d5a4f8bbe5e22559d9976810c177c",
                 "reference": "22746bfd8d8d5a4f8bbe5e22559d9976810c177c",
+=======
+            "time": "2019-09-09T16:04:18+00:00"
+        },
+        {
+            "name": "google/apiclient-services",
+            "version": "v0.113",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/googleapis/google-api-php-client-services.git",
+                "reference": "93f926106f53ebb56e68f0219189dbf55fae0a11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/93f926106f53ebb56e68f0219189dbf55fae0a11",
+                "reference": "93f926106f53ebb56e68f0219189dbf55fae0a11",
+>>>>>>> 4baa857b0187d039dfa538d8416a62dd15f92b8a
                 "shasum": ""
             },
             "require": {
@@ -683,7 +713,11 @@
             "keywords": [
                 "google"
             ],
+<<<<<<< HEAD
             "time": "2019-09-16T00:23:14+00:00"
+=======
+            "time": "2019-09-08T00:23:09+00:00"
+>>>>>>> 4baa857b0187d039dfa538d8416a62dd15f92b8a
         },
         {
             "name": "google/auth",
@@ -4634,6 +4668,7 @@
             "time": "2019-01-29T11:11:52+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "webklex/laravel-imap",
             "version": "1.2.6",
             "source": {
@@ -4693,6 +4728,8 @@
             "time": "2018-08-04T21:07:08+00:00"
         },
         {
+=======
+>>>>>>> 4baa857b0187d039dfa538d8416a62dd15f92b8a
             "name": "yajra/laravel-datatables-oracle",
             "version": "v8.13.7",
             "source": {
