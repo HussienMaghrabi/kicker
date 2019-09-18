@@ -15,6 +15,10 @@ class CreateContractsTable extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('contact_id');
+            $table->unsignedInteger('company_id');
+            $table->unsignedInteger('proposal_id');
+            $table->unsignedInteger('section_id');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
             $table->foreign('proposal_id')->references('id')->on('proposals')->onDelete('cascade');

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Failed-jobs extends Model
+class Failed_jobs extends Model
 {
     //
 }

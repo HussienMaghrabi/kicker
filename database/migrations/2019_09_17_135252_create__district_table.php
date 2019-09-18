@@ -18,9 +18,8 @@ class CreateDistrictTable extends Migration
             $table->string('ar_name');
             $table->string('en_name');
             $table->string('en_slug');
-            $table->string('en_slug');
             $table->integer('city_id');
-            $table->timestamps('created_at');
+            $table->timestamps();
         });
     }
 
