@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateListsTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class CreateListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('lists', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('email');
-            $table->string('phone');
-            $table->foreign('card_id')->references('id')->on('cards');
+            $table->string('roles');
+            $table->unsignedInteger('user_id')->nullable($value=true);
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
-            
-        }); 
-        
+        });
     }
-
 
     /**
      * Reverse the migrations.
@@ -33,6 +30,6 @@ class CreateListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lists');
+        Schema::dropIfExists('roles');
     }
 }
