@@ -9,10 +9,9 @@
                 <h6 style="color:red;margin-right:1%">*Proposed Company</h6>
                 <div class="field">
                     <div class="select">
-                        <b-select placeholder="Select Company" expanded>
-                            <option>Circle ERP</option>
-                            <option>PropertzCRM</option>
-                        </b-select>
+                          <b-select v-model="proposedCompanyId" placeholder="Select Event" expanded>
+                         <option v-for="propCompany in proposedCompanies" :value="propCompany.id" :key="propCompany.id">{{propCompany.name}}</option>
+                       </b-select> 
                     </div>
                 </div>
             </div>
@@ -29,10 +28,9 @@
                 <h6 style="color:red;margin-right:1%" class="column is-2">*Company Name</h6>
                 <div class="field column is-8">
                     <div class="select" style="width:42%">
-                        <b-select expanded>
-                            <option>Circle ERP</option>
-                            <option>PropertzCRM</option>
-                        </b-select>
+                        <b-select v-model="companyId" placeholder="Select Event" expanded>
+                         <option v-for="company in companies" :value="company.id" :key="company.id">{{company.name}}</option>
+                       </b-select> 
                     </div>
                 </div>
             </div>
@@ -110,7 +108,7 @@
                         <span style="color:rgb(100, 136, 213);cursor:pointer">Restore Default policy</span>
                     </section>
                     <footer class="modal-card-foot">
-                        <b-button type="is-info"><i class="fas fa-save"></i>&nbsp Save</b-button>
+                        <b-button type="is-info"><i class="fas fa-save"></i>&nbsp; Save</b-button>
                         <button class="button" type="button" @click="isComponentModalActive = false">Cancel</button>
                     </footer>
                 </div>
@@ -245,10 +243,14 @@
 </template>
 
 <script>
-import {} from './../../calls'
+import {getAllProposedCpmpany,getAllCpmpanies} from './../../calls'
 export default {
     data() {
         return {
+            proposedCompanies:[],
+            companies:[],
+            proposedCompanyId:null,
+            companyId:null,
             token: window.auth_user.csrf,
             isComponentModalActive: false, 
             // itemPrice:'',
@@ -301,12 +303,27 @@ export default {
         this.id = this.$route.params.id
     },
     mounted() {
-
+     this.getAllProposedCpmpany(),
+     this.getAllCpmpanies()
     },
     components: {
         
     },
     methods: {
+        getAllProposedCpmpany(){
+            getAllProposedCpmpany().then(Response=>{
+              this.proposedCompanies=Response.data.data
+            }).catch(error => {
+                console.log("there are error ".error)
+            })
+        },
+        getAllCpmpanies(){
+           getAllCpmpanies().then(Response=>{
+               this.companies=Response.data.data
+           }).catch(error=>{
+               console.log(error)
+           })
+        },
         ChangeInvoice(event){
 
         },
@@ -341,7 +358,7 @@ export default {
         },
         deleteRow(index, invoice) {
             var idx = this.invoices.indexOf(invoice);
-            console.log(idx, index);
+         //   console.log(idx, index);
             if (idx > -1) {
                 this.invoices.splice(idx, 1);
             }
@@ -356,7 +373,7 @@ export default {
         },
         deleteItem(k, item){
             var idx = this.items.indexOf(item);
-            console.log(idx, k);
+            //console.log(idx, k);
             if (idx > 0) {
                 this.items.splice(idx, 1);
             }

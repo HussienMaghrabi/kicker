@@ -2334,3 +2334,10 @@ export const getAllcampaigns = () => {
 export const getAllProposal = () => {
     return axios.get('/admin/proposals')
 }
+export const getAllProposedCpmpany = () => {
+    return axios.get('/admin/getAllProposedCompany')
+}
+export const getAllCpmpanies = () => {
+    return axios.get('/admin/getAllCpmpanies')
+}
+

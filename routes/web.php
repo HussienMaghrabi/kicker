@@ -846,6 +846,11 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('allow-rate', 'EmployeeController@allowRate');
     Route::post('update-rate','EmployeeController@updateRate');
 
+    Route::get('getAllProposedCompany','ProposedCompanyController@getProposedCompany');
+    Route::get('getAllCpmpanies','CompanyController@getCompany');
+
+    
+
 });
 
 Route::post('fblead1',function (){
