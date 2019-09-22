@@ -13,7 +13,7 @@ class ProposedCompanyAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::table('proposedCompany_addresses', function (Blueprint $table) {
+        Schema::create('proposedCompany_addresses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('street')->nullable($value=true);
             $table->string('state')->nullable($value=true);

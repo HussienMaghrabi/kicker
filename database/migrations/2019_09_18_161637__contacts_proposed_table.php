@@ -13,7 +13,7 @@ class ContactsProposedTable extends Migration
      */
     public function up()
     {
-        Schema::table('contacts_proposed', function (Blueprint $table) {
+        Schema::create('contacts_proposed', function (Blueprint $table) {
             $table->increments('id');
             // $table->string('relation')->nullable();
             $table->string('first_name');

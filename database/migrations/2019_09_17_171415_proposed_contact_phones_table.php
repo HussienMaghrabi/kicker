@@ -27,8 +27,6 @@ class ProposedContactPhonesTable extends Migration
      */
     public function down()
     {
-        Schema::table('proposedContact_phones', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('collections');
     }
 }
