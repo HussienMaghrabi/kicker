@@ -165,8 +165,16 @@ class LeadController extends Controller
 	}*/
 
 	public function index(){
+		$sources = DB::table('leads')
+				   ->select('leads.id','leads.prefix_name', 'leads.first_name','leads.last_name','leads.email','leads.phone','leads.status')
+				   ->paginate(100);
+				   
+		// return view('admin.tasks.index', ['title' => trans('admin.task'), 'source' => $sources]);
+		
+		return response()->json($sources);
+		
 
-		return view('admin.leads.index-new');
+		// return view('newlead');
 	}
 
 	/**
@@ -2528,6 +2536,7 @@ class LeadController extends Controller
 
 	// Get My Leads
 	public function getMyLeads(Request $request){
+		
 		if(auth()->user()->role->name == 'operation'){
 			$obj = (object)[];
 			$obj->data = [];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Proposal;
+use App\Company;
 use Illuminate\Http\Request;
 use Validator;
 use DB;
@@ -28,12 +29,26 @@ class ProposalController extends Controller
      */
     public function index()
     {
-        $proposals = Proposal::orderBy('created_at', 'desc')->get();
-
+        $arr=[];
+        $i=0;
+        $proposals = Proposal::orderBy('created_at', 'desc')->with('items')->get();
+        foreach($proposals as $proposal){
+            $arr[$i]['proposed_company']=Company::where('id',$proposal->proposed_company_id)->value('name');
+            $arr[$i]['company']=Company::where('id',$proposal->company_id)->value('name');
+            $arr[$i]['valid_until']=$proposal->valid_until;
+            $arr[$i]['sub_total']=$proposal->sub_total;
+            $arr[$i]['Discount']=$proposal->discount;
+            $arr[$i]['Total']=$proposal->total;
+            $i++;
+        }
+        return response()->json([
+            'status'=>'success',
+            'data'=>$arr
+        ]);
         // $proposals = DB::table('proposals as proposal')
         //     ->leftjoin('leads as lead', 'proposal.lead_id', '=', 'lead.id')
         //     ->select('proposal.id', 'proposal.lead_id', 'lead.first_name', 'lead.last_name')->get();
-        return view('admin.proposals.index_new', ['title' => trans('admin.all_proposals'), 'proposals' => $proposals]);
+        // return view('admin.proposals.index_new', ['title' => trans('admin.all_proposals'), 'proposals' => $proposals]);
     }
 
     /**

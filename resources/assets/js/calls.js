@@ -50,9 +50,15 @@ export const getresalefeature = () => {
 }
 
 // Get My Leads
-export const getMyLeads = (page) => {
-    return axios.get('/admin/getMyLeads?page='+page)
+export const getLeads = (page) => {
+    return axios.get('/admin/leads?page='+page)
 }
+
+// Get all contracts
+export const getAllContracts = (page) => {
+    return axios.get('/admin/contracts?page='+page)
+}
+
 export const removeBannerByID = (id) => {
     return axios.get('/admin/removeBannerByID/'+id)
 }
@@ -187,6 +193,11 @@ export const updatelead = (bodyFormData) => {
     });
     // return axios.post('/admin/ccgevents',data)
 }
+
+export const getMyLeads = (page) => {
+    return axios.get('/admin/getMyLeads?page='+page)
+}
+
 
 // edit employee
 export const updateEmployees = (bodyFormData) => {
@@ -2319,4 +2330,7 @@ export const getAllevents = () => {
 }
 export const getAllcampaigns = () => {
     return axios.get('/admin/getAllcampaigns')
+}
+export const getAllProposal = () => {
+    return axios.get('/admin/proposals')
 }
