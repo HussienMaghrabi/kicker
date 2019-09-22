@@ -14,6 +14,8 @@ class CreateRequestMenuItemsTable extends Migration
     public function up()
     {
         Schema::create('request_menu_items', function (Blueprint $table) {
+           
+
             $table->increments('id');
             $table->string('restaurant_name');
             $table->string('restaurant_phone_number');

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCvsTable extends Migration
+class AddProposedCompanyIdToProposals extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateCvsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cvs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('cv');
-            $table->timestamps();
+        Schema::table('proposals', function($table) {
+            $table->unsignedInteger('proposed_company_id')->nullable($value=true);
+            $table->foreign('proposed_company_id')->references('id')->on('companies')->onDelete('cascade');
         });
     }
 
@@ -27,6 +26,6 @@ class CreateCvsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cvs');
+        //
     }
 }
