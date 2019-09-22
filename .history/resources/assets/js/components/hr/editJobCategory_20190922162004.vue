@@ -17,13 +17,13 @@
         <div class="column is-mobile">
            <div class="column is-6">
                 <b-field label="English Description:">
-                    <b-input type="textarea" v-model="JobCategory.en_description"></b-input>
+                    <b-input type="textarea" v-model="JobCategory.en_descraption"></b-input>
                 </b-field>  
            </div>
 
             <div class="column is-6">
                 <b-field label="Arabic Description:">
-                        <b-input type="textarea" v-model="JobCategory.ar_description"></b-input>
+                        <b-input type="textarea" v-model="JobCategory.ar_descraption"></b-input>
                 </b-field>      
             </div>
        </div>

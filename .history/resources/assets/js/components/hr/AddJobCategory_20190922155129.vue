@@ -23,7 +23,7 @@
 
             <div class="column is-6">
                 <b-field label="Arabic Description:">
-                        <b-input type="textarea" v-model="ar_description"></b-input>
+                        <b-input type="textarea" v-model="ar_descraption"></b-input>
                 </b-field>      
             </div>
        </div>
@@ -57,7 +57,7 @@ export default {
             'en_name':this.en_name,
             'ar_name':this.ar_name,
             'en_description':this.en_description,
-            'ar_descraption':this.ar_description,
+            'ar_description':this.ar_description,
         };
         addJobCategory(data).then(response=>{
             this.success("Added")

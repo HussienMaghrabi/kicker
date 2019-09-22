@@ -132,11 +132,13 @@ class JobCategoryController extends Controller
         if ($validator->fails()) {
             return back()->withInput()->withErrors($validator);
         } else {
-        $jobCategory->en_name = $request->en_name;
-        $jobCategory->ar_name = $request->ar_name;
-        $jobCategory->en_description = $request->en_description;
-        $jobCategory->ar_description= $request->ar_description;
-        $jobCategory->update();
+        $Categories = JobCategory::where('id',$request->id)->update($request->all());
+        return 'updated';
+        // $jobCategory->en_name = $request->en_name;
+        // $jobCategory->ar_name = $request->ar_name;
+        // $jobCategory->en_description = $request->en_description;
+        // $jobCategory->ar_description= $request->ar_description;
+        // $jobCategory->save();
         // return redirect(adminPath().'/job_categories');
     }
 }

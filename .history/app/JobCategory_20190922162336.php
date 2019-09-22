@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class JobCategory extends Model
 {
     protected $table = "job_categories";
-    protected $fillable = ['en_name','ar_name','en_descraption','ar_descraption'];
+    protected $fillable = ['en_name','ar_name','en_descraption','ar_descraption','_method'];
 
     static function All_Categories(){
         return JobCategory::paginate(100);

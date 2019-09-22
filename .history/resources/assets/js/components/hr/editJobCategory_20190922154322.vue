@@ -73,7 +73,6 @@ export default {
                     const value = this.JobCategory[key];
                     bodyFormData.set(key, value);
                 }
-                bodyFormData.append('id',this.id)
                 bodyFormData.append('_method','put')
                 updateJobCategory(bodyFormData,this.id).then(response=>{
                     console.log(response)

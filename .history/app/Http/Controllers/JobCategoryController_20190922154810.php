@@ -117,8 +117,8 @@ class JobCategoryController extends Controller
         $rules = [
             'en_name' => 'required',
             'ar_name' => 'required',
-            // 'en_description' => 'required',
-            // 'ar_descraption' => 'required',
+            'en_description' => 'required',
+            'ar_description' => 'required',
 
         ];
         $validator = Validator::make($request->all(), $rules);
@@ -126,17 +126,19 @@ class JobCategoryController extends Controller
             'en_name' => trans('admin.en_name'),
             'ar_name' => trans('admin.ar_name'),
             'en_description' => trans('admin.en_description'),
-            'ar_descraption' => trans('admin.ar_description'),
+            'ar_description' => trans('admin.ar_description'),
 
         ]);
         if ($validator->fails()) {
             return back()->withInput()->withErrors($validator);
         } else {
-        $jobCategory->en_name = $request->en_name;
-        $jobCategory->ar_name = $request->ar_name;
-        $jobCategory->en_description = $request->en_description;
-        $jobCategory->ar_description= $request->ar_description;
-        $jobCategory->update();
+        $Categories = JobCategory::where('id',$request->id)->update($request->all());
+        return 'updated';
+        // $jobCategory->en_name = $request->en_name;
+        // $jobCategory->ar_name = $request->ar_name;
+        // $jobCategory->en_description = $request->en_description;
+        // $jobCategory->ar_description= $request->ar_description;
+        // $jobCategory->save();
         // return redirect(adminPath().'/job_categories');
     }
 }

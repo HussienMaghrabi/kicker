@@ -57,7 +57,7 @@ export default {
             'en_name':this.en_name,
             'ar_name':this.ar_name,
             'en_description':this.en_description,
-            'ar_descraption':this.ar_description,
+            'ar_description':this.ar_description,
         };
         addJobCategory(data).then(response=>{
             this.success("Added")
