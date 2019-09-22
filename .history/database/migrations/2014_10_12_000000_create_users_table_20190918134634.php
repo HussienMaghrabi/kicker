@@ -28,8 +28,6 @@ class CreateUsersTable extends Migration
             $table->enum('type',['admin','agent']);
             $table->integer('role_id');
             $table->string('refresh_token');
-            $table->integer('last_seen_dash')->nullable();
-            $table->integer('last_seen_mob')->nullable();
             $table->timestamps();
         });
     }
