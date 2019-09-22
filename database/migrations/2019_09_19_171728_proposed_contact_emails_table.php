@@ -13,9 +13,11 @@ class ProposedContactEmailsTable extends Migration
      */
     public function up()
     {
-        Schema::table('proposedContact_emails', function (Blueprint $table) {
+        Schema::create('proposedContact_emails', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email');
+            $table->unsignedInteger('contact_id')->nullable($value=true);
+            $table->foreign('contact_id')->references('id')->on('contacts_proposed')->onDelete('cascade');
             $table->timestamps();
         });
     }

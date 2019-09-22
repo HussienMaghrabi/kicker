@@ -13,21 +13,16 @@ class ContactsProposedTable extends Migration
      */
     public function up()
     {
-        Schema::table('contacts_proposed', function (Blueprint $table) {
+        Schema::create('contacts_proposed', function (Blueprint $table) {
             $table->increments('id');
             // $table->string('relation')->nullable();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->unsignedInteger('phone_id');
-            $table->foreign('phone_id')->references('id')->on('proposedContact_phones');
-            $table->unsignedInteger('mobile_id');
-            $table->foreign('mobile_id')->references('id')->on('proposedContact_mobiles');
-            $table->unsignedInteger('fax_id');
-            $table->foreign('fax_id')->references('id')->on('proposedContact_faxes');
-            $table->unsignedInteger('email_id');
-            $table->foreign('email_id')->references('id')->on('proposedContact_emails');
-            $table->string('nationality');
-            $table->string('website');
+            $table->string('first_name')->nullable($value=true);
+            $table->string('last_name')->nullable($value=true);
+            $table->string('website')->nullable($value=true);
+            $table->string('position')->nullable($value=true);
+             $table->unsignedInteger('nationality_id')->nullable();
+            $table->foreign('nationality_id')->references('id')->on('nationalities')->onDelete('cascade');
+
             // $table->string('phone')->nullable();
             // $table->string('mobile')->nullable();
             // $table->enum('leadstatus', ['contacted', 'not_contacted']);
