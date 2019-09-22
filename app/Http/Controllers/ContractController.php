@@ -5,9 +5,24 @@ namespace App\Http\Controllers;
 use App\Contract;
 use Illuminate\Http\Request;
 use Validator;
+use DB;
 
 class ContractController extends Controller
 {
+
+    public function index(){
+        $contracts = DB::table('contracts as contract')
+                     ->leftjoin('contacts as contact','contract.contact_id','=','contact.id')
+                     ->leftjoin('companies as company','contract.company_id','=','company.id')
+                     ->leftjoin('proposals as proposal','contract.proposal_id','=','proposal.id')
+                     ->leftjoin('contract_sections as section','contract.section_id','=','section.id')
+                     ->select('contract.id as contractID','contact.name as contactName','company.company_type as type','company.name as companyName','proposal.id as proposalID')
+                     ->paginate(100);
+
+        return response()->json($contracts);
+
+    }
+
     public function create()
     {
         $title = __('admin.contract');

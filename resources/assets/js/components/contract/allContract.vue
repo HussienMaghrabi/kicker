@@ -47,7 +47,7 @@
 
             </div>
                     <b-table
-                    :data="leads"
+                    :data="contracts"
                     bordered
                     checkable
                     narrowed
@@ -69,26 +69,26 @@
                     <template slot-scope="props">
                         <b-table-column  label="Proposed Company" sortable>
                              <router-link :to="'/admin/vue/showContract/'+props.row.id" style="color:#000"> 
-                                      {{props.row.first_name+' '+props.row.last_name}}
+                                      {{ props.row.companyName }}
                              </router-link>
                         </b-table-column>
 
                         <b-table-column label="Company" sortable>
                             <router-link :to="'/admin/vue/showContract/'+props.row.id" style="color:#000"> 
-                                      {{props.row.first_name+' '+props.row.last_name}}
+                                      {{ props.row.companyName }}
                             </router-link>
                            
                         </b-table-column>
 
                         <b-table-column label="Contact" sortable>
                             <router-link :to="'/admin/vue/showContract/'+props.row.id" style="color:#000"> 
-                               {{props.row.phone}}
+                               {{ props.row.contactName }}
                             </router-link>
                         </b-table-column>
 
                         <b-table-column  label="Proposal" sortable>
                             <router-link :to="'/admin/vue/showContract/'+props.row.id" style="color:#000"> 
-                               {{props.row.leadProbability}}
+                               Proposal No. {{props.row.proposalID}}
                             </router-link>
                         </b-table-column>
 
@@ -119,6 +119,7 @@
 
             <div class="buttons">
                 <b-button type="is-success"><i class="fas fa-envelope"></i>  Send Email</b-button>
+                <b-button type="is-danger" @click="bulkDeleteDialog('0')"><i class="fas fa-trash"></i>  Delete</b-button>
                 <b-button type="is-info"><i class="fas fa-print"></i>  Print</b-button>
             </div>
 
@@ -130,7 +131,7 @@
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 changeLeadFav
 <script>
-    import {autoSwitchAPi,getMyLeads,changeLeadFav,changeLeadHot,deleteLead,newLeadsFilter,getPublicData,switchLeads,getAgents,checkUserGroupAndRoles,searchForLead, getLeadSources, getLeadsByAgent, getBtns, addCall,bulkActions,deleteNoActionLeads} from './../../calls'
+    import {autoSwitchAPi,getAllContracts,changeLeadFav,changeLeadHot,deleteLead,newLeadsFilter,getPublicData,switchLeads,getAgents,checkUserGroupAndRoles,searchForLead, getLeadSources, getLeadsByAgent, getBtns, addCall,bulkActions,deleteNoActionLeads} from './../../calls'
     import Multiselect from 'vue-multiselect'
     export default {
         data() {
@@ -143,7 +144,8 @@ changeLeadFav
                 leadsTotalNumber: 0,
                 getLeadsByAgent: [],
                 leadSources: [],
-                leads: [],
+                contracts: [],
+                selectedContract:[],
                 isEmpty: false,
                 isLoading: true,
                 hasMobileCards: true,
@@ -206,54 +208,21 @@ changeLeadFav
         created() {
             this.$router.replace({hash: '#/1'});
             this.page = parseInt(this.$route.hash.split('/')[1])
-            this.getSources()
+            // this.getSources()
          },
          methods: {
-             refreshPage() {
-                 if(Object.keys(this.filter).length < 1){
-                     console.log('No Filters Detected')
-                     this.getData();   
-                 }else{
-                     console.log('Filters Detected')
-                     this.filterLeads();
-                 }
-             },
-            checkClass(r){
-                var path = this.$route.path.split('/');
-                if(path[1] == r) return 'tabLinkActive'
-                    else return 'tabLinkNotActive'
-                },
-            getLeadsfilter(){
-                getBtns({
-                  "user_id": this.userId,
-                  "agent_id": " ",
-              }).then(response=>{
-                    this.getLeadsByAgent = response.data.btns
-                })
-              .catch(error => {
-                console.log(error)
-            })
-          },
-
-          getSources(){
-            getLeadSources().then(response=>{
-                    this.leadSources = response.data
-                })
-            .catch(error => {
-                console.log(error)
-            })
-        },
-
         getData(loading = true){
             this.isLoading = loading
-            getMyLeads(this.page).then(response=>{
+            getAllContracts(this.page).then(response=>{
+                console.log('responseee',response)
                 this.perPage = response.data.per_page
-                this.leads = response.data.data
+                this.contracts = response.data.data
+                // console.log('All company => ',this.contracts)
                 this.leadsCurrentNumber = Math.min(response.data.total,this.page * this.perPage)
                 this.leadsTotalNumber = response.data.total
                 this.total = response.data.total
                 
-                if(this.leads.length == 0){
+                if(this.contracts.length == 0){
                     this.isEmpty = true
                 }
                 let currentTotal = response.data.total
@@ -263,7 +232,7 @@ changeLeadFav
 
                 this.total = currentTotal
                 this.isLoading = false
-                this.getPublic()
+                // this.getPublic()
                     //console.log(response.data)
 
                 })
@@ -332,18 +301,43 @@ changeLeadFav
                     console.log(error)
                 })
             },
-            bulkDeleteDialog(lead=0) {
-                if(this.selectedLeads.length != 0){
+            bulkDeleteDialog(contract=0) {
+                if(this.selectedContract.length != 0){
                     this.confirmDeleteBulk()
-                }else if(lead != 0){
-                    this.selectedLeads.push(lead)
+                }else if(contract != 0){
+                    this.selectedContract.push(contract)
                     this.confirmDeleteBulk()
 
                 }else{
                     this.errorDialog()
                 }
             },
-
+            confirmDeleteBulk() {
+                this.$dialog.confirm({
+                    title: 'Deleting Leads',
+                    message: 'Are you sure you want to <b>delete</b> Bulk Leads ?',
+                    confirmText: 'Delete Leads',
+                    type: 'is-danger',
+                    hasIcon: true,
+                    onConfirm: () => this.deleteBulkLead()
+                })
+            },
+             deleteBulkLead(){
+                this.selectedContract.forEach((contract)=>{
+                    this.deleteThisLead(contract.id)
+                })
+            },
+            deleteThisLead(id){
+                this.isLoading = true
+                deleteLead(id).then(response=>{
+                    console.log(response)
+                    this.getData()
+                    this.success('Deleted')
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            },
             bulkActionDialog(lead=0) {
                 if(this.selectedLeads.length != 0){
                     this.bulkActionModel = true
@@ -476,32 +470,6 @@ changeLeadFav
                     type: 'is-danger',
                     hasIcon: true,
                     onConfirm: () => this.deleteThisLead(id)
-                })
-            },
-            deleteThisLead(id){
-                this.isLoading = true
-                deleteLead(id).then(response=>{
-                    console.log(response)
-                    this.getData()
-                    this.success('Deleted')
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-            },
-            confirmDeleteBulk() {
-                this.$dialog.confirm({
-                    title: 'Deleting Leads',
-                    message: 'Are you sure you want to <b>delete</b> Bulk Leads ?',
-                    confirmText: 'Delete Leads',
-                    type: 'is-danger',
-                    hasIcon: true,
-                    onConfirm: () => this.deleteBulkLead()
-                })
-            },
-            deleteBulkLead(){
-                this.selectedLeads.forEach((lead)=>{
-                    this.deleteThisLead(lead.id)
                 })
             },
             getPublic(){

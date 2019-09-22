@@ -16,24 +16,15 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('industry_id');
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->text('notes')->nullable();
-            $table->integer('user_id');
-            $table->integer('annual_revenue');
-            $table->integer('lead_source_id');
-            $table->integer('contract_id');
-            $table->string('introduction');
-            $table->string('closing');
-            $table->string('policy');          
-            $table->enum('leadstatus', ['online', 'offline']);
-            $table->string('activity');
-            $table->enum('company_type',['lead','proposed_Company']);
-            $table->integer('sub_id');
-            $table->integer('invoice_id');
-            $table->integer('currency_id');
-            $table->integer('tax_bill');
+            $table->unsignedInteger('industry_id');
+            $table->foreign('industry_id')->references('id')->on('industries');
+            $table->integer('employees_Number');
+            $table->enum('rating',['1','2','3','4','5']);
+            $table->text('logo');
+            $table->string('description');
+            $table->integer('annual_revenue');    
+            $table->unsignedInteger('lead_source_id');
+            $table->foreign('lead_source_id')->references('id')->on('lead_sources');
             $table->timestamps();
         });
     }

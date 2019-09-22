@@ -53,6 +53,12 @@ export const getresalefeature = () => {
 export const getLeads = (page) => {
     return axios.get('/admin/leads?page='+page)
 }
+
+// Get all contracts
+export const getAllContracts = (page) => {
+    return axios.get('/admin/contracts?page='+page)
+}
+
 export const removeBannerByID = (id) => {
     return axios.get('/admin/removeBannerByID/'+id)
 }
