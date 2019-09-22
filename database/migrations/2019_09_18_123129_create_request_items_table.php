@@ -17,6 +17,7 @@ class CreateRequestItemsTable extends Migration
             $table->increments('id');
             $table->integer('menu_items_id');
             $table->integer('restaurant_id');
+            $table->unSignedInteger('user_id')->nullable($value=true);
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
             

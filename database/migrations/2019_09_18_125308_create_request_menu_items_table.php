@@ -14,11 +14,14 @@ class CreateRequestMenuItemsTable extends Migration
     public function up()
     {
         Schema::create('request_menu_items', function (Blueprint $table) {
+           
+
             $table->increments('id');
             $table->string('restaurant_name');
             $table->string('restaurant_phone_number');
             $table->string('item_name');
-            $table->enum('notes');
+            $table->string('notes');
+            $table->unsignedInteger('restaurant_id');
             $table->foreign('restaurant_id')->references('id')->on('request_items');
             $table->timestamps();
         });

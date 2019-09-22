@@ -30,8 +30,10 @@ class CreateUsersTable extends Migration
             $table->string('refresh_token');
             $table->integer('last_seen_dash')->nullable();
             $table->integer('last_seen_mob')->nullable();
-            $table->text('refresh_token')->nullable();
+           
             $table->timestamps();
+
+
         });
     }
 

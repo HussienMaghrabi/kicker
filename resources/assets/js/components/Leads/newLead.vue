@@ -371,9 +371,6 @@ export default {
             faxes:[{
                 newFax:''
             }],
-            fadys:[{
-                newfady:''
-            }],
             addresses:[{
                 street:'',
                 state:'',
@@ -403,14 +400,6 @@ export default {
                 this.addresses.splice(idx, 1);
             }
         },
-        // addfady(){{
-        //     this.fady.push({
-        //         newfady:'',
-        //      });
- 
-        //     }
-        
-        // },
         removeContactfield(indexContact,contact){
             var idx = this.contacts.indexOf(contact);
             console.log(idx, indexContact);
@@ -455,12 +444,6 @@ export default {
             });
 
         },
-        // addfady(){
-        //      this.fadys.push({
-        //         newfady: '',
-        //     });
-            
-        // },
         addMobileField(){
              this.mobiles.push({
                newMobile: '',

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCurrenciesTable extends Migration
+class AddProposedCompanyIdToProposals extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateCurrenciesTable extends Migration
      */
     public function up()
     {
-        Schema::create('currencies', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name')->nullable($value=true);
-            $table->timestamps();
+        Schema::table('proposals', function($table) {
+            $table->unsignedInteger('proposed_company_id')->nullable($value=true);
+            $table->foreign('proposed_company_id')->references('id')->on('companies')->onDelete('cascade');
         });
     }
 
@@ -27,6 +26,6 @@ class CreateCurrenciesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('currencies');
+        //
     }
 }

@@ -10,7 +10,7 @@ class Proposal extends Model
 
     public function items()
     {
-          return $this->hasMany('App\item','proposal_id');
+          return $this->hasMany('App\Item','proposal_id');
     }
 
 }

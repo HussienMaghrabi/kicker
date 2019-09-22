@@ -220,17 +220,18 @@
                             {{props.row.phone}}
                         </b-table-column>
 
-                        <b-table-column field="leadProbability" label="Mobile" sortable>
+                        <!-- <b-table-column field="leadProbability" label="Mobile" sortable>
                             {{props.row.phone}}
-                        </b-table-column>
+                        </b-table-column> -->
 
                         <b-table-column field="first_name" label="Email" sortable>
-                            {{props.row.first_name }}
+                            {{props.row.email}}
                         </b-table-column>
 
                         <b-table-column field="tag" label="Status" sortable>
                             <router-link :to="'/admin/vue/showLead/'+props.row.id" style="color:#4AAED5"> 
-                                      {{props.row.first_name+' '+props.row.last_name}}
+                                      <!-- {{props.row.first_name+' '+props.row.last_name}} -->
+                                      {{props.row.status}}
                              </router-link>
                         </b-table-column>
                         
@@ -495,7 +496,7 @@
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 changeLeadFav
 <script>
-    import {autoSwitchAPi,getMyLeads,changeLeadFav,changeLeadHot,deleteLead,newLeadsFilter,getPublicData,switchLeads,getAgents,checkUserGroupAndRoles,searchForLead, getLeadSources, getLeadsByAgent, getBtns, addCall,bulkActions,deleteNoActionLeads} from './../../calls'
+    import {autoSwitchAPi,getLeads,changeLeadFav,changeLeadHot,deleteLead,newLeadsFilter,getPublicData,switchLeads,getAgents,checkUserGroupAndRoles,searchForLead, getLeadSources, getLeadsByAgent, getBtns, addCall,bulkActions,deleteNoActionLeads} from './../../calls'
     import Hint from './Hint'
     import Multiselect from 'vue-multiselect'
     export default {
@@ -566,8 +567,8 @@ changeLeadFav
         },
         mounted() {
             this.authType = window.auth_user.type
-            this.checkUserHasGroup()
-            this.getCompanyAgents()
+            //this.checkUserHasGroup()
+            //this.getCompanyAgents()
             this.getData()
         },
         components: {
@@ -620,7 +621,8 @@ changeLeadFav
 
         getData(loading = true){
             this.isLoading = loading
-            getMyLeads(this.page).then(response=>{
+            getLeads(this.page).then(response=>{
+                console.log('responseeee',response)
                 this.perPage = response.data.per_page
                 this.leads = response.data.data
                 this.leadsCurrentNumber = Math.min(response.data.total,this.page * this.perPage)
@@ -637,7 +639,7 @@ changeLeadFav
 
                 this.total = currentTotal
                 this.isLoading = false
-                this.getPublic()
+                //this.getPublic()
                     //console.log(response.data)
 
                 })

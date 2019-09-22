@@ -18,6 +18,7 @@ class CreateRequestOrderingsTable extends Migration
             $table->integer('restaurant_id');
             $table->string('request_items_ids');
             $table->string('status');
+            $table->unSignedInteger('user_id')->nullable($value=true);
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

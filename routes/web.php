@@ -56,7 +56,7 @@ Route::group(['prefix' => adminPath().'/vue', 'middleware' => ['admin']], functi
 
 Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], function () {
     
-    
+        
     Route::get('getAllProjects','ProjectController@getAllProjects');
     Route::get('getAllevents','EventController@getAllevents');
     Route::get('getAllcampaigns','CampaignController@getAllcampaigns');
@@ -762,7 +762,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('get_req_projects', 'RequestController@getProjects');
 
     Route::post('search-team', 'LeadController@searchTeam');
-    
+    Route::resource('leads','LeadController');
 
     // Route::get('update-projects', function() {
     //     $projects = \App\Project::get();
@@ -834,7 +834,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('searchSuggestions','RequestController@searchSuggestions');
 //    Route::post('attendance', 'SalariesController@salaryCalculations');
 
-
+    Route::resource('Getleads','LeadController');
 
     Route::get('emp-dashboard','EmployerDashboard@statics');
  
