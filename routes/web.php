@@ -206,8 +206,9 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('getonesignal','onesignalController@index');
     Route::post('getonesignal','onesignalController@store');
 
-
+    
     Route::resource('archive', 'ArchiveController');
+    Route::resource('contracts', 'ContractController');
     Route::get('allarchive', 'ArchiveController@allArchive');
     Route::post('archive_data','ArchiveController@archive_data');
     

@@ -606,7 +606,6 @@ changeLeadFav
                 console.log(error)
             })
           },
-
           getSources(){
             getLeadSources().then(response=>{
                     // console.log('response.data')

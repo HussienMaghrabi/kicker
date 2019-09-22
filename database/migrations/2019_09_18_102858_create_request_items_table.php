@@ -18,7 +18,7 @@ class CreateRequestItemsTable extends Migration
             $table->integer('menu_items_id');
             $table->integer('user_id');
             $table->integer('restaurant_id');
-            $table->timestamps('created_at');
+            $table->timestamps();
         });
     }
 

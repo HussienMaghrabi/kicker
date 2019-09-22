@@ -19,7 +19,7 @@ class CreateRestaurantsTable extends Migration
             $table->string('phone_num');
             $table->string('tax');
             $table->string('deliver');  
-            $table->timestamps('created_at');
+            $table->timestamps();
         });
     }
 
