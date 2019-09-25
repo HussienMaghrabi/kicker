@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Contract_Sections;
+use Illuminate\Http\Reqest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContractSectionsController extends Controller
 {
@@ -34,7 +36,7 @@ class ContractSectionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Contract_Sections::create($request->all());
     }
 
     /**

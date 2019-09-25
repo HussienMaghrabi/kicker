@@ -16,7 +16,8 @@ class CountryController extends Controller
     public function index()
     {
         $countries = Country::all();
-        return view('admin.countries.index', ['title' => trans('admin.all_countries'), 'countries' => $countries]);
+        return response()->json($countries);
+        // return view('admin.countries.index', ['title' => trans('admin.all_countries'), 'countries' => $countries]);
     }
     
     public function returnapi()

@@ -14,7 +14,7 @@
                 </div>
            </div>
            <div class="column is-1 save">
-               <b-button type="is-info">Save</b-button>
+               <b-button type="is-info" @click="addNewLead">Save</b-button>
            </div>
            <div  class="column is-1 cancel">
                <b-button type="is-danger">Cancel</b-button>
@@ -23,10 +23,10 @@
 
        <div class="columns is-12">
            <div class="column is-2">
-              <b-checkbox>Company lead</b-checkbox>
+              <b-checkbox v-model="checkboxCustom">Company lead</b-checkbox>
            </div>
             <div class="column is-6">
-              <b-checkbox>Individiual lead</b-checkbox>
+              <b-checkbox v-model="checkboxCustom">Individiual lead</b-checkbox>
            </div>
            <hr>
        </div>
@@ -60,7 +60,7 @@
                  
                 <b-field>
                     <label class="column is-4">Company Name</label>
-                    <b-input class="Leaad" type="text" style="margin-left:5%;"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="name"></b-input>
                 </b-field>   
 
                 <b-field>
@@ -148,28 +148,28 @@
             <div class="column is-4">
                 <b-field>
                     <label class="column is-4">Lead Source</label>
-                    <b-input class="Leaad" type="text" style="margin-left:5%;"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="lead_source_id"></b-input>
                 </b-field>       
 
                 <b-field>
                     <label class="column is-4">Industry</label>
-                    <b-input class="Leaad" type="text" style="margin-left:5%;"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="industry_id"></b-input>
                 </b-field>
 
                 <b-field>
                     <label class="column is-4">Annual revenu</label>
-                    <b-input class="Leaad" style="margin-left:5%;"></b-input>
+                    <b-input class="Leaad" style="margin-left:5%;" v-model="annual_revenue"></b-input>
                 </b-field>
 
                 <b-field>
                     <label class="column is-4">#Employees</label>
-                    <b-input class="Leaad" type="number" style="margin-left:5%;"></b-input>
+                    <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="employees_Number"></b-input>
                 </b-field>
 
                 <b-field>
                     <label  class="column is-4">Rating</label>
-                    <b-select expanded class="Leaad2">
-                        <option value="Rate" selected>Rate</option>
+                    <b-select expanded class="Leaad2" v-model="rating"> 
+                        <option selected>Rate</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -216,11 +216,9 @@
                 <b-field>
                     <label  class="column is-4">Country</label>
                     <b-select class="Leaad2" expanded placeholder="Select Country" v-model="country">
-                        <option value="egypt">Egypt</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                       <option v-for="countryy in countries" :value="countryy.id">
+                           {{ countryy.name }}
+                       </option>
                     </b-select>
                 </b-field>
             </div>
@@ -229,11 +227,9 @@
                  <b-field>
                     <label  class="column is-4">City</label>
                     <b-select class="Leaad2" expanded v-model="city">
-                        <option value="egypt">Egypt</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                       <option v-for="cityy in cities" :value="cityy.id">
+                           {{ cityy.name }}
+                       </option>
                     </b-select>
                 </b-field>
 
@@ -270,9 +266,9 @@
                 <b-field>
                     <label  class="column is-4">Title</label>
                     <b-select class="Leaad2" expanded v-model="title">
-                        <option value="egypt">Mr.</option>
-                        <option value="2">Mrs.</option>
-                        <option value="3">Ms.</option>
+                        <option v-for="titlee in titles" :value="titlee.id">
+                            {{ titlee.name }}
+                        </option>
                     </b-select>
                 </b-field>
 
@@ -316,9 +312,8 @@
                 <b-field>
                     <label  class="column is-4">Lead Status</label>
                      <b-select class="Leaad2" expanded v-model="leadStatus">
-                        <option value="Contacted">Contacted</option>
-                        <option value="2">Not Contacted</option>
-                        <option value="3">Ms.</option>
+                        <option value="contacted">Contacted</option>
+                        <option value="not_contacted">Not Contacted</option>
                     </b-select>
                 </b-field>
 
@@ -346,7 +341,7 @@
               <div class="column is-2"></div>
               <b-field  class="column is-9">
                  <label class="column is-1">Description</label>
-                 <b-input type="textarea" style="margin-left:5%;" class="column is-9"></b-input>
+                 <b-input type="textarea" style="margin-left:5%;" class="column is-9" v-model="description"></b-input>
               </b-field>
           </div>
     
@@ -355,6 +350,8 @@
 </template>
 
 <script>
+import {addNewLead,getcities,getCountries,getTitleData} from './../../calls'
+
 export default {
      data() {
         return {
@@ -390,7 +387,24 @@ export default {
                 leadStatus:'',
                 position:''
             }],
+            name:null,
+            industry_id:null,
+            employees_Number:null,
+            rating:null,
+            logo:null,
+            description:null,
+            annual_revenue:null,
+            lead_source_id:null,
+            cities:[],
+            countries:[],
+            titles:[]
+
         }
+     },
+     mounted(){
+         this.getAllCities()
+         this.getAllCountries()
+         this.getAllTitles()
      },
       methods: {
         removeAddressfield(indexAddress,address){
@@ -480,6 +494,65 @@ export default {
                 mobile:'',
                 leadStatus:'',
                 position:''
+            })
+        },
+        getAllCities(){
+            getcities().then(response=>{
+                console.log('all cities',response)
+                this.cities = response.data.data
+            }).catch(error=>{
+                console.log(error)
+            })
+        },
+        getAllCountries(){
+            getCountries().then(response=>{
+                this.countries = response.data.data
+            }).catch(error=>{
+                console.log(error)
+            })
+        },
+        getAllTitles(){
+            getTitleData().then(response=>{
+                console.log('all titles',response)
+                this.titles = response.data.data
+            }).catch(error=>{
+                console.log(error)
+            })
+        },
+        addNewLead(){
+            var data ={
+            'name':this.name,
+            'industry_id':this.industry_id,
+            'employees_Number':this.employees_Number,
+            'rating':this.rating,
+            // 'logo':this.logo,
+            'description':this.description,
+            'annual_revenue':this.annual_revenue,
+            'lead_source_id':this.lead_source_id,
+            'street':this.street,
+            'state':this.state,
+            'country_id':this.country,
+            'city_id':this.city,
+            'zip_code':this.zipCode,
+            // 'company_id':this.company_id,
+
+            'first_name':this.firtsName ,
+            'last_name':this.lastName,
+            'title_id':this.title ,
+            'email':this.email,
+            'nationality':this.nationality ,
+            'phone':this.phone,
+            'mobile':this.mobile,
+            'position':this.position,
+            'leadstatus':this.leadStatus,
+            };
+            console.log('dataaaaaa',data)
+            addNewLead(data).then(response=>{
+                alert('Lead Added Successfully')
+                // $(location).attr('href', '/admin/vue/Leads')
+            })
+            .catch(error => {
+                    console.log(error)
             })
         }
       }
