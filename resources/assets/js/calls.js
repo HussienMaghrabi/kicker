@@ -363,6 +363,12 @@ export const getAllLeads = () => {
     return axios.get('/admin/getAllLeads')
 }
 
+// Get All Leads kickers
+export const getNewAllLeads = () => {
+    return axios.get('/admin/companyLeads')
+}
+
+
 export const getAllLeadsAutocompleteList = (usrInput) => {
     return axios.get('/admin/leads/autocomplete/list?q='+usrInput);
 }
@@ -2297,6 +2303,12 @@ export const getJobTitlesDep = (id) => {
     return axios.get('/admin/getJobTitlesDep/'+id)
 }
 
+// get contacts based on company Lead
+export const getleadContact = (id) => {
+    return axios.get('/admin/getleadContact/'+id)
+}
+
+
 // get vacancies based on job title
 export const getVacancyJob = (id) => {
     return axios.get('/admin/getVacancyJob/'+id)
@@ -2334,3 +2346,30 @@ export const getAllcampaigns = () => {
 export const getAllProposal = () => {
     return axios.get('/admin/proposals')
 }
+
+// add contracts
+export const addContract = (data) => {
+    return axios.post('/admin/contracts', data)
+}
+// add contract sections
+export const addContractSection = (data) => {
+    return axios.post('/admin/contractSections', data)
+}
+// get all Proposed Companies
+export const getProposedCompanies = () => {
+    return axios.get('/admin/getProposedCompanies')
+}
+
+// get all Leads
+export const getNewLeads = () => {
+    return axios.get('/admin/getNewLeads')
+}
+
+// add new lead
+export const addNewLead = (data) => {
+    return axios.post('/admin/companyLeads', data)
+}
+
+
+
+
