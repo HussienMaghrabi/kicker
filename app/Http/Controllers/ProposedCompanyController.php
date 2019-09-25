@@ -10,6 +10,8 @@ use App\ProposedContact_mobile;
 use App\ProposedContact_fax;
 use App\ProposedContact_email;
 use App\ProposedCompany_address;
+use DB;
+
 class ProposedCompanyController extends Controller
 {
     /**
@@ -151,6 +153,7 @@ class ProposedCompanyController extends Controller
             }
           
        
+        //
     }
 
     /**
@@ -205,4 +208,30 @@ class ProposedCompanyController extends Controller
               'data'=>$allProposedCompany
           ]);
     }
+    Public function getProposedCompanies(){
+        $proposedCompanies = DB::table('proposed_company')
+                             ->select('id','name')
+                             ->get();
+        return response()->json($proposedCompanies);
+    }
+
+    Public function getNewLeads(){
+        $leads = DB::table('companies')
+                             ->select('id','name')
+                             ->get();
+        return response()->json($leads);
+    }
+
+    public function getleadContact($id){
+        // dd('dd');
+        // return $id;
+        $leadContacts = DB::table('contacts')
+        ->where('company_id',$id)
+        ->select('id','first_name','last_name')
+        ->get();
+        return response()->json($leadContacts);
+    }
+    
+
+    
 }

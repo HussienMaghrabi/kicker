@@ -19,9 +19,6 @@ class ProposedContactPhonesTable extends Migration
             $table->string('mobile')->nullable($value=true);
             $table->unsignedInteger('contact_id')->nullable($value=true);
             $table->foreign('contact_id')->references('id')->on('contacts_proposed')->onDelete('cascade');
-
-            
-
             $table->timestamps();
         });
     }

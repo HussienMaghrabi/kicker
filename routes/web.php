@@ -108,12 +108,14 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('getJobTitleInputs','JobTitleController@getJobTitleInputs');
     Route::get('getAllJobTitles','EmployeeController@getAllJobTitles');
     Route::get('getJobTitlesDep/{id}','ApplicationController@getJobTitlesDep');
+    Route::get('getleadContact/{id}','ProposedCompanyController@getleadContact');
     Route::get('getVacancyJob/{id}','ApplicationController@getVacancyJob');
     
     Route::get('getAllRoles','EmployeeController@getAllRoles');
     
     Route::get('getTaskInputs','TaskController@getTaskInputs');
     Route::get('getMeetingsInputs','MeetingController@getMeetingsInputs');
+    
     
     Route::post('searchTitles','TitleController@searchTitles');  
     Route::get('getVacancyInputs','VacancyController@getVacancyInputs');        
@@ -204,10 +206,15 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
 
 
     Route::get('getonesignal','onesignalController@index');
-    Route::post('getonesignal','onesignalController@store');
+    Route::get('getProposedCompanies','ProposedCompanyController@getProposedCompanies');
+    Route::get('getNewLeads','ProposedCompanyController@getNewLeads');
 
+    Route::post('getonesignal','onesignalController@store');
     
+    
+    Route::resource('companyLeads', 'LeadsController');
     Route::resource('archive', 'ArchiveController');
+    Route::resource('contractSections', 'ContractSectionsController');
     Route::resource('contracts', 'ContractController');
     Route::get('allarchive', 'ArchiveController@allArchive');
     Route::post('archive_data','ArchiveController@archive_data');
