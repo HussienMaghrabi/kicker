@@ -19,11 +19,11 @@ class CountryController extends Controller
         return view('admin.countries.index', ['title' => trans('admin.all_countries'), 'countries' => $countries]);
     }
     
-    public function returnapi()
+    public function getAllCountries()
     {
         $countries = Country::all();
         return response()->json([
-            'status' => 200,
+            'status' => 'success',
             'data' => $countries
         ]);
     }

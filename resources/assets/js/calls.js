@@ -2340,4 +2340,25 @@ export const getAllProposedCpmpany = () => {
 export const getAllCpmpanies = () => {
     return axios.get('/admin/getAllCpmpanies')
 }
+export const getAllCurrency=()=>{
+    return axios.get('/admin/getAllCurrency')
+}
+export const getAllNationality=()=>{
+    return axios.get('/admin/getAllNationality')
+}
+export const getAllCities=()=>{
+    return axios.get('/admin/getAllCities')
+}
+export const getAllCountries=()=>{
+    return axios.get('/admin/getAllCountries')
+}
+export const addNewProposedCompany=(bodyFormData)=>{
+    // return axios.post('/admin/addNewProposedCompany',data)
+    return axios({
+        method: 'POST',
+        url: '/admin/addNewProposedCompany',
+        data: bodyFormData,
+        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    });
 
+}
