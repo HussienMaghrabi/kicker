@@ -71,6 +71,7 @@ class ProposedCompanyController extends Controller
         $contactsProposed->website=$request->webSite;
         $contactsProposed->position=$request->position;
         $contactsProposed->nationality_id=$request->nationlityId;
+        $contactsProposed->proposed_company_id=$proposedCompany->id;
         $contactsProposed->save();
         //save ProposedContact_phone
         $pArray = json_decode($request->phones);
@@ -89,21 +90,21 @@ class ProposedCompanyController extends Controller
             }
         }
         //save ProposedContact_mobile
-            $mArray=json_decode($request->mobiles);
-            // dd($mArray);
-            if(sizeof($mArray)>0){
-                foreach($mArray as $mobile){
+            // $mArray=json_decode($request->mobiles);
+            // // dd($mArray);
+            // if(sizeof($mArray)>0){
+            //     foreach($mArray as $mobile){
                 
-                    if($mobile !=null){
-                        $proposedContact_mobile= new ProposedContact_mobile;
-                        $proposedContact_mobile->mobile=$mobile;
-                        $proposedContact_mobile->contact_id=$contactsProposed->id;
-                        $proposedContact_mobile->save();
-                    }
+            //         if($mobile !=null){
+            //             $proposedContact_mobile= new ProposedContact_mobile;
+            //             $proposedContact_mobile->mobile=$mobile;
+            //             $proposedContact_mobile->contact_id=$contactsProposed->id;
+            //             $proposedContact_mobile->save();
+            //         }
                 
-                }
+            //     }
                
-            }
+            // }
             //save ProposedContact_fax
             $fArray=json_decode($request->faxies);
             // dd($mArray);
@@ -168,11 +169,19 @@ class ProposedCompanyController extends Controller
      */
     public function show($id)
     {
-        $proposalCompany=proposed_company::where('id',$id)->get();
+        $proposalCompany=proposed_company::where('id',$id)->with('proposalContacts')->with('proposalAddress')->get();
         $arr=[];
+       
         foreach($proposalCompany as $item){
-            $arr['name']=$item->name;
-            
+            $arr['name']=$item['name'];
+            $arr['image']=$item['image'];
+            $arr['activity']=$item->activity;
+            $arr['currencyId']=$item->currency_id;
+            $arr['introduction']=$item->introduction;
+            $arr['closing']=$item->closing;
+            $arr['policy']=$item->policy;
+            $arr['proposalContacts']=$item->proposalContacts;
+            $arr['proposalAddress']=$item->proposalAddress;
         }
         return response()->json([
             'status'=>'Success',

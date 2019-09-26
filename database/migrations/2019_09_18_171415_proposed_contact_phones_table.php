@@ -13,12 +13,9 @@ class ProposedContactPhonesTable extends Migration
      */
     public function up()
     {
-        Schema::create('proposedContact_phones', function (Blueprint $table) {
+        Schema::table('proposedContact_phones', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('phone')->nullable($value=true);
-            $table->string('mobile')->nullable($value=true);
-            $table->unsignedInteger('contact_id')->nullable($value=true);
-            $table->foreign('contact_id')->references('id')->on('contacts_proposed')->onDelete('cascade');
+            $table->string('phone');
             $table->timestamps();
         });
     }
@@ -30,8 +27,6 @@ class ProposedContactPhonesTable extends Migration
      */
     public function down()
     {
-        Schema::table('proposedContact_phones', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('collections');
     }
 }
