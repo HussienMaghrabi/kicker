@@ -23,32 +23,44 @@
             </div>
         </div>
 
-        <div class="columns is-12">
+        <!-- <div class="columns is-12">
             <div class="column is-12" style="display:-webkit-inline-box;padding-left:10%">
                 <h6 style="color:red;margin-right:1%" class="column is-2">*Company Name</h6>
                 <div class="field column is-8">
-                    <div class="select" style="width:42%">
-                        <b-select v-model="companyId" placeholder="Select Event" expanded>
-                         <option v-for="company in companies" :value="company.id" :key="company.id">{{company.name}}</option>
-                       </b-select> 
+                     <div class="select" style="width:100%">
+                        <select v-model="companyId" placeholder="Select Event" expanded v-on:change="getAllContactPersonById($event.target.value)">
+                         <option v-for="company in companies" :value="company.id" :key="company.id" >{{company.name}}</option>
+                        </select>
                     </div>
                 </div>
+            </div>
+        </div> -->
+
+       
+         <div class="columns is-12">
+            <div class="column is-12" style="padding-left:10%;display:-webkit-inline-box">
+                <h6 class="column is-2"  style="color:red;margin-right:1%" >*Company Name</h6>
+                 <b-field>
+                    <!-- <label  class="column is-8">Currency</label> -->
+                  <select v-model="companyId" placeholder="Select Company Name" expanded v-on:change="getAllContactPersonById($event.target.value)" >
+                         <option v-for="company in companies" :value="company.id" :key="company.id" >{{company.name}}</option>
+                 </select>
+                </b-field>
+            </div>
+        </div> 
+
+         <div class="columns is-12">
+            <div class="column is-12" style="padding-left:10%;display:-webkit-inline-box">
+                <h6 class="column is-2"  style="color:red;margin-right:1%" >*Contact Person</h6>
+                 <b-field>
+                    <!-- <label  class="column is-8">Currency</label> -->
+                    <b-select v-model="contactPersonId" placeholder="Select Contact Person"  expanded>
+                            <option v-for="item in contactPersonArr " :key="item.id" :value="item.id" >{{item.first_name+' '+item.last_name}}</option>
+                    </b-select>
+                </b-field>
             </div>
         </div>
 
-        <div class="columns is-12">
-            <div class="column is-12" style="display:-webkit-inline-box;padding-left:10%">
-                <h6 style="color:red;margin-right:1%" class="column is-2">*Contact Person</h6>
-                <div class="field column is-8">
-                    <div class="select" style="width:42%">
-                        <b-select expanded>
-                            <option>Circle ERP</option>
-                            <option>PropertzCRM</option>
-                        </b-select>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="columns is-12">
             <div class="column is-12">
@@ -58,7 +70,7 @@
 
         <div class="columns is-12">
             <div class="column is-12" style="padding-left:10%;">
-                <b-checkbox>Add Proposal introduction</b-checkbox><br>
+                <b-checkbox >Add Proposal introduction</b-checkbox><br>
                 <b-checkbox>Add Proposal Closing</b-checkbox><br>
             </div>
         </div>
@@ -67,7 +79,7 @@
             <div class="column is-12" style="padding-left:10%;display:-webkit-inline-box">
                 <h6 class="column is-2" style="margin-right:1%">This Proposal valid until</h6>
                 <b-field class="column is-4">
-                    <b-datepicker
+                    <b-datepicker v-model="validUntil"
                         icon="calendar-today">
                     </b-datepicker>
                 </b-field>
@@ -77,12 +89,11 @@
         <div class="columns is-12">
             <div class="column is-12" style="padding-left:10%;display:-webkit-inline-box">
                 <h6 class="column is-2" style="margin-right:1%">Proposal Currency</h6>
-                <b-field class="column is-8">
-                    <div class="select" style="width:50%">
-                        <b-select expanded>
-                            <option>EGP</option>
-                        </b-select>
-                    </div>
+                 <b-field>
+                    <!-- <label  class="column is-8">Currency</label> -->
+                    <b-select v-model="currencyId" placeholder="Select Currency"  expanded>
+                       <option v-for="currency in currencies " :key="currency.id" :value="currency.id" >{{currency.name}}</option>
+                    </b-select>
                 </b-field>
             </div>
         </div>
@@ -103,7 +114,7 @@
                     </header>
                     <section class="modal-card-body">
                         <b-field>
-                            <b-input type="textarea"></b-input>                                 
+                            <b-input type="textarea" v-model="policy"></b-input>                                 
                         </b-field>
                         <span style="color:rgb(100, 136, 213);cursor:pointer">Restore Default policy</span>
                     </section>
@@ -181,7 +192,7 @@
                                     </div>
                                     </section>
                                     <footer class="modal-card-foot">
-                                        <b-button type="is-info"><i class="fas fa-save"></i>&nbsp Save</b-button>
+                                        <b-button type="is-info"><i class="fas fa-save"></i>&nbsp; Save</b-button>
                                         <button class="button" type="button" @click="isComponentItemActive = false">Cancel</button>
                                     </footer>
                                 </div>
@@ -199,7 +210,7 @@
                         <hr>
                     </tr>
                 </table>
-                <b-button type="is-info"  @click="AddInvoicefield" style="margin-top:10px;margin-bottom:2%"><i class="fas fa-plus-square"></i>&nbsp Add item</b-button>
+                <b-button type="is-info"  @click="AddInvoicefield" style="margin-top:10px;margin-bottom:2%"><i class="fas fa-plus-square"></i>&nbsp; Add item</b-button>
 
                 <div class="columns is-12" v-if="k == 0" v-for="(invoice, k) in invoices" :key="k">
                     <div class="column is-12">
@@ -235,7 +246,7 @@
          
 
          <div class="columns is-12" style="margin-top:3%">
-               <b-button type="is-info" style="margin-right:2%"><i class="fas fa-save"></i>&nbsp Save</b-button>
+               <b-button type="is-info" style="margin-right:2%"><i class="fas fa-save"></i>&nbsp; Save</b-button>
                <b-button type="is-danger">Cancel</b-button>
           </div>
 
@@ -243,14 +254,20 @@
 </template>
 
 <script>
-import {getAllProposedCpmpany,getAllCpmpanies} from './../../calls'
+import {getAllProposedCpmpany,getAllCpmpanies,getAllContactPerson,getAllCurrency} from './../../calls'
 export default {
     data() {
         return {
+            policy:null,
+            currencies:[],
+            currencyId:null,
+            validUntil:null,
             proposedCompanies:[],
             companies:[],
+            contactPersonArr:[],
             proposedCompanyId:null,
             companyId:null,
+            contactPersonId:null,
             token: window.auth_user.csrf,
             isComponentModalActive: false, 
             // itemPrice:'',
@@ -303,13 +320,33 @@ export default {
         this.id = this.$route.params.id
     },
     mounted() {
+     this.getAllCurrency()
      this.getAllProposedCpmpany(),
      this.getAllCpmpanies()
+     
     },
     components: {
         
     },
     methods: {
+         getAllCurrency(){
+              getAllCurrency().then(Response=>{
+                  this.currencies=Response.data.data
+              }).catch(error=>{
+                  console.log(error);
+              })
+          },
+        getAllContactPersonById(value){
+            
+            // console.log("the id is ",value);
+            var id = value;
+            getAllContactPerson(id).then(Response=>{
+                this.contactPersonArr=Response.data.data
+                // console.log(Response);
+            }).catch(error=>{
+                console.log(error);
+            })
+        },
         getAllProposedCpmpany(){
             getAllProposedCpmpany().then(Response=>{
               this.proposedCompanies=Response.data.data

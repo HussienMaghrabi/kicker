@@ -11,23 +11,25 @@
 
         <div class="columns is-12" style="margin-top:10px;padding-bottom:15px">
             <div class="column is-2">
-                <b-field style="padding-right: 6px;">
+                <b-field style="padding-right: 6px; max-height: 200px; max-width: 200px;">
                     <b-upload v-model="NewCompany.dropFiles" 
                         multiple
-                        drag-drop>
+                        drag-drop  @change="onFileChange">
                         <section class="section">
                             <div class="content has-text-centered">
-                                <p>
+                                <img src="/img/placeholder.png">
+                                <!--   -->
+                                <!-- <p>
                                     <b-icon
                                         icon="upload"
                                         size="is-large">
                                     </b-icon>
                                 </p>
-                                <p>Drop your files here or click to upload</p>
+                                <p id="dropDiv">Drop your files here or click to upload</p> -->
                             </div>
                         </section>
                     </b-upload>
-                    <div class="tags">
+                    <div class="tags" >
                         <span v-for="(file, index) in NewCompany.dropFiles"
                             :key="index"
                             class="tag is-primary" >
@@ -128,10 +130,12 @@
                           <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addPhoneField"></span> 
                       </div>
                 </b-field> -->
+                <!-- v-model="phoneArr[indexContact]" -->
+                <!-- v-model.number="phones[data]"  -->
                  <b-field v-for="(data, index) in phones" :key="'a'+index" >
                      
                       <label class="column is-4">Phone</label>
-                      <b-input class="Leaad" type="number" style="margin-left:5%;"    v-model="phoneArr[index]" ></b-input>
+                      <b-input class="Leaad" type="number" style="margin-left:5%;"   min="0" v-model="phoneArr[index]" ></b-input>
                       <div class="column is-1">
                         <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removePhoneField(index,data)"></span> 
                         <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addPhoneField"></span> 
@@ -139,7 +143,7 @@
                 </b-field>
                  <b-field v-for="(data, index) in mobiles" :key="'b'+index" >
                       <label class="column is-4">Mobile</label>
-                      <b-input class="Leaad" type="number" style="margin-left:5%;"  v-model="mobileArr[index]" ></b-input>
+                      <b-input class="Leaad" type="number" style="margin-left:5%;" min="0"   v-model="mobileArr[index]" ></b-input>
                       <div class="column is-1">
                         <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeMobileField(index,data)"></span> 
                         <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addMobileField"></span> 
@@ -174,7 +178,7 @@
 
                  <b-field v-for="(data, index) in faxes" :key="'c'+index" >
                       <label class="column is-4">Fax</label>
-                      <b-input class="Leaad" type="number" style="margin-left:5%;"  v-model="faxArr[index]" ></b-input>
+                      <b-input class="Leaad" type="number" style="margin-left:5%;" min="0"   v-model="faxArr[index]" ></b-input>
                       <div class="column is-1">
                         <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeFaxField(index,data)"></span> 
                         <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addFaxField"></span> 
@@ -285,7 +289,7 @@
                 </b-field>
                 <b-field>
                     <label class="column is-4">Zip Code</label>
-                    <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="zipCode[indexAddress]"></b-input>
+                    <b-input class="Leaad" type="number" style="margin-left:5%;" min="0"  v-model="zipCode[indexAddress]"></b-input>
                 </b-field>
 
             </div>
@@ -351,6 +355,7 @@ import{getAllCurrency,getAllNationality,getAllCities,getAllCountries, dashgetsta
 export default {
      data() {
         return {
+            contactsArray:[],
                 removebtn:'',
                 title:'',
                 firstName:[],
@@ -369,6 +374,7 @@ export default {
                 zipCode:[],
                 token:window.auth_user.csrf,
                 NewCompany:[],
+                indexContact:0,
             currencies:[],
             nationalities:[],
             cities:[],
@@ -415,7 +421,32 @@ export default {
      
     },
       methods: {
+        
           addNewProposedCompany(){
+            //   var contactsArray=this.contacts.length+1;
+            //   var p;
+            //  for (let key in this.phones) {
+            //     const value = this.phones[key];
+            //   p=this.phones[key].phone;
+            //     }
+        // for (var i = 1; i < contactsArray; i++) {
+           
+            
+        //   this.contactsArray.push({
+        //   contactindex:i,
+        //   firstName: this.firstName[i],
+        //   lastName:this.lastName[i],
+        //   pArray:this.p,
+         
+        //   mArray:this.mobileArr[i],
+        //   fArray:this.faxArr[i],
+        //   eArray:this.emailArr[i],
+        //   nationality:this.nationalityId[i],
+        //   webiste:this.WebSite[i]
+        //  });
+  
+         
+        // }
             const bodyFormData = new FormData();
                 for (let key in this.NewCompany) {
                     const value = this.NewCompany[key];
@@ -445,6 +476,7 @@ export default {
             bodyFormData.append( 'introduction',this.Introduction)
             bodyFormData.append( 'closing',this.Closing)
             bodyFormData.append('policy',this.Policy)
+            bodyFormData.append('contactsArray',JSON.stringify(this.contactsArray))
          
            
               addNewProposedCompany(bodyFormData).then(Response=>{
@@ -550,11 +582,10 @@ export default {
          this.addresses.push( this.addresses.length+1)
         },
         addContact(){
-          
+        
          this.contacts.push( this.contacts.length+1)
          
-        // console.log(this.contacts.firstName);
-        //  console.log("dgdg",this.phoneArr[(this.flag)+1]);
+        
         }
       } 
 }

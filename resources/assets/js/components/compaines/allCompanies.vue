@@ -14,7 +14,7 @@
                     <div class="field  mr-10">
                         <div class="control">
                             <input class="input is-meduim mt-10" type="text" placeholder="Search" v-model="searchInput" @input="search" style="width:70%;margin-bottom: 23px;">
-                            <b-button type="is-info" style="margin-top:8px"><i class="fas fa-plus"></i>&nbsp
+                            <b-button type="is-info" style="margin-top:8px"><i class="fas fa-plus"></i>&nbsp;
                                 <router-link  :to="'/admin/vue/newProposal'" style="color:#fff">
                                   New
                                 </router-link>
@@ -27,7 +27,7 @@
 
             </div>
                     <b-table
-                    :data="leads"
+                    :data="proposalsCompanies"
                     bordered
                     checkable
                     narrowed
@@ -48,12 +48,12 @@
 
                     <template slot-scope="props">
                         <b-table-column  label="Company Name" sortable>
-                             <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000"> 
-                                      Test
+                             <router-link :to="'/admin/vue/showCompany/'+props.row.id" style="color:#000"> 
+                                     {{props.row.name}}
                              </router-link>
                         </b-table-column>
 
-                        <b-table-column label="Phone" sortable>
+                        <!-- <b-table-column label="Phone" sortable>
                             <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000"> 
                                       Test
                             </router-link>
@@ -76,7 +76,7 @@
                              <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000"> 
                               Test 
                             </router-link>
-                        </b-table-column>
+                        </b-table-column> -->
 
                       
                    
@@ -122,7 +122,7 @@
 </template>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <script>
-    import {autoSwitchAPi,getMyLeads,changeLeadFav,changeLeadHot,deleteLead,newLeadsFilter,getPublicData,switchLeads,getAgents,checkUserGroupAndRoles,searchForLead, getLeadSources, getLeadsByAgent, getBtns, addCall,bulkActions,deleteNoActionLeads} from './../../calls'
+    import {autoSwitchAPi,getMyLeads,changeLeadFav,changeLeadHot,deleteLead,newLeadsFilter,getPublicData,switchLeads,getAgents,checkUserGroupAndRoles,searchForLead, getLeadSources, getLeadsByAgent, getBtns, addCall,bulkActions,deleteNoActionLeads,getAllProposalCompanies} from './../../calls'
     import Multiselect from 'vue-multiselect'
     export default {
         data() {
@@ -135,7 +135,7 @@
                 leadsTotalNumber: 0,
                 getLeadsByAgent: [],
                 leadSources: [],
-                leads: [],
+                proposalsCompanies: [],
                 isEmpty: false,
                 isLoading: true,
                 hasMobileCards: true,
@@ -238,9 +238,9 @@
 
         getData(loading = true){
             this.isLoading = loading
-            getMyLeads(this.page).then(response=>{
+            getAllProposalCompanies(this.page).then(response=>{
                 this.perPage = response.data.per_page
-                this.leads = response.data.data
+                this.proposalsCompanies = response.data.data
                 this.leadsCurrentNumber = Math.min(response.data.total,this.page * this.perPage)
                 this.leadsTotalNumber = response.data.total
                 this.total = response.data.total

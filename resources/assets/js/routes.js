@@ -1628,14 +1628,15 @@ export const routes = [
         }
     },
     {
-        path: '/admin/vue/showCompany',
+        path: '/admin/vue/showCompany/:id',
         name: 'showCompany',
         component: showCompany,
         meta: {
             title: ' Show Company',
         }
     },
-  
+ 
+    
  
 
 ];

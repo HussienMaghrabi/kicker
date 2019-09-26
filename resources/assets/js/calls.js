@@ -2399,5 +2399,12 @@ export const addNewLead = (data) => {
 }
 
 
-
-
+export const getAllContactPerson=(id)=>{
+    return axios.get('/admin/getAllContactPerson/'+id)
+}
+export const getAllProposalCompanies=()=>{
+    return axios.get('/admin/getAllProposalCompanies')
+}
+export const getProposedCompanyData=(id)=>{
+    return axios.get('/admin/getProposalCompanyById/'+id)
+}

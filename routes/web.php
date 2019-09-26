@@ -860,9 +860,11 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('getAllCities', 'CityController@getAllCities');
     Route::get('getAllCountries', 'CountryController@getAllCountries');
     Route::post('addNewProposedCompany', 'ProposedCompanyController@store');
+    Route::get('getAllContactPerson/{id}','ContactController@getAllContactPerson');
+    Route::get('getAllProposalCompanies','ProposedCompanyController@index');
 
-    
-    
+    Route::get('getProposalCompanyById/{id}','ProposedCompanyController@show');
+
     
 
     

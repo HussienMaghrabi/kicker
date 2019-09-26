@@ -21,7 +21,11 @@ class ProposedCompanyController extends Controller
      */
     public function index()
     {
-        //
+        $allData=proposed_company::all();
+        return response()->json([
+            'status'=>'success',
+            'data'=>$allData
+        ]);
     }
 
     /**
@@ -42,7 +46,7 @@ class ProposedCompanyController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
         //static Data Of Proposed Company
          $proposedCompany=new proposed_company;
          $proposedCompany->name=$request->companyName;
@@ -164,7 +168,16 @@ class ProposedCompanyController extends Controller
      */
     public function show($id)
     {
-        //
+        $proposalCompany=proposed_company::where('id',$id)->get();
+        $arr=[];
+        foreach($proposalCompany as $item){
+            $arr['name']=$item->name;
+            
+        }
+        return response()->json([
+            'status'=>'Success',
+            'data'=>$arr
+        ]);
     }
 
     /**
