@@ -18,8 +18,8 @@ class ProposedCompanyAddressesTable extends Migration
             $table->string('street')->nullable($value=true);
             $table->string('state')->nullable($value=true);
             $table->string('zip_code')->nullable($value=true);
-            $table->unsignedInteger('company_id')->nullable($value=true);
-            $table->foreign('company_id')->references('id')->on('proposed_company')->onDelete('cascade');
+            $table->unsignedInteger('proposed_company_id')->nullable($value=true);
+            $table->foreign('proposed_company_id')->references('id')->on('proposed_company')->onDelete('cascade');
             $table->unsignedInteger('city_id')->nullable($value=true);
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->unsignedInteger('country_id')->nullable($value=true);

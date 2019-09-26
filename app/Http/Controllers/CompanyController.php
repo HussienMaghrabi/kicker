@@ -148,4 +148,12 @@ class CompanyController extends Controller
         session()->flash('success', trans('admin.deleted'));
         return redirect(adminPath().'/companies');
     }
+
+    public function getCompany(){
+        $allcompanies=Company::all();
+        return response()->json([
+            'status'=>'Success',
+            'data'=>$allcompanies
+        ]);
+    }
 }

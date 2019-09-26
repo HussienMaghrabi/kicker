@@ -363,6 +363,12 @@ export const getAllLeads = () => {
     return axios.get('/admin/getAllLeads')
 }
 
+// Get All Leads kickers
+export const getNewAllLeads = () => {
+    return axios.get('/admin/companyLeads')
+}
+
+
 export const getAllLeadsAutocompleteList = (usrInput) => {
     return axios.get('/admin/leads/autocomplete/list?q='+usrInput);
 }
@@ -2297,6 +2303,12 @@ export const getJobTitlesDep = (id) => {
     return axios.get('/admin/getJobTitlesDep/'+id)
 }
 
+// get contacts based on company Lead
+export const getleadContact = (id) => {
+    return axios.get('/admin/getleadContact/'+id)
+}
+
+
 // get vacancies based on job title
 export const getVacancyJob = (id) => {
     return axios.get('/admin/getVacancyJob/'+id)
@@ -2333,4 +2345,66 @@ export const getAllcampaigns = () => {
 }
 export const getAllProposal = () => {
     return axios.get('/admin/proposals')
+}
+export const getAllProposedCpmpany = () => {
+    return axios.get('/admin/getAllProposedCompany')
+}
+export const getAllCpmpanies = () => {
+    return axios.get('/admin/getAllCpmpanies')
+}
+export const getAllCurrency=()=>{
+    return axios.get('/admin/getAllCurrency')
+}
+export const getAllNationality=()=>{
+    return axios.get('/admin/getAllNationality')
+}
+export const getAllCities=()=>{
+    return axios.get('/admin/getAllCities')
+}
+export const getAllCountries=()=>{
+    return axios.get('/admin/getAllCountries')
+}
+export const addNewProposedCompany=(bodyFormData)=>{
+    // return axios.post('/admin/addNewProposedCompany',data)
+    return axios({
+        method: 'POST',
+        url: '/admin/addNewProposedCompany',
+        data: bodyFormData,
+        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    });
+
+}
+
+// add contracts
+export const addContract = (data) => {
+    return axios.post('/admin/contracts', data)
+}
+// add contract sections
+export const addContractSection = (data) => {
+    return axios.post('/admin/contractSections', data)
+}
+// get all Proposed Companies
+export const getProposedCompanies = () => {
+    return axios.get('/admin/getProposedCompanies')
+}
+
+// get all Leads
+export const getNewLeads = () => {
+    return axios.get('/admin/getNewLeads')
+}
+
+// add new lead
+export const addNewLead = (data) => {
+    return axios.post('/admin/companyLeads', data)
+}
+
+
+export const getAllContactPerson=(id)=>{
+    return axios.get('/admin/getAllContactPerson/'+id)
+}
+export const getAllProposalCompanies=()=>{
+    return axios.get('/admin/getAllProposalCompanies')
+}
+export const getProposedCompanyData=(id)=>{
+    return axios.get('/admin/getProposalCompanyById/'+id)
 }

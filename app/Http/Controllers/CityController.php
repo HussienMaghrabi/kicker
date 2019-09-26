@@ -12,11 +12,11 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAllCities()
     {
         $City = City::all();
         return response()->json([
-            'status' => 200,
+            'status' => 'success',
             'data' => $City
         ]);
     }

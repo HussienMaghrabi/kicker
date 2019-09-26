@@ -13,9 +13,11 @@ class ProposedContactFaxesTable extends Migration
      */
     public function up()
     {
-        Schema::table('proposedContact_faxes', function (Blueprint $table) {
+        Schema::create('proposedContact_faxes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('fax');
+            $table->unsignedInteger('contact_id')->nullable($value=true);
+            $table->foreign('contact_id')->references('id')->on('contacts_proposed')->onDelete('cascade');
             $table->timestamps();
         });
     }

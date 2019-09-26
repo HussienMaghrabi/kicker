@@ -16,7 +16,6 @@ class CreateContractSectionsTable extends Migration
         Schema::create('contract_sections', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('description');
             $table->timestamps();
         });
     }

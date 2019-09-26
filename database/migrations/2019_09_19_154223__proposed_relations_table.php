@@ -13,7 +13,7 @@ class ProposedRelationsTable extends Migration
      */
     public function up()
     {
-        Schema::table('proposedRelations', function (Blueprint $table) {
+        Schema::create('proposedRelations', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('company_id');
             $table->foreign('company_id')->references('id')->on('companies');
