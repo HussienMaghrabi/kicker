@@ -1,0 +1,130 @@
+    <div class="column is-1 border_right"> </div>
+
+<div class="column is-5 head_margin_top">
+    Weekend :
+    <!-- <span v-if="!edit.ar_last_name" id="ar_last_name" class="">
+        {{ getleads.lead.ar_last_name }}
+    </span>
+    <i v-if="!edit.ar_last_name" @click="fn_edit('ar_last_name')" -->
+    <i class="fa fa-edit update pull-right"
+        style="font-size: 20px; cursor: pointer" type="ar_last_name"
+        id="ar_last_name_btn"></i>
+    <!-- <i v-if="edit.ar_last_name" @click="fn_edit('ar_last_name')"
+        class="fa fa-check save pull-right"
+        style="font-size: 20px; cursor: pointer" type="ar_last_name"
+        id="ar_last_name_save"></i>
+    <span v-if="edit.ar_last_name" id="ar_last_name_input" class="">
+        <input type="text" v-model="updatelead.ar_last_name" class="update_input" value="arabic last name"
+            id="ar_last_name_update">
+    </span> -->
+</div>
+
+<div class="column is-5 border_right">
+    <div class="head_margin_top">
+        Special Reward :
+        <!-- <span v-if="!edit.nationality" id="nationality" class="">
+            {{ getleads.lead.nationality }}
+        </span>
+        <i v-if="!edit.nationality" @click="fn_edit('nationality')" -->
+        <i class="fa fa-edit update pull-right"
+            style="font-size: 20px; cursor: pointer" type="nationality"
+            id="nationality_btn"></i>
+        <!-- <i v-if="edit.nationality" @click="fn_edit('nationality')"
+            class="fa fa-check save pull-right"
+            style="font-size: 20px; cursor: pointer" type="nationality"
+            id="nationality_save"></i>
+        <span v-if="edit.nationality" id="nationality_input" class="">
+            <b-select placeholder="Select nationality">
+                <option>
+                    all nationalities
+                </option>
+            </b-select>
+        </span> -->
+    </div>
+</div>
+
+<div class="column is-5 border_right">
+    <div class="head_margin_top">
+        Unscheduled Vacation :
+        <!-- <span v-if="!edit.country" id="country_id" class="">
+            CountryName
+        </span>
+        <i v-if="!edit.country" @click="fn_edit('country')" -->
+        <i class="fa fa-edit update pull-right"
+            style="font-size: 20px; cursor: pointer" type="country_id"
+            id="country_id_btn"></i>
+        <!-- <i v-if="edit.country" @click="fn_edit('country')"
+            class="fa fa-check save pull-right"
+            style="font-size: 20px; cursor: pointer" type="country_id"
+            id="country_id_save"></i>
+        <span v-if="edit.country" id="country_id_input" class="">
+            <b-select v-model="updatelead.country_id" placeholder="Select country">
+                <option v-for="country in countries" :key="country.id" :value="country.id"> {{ country.name }} </option>
+            </b-select>
+        </span> -->
+    </div>
+</div>
+
+<div class="column is-5 head_margin_top">
+    Tax :
+    <!-- <span v-if="!edit.city" id="city_id" class="">
+        city
+    </span>
+    <i v-if="!edit.city" @click="fn_edit('city')" -->
+        <i class="fa fa-edit update pull-right"
+        style="font-size: 20px; cursor: pointer" type="city_id"
+        id="city_id_btn"></i>
+    <!-- <i v-if="edit.city" @click="fn_edit('city')"
+        class="fa fa-check save pull-right"
+        style="font-size: 20px; cursor: pointer" type="city_id"
+        id="city_id_save"></i>
+    <span v-if="edit.city" id="city_id_input" class="hidden">
+        <b-select v-model="updatelead.city_id" placeholder="Select city">
+            <option v-for="city in citeis" :key="city.id" :value="city.id">{{ city.name }}</option>
+        </b-select>
+    </span> -->
+</div>
+
+
+<div class="column is-5 border_right">
+    <div class="head_margin_top">
+        Punishment :
+        <!-- <span v-if="!edit.birth_date" id="birth_date" class="">
+            birth date
+        </span>
+        <i v-if="!edit.birth_date" @click="fn_edit('birth_date')" -->
+        <i class="fa fa-edit pull-right"
+            style="font-size: 20px; cursor: pointer" type="birth_date"
+            id="birth_date_btn"></i>
+        <!-- <i v-if="edit.birth_date" @click="fn_edit('birth_date')"
+            class="fa fa-check save pull-right"
+            style="font-size: 20px; cursor: pointer" type="birth_date"
+            id="birth_date_save"></i>
+        <span v-if="edit.birth_date" id="birth_date_input" class="hidden">
+            <input type="text" class="update_input datepicker1" value="date"
+                id="birth_date_update">
+        </span> -->
+    </div>
+</div> 
+
+
+<div class="column is-5 border_right">
+    <div class="head_margin_top">                                          
+            OverTime :
+        <!-- <span v-if="!edit.birth_date" id="birth_date" class="">
+            birth date
+        </span>
+        <i v-if="!edit.birth_date" @click="fn_edit('birth_date')" -->
+        <i class="fa fa-edit pull-right"
+            style="font-size: 20px; cursor: pointer" type="birth_date"
+            id="birth_date_btn"></i>
+        <!-- <i v-if="edit.birth_date" @click="fn_edit('birth_date')"
+            class="fa fa-check save pull-right"
+            style="font-size: 20px; cursor: pointer" type="birth_date"
+            id="birth_date_save"></i>
+        <span v-if="edit.birth_date" id="birth_date_input" class="hidden">
+            <input type="text" class="update_input datepicker1" value="date"
+                id="birth_date_update">
+        </span> -->
+    </div>
+</div> 
