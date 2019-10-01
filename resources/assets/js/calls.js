@@ -42,6 +42,46 @@ export const getBtns = (data) => {
     return axios.post('/admin/getBtns', data)
 }
 
+// updte vacancy type
+export const updateVacancy = (id,data) => {
+    return axios.post('/admin/updateVacancy/'+id,data)
+}
+// add request type
+export const AddRequestType = (data) => {
+    return axios.post('/admin/AddRequestType',data)
+}
+// edit request type
+export const requestEditData = (id) => {
+    return axios.get('/admin/editrequesttype/'+id)
+}
+// update request type
+export const updaterequesttype = (id,data) => {
+    return axios.post('/admin/updaterequesttype/'+id,data)
+}
+// update request type
+export const DeleteRequestType = (id) => {
+    return axios.get('/admin/DeleteRequestType/'+id)
+}
+// update request type
+export const AddRequestStatus = (data) => {
+    return axios.post('/admin/AddRequestStatus/',data)
+}
+
+// edit request status
+export const editRequestStatus = (id) => {
+    return axios.get('/admin/editRequestStatus/'+id)
+}
+
+// update request status
+export const updaterequeststatus = (id,data) => {
+    return axios.post('/admin/updaterequeststatus/'+id,data)
+}
+
+// delete request status
+export const DeleterequestStatusType = (id) => {
+    return axios.post('/admin/DeleterequestStatusType/'+id)
+}
+
 export const getprojectsfeature = () => {
     return axios.get('/admin/getprojectsfeature')
 }
@@ -52,6 +92,14 @@ export const getresalefeature = () => {
 // Get My Leads
 export const getLeads = (page) => {
     return axios.get('/admin/leads?page='+page)
+}
+// Get vacancy type
+export const getVacancyType = (page) => {
+    return axios.get('/admin/getVacancyType?page='+page)
+}
+// Get vacancy type
+export const getVacanceType = () => {
+    return axios.get('/admin/getVacanceType')
 }
 
 // Get all contracts
@@ -392,6 +440,53 @@ export const getResales = (data, page) => {
 export const getRental = (data, page) => {
     return axios.post('/api/agent/get_rentals?page='+page, data)
 }
+// get employee requests
+export const GetEmployeeRequests = (page) => {
+    return axios.get('/api/agent/GetEmployeeRequests?page='+page)
+}
+// store employee request
+export const StoreNewEmpRequest = (bodyFormData) => {
+    return axios.post('/admin/StoreNewEmpRequest',bodyFormData)
+}
+// store employee gross slaray
+export const UpdateGroosSalary = (bodyFormData) => {
+    return axios.post('/admin/UpdateGroosSalary',bodyFormData)
+}
+// store employee Deduction slaray
+export const employeeDeductionUpdate = (bodyFormData) => {
+    return axios.post('/admin/employeeDeductionUpdate',bodyFormData)
+}
+
+// save employee attendance
+export const saveEmployeeAttendance = (data) => {
+    return axios.post('/api/agent/saveemployeeattendance',data)
+}
+// Change status requests
+export const ChangeRequestStatus = (id) => {
+    return axios.get('/api/agent/ChangeRequestStatus/'+id)
+}
+export const getHrSettingData = () => {
+    return axios.get('/api/agent/getHrSettingData/')
+}
+export const updateHrSettings = (bodyFormData) => {
+    return axios.post('/api/agent/updateHrSettings/',bodyFormData)
+}
+
+// Change status requests
+export const DeleteEmployeeRequest = (id) => {
+    return axios.get('/api/agent/DeleteEmployeeRequest/'+id)
+}
+
+// update status requests
+export const UpdateRequestEmployee = (bodyFormData) => {
+    return axios.post('/api/agent/UpdateRequestEmployee/',bodyFormData)
+}
+
+// Change status requests
+export const getAllStatusOfRequest = () => {
+    return axios.get('/admin/getAllStatusOfRequest')
+}
+
 export const displayTable = ($value) => {
     return $value;
 }
@@ -2010,6 +2105,20 @@ export const rejectThisPush = (id) => {
     return axios.get('/admin/deletepush/'+id)
 }
 
+// reject Request types
+export const getRequestType = (page) => {
+    return axios.get('/admin/getRequestType?page='+page)
+}
+
+export const getRequestTypes = () => {
+    return axios.get('/admin/getAPIRequestTypes')
+}
+
+// reject Request status
+export const getRequestStatus = () => {
+    return axios.get('/admin/getRequestStatus')
+}
+
 // add employee
 export const addEmployee = (data) => {
     // console.log('data before sending',data)
@@ -2060,6 +2169,20 @@ export const updateMeetingstatus = (data,id) => {
 // update vacancy
 export const editVacancy = (data,id) => {
     return axios.post('/admin/vacancies/'+id,data)
+}
+
+// add vacancy type
+export const StoreNewVacType = (data) => {
+    return axios.post('/admin/AddVacancyType/',data)
+}
+// delete vacancy type
+export const DeleteVacType = (id) => {
+    return axios.get('/admin/deleteVacancyType/'+id)
+}
+
+// get singe vacancy type
+export const getVacTypeData = (id) => {
+    return axios.get('/admin/editVacancyType/'+id)
 }
 
 // get UnderReview app

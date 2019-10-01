@@ -266,6 +266,24 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('get_member/{id}', 'HomeController@get_member');
     Route::resource('lead_sources', 'LeadSourceController');
     Route::resource('leads', 'LeadController');
+    Route::get('getVacancyType', 'VacancyTypeController@index');
+    Route::post('AddVacancyType', 'VacancyTypeController@store');
+    Route::get('editVacancyType/{id}', 'VacancyTypeController@edit');
+    Route::post('updateVacancy/{id}', 'VacancyTypeController@update');
+    Route::get('deleteVacancyType/{id}', 'VacancyTypeController@distroy');
+    Route::get('getVacanceType', 'VacancyTypeController@getAll');
+    Route::get('getRequestType', 'RequestTypeController@AllTypes');
+    Route::get('getAPIRequestTypes', 'RequestTypeController@AllTypesAPI');
+    Route::post('AddRequestType', 'RequestTypeController@store');
+    Route::get('editrequesttype/{id}', 'RequestTypeController@edit');
+    Route::post('updaterequesttype/{id}', 'RequestTypeController@update');
+    Route::get('DeleteRequestType/{id}', 'RequestTypeController@destroy');
+    Route::get('getRequestStatus', 'RequestStatusController@AllStatus');
+    Route::post('AddRequestStatus', 'RequestStatusController@store');
+    Route::get('editRequestStatus/{id}', 'RequestStatusController@edit');
+    Route::post('updaterequeststatus/{id}', 'RequestStatusController@update');
+    Route::post('DeleterequestStatusType/{id}', 'RequestStatusController@destroy');
+    Route::get('getAllStatusOfRequest', 'RequestStatusController@AllForApi');
     Route::get('popup', 'popupController@index');
     Route::post('popup/{id}', 'popupController@update');
     Route::post('GetLeadMassege','LeadController@gitleadmassege');
@@ -689,6 +707,9 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('team_leads_ajax', 'LeadController@team_leads_ajax');
     Route::post('updatelead','LeadController@updatelead');
     Route::post('updateEmployees','EmployeeController@updateEmployees');
+    Route::post('StoreNewEmpRequest','EmployeeRequestController@Store');
+    Route::post('UpdateGroosSalary','grossSalaryController@Store');
+    Route::post('employeeDeductionUpdate','deductionController@Store');
    
 
     // New Vue Dashboard

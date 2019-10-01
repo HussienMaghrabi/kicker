@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use \App\request_status;
+use Validator;
+
+class RequestStatusController extends Controller
+{
+    public function AllStatus()
+    {
+        return request_status::paginate(100);
+    }
+    public function store(Request $request){
+        $rules = [
+            'name' => 'required',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        $validator->SetAttributeNames([
+            'name' => trans('admin.en_name'),
+        ]);
+        if ($validator->fails()) {
+            return 'have error in requirement';
+            // return back()->withInput()->withErrors($validator);
+        } else {
+            request_status::create($request->all());
+        }
+    }
+}

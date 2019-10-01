@@ -108,12 +108,19 @@ import HrSettings from './components/hr/HrSettings.vue'
 import showApplicaton from './components/hr/showApplicaton.vue'
 import addApplication from './components/hr/addApplication.vue'
 import vacancy from './components/hr/vacancy.vue'
+import vacancy_type from './components/hr/vacancyType.vue'
 import addVacancy from './components/hr/addVacancy.vue'
 import showVacancy from './components/hr/showVacancy.vue'
 import editVacancy from './components/hr/editVacancy.vue'
 import showApp from './components/hr/showApp.vue'
 import salaries from './components/hr/salaries.vue'
 import editSalary from './components/hr/editSalary.vue'
+
+
+import request_type from './components/hr/req_type.vue'
+import request_status from './components/hr/req_status.vue'
+import employeerequest from './components/hr/employee_request.vue'
+import employee_attendance from './components/hr/employeeattendance.vue'
 
 import salariesDetails from './components/hr/salariesDetails.vue'
 import employees from './components/hr/employees.vue'
@@ -1003,6 +1010,14 @@ export const routes = [
         }
     },
     {
+        path: '/admin/vue/vacancy_type',
+        name: 'vacancy type',
+        component: vacancy_type,
+        meta: {
+            title: 'Vacancy Type',
+        }
+    },
+    {
         path: '/admin/vue/showVacancy/:id',
         name: 'showVacancy',
         component: showVacancy,
@@ -1492,6 +1507,41 @@ export const routes = [
         component: editSalary,
         meta: {
             title: 'Edit Salary',
+        }
+    },
+
+
+    {
+        path: '/admin/vue/request_type',
+        name: 'request type',
+        component: request_type,
+        meta: {
+            title: 'request type',
+        }
+    },
+    {
+        path: '/admin/vue/request_status',
+        name: 'request status',
+        component: request_status,
+        meta: {
+            title: 'request status',
+        }
+    },
+    {
+        path: '/admin/vue/employee_request',
+        name: 'Requests',
+        component: employeerequest,
+        meta: {
+            title: 'Requests',
+        }
+    },
+
+    {
+        path: '/admin/vue/employee_attendance',
+        name: 'attendance',
+        component: employee_attendance,
+        meta: {
+            title: 'attendance',
         }
     },
     
