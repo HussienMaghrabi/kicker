@@ -442,6 +442,14 @@ export const GetEmployeeRequests = (page) => {
 export const StoreNewEmpRequest = (bodyFormData) => {
     return axios.post('/admin/StoreNewEmpRequest',bodyFormData)
 }
+// store employee gross slaray
+export const UpdateGroosSalary = (bodyFormData) => {
+    return axios.post('/admin/UpdateGroosSalary',bodyFormData)
+}
+// store employee Deduction slaray
+export const employeeDeductionUpdate = (bodyFormData) => {
+    return axios.post('/admin/employeeDeductionUpdate',bodyFormData)
+}
 
 // save employee attendance
 export const saveEmployeeAttendance = (data) => {

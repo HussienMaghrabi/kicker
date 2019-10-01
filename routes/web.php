@@ -701,6 +701,8 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('updatelead','LeadController@updatelead');
     Route::post('updateEmployees','EmployeeController@updateEmployees');
     Route::post('StoreNewEmpRequest','EmployeeRequestController@Store');
+    Route::post('UpdateGroosSalary','grossSalaryController@Store');
+    Route::post('employeeDeductionUpdate','deductionController@Store');
    
 
     // New Vue Dashboard

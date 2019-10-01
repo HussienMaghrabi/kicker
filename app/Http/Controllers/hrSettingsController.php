@@ -32,9 +32,11 @@ class hrSettingsController extends Controller
             foreach ($days as $day) {
                 $NewDay = weekends::find($day->id);
                 $NewDay->day = $day->day;
+                $NewDay->status = 1;
                 $NewDay->status = $day->status;
                 $NewDay->update();
             }
+            return "Update my hr setting";
         }
     }
 }

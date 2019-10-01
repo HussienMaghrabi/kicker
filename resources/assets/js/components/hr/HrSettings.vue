@@ -156,8 +156,7 @@
              <div class="Employee-details column is-6" style="border-top: 3px solid #b07d12;">
                     <b>Gross Salary</b><hr>
                     <b-field label="Choose Employee" class="column is-12">
-                        <b-select v-model="setting.employeeGSalary" expanded>
-                            <option value=""></option>
+                        <b-select v-model="GroosSalary.employee_id" expanded>
                             <option v-for="employee in employees" :key="employee.id" :value="employee.id">{{ employee.en_days }} {{ employee.en_last_name }}</option>
                         </b-select>
                     </b-field>
@@ -165,13 +164,13 @@
                     <div class="columns is-12">
                         <div class="column is-6">
                             <b-field label="Ordered by:">
-                              <b-input type="text" v-model="name"></b-input>
+                              <b-input type="text" v-model="GroosSalary.order_by"></b-input>
                             </b-field>
                         </div>
 
                          <div class="column is-6">
                             <b-field label="Allowances:">
-                              <b-input type="number" v-model="name"></b-input>
+                              <b-input type="number" v-model="GroosSalary.allowanes"></b-input>
                             </b-field>
                         </div>
                     </div>
@@ -179,27 +178,26 @@
                     <div class="columns is-12">
                         <div class="column is-6">
                             <b-field label="Date:">
-                              <b-input type="date" v-model="name"></b-input>
+                              <b-input type="date" v-model="GroosSalary.date"></b-input>
                             </b-field>
                         </div>
 
                          <div class="column is-6">
                             <b-field label="Details:">
-                              <b-input type="text" v-model="name"></b-input>
+                              <b-input type="text" v-model="GroosSalary.details"></b-input>
                             </b-field>
                         </div>
                     </div>
 
                     <div class="columns is-12">
-                          <b-button type="is-info">Update Salary</b-button>
+                          <b-button @click="UpdateEmployeeSalary" type="is-info">Update Salary</b-button>
                     </div>
                 
              </div>
             <div class="Employee-details column is-6" style="border-top: 3px solid #b07d12;">
                 <b>Deduction</b><hr>
                 <b-field label="Choose Employee" class="column is-12">
-                    <b-select v-model="setting.employeeDeduction" expanded>
-                        <option value=""></option>
+                    <b-select v-model="Deduction.employee_id" expanded>
                         <option v-for="employee in employees" :key="employee.id" :value="employee.id">{{ employee.en_days }} {{ employee.en_last_name }}</option>
                     </b-select>
                 </b-field>
@@ -207,13 +205,13 @@
                 <div class="columns is-12">
                     <div class="column is-6">
                         <b-field label="Ordered by:">
-                        <b-input type="text" v-model="name"></b-input>
+                        <b-input type="text" v-model="Deduction.order_by"></b-input>
                         </b-field>
                     </div>
 
                     <div class="column is-6">
                         <b-field label="Deductions:">
-                        <b-input type="number" v-model="name"></b-input>
+                        <b-input type="number" v-model="Deduction.Deduction"></b-input>
                         </b-field>
                     </div>
                 </div>
@@ -221,19 +219,19 @@
                 <div class="columns is-12">
                     <div class="column is-6">
                         <b-field label="Date:">
-                        <b-input type="date" v-model="name"></b-input>
+                        <b-input type="date" v-model="Deduction.date"></b-input>
                         </b-field>
                     </div>
 
                     <div class="column is-6">
                         <b-field label="Details:">
-                        <b-input type="text" v-model="name"></b-input>
+                        <b-input type="text" v-model="Deduction.details"></b-input>
                         </b-field>
                     </div>
                 </div>
 
                 <div class="columns is-12">
-                    <b-button type="is-info">Update Salary</b-button>
+                    <b-button @click="updateEmployeeDeduction" type="is-info">Update Salary</b-button>
                 </div>
             
             </div>
@@ -350,7 +348,7 @@
 <script>
 import Multiselect from 'vue-multiselect'
 import sidebarmenu from './sidebarmenu'
-import {allEmployees,deleteThisEmployee,filterEmployees,action_logs,callstatus,getMeetingStatus,getAllEmployees,getHrSettingData,updateHrSettings} from './../../calls'
+import {allEmployees,deleteThisEmployee,filterEmployees,action_logs,callstatus,getMeetingStatus,getAllEmployees,getHrSettingData,updateHrSettings,UpdateGroosSalary,employeeDeductionUpdate} from './../../calls'
 export default {
     data() {
             return {
@@ -380,6 +378,8 @@ export default {
                 showBooks: false,
                 logsCurrentNumber: 0,
                 logsTotalNumber: 0,
+                GroosSalary: [],
+                Deduction: [],
                 actionLogs: [],
                 selectedLogs: [],
                 isEmpty: false,
@@ -462,7 +462,7 @@ export default {
                     const value = this.HrSettings[key];
                     bodyFormData.set(key, value);
                 }
-                bodyFormData.append('weeks[]',JSON.stringify(this.Days))
+                bodyFormData.append('weeks[]',JSON.stringify(this.SelectDay))
                 updateHrSettings(bodyFormData).then(response=>{
                     console.log('lead update success')
                     this.$toast.open({
@@ -479,6 +479,30 @@ export default {
             }
             this.edit[value] = !this.edit[value];
         },
+        UpdateEmployeeSalary(){
+            const bodyFormData = new FormData();
+            for (const key in this.GroosSalary) {
+                const value = this.GroosSalary[key];
+                bodyFormData.set(key, value);
+            }
+            UpdateGroosSalary(bodyFormData).then(response=>{
+                console.log(response)
+            }).catch(error=>{
+                console.log(error)
+            })
+        },
+        updateEmployeeDeduction(){
+            const bodyFormData = new FormData();
+            for (const key in this.Deduction) {
+                const value = this.Deduction[key];
+                bodyFormData.set(key, value);
+            }
+            employeeDeductionUpdate(bodyFormData).then(response=>{
+                console.log(response)
+            }).catch(error=>{
+                console.log(error)
+            })
+        }
     },
 }
 </script>
