@@ -1,12 +1,14 @@
 <template>
   <div>
-  <section class="overlaySec" id="loadd" :is-full-page="true">
+  <sidebar-menu :menu="menu" />
+    
+  <!-- <section class="overlaySec" id="loadd" :is-full-page="true">
             <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-    </section>
+    </section> -->
     <div class="dashboard container">
       <div class="columns">
         <div class="column left-side-dash-col" style="width: 65%;">
-          <div class="row">
+          <!-- <div class="row">
             <div class="edit-bar">
               <button class="btn btn-default editBtn">
                 <i class="fa fa-edit" v-on:click="enableEdit"></i>
@@ -19,7 +21,7 @@
                 <date-picker v-model="time3" lang="en" range></date-picker>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <Assistant @newFollow="updateFromFollow"
           @newAssistant="updateFromFollow"
@@ -45,7 +47,7 @@
             ></component>
           </Vuedraggable>
         </div>
-        <div class="column right-side" style="margin-left: 3%; padding: 1%; width: 35%;">
+        <!-- <div class="column right-side" style="margin-left: 3%; padding: 1%; width: 35%;">
           <div class="rows">
             <div class="row">
               <label
@@ -230,17 +232,135 @@
                 </div>
 
               </b-collapse>
-                                      <img src="/images/Screen Shot2019-09-04 at6.37.55PM.png" />
+              <div class="birthday">
+                <img style="float:left;padding:4px;" src="/images/Image27.png" />
+                <img style="width:50%" src="/images/Image28.png" />
+                <div class="qoute">
+                  <p> Happy Birthday..10 July  </p>
+                  <p>Wish him a happy birthday</p>
+                </div>
+                <button  v-on:click="submit = !submit" style="background-color:#e1ceab;border:none;padding:3px;">Submit</button>
+                 <textarea style="display:block;margin:auto;width:70%;height:40px;margin-top:10px;" v-if="submit"></textarea>
+              </div>
+              <div class="hangout">
+                <h1 style="font-weight:bold;padding:10px;">Hangouts</h1>
+                   <div class="attend">
+                     <p>Somaya &nbsp; &nbsp;&nbsp;Cinema City Stars,,Angel has fallen,,Tuesday,3 September 2019</p>
+                   </div>
+                   <button style="background-color:#e1ceab;padding:15px;">Attend</button>
+              </div>
+              
 
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- <b-loading :is-full-page="true" :active.sync="isLoading" :can-cancel="true"></b-loading> -->
   </div>
 </template>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style src="./dashboard.css" scoped></style>
+<style>
+.right-side
+{
+  background-color: white;
+}
+@media screen and (max-width: 767px)
+{
+    .row 
+    {
+       display: block !important;
+    } 
+}
+.hangout
+{
+  background-color: #eadbc2;
+  margin-top: 15px !important;
+  padding: 15px;
+  width: 100%;
+  margin: auto
+}
+.attend
+{
+  background-color: #e1ceab;
+  /* width: 70%;
+  display: inline-block; */
+  padding: 7px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.birthday
+{
+  background-color: #eadbc2;
+  text-align: center;
+  padding: 15px;
+}
+.qoute
+{
+  background-color: #e1ceab;
+  width: 70%;
+  margin: auto;
+  padding: 7px;
+  font-weight: bold;
+}
+   #loading{
+  margin-left: 35%;
+  margin-top: 10%;
+}
+.overlaySec{
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+  z-index: 99999;
+  position: fixed;
+  top: 0;
+} 
+
+.lds-ring {
+  margin-left: 40%;
+  margin-top: 20%;
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  margin: 6px;
+  border: 20px solid red;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #cc0000 transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.v-sidebar-menu {
+  top: 66px;
+  height: 92vh;
+}
+
+</style>
 
 <script>
 $(window).load(function() {
@@ -292,6 +412,11 @@ import { FullCalendar } from "vue-full-calendar";
 import Vuedraggable from "vuedraggable";
 import DatePicker from "vue2-datepicker";
 import moment from "moment";
+import Vue from 'vue';
+import VueSidebarMenu from 'vue-sidebar-menu'
+import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
+Vue.use(VueSidebarMenu)
+
 
 export default {
   name: "dashboard",
@@ -303,7 +428,241 @@ export default {
   },
 
   data() {
+    
     return {
+            menu: [
+                {
+                    href: '',
+                    title: 'Lead',
+                     icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-lead.png"              
+                         
+                     }
+                   },
+                    child: [
+                            {
+                                href: '/admin/vue/Leads',
+                                title: 'All Leads'
+                            },
+                             {
+                                href: '/admin/vue/AllMeeting',
+                                title: 'Meetings'
+                            },
+                             {
+                                href: '/admin/vue/AllRequests',
+                                title: 'Requests'
+                            }
+                        ]
+                },
+                {
+                    href: '',
+                    title: 'Inventory',
+                    icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-inventory.png"           
+                     }
+                     },
+                     child: [
+                            {
+                                href: '/admin/vue/developers',
+                                title: 'Developers'
+                            },
+                             {
+                                href: '/admin/vue/projects',
+                                title: 'Projects'
+                            },
+                             {
+                                href: '/admin/vue/resale_units',
+                                title: 'Resale Units'
+                            },
+                             {
+                                href: '/admin/vue/resale_units',
+                                title: 'Rental Units'
+                            }
+                        ]
+
+                },
+                {
+                   href:'',
+                   title: 'Markiting',
+                   icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-marketing.png"               
+                         
+                     }
+                   },
+                   child: [
+                            {
+                                href: '/admin/vue/AllCampaigns',
+                                title: 'Campaigns'
+                            },
+                             {
+                                href: '/admin/vue/Campaign_Type',
+                                title: 'Campaigns Types'
+                            },
+                             {
+                                href: '/admin/vue/forms',
+                                title: 'Forms'
+                            },
+                            
+                        ]
+
+
+                },
+                {
+                   href:'/admin/vue/allProposals',
+                   title: 'Proposals',
+                   icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-proposals.png"               
+                         
+                     }
+                   }
+
+
+                },
+                {
+                   href:'/admin/vue/allContract',
+                   title: 'Contracts',
+                   icon: 
+                   {
+                     element :'img',
+                      attributes: {
+                     src : "/icon/header-proposals.png"              
+                         
+                     }              
+                   }
+
+
+                },
+                 {
+                   href:'/admin/vue/allInvoices',
+                   title: 'Invoices',
+                   icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-proposals.png"               
+                         
+                     }
+                   }
+
+
+                },
+                 {
+                   href:'/admin/vue/deals',
+                   title: 'Closed Deals',
+                  icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-closed-deals.png"               
+                         
+                     }
+                   }
+
+
+                },
+                 {
+                   href:'/admin/vue/FinalFinance',
+                   title: 'Finances',
+                    icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-finances.png"               
+                         
+                     }
+                   }
+
+
+                },
+                 {
+                   href:'',
+                   title: 'HR',
+                    icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-hr.png"               
+                         
+                     }
+                   },
+                   child: [
+                            {
+                                href: '/admin/vue/jobCategories',
+                                title: 'Job Categories'
+                            },
+                             {
+                                href: '/admin/vue/jobTitle',
+                                title: 'Job Titles'
+                            },
+                             {
+                                href: '/admin/vue/vacancy',
+                                title: 'Vacancies'
+                            },
+                             {
+                                href: '/admin/vue/application',
+                                title: 'Applications'
+                            },
+                             {
+                                href: '/admin/vue/employees',
+                                title: 'Employees'
+                            },
+                             {
+                                href: '/admin/vue/salaries',
+                                title: 'Salaries'
+                            },
+                              {
+                                href: '/admin/vue/salariesDetails',
+                                title: 'Salaries Details'
+                            },
+                              {
+                                href: '/admin/vue/ruleOfProcedure',
+                                title: 'Rules Of Procedure'
+                            },
+                            
+                        ]
+                },
+                 {
+                   href:'/admin/vue/traffic',
+                   title: 'Traffic',
+                   icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-closed-deals.png"               
+                         
+                     }
+                   }
+
+
+                },
+                 {
+                   href:'/admin/vue/Reports',
+                   title: 'Reports',
+                    icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-reports.png"               
+                         
+                     }
+                   }
+
+
+                },
+            ],
+      submit:false,
       // loading: true,
       isLoading: true,
       flag: 0,
@@ -1033,57 +1392,3 @@ export default {
 </script>
   
 
-<style src="./dashboard.css" scoped></style>
-<style>
-   #loading{
-  margin-left: 35%;
-  margin-top: 10%;
-}
-.overlaySec{
-  background-color: #fff;
-  height: 100%;
-  width: 100%;
-  z-index: 99999;
-  position: fixed;
-  top: 0;
-} 
-
-.lds-ring {
-  margin-left: 40%;
-  margin-top: 20%;
-  display: inline-block;
-  position: relative;
-  width: 64px;
-  height: 64px;
-}
-.lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 210px;
-  height: 210px;
-  margin: 6px;
-  border: 20px solid red;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #cc0000 transparent transparent transparent;
-}
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
-}
-.lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
-}
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
-}
-@keyframes lds-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-</style>

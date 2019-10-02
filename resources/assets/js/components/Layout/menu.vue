@@ -184,10 +184,13 @@
         <router-link to="admin/vue/reports">
             <b-menu-item v-if="permArray.reports == 1 || userType == 'admin'" icon="information-outline" label="Reports"></b-menu-item>
         </router-link>
+         <router-link to="/admin/vue/traffic">
+            <b-menu-item v-if=" userType == 'admin'" label="Traffic"></b-menu-item>
+        </router-link>
         </div>
         <div class="wui-content">
         <div class="wui-content-header">
-            <a href="#" class="wui-side-menu-trigger"><i class="fa fa-bars  menu"></i></a>
+            <a href="#" class="wui-side-menu-trigger"><i class="fa fa-bars menu_filter"></i></a>
         </div> 
         </div>
         <div class="wui-overlay"></div>
@@ -211,7 +214,13 @@
 
 .sidebar-menu-responsev{
     display: none;
-}
+    }
+.menu_filter{
+
+    margin-left: -190%;
+    }
+ 
+
 /* side menu */
 .wui-side-menu {
   position:fixed;
@@ -397,6 +406,13 @@ documentReady(function() {
             console.log(error);
           });
       },
+
+
+      
     }
+    
+
+
+
 }
 </script>
