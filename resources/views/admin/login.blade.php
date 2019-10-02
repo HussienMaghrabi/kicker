@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <style>
+  
   .w_mass
   {
     color: #a194a8
@@ -55,15 +56,18 @@
          }
         #bodymovin{
             background: url(../images/resources/kickerspsd.png);
-            background-size: cover;
+            background-size: 100% 100%;
             transform: translate3d(0,0,0);
             display:block;
             opacity: 1;
             width:100%;
-            position : fixed;
             top:0;
             bottom:0 ;
         }
+        .center
+          {
+            margin-bottom: 55% !important;
+          }
         .login-box{
             position:fixed;
             margin-left:calc(50% - 182px);
@@ -85,6 +89,7 @@
           .c-text{
             display : none
           }
+          
         }
         </style>
 <body class="hold-transition" >
@@ -109,9 +114,9 @@
   <div class="col-md-4 text-center form-body-content">
       <!-- <span class="gold bigsp">WELCOME!</span>
       <span class="gold smsp"> LOGIN</span> -->
-      <span class="c-text" style="color:white;font-size: x-large"> <img src="{{ url('website_style/images/01.png') }}" alt="">  Pressure is something you feel when you</span>
+      <span class="c-text" style="color:white;font-size: x-large"> <img src="{{ url('/images/Untitled-3.png') }}" alt="">  Pressure is something you feel when you</span>
       <br>
-      <span class="c-text" style="color:white;font-size: x-large"> don't know what the hell you're doing   <img src="{{ url('website_style/images/02.png') }}" alt=""> </span>
+      <span class="c-text" style="color:white;font-size: x-large"> don't know what the hell you're doing   <img src="{{ url('/images/Untitled-2copy.png') }}" alt=""> </span>
       <!-- /.login-logo -->
       <div class="login-box-body">
         <form action="{{ url(adminPath().'/login_post') }}" method="post" class=" hub-form">

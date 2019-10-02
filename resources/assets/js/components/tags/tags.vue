@@ -188,8 +188,7 @@ export default {
         },
         filterTag(){
         var data ={
-            'id':this.id,
-            'en_name':this.name,
+          
             'searchInput':this.search_query,
             '_token':this.token,
         };

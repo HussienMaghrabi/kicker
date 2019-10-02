@@ -19,6 +19,7 @@
             <button class="button header-menu-icon" slot="trigger" style="border: unset;">
               <i class="fas fa-bars" style="font-size: 1.25rem; margin-left: 1rem;"></i>
             </button>
+
             <div v-if="userType == 'admin'">
                 <b-dropdown-item :custom="true" aria-role="listitem" class="header-menu-item-hover m-2">
                   <div>
@@ -718,8 +719,8 @@
           </div>
         </div>
 
-        <router-link to="/admin/vue/settings" v-if="userType == 'admin'" class="navbar-item setting-bg-screen">
-          <img src="/icon/header-settings.png">
+        <router-link to="/admin/vue/settings" v-if="userType == 'admin'" class="navbar-item setting-bg-screen ">
+          <img src="/icon/header-settings.png" >
         </router-link>
       </div>
     </div>
@@ -1288,7 +1289,7 @@ import menubar from './menu'
     .msg-num {
       margin-top: 10%;
     }
-
+    
     .follow-up-img {
       width: 15% !important;
       margin-top: -2% !important;
@@ -1455,6 +1456,7 @@ import menubar from './menu'
   .followUpDivs {
     display: none;
   }
+
 </style>
 
 <style>

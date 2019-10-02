@@ -43,6 +43,8 @@ import showProposal from './components/Proposal/showProposal.vue';
 import LeadData from './components/Leads/LeadData.vue';
 import showlead from './components/Leads/show-lead.vue';
 
+
+
 // settings
 import mainsettings from './components/settings/main-settings.vue'
 import settings from './components/settings/settings.vue'
@@ -186,6 +188,12 @@ import ShowProposal from './components/Proposal/show-proposal.vue'
 import EditProposal from './components/Proposal/edit-proposal.vue'
 import traffic from './components/traffic/traffic.vue'
 import trafficTasks from './components/trafficTasks/trafficTasks.vue'
+
+import test1 from './components/test1/test1.vue'
+import allitems from './components/items/allitems.vue'
+import update_item from './components/items/update_item.vue'
+
+
 
 
 
@@ -1608,7 +1616,32 @@ export const routes = [
             title: ' Traffic Tasks',
         }
     },
-  
- 
+    
+    {
+        path: '/admin/vue/test1',
+        name: 'test1',
+        component: test1,
+        meta: {
+            title: ' Test',
+        }
+    },
+ {
+    path: '/admin/vue/allitems',
+    name: 'allitems',
+    component: allitems,
+    meta: {
+        title: ' All Items',
+    }
+},
+
+{
+    path: '/admin/vue/update_item/:id',
+    name: 'update_item',
+    component: update_item,
+    meta: {
+        title: 'Update Item',
+    }
+},
+
 
 ];

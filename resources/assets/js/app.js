@@ -15,7 +15,8 @@ import 'vue-drag-tree/dist/vue-drag-tree.min.css'
 Vue.use(VueDragTree)
 import { routes } from './routes';
 window.Vue.use(VueRouter);
-import App from './components/App.vue'
+import App from './components/App.vue' 
+
 
 import { i18n } from './lang'
 
@@ -27,6 +28,8 @@ window.$ = $;
 import Buefy from 'buefy'
 window.Vue.use(Buefy)
 import { Datetime } from 'vue-datetime';
+import { FunctionalCalendar } from 'vue-functional-calendar';
+
 
 window.Vue.component('datetime', Datetime);
 
