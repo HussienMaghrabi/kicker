@@ -824,6 +824,14 @@ import menubar from './menu'
 </script>
 
 <style type="text/css" scoped="">
+.header-menu-icon, .header-menu-item, .fa-users, .fa-user, .menu-icon, .menu-div ul li a, .filter-title, .filter-title i, .unit-details-value, .unit-rooms-value, .footer-btns:hover
+{
+  color: #7e7286 !important;
+}
+nav.navbar
+{
+  border-bottom: 5px solid rgb(126, 114, 134);
+}
   #num {
     background-color: red;
     padding: 4px 7px;

@@ -30,13 +30,35 @@
     </div>
       
   </div>
-  <!-- <date-pick v-model="date"></date-pick> -->
-  <!-- <functional-calendar v-model="calendarData" :configs="calendarConfigs"></functional-calendar> -->
-  <!-- <datetime  v-model="date"></datetime> -->
+  <div class="dashboard_calender">
+     <v-calendar style="width:100%;height:100%" :attributes='attrs'></v-calendar>
+  
+  </div>
+ 
  
 </div>
 </template>
 <style >
+.vc-header[data-v-d137fa42]
+{
+  background-color: #7f7286;
+}
+.vc-title[data-v-d137fa42]
+{
+  color: white;
+padding: 2px;
+}
+.dashboard_calender
+{
+  width: 21%;
+    height: 300px;
+    /* margin: 2% 1% 0% 0%; */
+    display: inline-block;
+    border: 1px solid #ccc;
+    position: absolute;
+    right: 2%;
+    top: 1.8%;
+}
 .headerr
 {
   background-color: #ECECEC;
@@ -65,7 +87,7 @@
    width: 42%;
    height: 300px;
    background-color: white;
-   margin: 2%;
+   margin: 2% 2% 1%;
    display: inline-block;
    border: 1px solid #ccc;
 
@@ -106,17 +128,40 @@
    margin:1%;
    padding-top: 14%;
  }
+ @media screen and (max-width:414px)
+ {
+ .deals 
+ {
+   width: 81%;
+    height: 259px;
+    margin-left: 17%;
+ }
+ .dashboard_calender {
+    width: 83%;
+    height: 300px;
+    margin-left: 64px;
+    position: unset;
+ }
+ .activity
+{
+   width: 82%;
+   height: 300px;
+   background-color: white;
+   position: unset;
+    margin-left: 67px;
+}
+ }
 </style>
 <script>
 import Vue from 'vue'
-import Datetime from 'vue-datetime'
-import 'vue-datetime/dist/vue-datetime.css' 
-import DatePick from 'vue-date-pick';
-import 'vue-date-pick/dist/vueDatePick.css';
-Vue.component('datetime', Datetime);
- Vue.use(Datetime)
-//  Vue.use()
-// Introduced in vue file
+import VCalendar from 'v-calendar';
+Vue.use(VCalendar, {
+  firstDayOfWeek: 2,  
+              
+});
+import { setupCalendar, Calendar} from 'v-calendar'
+// import 'v-calendar/lib/v-calendar.min.css';
+Vue.component('v-calendar', Calendar);
 import FunctionalCalendar from 'vue-functional-calendar';
 Vue.use(FunctionalCalendar, {
     dayNames: ['Moa', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
@@ -124,22 +169,27 @@ Vue.use(FunctionalCalendar, {
     export default {
         data() {
             return {
+              selectedValue: new Date(),
                 activeTab: 0,
                 showBooks: false,
-                 date: '2019-01-01'
+                 date: '2019-01-01',
+                  attrs: [
+                           {
+                              key: 'today',
+                              highlight: {
+                                backgroundColor: 'red',
+                              },
+                              dates: new Date(2018, 0, 1)
+                            }
+                          ],
 
             }
         },
         components: {
         FunctionalCalendar,
-        DatePick
+        
     },
        
     }
-    Vue.extend({
-  
-  components: {
-    datetime: Datetime
-  }
-});
+    
 </script>

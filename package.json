@@ -39,6 +39,7 @@
     "luxon": "^1.19.3",
     "pusher-js": "^4.2.1",
     "sortablejs": "^1.8.0-rc1",
+    "v-calendar": "^1.0.0-beta.22",
     "vue-apexcharts": "^1.4.0",
     "vue-browser-geolocation": "^1.8.0",
     "vue-carousel": "^0.18.0",
