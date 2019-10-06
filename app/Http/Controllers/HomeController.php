@@ -371,20 +371,21 @@ class HomeController extends Controller {
 
     public function home() {
         // dd(session()->get('lang'));
-        if (\App\Setting::first()->maintenance) {
-            return Redirect::to('temp-Home')->send();
-        }
-        $search = $this->search_info();
-        $events = Event::orderBy('id', 'desc')->get();
-        $resale = DB::table('resale_units as unit')
-                            ->where('unit.type', 'personal')
-                            ->join('projects as project','unit.project_id','=','project.id')
-                            ->select('unit.*','project.en_name as project_en_name','project.ar_name as project_ar_name')
-                            ->paginate(6);
-        $resaleCount = DB::table('resale_units')
-                            ->where('type', 'personal')
-                            ->count();
-        return view('website.home', compact('search', 'events', 'resale','resaleCount'));
+        return redirect('/admin');
+        // if (\App\Setting::first()->maintenance) {
+        //     return Redirect::to('temp-Home')->send();
+        // }
+        // $search = $this->search_info();
+        // $events = Event::orderBy('id', 'desc')->get();
+        // $resale = DB::table('resale_units as unit')
+        //                     ->where('unit.type', 'personal')
+        //                     ->join('projects as project','unit.project_id','=','project.id')
+        //                     ->select('unit.*','project.en_name as project_en_name','project.ar_name as project_ar_name')
+        //                     ->paginate(6);
+        // $resaleCount = DB::table('resale_units')
+        //                     ->where('type', 'personal')
+        //                     ->count();
+        // return view('website.home', compact('search', 'events', 'resale','resaleCount'));
     }
 
     public function search(Request $request) {

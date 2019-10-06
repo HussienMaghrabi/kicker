@@ -84,4 +84,11 @@ class ContactController extends Controller
         session()->flash('success', trans('admin.deleted'));
         return back();
     }
+    public function getAllContactPerson($id){
+        $allContactPerson=Contact::where('company_id',$id)->get();
+        return response()->json([
+             'status'=>'success',
+             'data'=>$allContactPerson
+        ]);
+    }
 }

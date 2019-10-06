@@ -113,7 +113,9 @@
 
                 <b-button type="is-info" @click="openModal">
                     New Income
-                     <b-modal :active.sync="isComponentModalActive" has-modal-card>
+                </b-button>
+
+                  <b-modal :active.sync="isComponentModalActive" has-modal-card>
                           <div class="modal-card">
                             <header class="modal-card-head">
                                <p class="modal-card-title">Add New Income</p>
@@ -195,7 +197,7 @@
                             </footer>
                 </div>
                </b-modal>
-            </b-button>
+
             </b-tab-item>
 
             <!-- End Income -->
@@ -268,7 +270,9 @@
         
                     <b-button type="is-info" @click="openModal">
                         New Outcome
-                      <b-modal :active.sync="isComponentModalActive" has-modal-card>
+                    </b-button>
+
+                    <b-modal :active.sync="isComponentModalActive" has-modal-card>
                           <div class="modal-card">
                             <header class="modal-card-head">
                                <p class="modal-card-title">Add New Outcome</p>
@@ -357,7 +361,6 @@
                             </footer>
                 </div>
                </b-modal>
-              </b-button>
 
             </b-tab-item>
 

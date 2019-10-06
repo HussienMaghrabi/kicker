@@ -239,9 +239,9 @@ const ModalForm = {
                 selectedagent_type: [],
                 token: window.auth_user.csrf,
                 userType: window.auth_user.type,
-               paginationPosition: 'bottom',
-               currentPage: 1,
-               isComponentModalActive: false,           
+                paginationPosition: 'bottom',
+                currentPage: 1,
+                isComponentModalActive: false,           
             }},
     mounted() {
         this.getData()

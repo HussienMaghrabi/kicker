@@ -159,13 +159,14 @@
         class="planet"
         v-on:dblclick="openHelp"
         @contextmenu.prevent="$refs.menu.open($event, { foo: 'bar' })"
-        style="width:50px;height:50px;display:block"
-        >
+        style="width:50px;height:50px;">
+      <img class="rotate" style="width:100%;height:100%;" src="/images/football-no-background.png"/>
+         
       </div>
-      <div class="gravity">
+      <!-- <div class="gravity">
         <div v-if="user.assistant == 0" id="satellite" class="satellite" @click="openReminder"></div>
         <div v-else style="display:none" id="satellite" class="satellite" @click="openReminder"></div>
-      </div>
+      </div> -->
     </div>
 
     <!-- add lead model -->
@@ -1606,7 +1607,7 @@ display: none !important;
   /* left: 49%; */
   margin-top: -40px;
   margin-left: -40px;
-  border: 20px solid #da224a;
+  
 }
 
 .gravity {
@@ -1659,6 +1660,18 @@ display: none !important;
   position: absolute;
   top: 7%;
   left: 37%;
+}
+.rotate {
+  animation: rotation 4s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }
 
 @keyframes circle {

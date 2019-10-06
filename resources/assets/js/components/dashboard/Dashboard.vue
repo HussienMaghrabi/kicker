@@ -226,8 +226,12 @@
                     <teamCalendarSection/>
 
                   </div>
+
                 </div>
+
               </b-collapse>
+                                      <img src="/images/Screen Shot2019-09-04 at6.37.55PM.png" />
+
             </div>
           </div>
         </div>
@@ -277,6 +281,7 @@ import ProjectSection from "./components/ProjectSection";
 import CallByCallSection from "./components/CallByCallSection";
 import AchievementsSection from "./components/AchievementsSection";
 import TeamAchievementsSection from "./components/TeamAchievementsSection";
+
 
 import FollowUp from "./components/FollowUp";
 import Assistant from "./components/Assistant";
@@ -556,7 +561,7 @@ export default {
     Multiselect,
     Assistant,
     teamCalendarSection,
-    yourCalendarSection
+    yourCalendarSection,
   },
   computed: {
     format() {

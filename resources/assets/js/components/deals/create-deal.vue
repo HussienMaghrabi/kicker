@@ -89,8 +89,12 @@
                 <div class="columns column is-12" style="margin: 0; ">
                     <b-field class="field-box column is-6" label="Agent" type="" message=""
                         style="flex:unset !important">
-                        <b-input class='disable-input' v-model="closed_deal_prop.user_name" type="input" >
-                        </b-input>
+                        <!-- <b-input class='disable-input' v-model="closed_deal_prop.user_name" type="input" >
+                        </b-input> -->
+                        <b-select placeholder="Select Agent" expanded required v-model="form_input.other_agent[index]">
+                            <option v-for="agent in allAgents" :key="agent.id" :value="agent.id">
+                                {{agent.name}}</option>
+                        </b-select>
                     </b-field>
                     <b-field class="field-box column is-6 has-add" style="flex:unset !important"
                         label="Agent Commission" type="" message="">

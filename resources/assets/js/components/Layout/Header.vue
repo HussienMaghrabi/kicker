@@ -20,7 +20,7 @@
             <button class="button header-menu-icon" slot="trigger" style="border: unset;">
               <i class="fas fa-bars" style="font-size: 1.25rem; margin-left: 1rem;"></i>
             </button>
-            <div v-if="userType == 'admin'">
+            <div>
                 <b-dropdown-item :custom="true" aria-role="listitem" class="header-menu-item-hover m-2">
                   <div>
                     <p>
@@ -31,7 +31,7 @@
 
                   <div id="lead-drop-menu" style="">
                     <router-link  class="navbar-item is-child" 
-                                  to="/admin/vue/leads"
+                                  to="/admin/vue/Leads"
                     >All Leads</router-link>
                     <hr style="padding: 0px; margin: 8px 0px;">
       
@@ -63,16 +63,7 @@
                     <!-- <a @click="redirectRoute(6)" class="navbar-item is-child">Requests Broadcast</a> -->
                   </div>
                 </b-dropdown-item>
-                <hr style="padding: 0px; margin: 8px 0px;">
 
-                <b-dropdown-item :custom="true" aria-role="listitem" class="header-menu-item-hover">
-                  <div>
-                    <p>
-                      <img src="/icon/header-inventory.png">
-                      <a @mouseover="openInventoryMenu" class="header-menu-item has-child">Inventory</a>
-                    </p>
-                  </div>
-                </b-dropdown-item>
                 <hr style="padding: 0px; margin: 8px 0px;">
                 <div id="inventory-drop-menu">
                   <router-link class="navbar-item is-child"
@@ -125,8 +116,30 @@
                   <b-dropdown-item aria-role="listitem">
                     <p>
                       <img src="/icon/header-proposals.png">
-                      <router-link to="/admin/vue/proposals" @mouseover="resethover" class="header-menu-item">
+                      <router-link to="/admin/vue/allProposals" @mouseover="resethover" class="header-menu-item">
                           Proposals
+                      </router-link>
+                    </p>
+                  </b-dropdown-item>
+                  <hr style="padding: 0px; margin: 8px 0px;">
+                </div>
+                  <div>
+                  <b-dropdown-item aria-role="listitem">
+                    <p>
+                      <img src="/icon/header-proposals.png">
+                      <router-link to="/admin/vue/allContract" @mouseover="resethover" class="header-menu-item">
+                          Contracts
+                      </router-link>
+                    </p>
+                  </b-dropdown-item>
+                  <hr style="padding: 0px; margin: 8px 0px;">
+                </div>
+                   <div>
+                  <b-dropdown-item aria-role="listitem">
+                    <p>
+                      <img src="/icon/header-proposals.png">
+                      <router-link to="/admin/vue/allInvoices" @mouseover="resethover" class="header-menu-item">
+                          Invoices
                       </router-link>
                     </p>
                   </b-dropdown-item>
@@ -162,6 +175,14 @@
                     </div>
                   </b-dropdown-item>
                   <hr style="padding: 0px; margin: 8px 0px;">
+                  <b-dropdown-item aria-role="listitem">
+                    <p>
+                      <img src="/icon/header-closed-deals.png">
+                      <router-link to="/admin/vue/traffic" @mouseover="resethover" class="header-menu-item" >
+                          Traffic
+                      </router-link>
+                    </p>
+                  </b-dropdown-item>
                 </div>
                 <div id="hr-drop-menu">
               
@@ -216,296 +237,15 @@
             </div>
             <!-- End admin vue menu -->
             <!-- start custome role vue menu -->
-            <div v-else>
-                <b-dropdown-item :custom="true" aria-role="listitem" class="header-menu-item-hover m-2">
-                  <div v-if="permArray.add_leads == 1
-                              || permArray.switch_leads == 1
-                              || permArray.edit_leads == 1
-                              || permArray.show_all_leads == 1
-                              || permArray.send_cil == 1
-                              || permArray.calls == 1
-                              || permArray.meetings == 1
-                              || permArray.requests == 1
-                              ">
-                    <p>
-                      <img src="/icon/header-lead.png">
-                      <a @mouseover="openLeadMenu" class="header-menu-item has-child">Lead</a>
-                    </p>
-                  </div>
-
-                  <div id="lead-drop-menu" style="">
-                    <router-link  class="navbar-item is-child" 
-                                  to="/admin/vue/leads"
-                                  v-if="permArray.add_leads == 1
-                                  || permArray.switch_leads == 1
-                                  || permArray.edit_leads == 1
-                                  || permArray.show_all_leads == 1
-                                  || permArray.send_cil == 1
-                                  "
-                    >All Leads</router-link>
-                    <hr v-if="permArray.add_leads == 1
-                                  || permArray.switch_leads == 1
-                                  || permArray.edit_leads == 1
-                                  || permArray.show_all_leads == 1
-                                  || permArray.send_cil == 1
-                                  " style="padding: 0px; margin: 8px 0px;">
-      
-                    <!-- <a @click="redirectRoute(2)" class="navbar-item" v-if="permArray.calls == 1 ">Calls</a> -->
-
-                  <router-link class="navbar-item is-child"
-                                to="/admin/vue/AllMeeting"
-                                v-if="permArray.meetings == 1 
-                                "
-
-                  > Meetings</router-link>
-
-                    <!-- <a @click="redirectRoute(3)" class="navbar-item is-child"
-                      v-if="permArray.meetings == 1 ">Meetings</a> -->
-
-
-                    <hr v-if="permArray.meetings == 1 " style="padding: 0px; margin: 8px 0px;">
-
-                    <router-link  class="navbar-item is-child"
-                                    to="/admin/vue/AllRequests"
-                                      v-if="permArray.requests == 1
-                                      "
-                    
-                    > Requests </router-link>
-                    <!--                 
-                    <a @click="redirectRoute(4)" class="navbar-item is-child"
-                      v-if="permArray.requests == 1 ">Requests</a> -->
-
-                    <hr v-if="permArray.requests == 1 " style="padding: 0px; margin: 8px 0px;">
-
-                  
-
-                    <!-- <a @click="redirectRoute(5)" class="navbar-item is-child">Events</a> -->
-                    <!-- <hr style="padding: 0px; margin: 8px 0px;"> -->
-                    <!-- <a @click="redirectRoute(6)" class="navbar-item is-child">Requests Broadcast</a> -->
-                  </div>
-                </b-dropdown-item>
-                <hr style="padding: 0px; margin: 8px 0px;">
-
-                <b-dropdown-item :custom="true" aria-role="listitem" class="header-menu-item-hover">
-                  <div v-if="permArray.add_developers == 1
-                              || permArray.edit_developers == 1
-                              || permArray.delete_developers == 1
-                              || permArray.show_developers == 1
-                              || permArray.add_projects == 1
-                              || permArray.edit_projects == 1
-                              || permArray.delete_projects == 1
-                              || permArray.show_projects == 1
-                              || permArray.add_phases == 1
-                              || permArray.edit_phases == 1
-                              || permArray.delete_phases == 1
-                              || permArray.show_phases == 1
-                              || permArray.add_properties == 1
-                              || permArray.edit_properties == 1
-                              || permArray.delete_properties == 1
-                              || permArray.show_properties == 1
-                              || permArray.add_resale_units == 1
-                              || permArray.edit_resale_units == 1
-                              || permArray.delete_resale_units == 1
-                              || permArray.show_resale_units == 1
-                              || permArray.add_rental_units == 1
-                              || permArray.edit_rental_units == 1
-                              || permArray.delete_rental_units == 1
-                              || permArray.show_rental_units == 1
-                              || permArray.add_lands == 1
-                              || permArray.edit_lands == 1
-                              || permArray.delete_lands == 1
-                              || permArray.show_lands == 1
-                              ">
-                    <p>
-                      <img src="/icon/header-inventory.png">
-                      <a @mouseover="openInventoryMenu" class="header-menu-item has-child">Inventory</a>
-                    </p>
-                  </div>
-                </b-dropdown-item>
-                <hr style="padding: 0px; margin: 8px 0px;">
-                <div id="inventory-drop-menu">
-                  <router-link class="navbar-item is-child"
-                                    to="/admin/vue/developers"
-                                    v-if="permArray.add_developers == 1
-                                  || permArray.edit_developers == 1
-                                  || permArray.delete_developers == 1
-                                  || permArray.show_developers == 1
-                                  ">
-                              Developers
-                  </router-link>
-                  <hr v-if="permArray.add_developers == 1
-                                  || permArray.edit_developers == 1
-                                  || permArray.delete_developers == 1
-                                  || permArray.show_developers == 1
-                                  " style="padding: 0px; margin: 8px 0px;">
-                  <router-link to="/admin/vue/projects" class="navbar-item is-child" v-if="permArray.add_projects == 1
-                                  || permArray.edit_projects == 1
-                                  || permArray.delete_projects == 1
-                                  || permArray.show_projects == 1
-                                  ">
-                      Projects
-                  </router-link>
-                  <hr v-if="permArray.add_projects == 1
-                                  || permArray.edit_projects == 1
-                                  || permArray.delete_projects == 1
-                                  || permArray.show_projects == 1
-                                  " style="padding: 0px; margin: 8px 0px;">
-                  <router-link  class="navbar-item is-child" 
-                                  to="/admin/vue/resale_units"
-                                  v-if="permArray.add_resale_units == 1
-                                  || permArray.edit_resale_units == 1
-                                  || permArray.delete_resale_units == 1
-                                  || permArray.show_resale_units == 1
-                                  "
-                    >Resale Units</router-link>                              
-                  <hr v-if="permArray.add_resale_units == 1
-                                  || permArray.edit_resale_units == 1
-                                  || permArray.delete_resale_units == 1
-                                  || permArray.show_resale_units == 1
-                                  " style="padding: 0px; margin: 8px 0px;">
-                  <router-link  class="navbar-item is-child" 
-                                  to="/admin/vue/resale_units"
-                                  v-if="permArray.add_rental_units == 1
-                                  || permArray.edit_rental_units == 1
-                                  || permArray.delete_rental_units == 1
-                                  || permArray.show_rental_units == 1
-                                  "
-                    >Rental Units</router-link>  
-                </div>
-                <div v-if="permArray.marketing == 1 ">
-                    <b-dropdown-item :custom="true" aria-role="listitem">
-                      <div v-if="permArray.marketing == 1
-                                  ">
-                        <p>
-                          <img src="/icon/header-marketing.png">
-                          <a @mouseover="openMarketingMenu" class="header-menu-item has-child">Marketing</a>
-                        </p>
-                      </div>
-                    </b-dropdown-item>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                </div>
-                <div id="marketing-drop-menu">
-                  <!-- <a @click="redirectRoute(12)" class="navbar-item is-child">Campaigns</a> -->
-                  <router-link class="navbar-item is-child" 
-                                to="/admin/vue/AllCampaigns"
-                  > Campaigns </router-link>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-
-                  <router-link class="navbar-item is-child" 
-                                to="/admin/vue/Campaign_Type"
-                  > Campaigns Types</router-link>
-                  
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <router-link class="navbar-item is-child"
-                              to="/admin/vue/forms"
-                      
-                  > Forms</router-link>
-                  <!-- <a @click="redirectRoute(16)" class="navbar-item is-child">Forms</a> -->
-                </div>
-                <div v-if="permArray.proposals == 1 ">
-                  <b-dropdown-item aria-role="listitem">
-                    <p>
-                      <img src="/icon/header-proposals.png">
-                      <router-link to="/admin/vue/proposals" @mouseover="resethover" class="header-menu-item" v-if="permArray.proposals == 1
-                                 ">
-                          Proposals
-                      </router-link>
-                    </p>
-                  </b-dropdown-item>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                </div>
-                <div v-if="permArray.deals == 1 ">
-                  <b-dropdown-item aria-role="listitem">
-                    <p>
-                      <img src="/icon/header-closed-deals.png">
-                      <router-link to="/admin/vue/deals" @mouseover="resethover" class="header-menu-item" v-if="permArray.deals == 1
-                                ">
-                          Closed Deals
-                      </router-link>
-                    </p>
-                  </b-dropdown-item>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                </div>
-                <div v-if="permArray.finance == 1 ">
-                  <b-dropdown-item aria-role="listitem">
-                    <p>
-                      <img src="/icon/header-finances.png">
-                      <router-link class="header-menu-item" to="/admin/vue/FinalFinance" v-if="permArray.finance == 1 ">Finances</router-link>
-                    </p>
-                    <hr style="padding: 0px; margin: 8px 0px;">
-                  </b-dropdown-item>
-                </div>
-                <div v-if="userHr == 1 ">
-                  <b-dropdown-item :custom="true" aria-role="listitem">
-                    <div v-if="userHr == 1 ">
-                      <p>
-                        <img src="/icon/header-hr.png">
-                        <a @mouseover="openHRMenu" class="header-menu-item has-child">HR</a>
-                      </p>
-                    </div>
-                  </b-dropdown-item>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                </div>
-                <div id="hr-drop-menu">
-              
-                  <!-- <a @click="redirectRoute(20)" class="navbar-item is-child">Job Categories</a> -->
-                  <router-link to="/admin/vue/jobCategories" class="navbar-item is-child">Job Categories</router-link>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <!-- <a @click="redirectRoute(21)" class="navbar-item is-child">Job Titles</a> -->
-                  <router-link to="/admin/vue/jobTitle" class="navbar-item is-child">Job Titles</router-link>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <!-- <a @click="redirectRoute(22)" class="navbar-item is-child">Vacancies</a> -->
-                  <router-link to="/admin/vue/vacancy" class="navbar-item is-child">Vacancies</router-link>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <!-- <a @click="redirectRoute(23)" class="navbar-item is-child">Applications</a> -->
-                  <router-link to="/admin/vue/application" class="navbar-item is-child">Applications</router-link>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <!-- <a @click="redirectRoute(24)" class="navbar-item is-child">Employees</a> -->
-                  <router-link to="/admin/vue/employees" class="navbar-item is-child">Employees</router-link>              
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <!-- <a @click="redirectRoute(25)" class="navbar-item is-child">Salaries</a> -->
-                  <router-link to="/admin/vue/salaries" class="navbar-item is-child">Salaries</router-link>              
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <!-- <a @click="redirectRoute(26)" class="navbar-item is-child">Salaries Details</a> -->
-                  <router-link to="/admin/vue/salariesDetails" class="navbar-item is-child">Salaries Details</router-link>              
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <!-- <a @click="redirectRoute(27)" class="navbar-item is-child">Rules Of Procedure</a> -->
-                  <router-link to="/admin/vue/ruleOfProcedure" class="navbar-item is-child">Rules Of Procedure</router-link>              
-                </div>
-                <div v-if="permArray.reports == 1 ">
-                  <b-dropdown-item aria-role="listitem">
-                    <p>
-                      <img src="/icon/header-reports.png">
-                      <!-- <a @mouseover="resethover" class="header-menu-item" 
-                      >Reports</a> -->
-                                <router-link to="/admin/vue/Reports" class="header-menu-item" v-if="permArray.reports == 1 ">Reports </router-link>
-                    </p>
-                  </b-dropdown-item>
-                </div>
-                <b-dropdown-item aria-role="listitem">
-                  <a v-if="locale == 'ar'" @click="redirectRoute(31)" class="navbar-item lang-bg-screen"
-                    style="display: block !important; margin-right: 11rem;">
-                    <!-- <i class="fa fa-globe"></i>
-                <span id="num" class="label label-danger" style="font-size: 0.5em">en</span> -->
-                    <img src="/icon/header-en.png">
-                  </a>
-                  <a v-else @click="redirectRoute(32)" style="display: block !important; margin-right: 11rem;"
-                    class="navbar-item lang-bg-screen">
-                    <!-- <i class="fa fa-globe"></i>
-                <span id="num" class="label label-danger" style="font-size: 0.5em">ar</span> -->
-                    <img src="/icon/header-ar.png">
-                  </a>
-                </b-dropdown-item>
-            </div>
           </b-dropdown>
           <router-link class="navbar-item followUpDivs" id="followUpDiv" style="width: 6rem !important; font-weight: 700"
             to="/admin/vue/followUp" v-if="userType == 'admin' || userType == 'agent'">
             <i class="fas fa-user" style="font-size: 1.35rem; margin-left: 0.9rem;margin-top:.5vw"></i>
-            <div v-if="pendingTodayTodo > 0" style="cursor: pointer; position: relative; top: -0.5rem;">
+            <!-- <div v-if="pendingTodayTodo > 0" style="cursor: pointer; position: relative; top: -0.5rem;">
               <img class="follow-up-img" src="/icon/followupLoading.gif" style="width: 80%;">
               <span class="follow-up-num"
                 style="position: absolute; top: 9%; right: 50%; font-size: 1.05rem; color: #8f9194;">{{ pendingTodayTodo }}</span>
-            </div>
+            </div> -->
           </router-link>
   
           <div class="navbar-item team-follow followUpDivs" @click="redirectRoute(35)"
@@ -524,11 +264,11 @@
             <div class="navbar-item" id="followUpDiv" style="width: 9rem; font-weight: 700"
             v-if="userType == 'admin' || userType == 'agent'">
                <a class="navbar-item" style="padding: 0px">Follow Up</a>
-               <div v-if="pendingTodayTodo > 0" style="cursor: pointer; position: relative; top: -0.5rem;">
+               <!-- <div v-if="pendingTodayTodo > 0" style="cursor: pointer; position: relative; top: -0.5rem;">
                 <img class="follow-up-img" src="/icon/followupLoading.gif" style="width: 80%;">
                 <span class="follow-up-num"
                   style="position: absolute; top: 9%; right: 50%; font-size: 1.05rem; color: #8f9194;">{{ pendingTodayTodo }}</span>
-               </div>
+               </div> -->
             </div>
           </router-link>
 
@@ -578,12 +318,6 @@
 
       <div id="navMenu" class="navbar-end">
   
-        <router-link v-if="userType == 'admin'" to="/admin/vue/cils" class="navbar-item message-div">
-        <!-- <router-link v-if="userType == 'admin'" to="#" class="navbar-item message-div"> -->
-          <img @click="clearCountCil" src="/icon/header-message.png">
-          <span v-if="numOfCil > 0" class="label label-danger msg-num" id="num">{{numOfCil}}</span>
-        </router-link>
-
         <!-- <a v-if="locale == 'ar'" href="/admin/language/en" class="navbar-item">
                       <i class="fa fa-envelope"></i>
                       <span class="label label-danger"style="font-size: 0.5em">10</span>
@@ -591,9 +325,9 @@
           <b-dropdown aria-role="menu" class="web_menu" ref="_dropmenu">
             <button @click="ChangeStatusNotification" class="button header-menu-icon" slot="trigger" style="border: unset;">
               <img src="/icon/header-bill.png">
-              <span class="label label-danger" v-if="numOfNotifications > 0" id="num">{{ numOfNotifications }}</span>
+              <!-- <span class="label label-danger" v-if="numOfNotifications > 0" id="num">{{ numOfNotifications }}</span> -->
             </button>
-            <b-dropdown-item id="notifications" class="notifications" style="height: 347px; overflow: scroll;" >
+            <!-- <b-dropdown-item id="notifications" class="notifications" style="height: 347px; overflow: scroll;" >
               <div v-for="notification in notifications" :key="notification.id" v-if="notification.status == 0" style="background-color:#edf2fa">
                 <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'lead'" class="navbar-item notification"
                   v-bind:url="'/admin/vue/showleadDetals/' + notification.id" v-bind:href="'/admin/vue/showleadDetals/' + notification.id">
@@ -622,51 +356,8 @@
                   <br>
                   <span class="date">{{notification.diff}}</span>
                 </a>
-                <!-- <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'cil' " class="navbar-item notification">
-                  <img v-bind:src="'/images/'+ notification.icon">
-                  {{notification.title}}
-                  <br>
-                  <span class="date">{{notification.diff}}</span>
-                </a> -->
-              <hr class="navbar-divider">
             </div>
-            <div v-for="notification in notifications" :key="notification.id" v-if="notification.status == 1" style="background-color:#FFF !important">
-              <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'lead'" class="navbar-item notification"
-                v-bind:url="'/admin/vue/showleadDetals/' + notification.id" v-bind:href="'/admin/vue/showleadDetals/' + notification.id">
-                <img v-bind:src="'/images/'+ notification.icon">
-                {{notification.title}}
-                <br>
-                <span class="date">{{notification.diff}}</span>
-              </a>
-              <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'lead'" class="navbar-item notification"
-                v-bind:url="'/admin/vue/showleadDetals/' + notification.id" v-bind:href="'/admin/vue/showleadDetals/' + notification.id">
-                <img v-bind:src="'/images/'+ notification.icon">
-                {{notification.title}}
-                <br>
-                <span class="date">{{notification.diff}}</span>
-              </a>
-              <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'meeting' " class="navbar-item notification"
-                v-bind:url="'/admin/vue/Allmeetings/'" v-bind:href="'/admin/vue/Allmentngs/'">
-                <img v-bind:src="'/images/'+ notification.icon">
-                {{notification.title}}
-                <br>
-                <span class="date">{{notification.diff}}</span>
-              </a>
-              <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'call' " class="navbar-item notification">
-                <img v-bind:src="'/images/'+ notification.icon">
-                {{notification.title}}
-                <br>
-                <span class="date">{{notification.diff}}</span>
-              </a>
-              <!-- <a @click="changeStatus(notification.notiy_id)" v-if="notification.type == 'cil' " class="navbar-item notification">
-                <img v-bind:src="'/images/'+ notification.icon">
-                {{notification.title}}
-                <br>
-                <span class="date">{{notification.diff}}</span>
-              </a> -->
-              <hr class="navbar-divider">
-            </div>
-            </b-dropdown-item>
+            </b-dropdown-item> -->
           </b-dropdown>
         <a v-if="locale == 'ar'" @click="redirectRoute(31)" class="navbar-item lang-sm-screen"
           style="margin-right: 11rem;">
@@ -703,7 +394,7 @@ import menubar from './menu'
   import {
     checkUserGroupAndRoles,
     getNotifications,
-    pendingTodayTodos,
+    // pendingTodayTodos,
     notification_status,
     ChangeAllNotification,
     clearNumCil
@@ -714,7 +405,6 @@ import menubar from './menu'
       return {
         name: window.auth_user.name,
         id: window.auth_user.id,
-        numOfCil: window.auth_user.numOfCil,
         agentType: window.auth_user.agentType,
         token: window.auth_user.token,
         locale: window.auth_user.locale,
@@ -741,8 +431,8 @@ import menubar from './menu'
     // },
     mounted() {
       this.checkUserHasGroup();
-      this.pendingTodayTodos();
-      setInterval(this.pendingTodayTodos, 120000);
+      // this.pendingTodayTodos();
+      // setInterval(this.pendingTodayTodos, 120000);
       this.followUpAgentDesign();
     },
     components:{
@@ -766,22 +456,15 @@ import menubar from './menu'
         })
         console.log('status')
       },
-      clearCountCil(){
-        clearNumCil().then(response=>{
-          this.numOfCil = response.data
-        }).catch(error=>{
-          console.log(error)
-        })
-      },
-      pendingTodayTodos() {
-        pendingTodayTodos()
-          .then(response => {
-            this.pendingTodayTodo = response.data;
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      },
+      // pendingTodayTodos() {
+      //   pendingTodayTodos()
+      //     .then(response => {
+      //       this.pendingTodayTodo = response.data;
+      //     })
+      //     .catch(error => {
+      //       console.log(error);
+      //     });
+      // },
       getNotificationsFun() {
         // console.log('time',this.dateFormatter())
         getNotifications({
