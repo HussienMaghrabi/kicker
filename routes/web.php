@@ -399,8 +399,8 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('getOrder','DashboardController@getOrder');
 
     // get cities and contries
-    Route::get('getCountries','CountryController@returnapi');
-    Route::get('getcities','CityController@index');
+    Route::get('getCountries','CountryController@getAllCountries');
+    Route::get('getcities','CityController@getAllCities');
 
     Route::post('count_notify','AjaxController@count_notify');
     Route::post('send_notify','AjaxController@send_notify');
