@@ -15,7 +15,7 @@
               </button>
               <div
                 id="reportrange"
-                style="background: #9e6900; color:white; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; min-width: 300px;"
+              style="background: #9e6900; color:white; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; min-width: 300px;"
               >
                 <i class="fa fa-caret-down"></i>
                 <date-picker v-model="time3" lang="en" range></date-picker>
