@@ -38,6 +38,10 @@ use OneSignal;
 
 class AjaxController extends Controller
 {
+    public function testAgax(Request $request)
+    {
+        return $request->all();
+    }
     public function get_cities(Request $request)
     {
         $id = $request->id;

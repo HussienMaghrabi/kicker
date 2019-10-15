@@ -197,6 +197,7 @@ import traffic from './components/traffic/traffic.vue'
 import trafficTasks from './components/trafficTasks/trafficTasks.vue'
 import newCompany from './components/newCompany/newCompany.vue'
 import showCompany from './components/showCompany/showCompany.vue'
+import testvue from './components/test.vue'
 
 
 
@@ -1693,6 +1694,14 @@ export const routes = [
         component: showCompany,
         meta: {
             title: ' Show Company',
+        }
+    },
+    {
+        path: '/admin/vue/TestVue',
+        name: 'test',
+        component: testvue,
+        meta: {
+            title: 'Test AAA',
         }
     },
  

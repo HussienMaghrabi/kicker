@@ -448,6 +448,9 @@ export const GetEmployeeRequests = (page) => {
 export const GetAllVacatonType = () => {
     return axios.get('/admin/GetAllVacatonType')
 }
+export const Testagajx = (data) => {
+    return axios.post('/admin/testagax',data)
+}
 // get All Vacation type
 export const addNewNational = (bodyFormData) => {
     return axios.post('/admin/addNewNational',bodyFormData)

@@ -56,7 +56,7 @@ Route::group(['prefix' => adminPath().'/vue', 'middleware' => ['admin']], functi
 
 Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], function () {
     
-        
+    Route::post('testagax','AjaxController@testAgax');
     Route::get('getAllProjects','ProjectController@getAllProjects');
     Route::get('getAllevents','EventController@getAllevents');
     Route::get('getAllcampaigns','CampaignController@getAllcampaigns');
