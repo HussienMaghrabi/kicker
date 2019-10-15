@@ -87,7 +87,6 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         // return $request->all();
         $rules = [
             'en_first_name' => 'required',
@@ -154,14 +153,14 @@ class EmployeeController extends Controller
                 if ('admin' == $request->type) {
                     $employee->is_hr = 1;
                 }
-                $hr_setting_anuual = HrSetting::where('name', '=', 'annual_vacation')->first();
-                if($hr_setting_anuual){
-                    $employee->annual_vacations = $hr_setting_anuual->value;
-                }
-                $hr_setting_unscheduled = HrSetting::where('name', '=', 'unscheduled_vacation')->first();
-                if($hr_setting_unscheduled){
-                    $employee->unscheduled_vacation = $hr_setting_unscheduled->value;                
-                }
+                // $hr_setting_anuual = HrSetting::where('name', '=', 'annual_vacation')->first();
+                // if($hr_setting_anuual){
+                //     $employee->annual_vacations = $hr_setting_anuual->value;
+                // }
+                // $hr_setting_unscheduled = HrSetting::where('name', '=', 'unscheduled_vacation')->first();
+                // if($hr_setting_unscheduled){
+                //     $employee->unscheduled_vacation = $hr_setting_unscheduled->value;
+                // }
                 $employee->save();
 
                 if ($file = $request->file('profile_photo')) {

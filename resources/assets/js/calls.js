@@ -455,9 +455,13 @@ export const Testagajx = (data) => {
 export const addNewNational = (bodyFormData) => {
     return axios.post('/admin/addNewNational',bodyFormData)
 }
-// get All National vacation
+// get All National vacation get limit
 export const GetVacationOfNational = () => {
     return axios.get('/admin/GetVacationOfNational')
+}
+// get All National vacation get All
+export const GetAllNationalVacation = () => {
+    return axios.get('/admin/GetAllNationalVacation')
 }
 // edit National vacation
 export const getSingleNVacation = (VID) => {
@@ -482,6 +486,11 @@ export const UpdateGroosSalary = (bodyFormData) => {
 // Get All  gross slaray
 export const GrossEmployeeSalary = () => {
     return axios.get('/admin/GrossEmployeeSalary',)
+}
+
+// Get All  Employee deductions
+export const getAlldeduction = () => {
+    return axios.get('/admin/getAlldeduction',)
 }
 // store employee Deduction slaray
 export const employeeDeductionUpdate = (bodyFormData) => {

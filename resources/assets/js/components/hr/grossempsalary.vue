@@ -17,7 +17,46 @@
                 <section class="container tasks">
                     <div class="columns padding">
                         <div class="column is-12">
-                            <b-table>
+                            <b-table
+                                :data="EmployeesSalary"
+                                :paginated="isPaginated"
+                                :per-page="perPage"
+                                :current-page.sync="currentPage"
+                                :pagination-simple="isPaginationSimple"
+                                :pagination-position="paginationPosition"
+                                :default-sort-direction="defaultSortDirection"
+                                default-sort="user.first_name"
+                                aria-next-label="Next page"
+                                aria-previous-label="Previous page"
+                                aria-page-label="Page"
+                                aria-current-label="Current page">
+
+                                <template slot-scope="props">
+                                    <b-table-column field="EmployeesSalary.id" label="ID" width="40" sortable numeric>
+                                        {{ props.row.id }}
+                                    </b-table-column>
+                                    <b-table-column field="EmployeesSalary.en_first_name" label="First name" width="40" sortable>
+                                        {{ props.row.en_first_name }}
+                                    </b-table-column>
+                                    <b-table-column field="EmployeesSalary.en_last_name" label="Last name" width="40" sortable>
+                                        {{ props.row.en_last_name }}
+                                    </b-table-column>
+                                    <b-table-column field="EmployeesSalary.salary" label="Salary" width="40" sortable>
+                                        {{ props.row.salary }}
+                                    </b-table-column>
+                                    <b-table-column field="EmployeesSalary.allowanes" label="Allowanes" width="40" sortable>
+                                        {{ props.row.allowanes }}
+                                    </b-table-column>
+                                    <b-table-column field="EmployeesSalary.details" label="Details" width="40" sortable>
+                                        {{ props.row.details }}
+                                    </b-table-column>
+                                    <b-table-column field="EmployeesSalary.order_by" label="Order By" width="40" sortable>
+                                        {{ props.row.order_by }}
+                                    </b-table-column>
+                                    <b-table-column field="EmployeesSalary.date" label="Date" width="40" sortable>
+                                        {{ props.row.date }}
+                                    </b-table-column>
+                                </template>
                             </b-table>
                         </div>
                     </div>
@@ -41,12 +80,21 @@ export default {
             isFullPage:true,
             isLoading:true,
             EmployeesSalary:[],
+            isPaginated: true,
+            isPaginationSimple: false,
+            showDetailIcon: true,
+            defaultSortDirection: 'desc',
+            IconsCurrentNumber: null,
+            perPage:20,
+            ActiveModal:false,
+            isLoading:true,
         }
     },
     methods:{
         getData(){
             GrossEmployeeSalary().then(response=>{
                 this.EmployeesSalary = response.data
+                console.log(this.EmployeesSalary)
                 this.isLoading = false
             }).catch(error=>{
                 console.log(error)
