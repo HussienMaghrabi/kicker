@@ -61,19 +61,29 @@ class LeadsController extends Controller
         // }
 
         if ($saved) {
-            $address = array(
-                    'street' => $request->street,
-                    'state' => $request->state,
-                    'country_id' => $request->country_id,
-                    'zip_code' => $request->zip_code,
-                    'city_id' => $request->id_city,
-                    'company_id' => $request->company_id
-                );
+            // $address = array(
+            //         'street' => $request->street,
+            //         'state' => $request->state,
+            //         'country_id' => $request->country_id,
+            //         'zip_code' => $request->zip_code,
+            //         'city_id' => 1,
+            //         'company_id' =>3
+            //     );
+//echo dd($address);
+        // foreach($address as $ad){
+        //     $company->Address()->create([$ad]);
+        //     }
+           // $address = Address::create($request->all());
 
-        foreach($address as $ad){
-            $company->Address()->create([$ad]);
-            }
-
+            $address = new Address;
+            $address->street = $request->street;
+            $address->state =$request->state;
+            $address->country_id  =$request->country_id;
+            $address->zip_code =$request->zip_code;
+            $address->city_id  = 1;
+            $address->company_id = 1;
+            $address->save();
+            
         DB::table('contacts')->insert([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
