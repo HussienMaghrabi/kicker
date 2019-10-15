@@ -123,6 +123,7 @@ import request_type from './components/hr/req_type.vue'
 import request_status from './components/hr/req_status.vue'
 import employeerequest from './components/hr/employee_request.vue'
 import employee_attendance from './components/hr/employeeattendance.vue'
+import GrossEmployeeSalary from './components/hr/grossempsalary.vue'
 
 import salariesDetails from './components/hr/salariesDetails.vue'
 import employees from './components/hr/employees.vue'
@@ -198,6 +199,7 @@ import traffic from './components/traffic/traffic.vue'
 import trafficTasks from './components/trafficTasks/trafficTasks.vue'
 import newCompany from './components/newCompany/newCompany.vue'
 import showCompany from './components/showCompany/showCompany.vue'
+import testvue from './components/test.vue'
 
 import test1 from './components/test1/test1.vue'
 import allitems from './components/items/allitems.vue'
@@ -1552,6 +1554,15 @@ export const routes = [
             title: 'attendance',
         }
     },
+
+    {
+        path: '/admin/vue/GrossReport',
+        name: 'attendance',
+        component: GrossEmployeeSalary,
+        meta: {
+            title: 'Gross salary',
+        }
+    },
     
     {
         path: '/admin/vue/ShowMeeting/:id',
@@ -1691,6 +1702,14 @@ export const routes = [
         component: showCompany,
         meta: {
             title: ' Show Company',
+        }
+    },
+    {
+        path: '/admin/vue/TestVue',
+        name: 'test',
+        component: testvue,
+        meta: {
+            title: 'Test AAA',
         }
     },
  
