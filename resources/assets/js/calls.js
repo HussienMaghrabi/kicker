@@ -290,6 +290,15 @@ export const getcities = () => {
 export const deleteLead = (id) => {
     return axios.get('/admin/delete-lead/'+id)
 }
+
+export const deleteCompany = (id) => {
+    return axios.get('/admin/delete-Company/'+id)
+}
+// Delete a allCompanies
+export const deleteThisCompanies = (id) => {
+    return axios.get('/admin/allCompanies/'+id)
+}
+
 //delete Resale
 export const deleteResale = (id) => {
     return axios.get('/admin/delete-resale/'+id)
