@@ -1,5 +1,3 @@
-
-
 <template>
     <div class="container" style="background-color:#fff;padding:3%">
        <div class="columns is-12 is-mobile" style="margin-bottom:3%">
@@ -51,11 +49,11 @@
 
             </div>
 
-           
+
 
             <!-- <div class="column is-4"> -->
                 <!-- <b-field>
-                     
+
                     <label  class="column is-3">
                       <b-checkbox style="margin-right:3px;margin-left:0px;">Sub To</b-checkbox>
                     </label>
@@ -68,7 +66,7 @@
                         <option value="5">5</option>
                     </b-select>
                 </b-field> -->
-                
+
             <!-- </div> -->
 
         </div>
@@ -109,12 +107,12 @@
                     <label class="column is-4">Last Name</label>
                     <b-input class="company" type="text" style="margin-left:5%;" v-model="contact_array[0].last_name"></b-input>
                 </b-field>
-                 
+
                  <!-- <b-field>
                       <label class="column is-4">Phone</label>
                       <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="phones.phone"></b-input>
                       <div class="column is-1">
-                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addPhoneField"></span> 
+                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addPhoneField"></span>
                       </div>
                 </b-field> -->
                 <!-- v-model="phoneArr[indexContact]" -->
@@ -141,7 +139,7 @@
                     <label class="column is-4">Mobile</label>
                     <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="newMobile"></b-input>
                     <div class="column is-1">
-                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addMobileField"></span> 
+                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addMobileField"></span>
                     </div>
                 </b-field>
 
@@ -149,7 +147,7 @@
                     <label class="column is-4">Mobile</label>
                     <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="newMobile"></b-input>
                     <div class="column is-1">
-                          <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeMobileField(indexMob,mobile)"></span> 
+                          <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeMobileField(indexMob,mobile)"></span>
                     </div>
                 </b-field> -->
                  <b-field>
@@ -176,7 +174,7 @@
                       <label class="column is-4">Fax</label>
                       <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="newFax"></b-input>
                       <div class="column is-1">
-                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addFaxField"></span> 
+                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addFaxField"></span>
                       </div>
                 </b-field>
 
@@ -184,7 +182,7 @@
                       <label class="column is-4">Fax</label>
                       <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="newFax"></b-input>
                       <div class="column is-1">
-                          <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeFaxField(index,Fax)"></span> 
+                          <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeFaxField(index,Fax)"></span>
                       </div>
                 </b-field> -->
                 <b-field v-for="(data, index) in emails" :key="'d'+index" >
@@ -200,7 +198,7 @@
                       <label class="column is-4">Email</label>
                       <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="newMail"></b-input>
                       <div class="column is-1">
-                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addMailField(index,Fax)"></span> 
+                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addMailField(index,Fax)"></span>
                       </div>
                 </b-field>
 
@@ -208,7 +206,7 @@
                       <label class="column is-4">Email</label>
                       <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="newMail"></b-input>
                       <div class="column is-1">
-                          <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeMailField(index,Email)"></span> 
+                          <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeMailField(index,Email)"></span>
                       </div>
                 </b-field> -->
 

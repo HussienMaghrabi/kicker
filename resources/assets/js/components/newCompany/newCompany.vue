@@ -286,9 +286,9 @@
 
                         <!-- Save button-->
                         <b-button type="is-danger" style="margin-top:8px"><i class="fas fa-remove "></i>&nbsp;
-<!--                            <router-link :to="'/admin/vue/allCompanies'" style="color:#000">-->
+                            <router-link :to="'/admin/vue/allCompanies'" style="color:#000">
                                 Cancel
-<!--                            </router-link>-->
+                            </router-link>
                         </b-button>
                         <!-- Save Cancel-->
                     </div>
