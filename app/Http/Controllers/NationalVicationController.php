@@ -12,6 +12,11 @@ class NationalVicationController extends Controller
         $n_vacation = new nationalVication;
         return $n_vacation->GetAll();
     }
+    public function vacationRebort()
+    {
+        $n_vacation = new nationalVication;
+        return $n_vacation->GetRebort();
+    }
     public function store(Request $request)
     {
         $saved = nationalVication::create($request->all());

@@ -705,7 +705,10 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('StoreNewEmpRequest','EmployeeRequestController@Store');
     Route::post('UpdateGroosSalary','grossSalaryController@Store');
     Route::get('GrossEmployeeSalary','grossSalaryController@GrossReport');
+    Route::get('GetEmpDetails/{id}','grossSalaryController@customeEmployee');
+    Route::get('getAlldeduction','deductionController@getAlldeduction');
     Route::post('employeeDeductionUpdate','deductionController@Store');
+    Route::post('storeEmployeeContact','EmployeeController@addErContact');
    
 
     // New Vue Dashboard
@@ -852,6 +855,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('GetAllVacatonType', 'VacationTypesController@index');
     Route::post('addNewNational', 'NationalVicationController@store');
     Route::get('GetVacationOfNational', 'NationalVicationController@index');
+    Route::get('GetAllNationalVacation', 'NationalVicationController@vacationRebort');
     Route::get('getSingleNVacation/{id}', 'NationalVicationController@edit');
     Route::post('updateNVacany', 'NationalVicationController@update');
     Route::delete('DeleteNationalVacation/{id}', 'NationalVicationController@destroy');

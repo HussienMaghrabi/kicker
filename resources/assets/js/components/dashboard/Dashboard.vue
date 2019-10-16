@@ -606,9 +606,13 @@ export default {
                                 href: '/admin/vue/jobTitle',
                                 title: 'Job Titles'
                             },
-                             {
+                            {
                                 href: '/admin/vue/vacancy',
                                 title: 'Vacancies'
+                            },
+                            {
+                                href: '/admin/vue/vacancy_type',
+                                title: 'Vacancies Type'
                             },
                              {
                                 href: '/admin/vue/application',

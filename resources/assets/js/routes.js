@@ -124,6 +124,8 @@ import request_status from './components/hr/req_status.vue'
 import employeerequest from './components/hr/employee_request.vue'
 import employee_attendance from './components/hr/employeeattendance.vue'
 import GrossEmployeeSalary from './components/hr/grossempsalary.vue'
+import deductionReport from './components/hr/deductionReport.vue'
+import NationalVacation from './components/hr/allNatVacation.vue'
 
 import salariesDetails from './components/hr/salariesDetails.vue'
 import employees from './components/hr/employees.vue'
@@ -1557,10 +1559,28 @@ export const routes = [
 
     {
         path: '/admin/vue/GrossReport',
-        name: 'attendance',
+        name: 'gross salary',
         component: GrossEmployeeSalary,
         meta: {
             title: 'Gross salary',
+        }
+    },
+
+    {
+        path: '/admin/vue/deductionreport',
+        name: 'deduction',
+        component: deductionReport,
+        meta: {
+            title: 'Deduction salary',
+        }
+    },
+
+    {
+        path: '/admin/vue/NationalVacation',
+        name: 'National Vacation',
+        component: NationalVacation,
+        meta: {
+            title: 'National Vacation',
         }
     },
     
