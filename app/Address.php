@@ -12,4 +12,5 @@ class Address extends Model
     protected $keyType = 'integer';
     public $timestamps = true;
     protected $fillable = ['street','state','country_id','city_id','zip_code','company_id'];
+    
 }

@@ -1677,7 +1677,7 @@ export const routes = [
         name: 'trafficTasks',
         component: trafficTasks,
         meta: {
-            title: ' Traffic Tasks',
+            title: 'Traffic Tasks',
         }
     },
     {

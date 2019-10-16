@@ -203,16 +203,19 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('GetleadSwitchHistory','LeadController@GetleadSwitchHistory');
     Route::post('Getcilslead','LeadController@Getcilslead');
     Route::post('GetleadInfo','LeadController@GetleadInfo');
-
-
+    
+    
     Route::get('getonesignal','onesignalController@index');
     Route::get('getProposedCompanies','ProposedCompanyController@getProposedCompanies');
     Route::get('getNewLeads','ProposedCompanyController@getNewLeads');
-
+    
     Route::post('getonesignal','onesignalController@store');
     
     
+    
     Route::resource('companyLeads', 'LeadsController');
+    Route::post('addNewLead','LeadsController@addNewLead');
+    
     Route::resource('archive', 'ArchiveController');
     Route::resource('contractSections', 'ContractSectionsController');
     Route::resource('contracts', 'ContractController');

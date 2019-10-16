@@ -44,4 +44,10 @@ class Company extends Model
          return $this->hasMany('App\Proposal','company_id');
     }
 
+     public function address()
+     {
+     return $this->hasMany(Address::class);
+     //return $this->belongsTo('App\Note');
+     }
+
 }

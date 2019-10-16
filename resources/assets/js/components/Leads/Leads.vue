@@ -72,7 +72,7 @@
                                                 <b-datepicker
                                                 placeholder="Click to select..."
                                                 :date-formatter="dateFormatterTo"
-                                                position="is-bottom-left" v-model="filter.to">
+                                                position="is-bottom-left" v-model="filter.to"> 
                                             </b-datepicker>
                                         </b-field>
                                         </div>

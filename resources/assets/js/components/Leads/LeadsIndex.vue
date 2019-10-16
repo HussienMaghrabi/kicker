@@ -2,7 +2,7 @@
     <div class="container is-fluid">
       <Assistant
       ref="_slider"/>
-                <div class="card ">
+                <div class="card">
                     <header class="card-header level header-content">
                         <div class="level">
                             <div class="level-item">
@@ -329,6 +329,7 @@ import Multiselect from 'vue-multiselect'
             this.getSources()
             this.getCompanyAgents()
             this.newLeadData.r_agent = this.id
+            console.window(this.newLeadData)
         },
         methods: {
             getPublic(){

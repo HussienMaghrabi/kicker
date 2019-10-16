@@ -978,7 +978,7 @@ changeLeadFav
 }
 </script>
 
-<style type="text/css" scoped="">
+<style type="text/css" scoped=""> 
 .leads-number
 {
     position: absolute;
