@@ -7,15 +7,13 @@
                 </div>
             </div>
 
-
-
             <div class="level">
                 <div class="level-item filters">
                     <div class="field  mr-10">
                         <div class="control">
-                            <input class="input is-meduim mt-10" type="text" placeholder="Search" v-model="searchInput" @input="search" style="width:70%;margin-bottom: 23px;">
+                            <input class="input is-meduim mt-10" type="text" placeholder="Search" v-model="searchInput" @input="search_Company" style="width:70%;margin-bottom: 23px;">
                             <b-button type="is-info" style="margin-top:8px"><i class="fas fa-plus"></i>&nbsp;
-                                <router-link  :to="'/admin/vue/newProposal'" style="color:#fff">
+                                <router-link  :to="'/admin/vue/newcompany'" style="color:#fff">
                                     New
                                 </router-link>
                             </b-button>
@@ -43,8 +41,7 @@
 
                 :checked-rows.sync="selectedLeads"
                 :default-sort-direction="defaultSortDirection"
-                default-sort="created_at"
-        >
+                default-sort="created_at">
 
             <template slot-scope="props">
                 <b-table-column  label="Company Name" sortable>
@@ -52,28 +49,6 @@
                         {{props.row.name}}
                     </router-link>
                 </b-table-column>
-
-                <!-- <b-table-column label="Phone" sortable>
-                    <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">
-                              Test
-                    </router-link>
-
-                </b-table-column>
-                <b-table-column label="Fax" sortable>
-                    <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">
-                    Test
-                    </router-link>
-                </b-table-column>
-                <b-table-column  label="Email" sortable>
-                     <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">
-                       Test
-                    </router-link>
-                </b-table-column>
-                <b-table-column  label="Website" sortable>
-                     <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">
-                      Test
-                    </router-link>
-                </b-table-column> -->
 
                 <b-table-column  label="Send Email" sortable>
                     <i class="fas fa-envelope"></i>
@@ -115,7 +90,7 @@
 </template>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <script>
-    import {autoSwitchAPi,getMyLeads,changeLeadFav,deleteThisCompanies,changeLeadHot,deleteLead,deleteCompany,newLeadsFilter,getPublicData,switchLeads,getAgents,checkUserGroupAndRoles,searchForLead, getLeadSources, getLeadsByAgent, getBtns, addCall,bulkActions,deleteNoActionLeads,getAllProposalCompanies} from './../../calls'
+    import {autoSwitchAPi,getMyLeads,changeLeadFav,deleteThisCompanies,changeLeadHot,deleteLead,deleteCompany,newLeadsFilter,getPublicData,switchLeads,getAgents,checkUserGroupAndRoles,searchForCompany, getLeadSources, getLeadsByAgent, getBtns, addCall,bulkActions,deleteNoActionLeads,getAllProposalCompanies} from './../../calls'
     import Multiselect from 'vue-multiselect'
     export default {
         data() {
@@ -140,6 +115,7 @@
                 perPage: 100,
                 isFullPage: true,
                 searchInput: '',
+                search: '',
                 selectedLeads: [],
                 ShowHint: false,
                 hintId: '',
@@ -253,17 +229,20 @@
                     .catch(error => {
                         console.log(error)
                     })
+                this.isLoading = false
+
             },
-            search(){
+            search_Company(){
+
                 if(this.searchInput){
-                    //this.isLoading = true
+
                     var data ={
                         'searchInput':this.searchInput,
                         '_token':this.token,
                         'agent_id':this.userId,
                     };
-                    searchForLead(data).then(response=>{
-                        this.leads = response.data
+                    searchForCompany(data).then(response=>{
+                        this.proposalsCompanies = response.data
                     })
                         .catch(error => {
                             console.log(error)
@@ -294,6 +273,7 @@
                 })
             },
             filterLeads(scrollSwitch = false){
+                console.log("asdsadad ");
                 this.isLoading = true
                 this.fitlerFlag = true
                 this.tagIds = []
@@ -312,10 +292,10 @@
                     'agent_id':this.userId,
                     'tags':this.tagIds,
                     'phoneIso': this.phoneIso,
-                    'probability': this.probability
+                    'probability': this.probability,
+                    'searchInput': this.searchInput
                 };
-                newLeadsFilter(this.page, data).then(response=>{
-                    console.log("asdsadad ", response.data.per_page);
+                newLeadsFilter(data).then(response=>{
                     this.perPage = response.data.per_page
                     this.leads = response.data.data;
                     this.leadsCurrentNumber = response.data.to;
@@ -634,6 +614,13 @@
                         console.log(error)
                     })
             },
+        },
+        computed:{
+            filteredBlogs:function(){
+                return this.blogs.filter((blog)=>{
+                    return blog.title.match(this.search);
+                });
+            }
         }
     }
 </script>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use Illuminate\Http\Request;
 use App\proposed_company;
 use App\Contact_proposed;
@@ -10,6 +11,8 @@ use App\ProposedContact_mobile;
 use App\ProposedContact_fax;
 use App\ProposedContact_email;
 use App\ProposedCompany_address;
+use App\User;
+use Auth;
 use Validator;
 use DB;
 
@@ -50,13 +53,14 @@ class ProposedCompanyController extends Controller
     {
 
         //static Data Of Proposed Company
-        $proposedCompany                =new proposed_company;
+        $proposedCompany=new proposed_company;
         $proposedCompany->name          =$request->companyName;
         $proposedCompany->currency_id   =$request->currencyId;
         $proposedCompany->activity      =$request->activity;
         $proposedCompany->introduction  =$request->introduction;
         $proposedCompany->closing       =$request->closing;
         $proposedCompany->policy        =$request->policy;
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $name = md5($image->getClientOriginalName() . time()) . "." . $image->getClientOriginalExtension();
@@ -65,8 +69,9 @@ class ProposedCompanyController extends Controller
             $proposedCompany->image   = $name;
         }
         $proposedCompany->save();
+
         //Save Contact_proposed
-        $contactsProposed                       =new Contact_proposed;
+        $contactsProposed=new Contact_proposed;
         $contactsProposed->first_name           =$request->firstName;
         $contactsProposed->last_name            =$request->lastName;
         $contactsProposed->website              =$request->webSite;
@@ -74,20 +79,18 @@ class ProposedCompanyController extends Controller
         $contactsProposed->nationality_id       =$request->nationlityId;
         $contactsProposed->proposed_company_id  =$proposedCompany->id;
         $contactsProposed->save();
+
         //save ProposedContact_phone
         $pArray = json_decode($request->phones);
 
         if(sizeof($pArray)>0){
-
             foreach($pArray as $item){
-                // dd($phones);
                 if($item !=null){
                     $ProposedContact_phone= new ProposedContact_phone;
                     $ProposedContact_phone->phone=$item;
                     $ProposedContact_phone->contact_id=$contactsProposed->id;
                     $ProposedContact_phone->save();
                 }
-
             }
         }
 //        //save ProposedContact_mobile
@@ -106,36 +109,31 @@ class ProposedCompanyController extends Controller
 //                 }
 //
 //             }
+
         //save ProposedContact_fax
         $fArray=json_decode($request->faxies);
-        // dd($mArray);
         if(sizeof($fArray)>0){
             foreach($fArray as $fax){
-
                 if($fax !=null){
                     $proposedContact_fax= new ProposedContact_fax;
                     $proposedContact_fax->fax=$fax;
                     $proposedContact_fax->contact_id=$contactsProposed->id;
                     $proposedContact_fax->save();
                 }
-
             }
-
         }
+
         //save ProposedContact_email
         $eArray=json_decode($request->emails);
         if(sizeof($eArray)>0){
             foreach($eArray as $email){
-
                 if($email !=null){
                     $proposedContact_email= new ProposedContact_email;
                     $proposedContact_email->email=$email;
                     $proposedContact_email->contact_id=$contactsProposed->id;
                     $proposedContact_email->save();
                 }
-
             }
-
         }
 
         //save Address for Proposed Company
@@ -268,6 +266,23 @@ class ProposedCompanyController extends Controller
             ->get();
         return response()->json($leadContacts);
     }
+
+    public function searchForCompany(Request $request){
+
+        $search = $request->searchInput;
+        if (Auth::user()->type === 'admin' ) {
+            $company = DB::table('proposed_company')
+                ->where('name', 'LIKE', '%' . $search . '%')
+                ->get();
+            return $company;
+
+        }
+
+
+    }
+
+
+
 
 
 

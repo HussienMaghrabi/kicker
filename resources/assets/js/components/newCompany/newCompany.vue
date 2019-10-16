@@ -172,7 +172,6 @@
         </div>
         <!-- end Contact -->
 
-
         <!-- Start Address -->
         <div class="columns is-12 plusSign" style="padding-bottom: 28px;border-bottom: solid 1px lightgray;">
             <h4 style="color:#9A9A9A">Address</h4>
@@ -280,16 +279,16 @@
             <div class="level-item filters">
                 <div class="field  mr-10">
                     <div class="control">
-                        <b-button type="is-success" style="margin-top:8px" @click="addNewProposedCompany()"><i class="fas fa-save"></i>&nbsp;
-                            <router-link :to="'/admin/vue/allCompanies'" style="color:#000">
+                        <b-button type="is-success" style="margin-top:8px" @click="addNewProposedCompany()">
+                            <i class="fas fa-save"></i>&nbsp;
                                 Save
-                            </router-link>
                         </b-button>
+
                         <!-- Save button-->
                         <b-button type="is-danger" style="margin-top:8px"><i class="fas fa-remove "></i>&nbsp;
-                            <router-link :to="'/admin/vue/allCompanies'" style="color:#000">
+<!--                            <router-link :to="'/admin/vue/allCompanies'" style="color:#000">-->
                                 Cancel
-                            </router-link>
+<!--                            </router-link>-->
                         </b-button>
                         <!-- Save Cancel-->
                     </div>
@@ -437,6 +436,7 @@
 
                 addNewProposedCompany(bodyFormData).then(Response=>{
                     //   console.log("the returned Value is ",Response.data)
+                    window.location.href="allCompanies"
                 })
 
             },

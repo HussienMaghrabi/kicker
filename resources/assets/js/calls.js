@@ -347,8 +347,8 @@ export const getAgents = () => {
 }
 
 // Filter Leads
-export const newLeadsFilter = (page,data) => {
-    return axios.post('/admin/newLeadsFilter?page='+page,data)
+export const newLeadsFilter = (data) => {
+    return axios.post('/admin/newLeadsFilter',data)
 }
 //newResaleFilter
 export const newResaleFilter = (page,data) => {
@@ -394,6 +394,10 @@ export const getUnitTypes = (data) => {
 // Get Unit Types
 export const searchForLead = (data) => {
     return axios.post('/admin/searchForLead',data)
+}
+// Get Unit Types
+export const searchForCompany = (data) => {
+    return axios.post('/admin/searchForCompany',data)
 }
 
 // Add New ToDo

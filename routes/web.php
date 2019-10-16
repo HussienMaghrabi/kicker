@@ -886,6 +886,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('getProposalCompanyById/{id}','ProposedCompanyController@show');
     Route::get('allCompanies/{id}','ProposedCompanyController@destroy');
     Route::get('delete-Company/{id}', 'ProposedCompanyController@multiDelete');
+    Route::post('searchForCompany','ProposedCompanyController@searchForCompany');
 
     
 
