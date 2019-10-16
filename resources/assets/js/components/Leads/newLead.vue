@@ -274,7 +274,7 @@
 
                 <b-field>
                     <label class="column is-4">First Name</label>
-                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="firstName"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="firtName"></b-input>
                 </b-field>
 
                 <b-field>
@@ -378,7 +378,7 @@ export default {
             contacts:[{
                 removebtn:'',
                 title:'',
-                firtsName:'',
+                firtName:'',
                 lastName:'',
                 email:'',
                 nationality:'',
@@ -486,7 +486,7 @@ export default {
             this.contacts.push({
                 removebtn:'',
                 title:'',
-                firtsName:'',
+                firtName:'',
                 lastName:'',
                 email:'',
                 nationality:'',
@@ -536,7 +536,7 @@ export default {
             'zip_code':this.zipCode,
             // 'company_id':this.company_id,
 
-            'first_name':this.firtsName ,
+            'first_name':this.firtName ,
             'last_name':this.lastName,
             'title_id':this.title ,
             'email':this.email,

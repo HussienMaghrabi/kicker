@@ -3,7 +3,7 @@
     <section class="container style">
      
       <b-field label="Lead">
-            <select class="form-control lead" v-on:change="LeadInfo($event.target.value)" v-model="lead_id">
+            <select class="form-control lead" v-on:change="LeadInfo($event.target.value)" v-model="lead_id" >
                 <option v-for="lead in leads" :key="lead.id" :value="lead.id">{{ lead.first_name +' '+lead.last_name}}</option>
             </select>    
       </b-field>
@@ -41,7 +41,7 @@
     </b-field>
 
     <b-field  :active.sync="action" label="Description">
-            <b-input  type="textarea"></b-input>
+            <b-input  type="textarea" required></b-input>
     </b-field>
 
 <b-field label="Projects">
@@ -52,7 +52,7 @@
 <!-- end next action -->
  
       <b-field label="Duraiton">
-            <b-input type="number" v-model="duration"></b-input>
+            <b-input type="number" v-model="duration" required></b-input>
       </b-field>
 
        <b-field label="Date">
@@ -96,7 +96,7 @@
     
 
     <b-field label="Description">
-        <b-input type="textarea" v-model="description"></b-input>
+        <b-input type="textarea" v-model="description" required></b-input>
     </b-field>
         
         

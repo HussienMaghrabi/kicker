@@ -370,7 +370,7 @@ class AjaxController extends Controller
         // dd($request);
         $leadInfo = Lead::where('id',$request->lead_id)->first();
         $userInfo = \App\user::where('id',Auth::user()->id)->first();
-    $rules = [
+     $rules = [
             'lead_id' => 'required',
             'contact_id' => 'required',
             // 'date' => 'required',
@@ -668,7 +668,7 @@ class AjaxController extends Controller
             ['title' => 'seen', 'count' => $seen],
             ['title' => 'notSeen', 'count' => $notSeen],
             ['title' => 'Today Cold Calls', 'count' => $todayColdCalls],
-            ['title' => 'Individual Leads', 'count' => $individualLeads],
+            ['title' => 'Individual Leads', 'count' => $individualLeads], 
         ];
 
         $response = 'ok';

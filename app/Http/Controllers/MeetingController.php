@@ -104,7 +104,8 @@ class MeetingController extends Controller
             'meeting_status_id' => trans('admin.meeting_status'),
         ]);
         if ($validator->fails()) {
-            return back()->withInput()->withErrors($validator);
+           // return back()->withInput()->withErrors($validator);
+            return response()->json([ "status" => "faild_Added"],200);
         } else {
             $meeting = new Meeting;
             $meeting->lead_id = $request->lead_id;
