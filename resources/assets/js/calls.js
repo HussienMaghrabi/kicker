@@ -2154,6 +2154,14 @@ export const getRequestTypes = () => {
     return axios.get('/admin/getAPIRequestTypes')
 }
 
+export const EmployeeSalaryDetails = (id) => {
+    return axios.get('/admin/GetEmpDetails/'+id)
+}
+
+export const storeEmployeeContact = (bodyFormData) => {
+    return axios.post('/admin/storeEmployeeContact',bodyFormData)
+}
+
 // reject Request status
 export const getRequestStatus = () => {
     return axios.get('/admin/getRequestStatus')

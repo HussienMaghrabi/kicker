@@ -35,6 +35,7 @@ class CreateEmployeesTable extends Migration
             $table->text('job_history');
             $table->integer('national_id')->nullable();
             $table->integer('salary')->nullable();
+            $table->integer('photo_id')->nullable();
             $table->integer('is_hr');
             $table->double('day_value',8,2);
             $table->integer('finger_print_id');

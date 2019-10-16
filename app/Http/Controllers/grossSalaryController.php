@@ -18,4 +18,8 @@ class grossSalaryController extends Controller
     {
         return gross_salary::report();
     }
+    public function customeEmployee($id)
+    {
+        return gross_salary::sDetails($id);
+    }
 }

@@ -12,6 +12,7 @@ use App\HrSetting;
 use App\JobCategory;
 use App\JobTitle;
 use App\Photo;
+use App\employee_image;
 use App\Rate;
 use App\Salary;
 use App\SalaryDetail;
@@ -87,6 +88,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         // return $request->all();
         $rules = [
             'en_first_name' => 'required',
@@ -144,11 +146,11 @@ class EmployeeController extends Controller
                 $employee->military_status = $request->military_status;
                 $employee->phone = $request->phone;
                 $employee->personal_mail = $request->personal_mail;
-                $employee->company_mail = $request->company_mail;
+                // $employee->company_mail = $request->company_mail;
                 $employee->job_category_id = $request->job_category_id;
                 $employee->job_title_id = $request->job_title_id;
                 $employee->day_value = $request->salary / 30;
-                $employee->photo_id = $request->profile_photo;
+                // $employee->photo_id = $request->profile_photo;
                 $employee->user_id = $user->id;
                 if ('admin' == $request->type) {
                     $employee->is_hr = 1;
@@ -159,22 +161,22 @@ class EmployeeController extends Controller
                 // }
                 // $hr_setting_unscheduled = HrSetting::where('name', '=', 'unscheduled_vacation')->first();
                 // if($hr_setting_unscheduled){
-                //     $employee->unscheduled_vacation = $hr_setting_unscheduled->value;
+                //     $employee->unscheduled_vacation = $hr_setting_unscheduled->value;                
                 // }
                 $employee->save();
 
                 if ($file = $request->file('profile_photo')) {
                     $image = uploads($request, 'profile_photo');
-                    $photo = Photo::create(['image' => $image, 'employee_id' => $employee->id, 'code' => 'profile']);
+                    $photo = employee_image::create(['image' => $image, 'employee_id' => $employee->id]);
                     $em = Employee::where('photo_id', $request->profile_photo)->first();
                     $em->photo_id = $photo->id;
                     $em->save();
                 }
 
-                $us = User::where('id', $request->id)->first();
+                $us = User::where('id', $employee->id)->first();
                 if($us){
                     $us->employee_id = $employee->id;  
-                    $us->save();            
+                    $us->save();
                 }
              
 
@@ -397,11 +399,11 @@ class EmployeeController extends Controller
             }
 
             $employee->save();
-            $user = User::where('id', $employee->user_id);
-            $user->email = $request->personal_mail;
-            $user->password = bcrypt($request->password);
-            $user->name = $request->en_first_name;
-            $user->phone = $request->phone;
+            // $user = User::where('id', Auth::user()->id);
+            // $user->email = $request->personal_mail;
+            // $user->password = bcrypt($request->password);
+            // $user->name = $request->en_first_name;
+            // $user->phone = $request->phone;
 
             // session()->flash('success', trans('admin.updated'));
             // return redirect(adminPath() . '/employees/');
@@ -556,7 +558,14 @@ class EmployeeController extends Controller
 
     public function addErContact(request $request)
     {
-        if ($request->has('contact_name')) {
+        // dd($request->all());
+        foreach ($request->emails as $email) {
+            $A = json_decode($email);
+            return $A;
+        }
+        // $A = json_decode($request->emails);
+        // return $request->emails;
+        // if ($request->has('contact_name')) {
             foreach ($request->contact_name as $k => $v) {
                 $contact = new Contact;
                 $contact->employee_id = $request->employee_id;
@@ -579,7 +588,7 @@ class EmployeeController extends Controller
                 };
                 $contact->save();
             }
-        }
+        // }
         return back();
     }
 

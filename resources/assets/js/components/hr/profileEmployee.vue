@@ -301,7 +301,7 @@
                                                     id="birth_date_save"></i>
                                                 <span v-if="edit.jobtitle" id="jobtitle" class="hidden">
                                                   <b-select expanded v-model="employeeData.jobtitle">
-                                                        <option v-for="jobTitle in jobTitles" :value="jobTitle.id" >
+                                                        <option v-for="jobTitle in jobTitles" :key="jobTitle.id" :value="jobTitle.id" >
                                                                 {{ jobTitle.en_name }} 
                                                         </option>
                                                   </b-select>
@@ -457,7 +457,7 @@
                              </div>
 
                             <b-table
-                            :data="actionLogs"
+                            :data="DtailsSalary"
                             bordered
                             checkable
                             narrowed
@@ -471,9 +471,7 @@
                             :per-page="perPage"
                             @page-change="onPageChange"
 
-                            :checked-rows.sync="selectedLogs"
                             :default-sort-direction="defaultSortDirection"
-                            default-sort="created_at"
                             >
 
 
@@ -487,24 +485,28 @@
                                     {{ props.row.title }}
                                 </b-table-column>
 
-                                <b-table-column class="width" field="title" label="Employee" sortable>
+                                <!-- <b-table-column class="width" field="title" label="Employee" sortable>
                                     {{ props.row.title }}
-                                </b-table-column>
+                                </b-table-column> -->
 
-                                <b-table-column class="width" field="title" label="Basic Salary" sortable>
-                                    {{ props.row.title }}
+                                <b-table-column class="width" field="title" label="Basic Salary">
+                                    {{ props.row.salary }}
                                 </b-table-column>
 
                                 <b-table-column class="width" field="title" label="Gross Salary" sortable>
-                                    {{ props.row.title }}
+                                    {{ props.row.allowanes }}
                                 </b-table-column>
 
-                                <b-table-column class="width" field="title" label="Net Salary" sortable>
+                                <!-- <b-table-column class="width" field="title" label="Net Salary" sortable>
                                     {{ props.row.title }}
+                                </b-table-column> -->
+
+                                <b-table-column class="width" field="title" label="Details" sortable>
+                                    {{ props.row.details }}
                                 </b-table-column>
 
-                                <b-table-column class="width" field="title" label="Full Salary" sortable>
-                                    {{ props.row.title }}
+                                <b-table-column class="width" field="date" label="Date" sortable>
+                                    {{ props.row.date }}
                                 </b-table-column>
 
                             </template>
@@ -910,11 +912,11 @@
                                 </header>
                                 <section class="modal-card-body">
                                 <b-field label="Name">
-                                   <b-input type="text" placeholder="Name"></b-input>
+                                   <b-input type="text" v-model="contactName" placeholder="Name"></b-input>
                                 </b-field>
 
                                 <b-field label="Relation">
-                                   <b-input type="text" placeholder="Relation"></b-input>                                    
+                                   <b-input type="text" v-modal="contactrelation" placeholder="Relation"></b-input>
                                 </b-field>
 
                                  <div class="card">
@@ -994,21 +996,22 @@
                                  </div>
 
                                 <b-field label="Job Title">
-                                    <b-select  expanded>
-                                        <option>CEO</option>
+                                    <b-select expanded v-model="contractJobTitle">
+                                        <option v-for="jobTitle in jobTitles" :key="jobTitle.id" :value="jobTitle.id" >
+                                                {{ jobTitle.en_name }} 
+                                        </option>
                                     </b-select>
                                 </b-field>
                                 
-                                <b-field label="Nationality">
+                                <!-- <b-field label="Nationality">
                                     <b-select  expanded>
-                                        <option>CEO</option>
                                     </b-select>
-                                </b-field>
+                                </b-field> -->
                                 
                             </section>
                                 <footer class="modal-card-foot">
                                     <button class="button" type="button" @click="isComponentModalActive = false">Close</button>
-                                    <b-button class="is-danger">Remove</b-button>
+                                    <b-button @click="StoreContact" class="is-success">Add</b-button>
                                 </footer>
                             </div>
                         </b-modal>
@@ -1246,7 +1249,7 @@ Vue.use(Slider)
 
 
 import {showThisEmployee,deleteThisEmployee,filterEmployees,action_logs,callstatus,getMeetingStatus,updateEmployees
-     ,getcities,getCountries,getVacancyInputs} from './../../calls'
+     ,getcities,getCountries,getVacancyInputs,EmployeeSalaryDetails,storeEmployeeContact,getAllJobTitles} from './../../calls'
 export default {
     data() {
             return {
@@ -1267,7 +1270,10 @@ export default {
                     }
                 }]},
                 file: null,
+                contactName:null,
+                contactrelation:null,
                 name: null,
+                contractJobTitle: null,
                 has_next_action: null,
                 isSwitched: false,
                 isSwitchedCustom: 'Yes',
@@ -1325,14 +1331,15 @@ export default {
                     notes:false
                 },
                 employees:[],
-                employee_id:null
+                DtailsSalary:[],
+                employee_id:null,
             }
         },
         mounted() {
             this.getEmployeesData()
-            this.getData()
-            this.getData2()
-            this.getData3()
+            // this.getData()
+            // this.getData2()
+            // this.getData3()
         },
         components: {
             'slider': Slider,
@@ -1340,11 +1347,12 @@ export default {
             ProgressBar,
         },
         created() {
-            this.$router.replace({hash: '#/1'});
+            // this.$router.replace({hash: '#/1'});
             this.id = this.$route.params.id;
-            this.Allcities();
-            this.Allcountries();
-            this.AllJobTitles()
+            this.getSalarydetails()
+            // this.Allcities();
+            // this.Allcountries();
+            this.getAllJobTitles()
          },
          methods:{
             getEmployeesData(){
@@ -1373,6 +1381,20 @@ export default {
         .catch(error => {
             console.log(error)
         })
+        },
+        getAllJobTitles(){
+            getAllJobTitles().then(response=>{
+                this.jobTitles = response.data;
+            }).catch(error=>{
+                console.log(error)
+            })
+        },
+        getSalarydetails(){
+            EmployeeSalaryDetails(this.id).then(response=>{
+                this.DtailsSalary = response.data
+            }).catch(error=>{
+                console.log(error)
+            })
         },
         Allcities(){
             getcities().then(response=>{
@@ -1421,10 +1443,20 @@ export default {
 
             // this.total = currentTotal
             this.isLoading = false
-        
-
             })
         .catch(error => {
+            console.log(error)
+        })
+     },
+     StoreContact(){
+         const bodyFormData = new FormData;
+         bodyFormData.append('emails[]',JSON.stringify(this.emails))
+         bodyFormData.append('phones[]',JSON.stringify(this.phones))
+         bodyFormData.append('ContactName',this.contactName)
+         bodyFormData.append('contactrelation',this.contactrelation)
+        storeEmployeeContact(bodyFormData).then(response=>{
+
+        }).catch(error=>{
             console.log(error)
         })
      },

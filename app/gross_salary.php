@@ -19,4 +19,13 @@ class gross_salary extends Model
         ->get();
         return $EmployeeGross;
     }
+    static function sDetails($id){
+        $EmployeeGrossDetails = DB::table('create_gross_salary as g_salary')
+        ->leftjoin('employees as employee','g_salary.employee_id','=','employee.id')
+        ->orderBy('g_salary.id','DESC')
+        ->where('g_salary.employee_id',$id)
+        ->select('g_salary.id as id','g_salary.details','employee.salary','g_salary.date','g_salary.allowanes','g_salary.order_by')
+        ->get();
+        return $EmployeeGrossDetails;
+    }
 }
