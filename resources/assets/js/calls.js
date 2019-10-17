@@ -334,7 +334,7 @@ export const getPublicData = () => {
 
 // Get Agents
 export const getAgents = () => {
-    return axios.get('/admin/getAgents')
+    return axios.get('/admin/getAgents') 
 }
 
 // Filter Leads
@@ -1446,7 +1446,6 @@ export const deleteThisLeadSource = (id) => {
 export const addLeadSource = (data) => {
     return axios.post('/admin/lead_sources', data)
 }
-
 
 // begin settings
         export const getdatasetting = () => {

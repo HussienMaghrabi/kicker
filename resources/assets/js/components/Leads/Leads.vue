@@ -179,7 +179,7 @@
                     <template slot-scope="props">
                         <b-table-column label="Lead" sortable>
                              <router-link :to="'/admin/vue/showLead/'+props.row.id" style="color:#4AAED5"> 
-                                      {{ props.row.name }}
+                                	{{ props.row.prefix_name }}&nbsp;:&nbsp;{{ props.row.first_name }}
                              </router-link>
                         </b-table-column>
 
@@ -189,13 +189,19 @@
                             </router-link>
                         </b-table-column>
 
+                        <!-- <b-table-column label="Lead Type" sortable>
+                            <router-link :to="'/admin/vue/showLead/'+props.row.id" style="color:#4AAED5"> 
+                                      {{ props.row.lead_type }}
+                            </router-link>
+                        </b-table-column> -->
+
                         <b-table-column label="Phone" sortable>
                             {{props.row.phone}}
                         </b-table-column>
 
-                         <b-table-column label="Mobile" sortable>
+                         <!-- <b-table-column label="Mobile" sortable>
                             {{props.row.mobile}}
-                        </b-table-column>
+                        </b-table-column> -->
 
                         <b-table-column label="Email" sortable>
                             {{props.row.email}}
@@ -314,6 +320,7 @@ changeLeadFav
                 probability: '',
                 project_id:null
             }
+            
         },
         mounted() {
             this.authType = window.auth_user.type

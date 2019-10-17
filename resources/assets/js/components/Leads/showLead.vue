@@ -12,10 +12,11 @@
                     <div class="columns is-mobile is-12">
                         <div class="column is-6 respo-header show-lead" style="display: block; margin-top: 0; margin-left: 0">
                             <h3 class="lead"> Kirolos &nbsp &nbsp<i class="far fa-user" style="color:#444 !important"></i></h3>
-                            <p>Lead Owner  : --  </p>
-                            <p>Email  : -- </p>
-                            <p>Phone  : -- </p>
-                            <p>Mobile  : -- </p>
+                            
+                            <p>Lead Owner  : <span> {{ getleads.prefix_name}} </span>.{{ getleads.first_name }}. </p>
+                            <p>Email  : {{ getleads.email }} </p>
+                            <p>Phone  : {{ getleads.phone}}  </p>
+                            <!-- <p>Mobile  : {{ getleads.prefix_name}}  </p> -->
                             <!-- <div class="columns is-12 is-mobile"> -->
                                <p class="column">Lead status  : </p>
                              
@@ -803,11 +804,16 @@
 
 
 <script>
-import {} from './../../calls'
+    import {
+
+        getLeadData,
+    } from "./../../calls"
 export default {
     data() {
             return {
                 isLoading: true,
+                lead_id:null,
+                getleads:[],
                 token: window.auth_user.csrf,
                 id: null,
                 disabled: true,
@@ -829,7 +835,8 @@ export default {
             }
         },
     created() {
-        this.id = this.$route.params.id
+        this.lead_id= this.$route.params.id
+        this.getData()
     },
     mounted() {
     },
@@ -851,8 +858,31 @@ export default {
         },
         openGuranteeModal(){
             this.isComponentModalGuranteeActive = true
-        }
         },
+                getData(loading = true) {
+                getLeadData(this.lead_id).then(response=>{
+                    // console.log('TEEEEEEEES',response)
+                    this.getleads = response.data
+                    // console.log('this get lead var',this.getleads)
+                    this.first_name_value = response.data.lead.first_name
+                    // console.log('test response get lead',this.getleads)
+                    // new get lead data
+                    this.leadData = response.data.lead
+                    this.contacts = response.data.contacts
+                    this.newCallData.contact_id = 0
+                    this.newMeetingData.contact_id = 0
+                    this.newCallData.phone = this.leadData.phone
+                    this.selectedTags = response.data.lead.tags
+                // end new get lead data
+                    this.isLoading = false;
+
+                }).catch(error => {
+                    console.log(error)
+                })
+            }
+
+        },
+        
 }
 </script>
 

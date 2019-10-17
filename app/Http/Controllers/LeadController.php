@@ -324,7 +324,6 @@ class LeadController extends Controller
 			$lead->email = $request->email;
 			// $lead->phone = $request->phone;
 			$contact = $leadInstance->reformPhone($request->phone);
-
 			$lead->phone = $contact->phone;
 			$lead->phone_iso = $contact->iso;
 			$lead->reference = $request->reference;
@@ -2986,12 +2985,15 @@ class LeadController extends Controller
 
 	public function getLeadData($id)
 	{
-		if(auth()->user()->role->name == 'operation'){
-			$obj = (object)[];
-			$obj->data = [];
-			return response()->json($obj);
-		}
+		//echo dd(auth()->user()->id);
+		// if(auth()->user()){
+		// 	$obj = (object)[];
+		// 	$obj->data = [];
+		// 	return response()->json($obj);
+		// }
 		$lead = Lead::find($id);
+		return $lead;
+		//echo dd($id);
 		$leadInstance = new Lead;
 		if ($lead) {
 			if ($lead->image == 'image.jpg') {
