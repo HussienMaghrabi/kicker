@@ -15,7 +15,10 @@ class CreateTableEmployeeContactPhone extends Migration
     {
         Schema::create('employee_contact_phone', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('employee_contact_id')->unsigned();
+            $table->string('phone');
             $table->timestamps();
+            $table->foreign('employee_contact_id')->references('id')->on('employee_contact')->onDelete('cascade');
         });
     }
 
