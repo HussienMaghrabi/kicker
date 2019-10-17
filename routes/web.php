@@ -279,6 +279,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('updaterequesttype/{id}', 'RequestTypeController@update');
     Route::get('DeleteRequestType/{id}', 'RequestTypeController@destroy');
     Route::get('getRequestStatus', 'RequestStatusController@AllStatus');
+    Route::get('EmployeeContacts/{id}', 'EmployeeController@getAllContacts');
     Route::post('AddRequestStatus', 'RequestStatusController@store');
     Route::get('editRequestStatus/{id}', 'RequestStatusController@edit');
     Route::post('updaterequeststatus/{id}', 'RequestStatusController@update');

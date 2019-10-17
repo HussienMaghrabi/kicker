@@ -16,8 +16,8 @@ class CreateEmployeeRequestTable extends Migration
         Schema::create('employee_request', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('employee_id');
-            $table->integer('request_status_id');
-            $table->integer('request_type_id');
+            $table->unsignedInteger('request_status_id');
+            $table->unsignedInteger('request_type_id');
             $table->text('note');
             $table->date('date_from');
             $table->date('date_too');

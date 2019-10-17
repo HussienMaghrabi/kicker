@@ -845,7 +845,7 @@
                     <!-- table ER Contact -->
 
                      <b-table
-                            :data="actionLogs"
+                            :data="EmployeeContact"
                             bordered
                             checkable
                             narrowed
@@ -872,15 +872,15 @@
                                 </b-table-column>
                             
                                 <b-table-column class="width" label="Phone" sortable>
-                                    {{ props.row.title }}
+                                    {{ props.row.phone }}
                                 </b-table-column>
 
                                 <b-table-column class="width" label="Relation" sortable>
-                                    {{ props.row.title }}
+                                    {{ props.row.relation }}
                                 </b-table-column>
 
                                 <b-table-column class="width" label="Mail" sortable>
-                                    {{ props.row.title }}
+                                    {{ props.row.email }}
                                 </b-table-column>
 
                             </template>
@@ -915,13 +915,21 @@
                                    <b-input type="text" v-model="contactName" placeholder="Name"></b-input>
                                 </b-field>
 
+                                <b-field label="Email">
+                                   <b-input type="text" v-model="contactEmail" placeholder="Email"></b-input>
+                                </b-field>
+
+                                <b-field label="Phone">
+                                   <b-input type="phone" v-model="contactPhone" placeholder="Phone"></b-input>
+                                </b-field>
+
                                 <b-field label="Relation">
                                    <b-input type="text" v-modal="contactrelation" placeholder="Relation"></b-input>
                                 </b-field>
 
                                  <div class="card">
                                     <header class="card-header cardHeader">
-                                        <p class="card-header-title">Phone</p>
+                                        <p class="card-header-title">Other Phone</p>
                                         <i
                                         class="fas fa-plus-circle"
                                         @click="Addphonefield"
@@ -936,7 +944,7 @@
 
                                    <b-collapse class="card" v-for="(data, index) in phones" :key="index">
                                         <div slot="trigger" class="card-header">
-                                            <p class="card-header-title">Other Phone {{ index+1 }}</p>
+                                            <p class="card-header-title">Phone {{ index+1 }}</p>
                                             <i
                                             class="fas fa-trash"
                                             @click="RemovePhone(index)"
@@ -959,7 +967,7 @@
 
                                <div class="card">
                                     <header class="card-header cardHeader">
-                                        <p class="card-header-title">Email</p>
+                                        <p class="card-header-title">Other Email</p>
                                         <i
                                         class="fas fa-plus-circle"
                                         @click="Addemailfield"
@@ -974,7 +982,7 @@
 
                                    <b-collapse class="card" v-for="(data, index) in emails" :key="index">
                                         <div slot="trigger" class="card-header">
-                                            <p class="card-header-title">Other Email {{ index+1 }}</p>
+                                            <p class="card-header-title">Email {{ index+1 }}</p>
                                             <i
                                             class="fas fa-trash"
                                             @click="RemoveEmail(index)"
@@ -1249,7 +1257,7 @@ Vue.use(Slider)
 
 
 import {showThisEmployee,deleteThisEmployee,filterEmployees,action_logs,callstatus,getMeetingStatus,updateEmployees
-     ,getcities,getCountries,getVacancyInputs,EmployeeSalaryDetails,storeEmployeeContact,getAllJobTitles} from './../../calls'
+     ,getcities,getCountries,getVacancyInputs,EmployeeSalaryDetails,storeEmployeeContact,getAllJobTitles,EmployeeContacts} from './../../calls'
 export default {
     data() {
             return {
@@ -1272,6 +1280,8 @@ export default {
                 file: null,
                 contactName:null,
                 contactrelation:null,
+                contactEmail:null,
+                contactPhone:null,
                 name: null,
                 contractJobTitle: null,
                 has_next_action: null,
@@ -1282,6 +1292,7 @@ export default {
                 logsCurrentNumber: 0,
                 logsTotalNumber: 0,
                 actionLogs: [],
+                EmployeeContact: [],
                 selectedLogs: [],
                 callstatus: [],
                 meetingStatus: [],
@@ -1353,6 +1364,7 @@ export default {
             // this.Allcities();
             // this.Allcountries();
             this.getAllJobTitles()
+            this.GetEmployeeContact()
          },
          methods:{
             getEmployeesData(){
@@ -1381,6 +1393,13 @@ export default {
         .catch(error => {
             console.log(error)
         })
+        },
+        GetEmployeeContact(){
+            EmployeeContacts(this.id).then(response=>{
+                this.EmployeeContact = response.data
+            }).catch(error=>{
+                console.log(error)
+            })
         },
         getAllJobTitles(){
             getAllJobTitles().then(response=>{
@@ -1452,10 +1471,12 @@ export default {
          const bodyFormData = new FormData;
          bodyFormData.append('emails[]',JSON.stringify(this.emails))
          bodyFormData.append('phones[]',JSON.stringify(this.phones))
-         bodyFormData.append('ContactName',this.contactName)
-         bodyFormData.append('contactrelation',this.contactrelation)
+         bodyFormData.append('name',this.contactName)
+         bodyFormData.append('email',this.contactEmail)
+         bodyFormData.append('phone',this.contactPhone)
+         bodyFormData.append('relation',this.contactrelation)
+         bodyFormData.append('employee_id',this.id)
         storeEmployeeContact(bodyFormData).then(response=>{
-
         }).catch(error=>{
             console.log(error)
         })

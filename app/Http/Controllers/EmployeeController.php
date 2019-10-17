@@ -14,6 +14,9 @@ use App\JobTitle;
 use App\Photo;
 use App\employee_image;
 use App\Rate;
+use App\employeeContact;
+use App\employeecontactemail;
+use App\employeecontactphone;
 use App\Salary;
 use App\SalaryDetail;
 use App\User;
@@ -477,6 +480,16 @@ class EmployeeController extends Controller
         }
     }
 
+    public function getAllContacts($id){
+        $getContacts = DB::table('employee_contact as contact')
+        ->leftJoin('employee_contact_email as contact_mail','contact_mail.employee_contact_id','=','contact.id')
+        ->leftJoin('employee_contact_phone as contact_phone','contact_phone.employee_contact_id','=','contact.id')
+        ->select('contact.id as id','contact.name','contact.email','contact.phone','contact.relation')
+        ->where('contact.id',$id)
+        ->get();
+        return $getContacts;
+    }
+
     public function imageCollector(Request $request)
     {
         $rules = [
@@ -556,41 +569,75 @@ class EmployeeController extends Controller
         }
     }
 
-    public function addErContact(request $request)
-    {
+    public function addErContact(request $request){
         // dd($request->all());
-        foreach ($request->emails as $email) {
-            $A = json_decode($email);
-            return $A;
-        }
-        // $A = json_decode($request->emails);
-        // return $request->emails;
-        // if ($request->has('contact_name')) {
-            foreach ($request->contact_name as $k => $v) {
-                $contact = new Contact;
-                $contact->employee_id = $request->employee_id;
-                $contact->name = $request->contact_name[$k];
-                $contact->relation = $request->contact_relation[$k];
-                $contact->nationality = $request->contact_nationality[$k];
-                $contact->title_id = $request->contact_title_id[$k];
-                $contact->email = $request->contact_email[$k];
-                $contact->other_emails = json_encode($request->contact_other_emails[$k]);
-                $contact->phone = $request->contact_phone[$k];
-                $contact->other_phones = json_encode($request->contact_other_phones[$k]);
-                $contact->social = json_encode($request->contact_social[$k]);
-                if ($request->has('contact_other_phones')) {
-                    foreach ($request->contact_other_phones[$k] as $k1 => $v1) {
-                        $contactPhones[] = [
-                            $request->contact_other_phones[$k][$k1] => $request->contact_other_socials[$k][$k1],
-                        ];
-                    }
-                    $contact->other_phones = json_encode($contactPhones);
-                };
-                $contact->save();
-            }
-        // }
-        return back();
+        $employeeContact = new employeeContact;
+        $employeeContact->name = $request->name;
+        $employeeContact->email = $request->email;
+        $employeeContact->employee_id = $request->employee_id;
+        $employeeContact->relation = $request->relation;
+        $employeeContact->relation = $request->relation;
+        $employeeContact->phone = $request->phone;
+        $employeeContact->save();
+         foreach($request->phones as $phone){
+             $EatcPhone = json_decode($phone);
+             if($EatcPhone){
+                 foreach($EatcPhone as $objectPhone){
+                     $contactPhone = new employeecontactphone;
+                     $contactPhone->phone = $objectPhone->phone;
+                     $contactPhone->employee_contact_id = $employeeContact->id;
+                     $contactPhone->save();
+                 }
+             }
+         }
+         foreach($request->emails as $email){
+             $eatchEmail = json_decode($email);
+             if($eatchEmail){
+                foreach($eatchEmail as $objectEmail){
+                    $contactEmail = new employeecontactemail;
+                    $contactEmail->email = $objectEmail->email;
+                    $contactEmail->employee_contact_id = $employeeContact->id;
+                    $contactEmail->save();
+                }
+             }
+         }
     }
+
+    // public function oldaddErContact(request $request)
+    // {
+    //     // dd($request->all());
+    //     foreach ($request->emails as $email) {
+    //         $A = json_decode($email);
+    //         return $A;
+    //     }
+    //     // $A = json_decode($request->emails);
+    //     // return $request->emails;
+    //     // if ($request->has('contact_name')) {
+    //         foreach ($request->contact_name as $k => $v) {
+    //             $contact = new Contact;
+    //             $contact->employee_id = $request->employee_id;
+    //             $contact->name = $request->contact_name[$k];
+    //             $contact->relation = $request->contact_relation[$k];
+    //             $contact->nationality = $request->contact_nationality[$k];
+    //             $contact->title_id = $request->contact_title_id[$k];
+    //             $contact->email = $request->contact_email[$k];
+    //             $contact->other_emails = json_encode($request->contact_other_emails[$k]);
+    //             $contact->phone = $request->contact_phone[$k];
+    //             $contact->other_phones = json_encode($request->contact_other_phones[$k]);
+    //             $contact->social = json_encode($request->contact_social[$k]);
+    //             if ($request->has('contact_other_phones')) {
+    //                 foreach ($request->contact_other_phones[$k] as $k1 => $v1) {
+    //                     $contactPhones[] = [
+    //                         $request->contact_other_phones[$k][$k1] => $request->contact_other_socials[$k][$k1],
+    //                     ];
+    //                 }
+    //                 $contact->other_phones = json_encode($contactPhones);
+    //             };
+    //             $contact->save();
+    //         }
+    //     // }
+    //     return back();
+    // }
 
     public function addCustody(Request $request)
     {

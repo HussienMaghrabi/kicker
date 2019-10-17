@@ -2167,6 +2167,11 @@ export const getRequestStatus = () => {
     return axios.get('/admin/getRequestStatus')
 }
 
+// reject Request status
+export const EmployeeContacts = (id) => {
+    return axios.get('/admin/EmployeeContacts/'+id)
+}
+
 // add employee
 export const addEmployee = (data) => {
     // console.log('data before sending',data)
