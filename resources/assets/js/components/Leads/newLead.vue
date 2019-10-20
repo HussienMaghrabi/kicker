@@ -23,10 +23,10 @@
 
        <div class="columns is-12">
            <div class="column is-2">
-              <b-checkbox v-model="checkboxCustom">Company lead</b-checkbox>
+              <b-checkbox v-model="checkboxcompany">Company lead</b-checkbox>
            </div>
             <div class="column is-6">
-              <b-checkbox v-model="checkboxCustom">Individiual lead</b-checkbox>
+              <b-checkbox v-model="checkboxindividual">Individiual lead</b-checkbox>
            </div>
            <hr>
        </div>
