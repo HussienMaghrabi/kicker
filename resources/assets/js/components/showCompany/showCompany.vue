@@ -12,16 +12,25 @@
         <div class="columns is-12" style="margin-top:10px;padding-bottom:15px">
             <div class="column is-2">
                 <b-field style="padding-right: 6px; max-height: 200px; max-width: 200px;">
-                       <img thumbnail fluid  :src="`/img/${companyImage}`" alt="Image 1"/>
+                    <b-upload v-model="NewCompany.dropFiles"
+                              multiple
+                              drag-drop  @change="onFileChange" required>
+                        <section class="section">
+                            <div class="content has-text-centered">
+                                <img thumbnail fluid  :src="`/img/${companyImage}`" alt="Image 1"/>
+                            </div>
+                        </section>
+                    </b-upload>
+
 
                     <div class="tags" >
                         <span v-for="(file, index) in NewCompany.dropFiles"
-                            :key="index"
-                            class="tag is-primary" >
+                              :key="index"
+                              class="tag is-primary" >
                             {{file.name}}
                             <button class="delete is-small"
-                                type="button"
-                                @click="deleteDropFile(index)">
+                                    type="button"
+                                    @click="deleteDropFile(index)">
                             </button>
                         </span>
                     </div>
@@ -45,37 +54,9 @@
                        <option v-for="currency in currencies " :key="currency.id" :value="currency.id" >{{currency.name}}</option>
                     </b-select>
                 </b-field>
-
-
             </div>
-
-
-
-            <!-- <div class="column is-4"> -->
-                <!-- <b-field>
-
-                    <label  class="column is-3">
-                      <b-checkbox style="margin-right:3px;margin-left:0px;">Sub To</b-checkbox>
-                    </label>
-                    <b-select expanded class="company2">
-                        <option value="Rate" selected>Rate</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </b-select>
-                </b-field> -->
-
-            <!-- </div> -->
-
         </div>
 
-        
-        
-
-
-    
         <div class="columns is-12 plusSign contact" style="border-bottom: solid 1px lightgray;padding-bottom: 28px;">
             <h4 style="color:#9A9A9A">Contact </h4>
             <div class="column is-1">
@@ -93,8 +74,6 @@
                </div>
         </div>
 
-        
-
         <div class="columns is-12">
           <div class="column is-2" style="margin-top:6%"></div>
             <div class="column is-5"  style="margin-top:6%">
@@ -108,15 +87,6 @@
                     <b-input class="company" type="text" style="margin-left:5%;" v-model="contact_array[0].last_name"></b-input>
                 </b-field>
 
-                 <!-- <b-field>
-                      <label class="column is-4">Phone</label>
-                      <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="phones.phone"></b-input>
-                      <div class="column is-1">
-                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addPhoneField"></span>
-                      </div>
-                </b-field> -->
-                <!-- v-model="phoneArr[indexContact]" -->
-                <!-- v-model.number="phones[data]"  -->
                  <b-field v-for="(data, index) in phones" :key="'a'+index"  >
                      
                       <label class="column is-4">Phone</label>
@@ -126,6 +96,7 @@
                         <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addPhoneField"></span> 
                       </div>
                 </b-field>
+
                  <b-field v-for="(data, index) in mobiles" :key="'b'+index" >
                       <label class="column is-4">Mobile</label>
                       <b-input class="Leaad" type="number" style="margin-left:5%;" min="0"   v-model="mobileArr[index]" ></b-input>
@@ -135,28 +106,10 @@
                       </div>
                 </b-field>
 
-                <!-- <b-field>
-                    <label class="column is-4">Mobile</label>
-                    <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="newMobile"></b-input>
-                    <div class="column is-1">
-                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addMobileField"></span>
-                    </div>
-                </b-field>
-
-                 <b-field v-if="indexMob > 0" v-for="(mobile, indexMob) in mobiles" :key="indexMob">
-                    <label class="column is-4">Mobile</label>
-                    <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="newMobile"></b-input>
-                    <div class="column is-1">
-                          <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeMobileField(indexMob,mobile)"></span>
-                    </div>
-                </b-field> -->
                  <b-field>
                       <label class="column is-4">Position</label>
                       <b-input class="company" type="text" style="margin-left:5%;" v-model="contact_array[0].position"></b-input>
                 </b-field>
-
-
-               
             </div>
 
             <div class="column is-5"  style="margin-top:6%">
@@ -170,21 +123,6 @@
                       </div>
                 </b-field>
 
-                <!-- <b-field>
-                      <label class="column is-4">Fax</label>
-                      <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="newFax"></b-input>
-                      <div class="column is-1">
-                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addFaxField"></span>
-                      </div>
-                </b-field>
-
-                 <b-field v-if="index > 0" v-for="(Fax, index) in faxes" :key="index">
-                      <label class="column is-4">Fax</label>
-                      <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="newFax"></b-input>
-                      <div class="column is-1">
-                          <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeFaxField(index,Fax)"></span>
-                      </div>
-                </b-field> -->
                 <b-field v-for="(data, index) in emails" :key="'d'+index" >
                       <label class="column is-4">Email</label>
                       <b-input class="Leaad" type="email" style="margin-left:5%;"   v-model="contact_array[0].proposed_contact_emails[index].email" ></b-input>
@@ -193,22 +131,6 @@
                         <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addMailField"></span> 
                       </div>
                 </b-field>
-
-                 <!-- <b-field>
-                      <label class="column is-4">Email</label>
-                      <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="newMail"></b-input>
-                      <div class="column is-1">
-                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addMailField(index,Fax)"></span>
-                      </div>
-                </b-field>
-
-                 <b-field v-if="index > 0" v-for="(Email, index) in emails" :key="index">
-                      <label class="column is-4">Email</label>
-                      <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="newMail"></b-input>
-                      <div class="column is-1">
-                          <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeMailField(index,Email)"></span>
-                      </div>
-                </b-field> -->
 
                  <b-field>
                     <label  class="column is-3">Nationality</label>
@@ -221,8 +143,6 @@
                     <label class="column is-4">WebSite</label>
                     <b-input class="company" type="text" style="margin-left:5%;" v-model="contact_array[0].website"></b-input>
                 </b-field>
-               
-
             </div>
         </div>
         </div>
@@ -256,6 +176,7 @@
                     <label class="column is-4">State</label>
                     <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="address_array[indexAddress].state"></b-input>
                 </b-field>
+
                  <b-field>
                     <label  class="column is-3">Country</label>
                     <b-select v-model="address_array[indexAddress].country_id" placeholder="Select Country"  expanded>
@@ -280,7 +201,6 @@
             </div>
          </div>
         </div>
-
 
         <div class="columns is-12 plusSign contact" style="border-bottom: solid 1px lightgray;padding-bottom: 28px;">
             <h4 style="color:#9A9A9A;border-bottom:#solid 1px #000">About THe Company</h4>
@@ -317,9 +237,11 @@
                 <div class="level-item filters">
                     <div class="field  mr-10">
                         <div class="control">
-                            <b-button type="is-success" style="margin-top:8px" @click="addNewProposedCompany()"><i class="fas fa-save"></i>&nbsp;
+                            <b-button type="is-success" style="margin-top:8px" @click="updatecompany()">
+                                <i class="fas fa-save"></i>&nbsp;
                                Save
                              </b-button>
+
                              <b-button type="is-danger" style="margin-top:8px"><i class="fas fa-remove "></i>&nbsp;
                               Cancel
                              </b-button>
@@ -336,13 +258,14 @@
 </template>
 
 <script>
-import{getAllCurrency,getAllNationality,getAllCities,getAllCountries, dashgetstatus,addNewProposedCompany,getProposedCompanyData}   from './../../calls'
+import{getAllCurrency,getAllNationality,getAllCities,getAllCountries,updatecompanies, dashgetstatus,addNewProposedCompany,updateProposedCompany,getProposedCompanyData}   from './../../calls'
 export default {
      data() {
         return {
             
             companyImage:'',
             contactsArray:[],
+            showCompany:[],
                 removebtn:'',
                 title:'',
                 firstName:[],
@@ -408,7 +331,8 @@ export default {
      this.getAllCities()
      this.getAllCountries()
      this.getData()
-     
+    
+
     },
     created() {
         this.id = this.$route.params.id
@@ -427,13 +351,14 @@ export default {
                   if(Response.data.data.proposalContacts !=null)
                    this.contact_array=Response.data.data.proposalContacts;
                    this.address_array=Response.data.data.proposalAddress;
-                   
-                   
+
+
               }).catch(error=>{
                   console,log(error);
               })
           },
-          addNewProposedCompany(){
+
+          updateProposedCompany(){
             //   var contactsArray=this.contacts.length+1;
             //   var p;
             //  for (let key in this.phones) {
@@ -441,22 +366,22 @@ export default {
             //   p=this.phones[key].phone;
             //     }
         // for (var i = 1; i < contactsArray; i++) {
-           
-            
+
+
         //   this.contactsArray.push({
         //   contactindex:i,
         //   firstName: this.firstName[i],
         //   lastName:this.lastName[i],
         //   pArray:this.p,
-         
+
         //   mArray:this.mobileArr[i],
         //   fArray:this.faxArr[i],
         //   eArray:this.emailArr[i],
         //   nationality:this.nationalityId[i],
         //   webiste:this.WebSite[i]
         //  });
-  
-         
+
+
         // }
             const bodyFormData = new FormData();
                 for (let key in this.NewCompany) {
@@ -488,12 +413,28 @@ export default {
             bodyFormData.append( 'closing',this.Closing)
             bodyFormData.append('policy',this.Policy)
             bodyFormData.append('contactsArray',JSON.stringify(this.contactsArray))
-         
-           
-              addNewProposedCompany(bodyFormData).then(Response=>{
+
+
+              updateProposedCompany(bodyFormData).then(Response=>{
                 //   console.log("the returned Value is ",Response.data)
+                  window.location.href="allCompanies"
               })
 
+          },
+          updatecompany(id){
+              const bodyFormData = new FormData();
+              for (let key in this.showCompany) {
+                  const value = this.showCompany[key];
+                  bodyFormData.set(key, value);
+              }
+              bodyFormData.append('id',this.id)
+              bodyFormData.append('_method','get')
+              updatecompanies(bodyFormData,this.id).then(response=>{
+                  console.log(response)
+                  //   $(location).attr('href', '/admin/vue/jobCategories')
+              }).catch(error=>{
+                  console.log(error)
+              })
           },
         getAllCities(){
               getAllCities().then(Response=>{

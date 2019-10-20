@@ -1451,6 +1451,9 @@ export const updateCampaignType = (data,id) => {
 export const updateForm = (data,id) => {
     return axios.post('/admin/forms/'+id,data)
 }
+export const updatecompany = (data,id) => {
+    return axios.get('/admin/updateProposedCompany/'+id,data)
+}
 export const updateSubCategory = (data,id) => {
     return axios.post('/admin/out_sub_cats/'+id,data)
 }
@@ -2026,6 +2029,15 @@ export const updateJobCategory = (bodyFormData,id) => {
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     });
 }
+// update company
+export const updatecompanies = (bodyFormData,id) => {
+    return axios({
+        method: 'get',
+        url: '/admin/updateProposedCompany/'+id,
+        data: bodyFormData,
+        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    });
+}
 
 // Get Phase Info
 export const getPhase = (id) => {
@@ -2563,6 +2575,16 @@ export const addNewProposedCompany=(bodyFormData)=>{
     });
 
 }
+export const updateProposedCompany=(bodyFormData)=>{
+    // return axios.post('/admin/updateProposedCompany',data)
+    return axios({
+        method: 'get',
+        url: '/admin/updateProposedCompany',
+        data: bodyFormData,
+        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    });
+
+}
 
 // add contracts
 export const addContract = (data) => {
@@ -2597,3 +2619,4 @@ export const getAllProposalCompanies=()=>{
 export const getProposedCompanyData=(id)=>{
     return axios.get('/admin/getProposalCompanyById/'+id)
 }
+

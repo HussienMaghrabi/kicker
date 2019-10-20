@@ -171,10 +171,8 @@ class ProposedCompanyController extends Controller
     {
         $proposalCompany = proposed_company::where('id',$id)->with('proposalContacts')->with('proposalAddress')->get();
 
-        $arr=[];
-
         foreach($proposalCompany as $item){
-
+//
             $arr['name']=$item['name'];
             $arr['image']=$item['image'];
             $arr['activity']=$item->activity;
@@ -185,10 +183,13 @@ class ProposedCompanyController extends Controller
             $arr['proposalContacts']=$item->proposalContacts;
             $arr['proposalAddress']=$item->proposalAddress;
         }
+
         return response()->json([
             'status'=>'Success',
             'data'=>$arr
         ]);
+
+
     }
 
     /**
@@ -209,8 +210,48 @@ class ProposedCompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        //
+        $id = $request->id;
+
+        echo dd($request->activity);
+
+
+//        DB::table('proposed_company')
+//            ->where('id',$id)
+//            ->update([
+//                'name' =>  $request->companyName,
+//                'activity' =>  'name',
+//                'currency_id' =>  '1',
+//                'introduction' =>  'name',
+//                'closing' =>  'name',
+//                'policy' =>  'name',
+//
+//
+//
+//            ]);
+//
+//        $proposalCompany = proposed_company::where('id',$id)->get();
+//        echo dd($proposalCompany);
+//        foreach($proposalCompany as $item){
+//            $item->name = $request->companyName;
+//            $item->activity = $request->activity;
+//            $item->currency_id = $request->currency_id;
+//            $item->introduction = $request->introduction;
+//            $item->closing = $request->closing;
+//            $item->policy = $request->policy;
+//            if ($request->hasFile('image')) {
+//                $image = $request->file('image');
+//                $name = md5($image->getClientOriginalName() . time()) . "." . $image->getClientOriginalExtension();
+//                $destinationPath = public_path('/img');
+//                $image->move($destinationPath, $name);
+//                $item->image   = $name;
+//            }
+//            $item->update();
+//        }
+
+
         //
     }
 

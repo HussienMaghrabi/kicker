@@ -431,6 +431,20 @@ export default {
     
     return {
             menu: [
+              {
+                href:'/admin/vue/allCompanies',
+                title: 'Companies',
+                icon:
+                        {
+                          element :'img',
+                          attributes: {
+                            src : "/icon/header-proposals.png"
+
+                          }
+                        }
+
+
+              },
                 {
                     href: '',
                     title: 'Lead',

@@ -767,6 +767,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('get_cities_districts', 'AjaxController@get_cities_districts');
 
     Route::resource('forms', 'FormController');
+
     Route::post('get_form_projects', 'AjaxController@get_form_projects');
     Route::post('get_form_phases', 'AjaxController@get_form_phases');
     Route::resource('contracts', 'ContractController');
@@ -888,6 +889,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('getAllCities', 'CityController@getAllCities');
     Route::get('getAllCountries', 'CountryController@getAllCountries');
     Route::post('addNewProposedCompany', 'ProposedCompanyController@store');
+    Route::get('updateProposedCompany/{id}', 'ProposedCompanyController@update');
     Route::get('getAllContactPerson/{id}','ContactController@getAllContactPerson');
     Route::get('getAllProposalCompanies','ProposedCompanyController@index');
 
@@ -896,9 +898,9 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('delete-Company/{id}', 'ProposedCompanyController@multiDelete');
     Route::post('searchForCompany','ProposedCompanyController@searchForCompany');
 
-    
 
-    
+
+
 
 });
 
