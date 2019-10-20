@@ -17,12 +17,23 @@ class LeadsController extends Controller
      */
     public function index()
     {
-        $leads = DB::table('companies as company') 
-            ->leftjoin('phones as phone','company.id','=','phone.company_id')
-            ->leftjoin('emails as email','company.id','=','email.company_id')
-            ->leftjoin('contacts as contact','company.id','=','contact.company_id')
-            ->select('company.id','company.name','company.lead_type','contact.phone','contact.mobile','contact.email','contact.leadstatus')
-            ->paginate(100);
+        $leads = DB::table('leads') 
+        ->select('id','first_name','prefix_name','phone','email')
+        ->paginate(100);
+        // $leadds = DB::table('leads') 
+        // ->select('id','first_name','prefix_name','phone','email')
+        // ->get();
+        
+        // foreach($leadds as $lead){
+        //     $comlead = DB::table('companies as company')->where('lead_id',$lead->id)
+        //         ->leftjoin('phones as phone','company.id','=','phone.company_id')
+        //         ->leftjoin('emails as email','company.id','=','email.company_id')
+        //         ->leftjoin('contacts as contact','company.id','=','contact.company_id')
+        //         ->select('company.id','company.name','company.lead_type','contact.phone','contact.mobile','contact.email','contact.leadstatus')
+        //         ->get();
+        //         $leads[]=$comlead;
+        // }
+       // echo dd($leads);
         return response()->json($leads);
         
     }
@@ -45,6 +56,8 @@ class LeadsController extends Controller
      */
     public function store(Request $request)
     {
+          echo dd($request);
+          return ($request->all());
          $saved = Company::create($request->all());
         if($saved){
             $address = new Address;
@@ -56,8 +69,21 @@ class LeadsController extends Controller
             $address->company_id = $saved->id;
             $address->save();
         }
-          
-          $lead = new Lead;
+        if ($saved) {
+            $address = array(
+                    'street' => $request->street,
+                    'state' => $request->state,
+                    'country_id' => $request->country_id,
+                    'zip_code' => $request->zip_code,
+                    'city_id' => $request->id_city,
+                    'company_id' => $saved->id
+                );
+
+        foreach($address as $ad){
+            $company->Address()->create([$ad]);
+            }
+        }
+          $lead = new Lead;  
           $lead->prefix_name = 'mr';
           $lead->first_name = $request->first_name;
           $lead->last_name = $request->last_name;
