@@ -1749,6 +1749,10 @@ export const getTitleData = () => {
     return axios.get('/admin/titles')
 }
 
+// Show Industries 
+export const getIndustries = () => {
+    return axios.get('/admin/industries')
+}
 
 // Show title
 export const titleShow = (id) => {

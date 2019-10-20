@@ -7,11 +7,18 @@
                 <option v-for="lead in leads" :value="lead.id">{{ lead.first_name +' '+lead.last_name}}</option>
             </b-select>    
       </b-field>
-      <b-field label="Location On Map">
+
+      <!-- <b-field label="Lead">
+            <select class="form-control lead" v-on:change="LeadInfo($event.target.value)" v-model="lead_id" >
+                <option v-for="lead in leads" :key="lead.id" :value="lead.id">{{ lead.first_name +' '+lead.last_name}}</option>
+            </select>    
+      </b-field> -->
+
+      <!-- <b-field label="Location On Map">
            <b-select v-model="location" expanded>
                 <option v-for="location in locations" :value="location.id">{{location.name}}</option>
             </b-select>    
-      </b-field>
+      </b-field> -->
        <b-field label="Buyer Or seller">
             <b-select v-model="buyer_seller"  expanded>
                 <option>Buyer</option>
@@ -19,6 +26,7 @@
 
             </b-select> 
       </b-field>
+
        <b-field label="Unit Type">
             <b-select v-model="unit_type" expanded>
                 <option value="commercial">Commercial</option>
@@ -26,11 +34,12 @@
 
             </b-select> 
       </b-field>
-      <b-field label="Unit Types">
+
+      <!-- <b-field label="Unit Types">
             <b-select v-model="unit_type_id" expanded>
                 <option v-for="unit_type_id in allTypes" :value="unit_type_id.id">{{unit_type_id.name}}</option>
             </b-select> 
-      </b-field>
+      </b-field> -->
        <b-field label="Request Type">
           <b-select v-model="request_type" expanded>
                 <option >Resale</option>

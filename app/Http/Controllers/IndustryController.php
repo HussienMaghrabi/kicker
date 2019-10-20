@@ -24,10 +24,12 @@ class IndustryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $industries = Industry::get();
-        return view('admin.industries.index', ['title' => trans('admin.all_industries'), 'industries' => $industries]);
+        return response()->json($industries);
+        // return view('admin.industries.index', ['title' => trans('admin.all_industries'), 'industries' => $industries]);
     }
 
     /**

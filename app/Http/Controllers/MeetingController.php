@@ -64,14 +64,14 @@ class MeetingController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
+                // echo dd($request);
         if ($request->has('to_do_type')) {
             $rules = [
                 'lead_id' => 'required',
                 // 'contact_id' => 'required',
                 'date' => 'required',
                 'time' => 'required',
-                'location' => 'required',
+                // 'location' => 'required',
                 'probability' => 'required',
                 'description' => 'required',
                 'duration' => 'required',
@@ -84,7 +84,7 @@ class MeetingController extends Controller
                 'contact_id' => 'required',
                 'date' => 'required',
                 'time' => 'required',
-                'location' => 'required',
+                // 'location' => 'required',
                 'probability' => 'required',
                 'description' => 'required',
                 'duration' => 'required',
@@ -98,12 +98,13 @@ class MeetingController extends Controller
             'date' => trans('admin.date'),
             'time' => trans('admin.time'),
             'duration' => trans('admin.duration'),
-            'location' => trans('admin.location'),
+            // 'location' => trans('admin.location'),
             'probability' => trans('admin.probability'),
             'description' => trans('admin.description'),
             'meeting_status_id' => trans('admin.meeting_status'),
         ]);
         if ($validator->fails()) {
+            echo dd($validator->fails());
            // return back()->withInput()->withErrors($validator);
             return response()->json([ "status" => "faild_Added"],200);
         } else {
@@ -114,7 +115,8 @@ class MeetingController extends Controller
             $meeting->time = $request->time;
             $meeting->probability = $request->probability;
             $meeting->description = $request->description;
-            $meeting->location = $request->location;
+            // $meeting->location = $request->location;
+            $meeting->location = "24";
             $meeting->duration = $request->duration;
             $meeting->meeting_status_id = $request->meeting_status_id;
             $meeting->budget = $request->budget;
