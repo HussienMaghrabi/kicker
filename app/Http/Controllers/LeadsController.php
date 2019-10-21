@@ -44,9 +44,10 @@ class LeadsController extends Controller
             ->leftjoin('phones as phone','company.id','=','phone.company_id')
             ->leftjoin('emails as email','company.id','=','email.company_id')
             ->leftjoin('contacts as contact','company.id','=','contact.company_id')
+            ->leftjoin('leads as lead','company.id','=','lead.company')
             ->select('company.id','company.name','company.lead_type','phone.phone','phone.mobile','email.email','contact.leadstatus')
             ->paginate(100);
-
+//echo dd($leads);
         return response()->json($leads);
         
     }
