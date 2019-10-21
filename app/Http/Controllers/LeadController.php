@@ -3510,7 +3510,7 @@ class LeadController extends Controller
 	}
 
 	public function searchForLead(Request $request){
-
+dd($request->all());
 		$search = $request->searchInput;
 		$teamLead = Group::where('team_leader_id', Auth::user()->id)->count();
 		$commercialAgents = @\App\User::where('residential_commercial', 'commercial')->pluck('id')->toArray();

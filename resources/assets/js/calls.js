@@ -290,6 +290,15 @@ export const getcities = () => {
 export const deleteLead = (id) => {
     return axios.get('/admin/delete-lead/'+id)
 }
+
+export const deleteCompany = (id) => {
+    return axios.get('/admin/delete-Company/'+id)
+}
+// Delete a allCompanies
+export const deleteThisCompanies = (id) => {
+    return axios.get('/admin/allCompanies/'+id)
+}
+
 //delete Resale
 export const deleteResale = (id) => {
     return axios.get('/admin/delete-resale/'+id)
@@ -338,8 +347,8 @@ export const getAgents = () => {
 }
 
 // Filter Leads
-export const newLeadsFilter = (page,data) => {
-    return axios.post('/admin/newLeadsFilter?page='+page,data)
+export const newLeadsFilter = (data) => {
+    return axios.post('/admin/newLeadsFilter',data)
 }
 //newResaleFilter
 export const newResaleFilter = (page,data) => {
@@ -385,6 +394,10 @@ export const getUnitTypes = (data) => {
 // Get Unit Types
 export const searchForLead = (data) => {
     return axios.post('/admin/searchForLead',data)
+}
+// Get Unit Types
+export const searchForCompany = (data) => {
+    return axios.post('/admin/searchForCompany',data)
 }
 
 // Add New ToDo
@@ -2164,6 +2177,11 @@ export const storeEmployeeContact = (bodyFormData) => {
 // reject Request status
 export const getRequestStatus = () => {
     return axios.get('/admin/getRequestStatus')
+}
+
+// reject Request status
+export const EmployeeContacts = (id) => {
+    return axios.get('/admin/EmployeeContacts/'+id)
 }
 
 // add employee

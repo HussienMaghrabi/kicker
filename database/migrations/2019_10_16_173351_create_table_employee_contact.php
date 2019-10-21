@@ -15,6 +15,13 @@ class CreateTableEmployeeContact extends Migration
     {
         Schema::create('employee_contact', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('relation')->nullable();
+            $table->string('name');
+            $table->integer('lead_id')->unsigned();
+            $table->integer('employee_id')->unsigned();
+            $table->integer('title_id')->unsigned();
+            $table->string('email');
+            $table->string('phone');
             $table->timestamps();
         });
     }
