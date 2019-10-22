@@ -65,13 +65,13 @@
 
                 <b-field>
                       <label class="column is-4">Phone</label>
-                      <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="newPhone"></b-input>
+                      <b-input class="Leaad" type="number" style="margin-left:5%;" v-once v-model="newPhone"></b-input>
                       <div class="column is-1">
                           <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addPhoneField"></span> 
                       </div>
                 </b-field>
 
-                 <b-field v-if="index > 0" v-for="(phone, index) in phones" :key="index">
+                 <b-field class="repeat" v-if="index > 0" v-for="(phone, index) in phones" :key="index">
                       <label class="column is-4">Phone</label>
                       <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="newPhone"></b-input>
                       <div class="column is-1">
@@ -452,12 +452,26 @@ export default {
         deleteDropFile(index) {
             this.dropFiles.splice(index, 1)
         },
-        addPhoneField(){
-             this.phones.push({
-               newPhone: '',
-            });
+        // addPhoneField(){
+        //      this.phones.push({
+        //        newPhone: '',
+        //     });
 
-        },
+        // },
+           addPhoneField: function() {
+            var id =
+                Math.max.apply(
+                Math,
+                this.phones.map(function(o) {
+                    return o.id;
+                })
+                ) + 1;
+            // this.phones.push({ id, field: null, value: null });
+             this.phones.push({
+               newPhone:'',
+            });
+            console.log("phones", this.phones)
+            },
         addMobileField(){
              this.mobiles.push({
                newMobile: '',
@@ -554,6 +568,7 @@ export default {
             .catch(error => {
                     console.log(error)
             })
+            console.log("phoneeeeeeeees",this.phones)
         }
       }
     

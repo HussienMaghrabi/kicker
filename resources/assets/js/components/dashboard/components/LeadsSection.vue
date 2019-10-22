@@ -16,16 +16,24 @@
   </thead>
   <tbody>
     <tr>
-      <td style="width:12%"> <img style="height:60%;"  src="/images/Image24.png" /></td>
-      <td style="width:23%">  <span style="font-weight:bold">{{title1}}</span> <br> Super CrunchySuper CrunchySuper CrunchySuper CrunchySuper CrunchySuper Crunchy  </td>
+      <td  style="width:12%"> <img class="img_order_rspnsv" style="height:60%;"  src="/images/Image24.png" /> <button  class="button is-primary is-medium btn-rspnsv"
+            @click="isCardModalActive = true">
+             Detailes
+        </button>
+</td>
+      <td  style="width:23%">  <span style="font-weight:bold">{{title1}}</span> <br> <span class="disc_rspnsv"> Super CrunchySuper CrunchySuper CrunchySuper CrunchySuper CrunchySuper Crunchy </span> </td>
       <td  style="width:12%"><i v-on:click="decrement1" style="color:red;font-size: 27px;margin-top: 18px;" class="fas fa-minus-circle icon1"></i></td>
       <td  style="width:12%"><p class="q1">{{counter1}}</p></td>
       <td  style="width:12%"><i v-on:click="increment1" style="color:green;font-size: 27px;margin-top: 18px;" class="fas fa-plus-circle icon1"></i></td>
       <td  style="width:12%"><p style="margin-top:18px" >{{price1}} EGP</p></td>
     </tr>
     <tr>
-      <td  style="width:12%"><img style="height:60%" src="/images/Image24.png" /></td>
-      <td style="width:23%">  <span style="font-weight:bold">{{title2}}</span> <br> Super CrunchySuper CrunchySuper CrunchySuper CrunchySuper CrunchySuper Crunchy  </td>
+      <td  style="width:12%"><img class="img_order_rspnsv" style="height:60%" src="/images/Image24.png" /><button  class="button is-primary is-medium btn-rspnsv"
+            @click="isCardModalActive = true">
+             Detailes
+        </button>
+</td>
+      <td style="width:23%">  <span style="font-weight:bold">{{title2}}</span> <br> <span class="disc_rspnsv"> Super CrunchySuper CrunchySuper CrunchySuper CrunchySuper CrunchySuper Crunchy </span> </td>
       <td  style="width:12%"><i v-on:click="decrement2" style="color:red;font-size: 27px;margin-top: 18px;" class="fas fa-minus-circle icon1"></i></td>
       <td  style="width:12%"><p class="q1">{{counter2}}</p></td>
       <td  style="width:12%"><i v-on:click="increment2" style="color:green;font-size: 27px;margin-top: 18px;" class="fas fa-plus-circle icon1"></i></td>
@@ -33,8 +41,12 @@
 
     </tr>
     <tr>
-      <td  style="width:12%"><img style="height:60%" src="/images/Image24.png" /></td>
-      <td style="width:23%">  <span style="font-weight:bold">{{title3}}</span> <br> Super CrunchySuper CrunchySuper CrunchySuper CrunchySuper CrunchySuper Crunchy  </td>
+      <td  style="width:12%"><img class="img_order_rspnsv" style="height:60%" src="/images/Image24.png" /><button  class="button is-primary is-medium btn-rspnsv"
+            @click="isCardModalActive = true">
+             Detailes
+        </button>
+</td>
+      <td style="width:23%">  <span style="font-weight:bold">{{title3}}</span> <br> <span class="disc_rspnsv"> Super CrunchySuper CrunchySuper CrunchySuper CrunchySuper CrunchySuper Crunchy </span> </td>
       <td  style="width:12%"><i v-on:click="decrement3" style="color:red;font-size: 27px;margin-top: 18px;" class="fas fa-minus-circle icon1"></i></td>
       <td  style="width:12%"><p class="q1">{{counter3}}</p></td>
       <td  style="width:12%"><i v-on:click="increment3" style="color:green;font-size: 27px;margin-top: 18px;" class="fas fa-plus-circle icon1"></i> </td> 
@@ -44,6 +56,31 @@
   </tbody>
 </table>
 </div>
+<b-modal :active.sync="isCardModalActive" :width="640" scroll="keep">
+            <div class="card">
+                <!-- <div class="card-image">
+                    <figure class="image is-4by3">
+                        <img src="/static/img/placeholder-1280x960.png" alt="Image">
+                    </figure>
+                </div> -->
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-48x48">
+                                <img  src="/images/Image24.png"  alt="Image">
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <p class="title is-4">{{title1}}</p>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                       Super CrunchySuper CrunchySuper CrunchySuper CrunchySuper CrunchySuper Crunchy
+                    </div>
+                </div>
+            </div>
+        </b-modal>
 <div class="selected_items">
     <div class="hdr">
        <p style="padding:3%">Selected Items</p>
@@ -134,6 +171,70 @@ table td:not([align]), table th:not([align]) {
     margin-top: 18px;
     text-align: center;
 }
+
+img
+{
+  max-width: unset !important;
+}
+.btn-rspnsv
+{
+  display: none
+}
+@media screen and (max-width:414px)
+{
+  .food_order
+  {
+     width: 69%;
+    border: 1px solid #ccc;
+    margin-left: 2%;
+    margin-top: 1%;
+  
+  }
+  .img_order_rspnsv
+  {
+        height: 33% !important;
+    width: 58px !important;
+  }
+  .disc_rspnsv
+  {
+    display: none;
+  }
+  .btn-rspnsv
+  {
+    display: block;
+    height: 16px;
+    width: 58px;
+    font-size: 8px;
+  }
+  .q1
+  {
+    width: 64%;
+  }
+  .selected_items
+{
+    width: 50%;
+    border: 1px solid #ccc;
+    margin-left: 5.5%;
+    margin-top: 1%;
+    display: inline-block;
+    height: 294px;
+    position: unset;
+    background-color: white;
+}
+.total_price
+{
+    
+    border: 1px solid #ccc;
+    margin-left: 0.5%;
+    display: inline-block; 
+    height: 294px;
+    background-color: white;
+    width: 43%;
+    position: absolute;
+    right: 1%;
+    margin-top: 1%;
+}
+}
 </style>
 <script>
 
@@ -157,7 +258,8 @@ export default {
              Vat:0,
              title1:" Super Crunchy",
              title2:"Friskes Fries",
-             title3:"Chicken N Cheese Titan"
+             title3:"Chicken N Cheese Titan",
+             isCardModalActive: false
 
       };
   },

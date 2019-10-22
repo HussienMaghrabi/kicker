@@ -1,6 +1,6 @@
 <template>
   <div>
-  <sidebar-menu :menu="menu" />
+  <!-- <sidebar-menu :menu="menu" /> -->
     
   <!-- <section class="overlaySec" id="loadd" :is-full-page="true">
             <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
@@ -262,6 +262,10 @@
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style src="./dashboard.css" scoped></style>
 <style>
+.dashboard
+{
+  overflow: hidden;
+}
 .right-side
 {
   background-color: white;
@@ -430,238 +434,7 @@ export default {
   data() {
     
     return {
-            menu: [
-                {
-                    href: '',
-                    title: 'Lead',
-                     icon: 
-                   {
-                     element :'img',
-                     attributes: {
-                     src : "/icon/header-lead.png"              
-                         
-                     }
-                   },
-                    child: [
-                            {
-                                href: '/admin/vue/Leads',
-                                title: 'All Leads'
-                            },
-                             {
-                                href: '/admin/vue/AllMeeting',
-                                title: 'Meetings'
-                            },
-                             {
-                                href: '/admin/vue/AllRequests',
-                                title: 'Requests'
-                            }
-                        ]
-                },
-                {
-                    href: '',
-                    title: 'Inventory',
-                    icon: 
-                   {
-                     element :'img',
-                     attributes: {
-                     src : "/icon/header-inventory.png"           
-                     }
-                     },
-                     child: [
-                            {
-                                href: '/admin/vue/developers',
-                                title: 'Developers'
-                            },
-                             {
-                                href: '/admin/vue/projects',
-                                title: 'Projects'
-                            },
-                             {
-                                href: '/admin/vue/resale_units',
-                                title: 'Resale Units'
-                            },
-                             {
-                                href: '/admin/vue/resale_units',
-                                title: 'Rental Units'
-                            }
-                        ]
-
-                },
-                {
-                   href:'',
-                   title: 'Markiting',
-                   icon: 
-                   {
-                     element :'img',
-                     attributes: {
-                     src : "/icon/header-marketing.png"               
-                         
-                     }
-                   },
-                   child: [
-                            {
-                                href: '/admin/vue/AllCampaigns',
-                                title: 'Campaigns'
-                            },
-                             {
-                                href: '/admin/vue/Campaign_Type',
-                                title: 'Campaigns Types'
-                            },
-                             {
-                                href: '/admin/vue/forms',
-                                title: 'Forms'
-                            },
-                            
-                        ]
-
-
-                },
-                {
-                   href:'/admin/vue/allProposals',
-                   title: 'Proposals',
-                   icon: 
-                   {
-                     element :'img',
-                     attributes: {
-                     src : "/icon/header-proposals.png"               
-                         
-                     }
-                   }
-
-
-                },
-                {
-                   href:'/admin/vue/allContract',
-                   title: 'Contracts',
-                   icon: 
-                   {
-                     element :'img',
-                      attributes: {
-                     src : "/icon/header-proposals.png"              
-                         
-                     }              
-                   }
-
-
-                },
-                 {
-                   href:'/admin/vue/allInvoices',
-                   title: 'Invoices',
-                   icon: 
-                   {
-                     element :'img',
-                     attributes: {
-                     src : "/icon/header-proposals.png"               
-                         
-                     }
-                   }
-
-
-                },
-                 {
-                   href:'/admin/vue/deals',
-                   title: 'Closed Deals',
-                  icon: 
-                   {
-                     element :'img',
-                     attributes: {
-                     src : "/icon/header-closed-deals.png"               
-                         
-                     }
-                   }
-
-
-                },
-                 {
-                   href:'/admin/vue/FinalFinance',
-                   title: 'Finances',
-                    icon: 
-                   {
-                     element :'img',
-                     attributes: {
-                     src : "/icon/header-finances.png"               
-                         
-                     }
-                   }
-
-
-                },
-                 {
-                   href:'',
-                   title: 'HR',
-                    icon: 
-                   {
-                     element :'img',
-                     attributes: {
-                     src : "/icon/header-hr.png"               
-                         
-                     }
-                   },
-                   child: [
-                            {
-                                href: '/admin/vue/jobCategories',
-                                title: 'Job Categories'
-                            },
-                             {
-                                href: '/admin/vue/jobTitle',
-                                title: 'Job Titles'
-                            },
-                             {
-                                href: '/admin/vue/vacancy',
-                                title: 'Vacancies'
-                            },
-                             {
-                                href: '/admin/vue/application',
-                                title: 'Applications'
-                            },
-                             {
-                                href: '/admin/vue/employees',
-                                title: 'Employees'
-                            },
-                             {
-                                href: '/admin/vue/salaries',
-                                title: 'Salaries'
-                            },
-                              {
-                                href: '/admin/vue/salariesDetails',
-                                title: 'Salaries Details'
-                            },
-                              {
-                                href: '/admin/vue/ruleOfProcedure',
-                                title: 'Rules Of Procedure'
-                            },
-                            
-                        ]
-                },
-                 {
-                   href:'/admin/vue/traffic',
-                   title: 'Traffic',
-                   icon: 
-                   {
-                     element :'img',
-                     attributes: {
-                     src : "/icon/header-closed-deals.png"               
-                         
-                     }
-                   }
-
-
-                },
-                 {
-                   href:'/admin/vue/Reports',
-                   title: 'Reports',
-                    icon: 
-                   {
-                     element :'img',
-                     attributes: {
-                     src : "/icon/header-reports.png"               
-                         
-                     }
-                   }
-
-
-                },
-            ],
+          
       submit:false,
       // loading: true,
       isLoading: true,

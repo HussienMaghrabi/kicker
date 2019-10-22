@@ -72,6 +72,14 @@ padding: 2px;
   margin: 7%;
   
 }
+@media (max-width:414px)
+{
+  .headerr span 
+{
+  margin: 5%;
+  
+}
+}
 .activity
 {
    width: 30%;
@@ -134,12 +142,12 @@ padding: 2px;
  {
    width: 81%;
     height: 259px;
-    margin-left: 17%;
+    margin-left: 9%;
  }
  .dashboard_calender {
     width: 83%;
     height: 300px;
-    margin-left: 64px;
+    margin-left: 31px;
     position: unset;
  }
  .activity
@@ -148,7 +156,7 @@ padding: 2px;
    height: 300px;
    background-color: white;
    position: unset;
-    margin-left: 67px;
+    margin-left: 32px;
 }
  }
 </style>

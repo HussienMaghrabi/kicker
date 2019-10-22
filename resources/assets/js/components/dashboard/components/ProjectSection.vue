@@ -2,10 +2,7 @@
 <div>
   <div class="pipline">
    <img style="width: 50%;"  src="/images/Funnel-charts.png" />
-          <i class="fas fa-long-arrow-alt-right data1"></i> 
-          <i class="fas fa-long-arrow-alt-right data2"></i> 
-          <i class="fas fa-long-arrow-alt-right data3"></i> 
-          <i class="fas fa-long-arrow-alt-right data4"></i> 
+          <!--  -->
           <div class="pipeline-info">
              <div><i style="color:#4d5596;margin:10px" class="fas fa-square"></i>aaa</div>
              <div><i style="color:#019b83;margin:10px" class="fas fa-square"></i>bbb</div>
@@ -54,50 +51,24 @@
     background-color: white;
     position: relative;
  }
- .data1
+ 
+@media (max-width:414px)
 {
-  font-size: 70px;
-  height: 2px;
-  margin: 10px;
-  position: absolute;
-  top: 18%;
-    left: 34.8%;
-  color: #4d5596;
-}
-.data2
-{
-  font-size: 50px;
-  height: 2px;
-  margin: 10px;
-  margin-left: 0px;
-  top: 53%;
-    left: 31%;
-  position: absolute;
-  color: #019b83
-
-}
-.data3
-{
-  font-size: 50px;
-  height: 2px;
-  margin: 10px;
-  margin-left: 0px;
-  top: 63%;
-    left: 31%;
-  position: absolute;
-  color: #e9624f;
-
-}
-.data4
-{
-  font-size: 50px;
-  height: 2px;
-  margin: 10px;
-  margin-left: 0px;
-  top: 70.6%;
-    left: 31%;
-  position: absolute;
-  color: #e7cb50;
+  .pipline
+ {
+   width: 97%;
+  margin-left: 2%;
+    display: block;
+    height: 176px;
+  
+    /* position: relative; */
+ }
+ .birthday
+ {
+   width: 94.5%;
+    margin-left: 3.5%;
+   position: unset
+ }
 
 }
 </style>
