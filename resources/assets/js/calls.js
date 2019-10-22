@@ -450,6 +450,24 @@ export const leadShortAdding = (data) => {
 export const getResales = (data, page) => {
     return axios.post('/api/agent/get_resales?page='+page, data)
 }
+export const getVacationType = (page) => {
+    return axios.get('/admin/getVacationType?page='+page)
+}
+export const updateVacation = (id,data) => {
+    return axios.post('/admin/updateVacation/'+id,data)
+}
+export const StoreNewNationalVacType = (data) => {
+    return axios.post('/admin/StoreNewNationalVacType',data)
+}
+export const DeleteNationalVacType = (id) => {
+    return axios.get('/admin/DeleteNationalVacType/'+id)
+}
+export const GetAttendanceReport = () => {
+    return axios.get('/admin/GetAttendanceReport/')
+}
+export const getSinglevacationType = (id) => {
+    return axios.get('/admin/getSinglevacationType/'+id)
+}
 export const getRental = (data, page) => {
     return axios.post('/api/agent/get_rentals?page='+page, data)
 }
@@ -2187,6 +2205,10 @@ export const getRequestStatus = () => {
 export const EmployeeContacts = (id) => {
     return axios.get('/admin/EmployeeContacts/'+id)
 }
+// reject Request status
+export const empRequestVacation = (id) => {
+    return axios.get('/admin/empRequestVacation/'+id)
+}
 
 // add employee
 export const addEmployee = (data) => {
@@ -2195,6 +2217,16 @@ export const addEmployee = (data) => {
         method: 'POST',
         url: '/admin/employees/',
         data: data,
+        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    });
+}
+// add Employee request
+export const uploadEmployeeRequest = (bodyformdata) => {
+    // console.log('data before sending',data)
+    return axios({
+        method: 'POST',
+        url: '/admin/AddEmployeeRequest/',
+        data: bodyformdata,
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     });
 }
