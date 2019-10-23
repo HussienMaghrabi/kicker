@@ -31,6 +31,15 @@ export const saveNewKey = (bodyFormData) => {
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     });
 }
+// store Employee attendance by exiel
+export const StoreAttendanceByEx = (bodyFormData) => {
+    return axios({
+        method: 'POST',
+        url: '/admin/StoreAttendanceByEx',
+        data: bodyFormData,
+        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    });
+}
 
 // Get My Leads
 export const getLeadsByAgent = (data) => {
@@ -1593,6 +1602,21 @@ export const addLeadSource = (data) => {
         export const getAllEvents = () => {
             return axios.get('/admin/events')
         }
+        export const GetAllRoleDetails = (page) => {
+            return axios.get('/admin/GetAllRoleDetails?page='+page)
+        }
+        export const DeleteRoleDetails = (id) => {
+            return axios.get('/admin/DeleteRoleDetails/'+id)
+        }
+        export const EditRoleDetails = (id) => {
+            return axios.get('/admin/EditRoleDetails/'+id)
+        }
+        export const updateSigleRole = (id,data) => {
+            return axios.post('/admin/updateSigleRole/'+id,data)
+        }
+        export const saveNewRoleDetails = (data) => {
+            return axios.post('/admin/saveNewRoleDetails/',data)
+        }
         export const singleEventData = (id) => {
             return axios.get('/admin/events/'+id)
         }
@@ -2236,6 +2260,36 @@ export const getAllJobTitles = () => {
 // get roles
 export const getAllRoles = () => {
     return axios.get('/admin/getAllRoles')
+}
+// edit roles
+export const EditSingleRole = (id) => {
+    return axios.get('/admin/EditSingleRole/'+id)
+}
+
+// edit roles
+export const updateSingleRole = (id,data) => {
+    return axios.post('/admin/updateSingleRole/'+id,data)
+
+}
+// delete role
+export const deleteSingleRole = (id) => {
+    return axios.get('/admin/deleteSingleRole/'+id)
+}
+// get data for custome role page
+export const GetRoleAndDetails = (id) => {
+    return axios.get('/admin/GetRoleAndDetails/'+id)
+}
+// get data for Api role 
+export const GetApiAllRole = (id) => {
+    return axios.get('/admin/GetApiAllRole/'+id)
+}
+// get data for Api role Details 
+export const GetApiAllRoleDetails = () => {
+    return axios.get('/admin/GetApiAllRoleDetails/')
+}
+// store role
+export const storeSingleRole = (data) => {
+    return axios.post('/admin/storeSingleRole/',data)
 }
 
 // Show employee

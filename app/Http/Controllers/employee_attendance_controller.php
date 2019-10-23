@@ -61,4 +61,25 @@ class employee_attendance_controller extends Controller
         ->get();
         return $allAtendance;
     }
+    public function StoreByEx(Request $request)
+    {
+        // dd('sa');
+        $getLocation = Setting::select('lat','lng')->first();        
+        if($request->hasFile('Employee_Sheet')){
+            $path = $request->file('Employee_Sheet')->getRealPath();
+            $data = \Excel::load($path)->get();
+            if($data->count()){
+                // dd($data);
+                foreach ($data as $key => $value) {
+                    $arr[] = ['employee_id' => $value->employee_id, 'attend_time' => $value->time, 'date'=>$value->date, 'long'=> $getLocation->lng ,'lat'=> $getLocation->lat];
+                }
+                dd($arr);
+                if(!empty($arr)){
+                    \DB::table('attendance')->insert($arr);
+                    // dd('Insert Record successfully.');
+                    return response()->json('Insert Record successfully',200);
+                }
+            }
+        }
+    }
 }
