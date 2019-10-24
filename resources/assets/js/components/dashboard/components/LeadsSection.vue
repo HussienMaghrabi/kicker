@@ -187,7 +187,7 @@ img
      width: 69%;
     border: 1px solid #ccc;
     margin-left: 2%;
-    margin-top: 1%;
+    margin-top: 2%;
   
   }
   .img_order_rspnsv

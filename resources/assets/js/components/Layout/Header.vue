@@ -1131,6 +1131,11 @@ nav.navbar
   .followUpDivs {
     display: none;
   }
+.v-sidebar-menu
+{
+  top: 66px;
+  height: 90vh;
+}
 
 </style>
 

@@ -495,6 +495,7 @@ export default {
                 city:'',
                 zipCode:''  
             })
+            console.log("addresses",this.addresses)
         },
         addContact(){
             this.contacts.push({
@@ -509,6 +510,7 @@ export default {
                 leadStatus:'',
                 position:''
             })
+            console.log("contacts",this.contacts)
         },
         getAllCities(){
             getcities().then(response=>{

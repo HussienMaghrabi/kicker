@@ -59,7 +59,12 @@
 </div>
 
 <!-- ------------------------------------------------ -->
+
 <div class="proposals ">
+   <div  class="icon-show"> 
+        <b-input placeholder="search"></b-input>
+     
+      </div>
    <table id="scroll" style="width:100%;height:100%;border:none" class="table  table-borderless table-hover">
   <thead>
     <tr>
@@ -70,14 +75,10 @@
       <td scope="col">Contracts</td>
       <td scope="col">Deals</td>
       <td  style="width:17%" scope="col">
-        <div class="icons-hidden">
+        <div  class="icons-hidden">
                   <i style="position: absolute;z-index: 1;right: 2%;top: 7%; " class="fas fa-search"  ></i>
-
         </div>
-        
-        <b-input placeholder="search"></b-input></td>
-
-
+        <b-input class="icons-hidden" placeholder="search"></b-input></td>
     </tr>
   </thead>
   <tbody>
@@ -91,7 +92,7 @@
       <td >---</td>
       <td style="color:green" >Invoice No:79</td>
       <td class="icons-hidden" style="font-size:16px;padding-left:5%" ><i class="fas fa-envelope"></i> &nbsp; &nbsp; &nbsp; &nbsp;<i class="far fa-trash-alt"></i>&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-print"></i></td>
-       <td style="font-size:16px;padding-left:42%" class="icon-show"><i class="fas fa-ellipsis-v"></i></td>
+       <!-- <td style="font-size:16px;padding-left:42%" class="icon-show"><i class="fas fa-ellipsis-v"></i></td> -->
 
 
 
@@ -104,7 +105,7 @@
       <td >---</td>
       <td style="color:green">Invoice No:79</td>
       <td class="icons-hidden" style="font-size:16px;padding-left:5%" ><i class="fas fa-envelope"></i> &nbsp; &nbsp;&nbsp; &nbsp; <i class="far fa-trash-alt"></i>&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-print"></i></td>
-       <td style="font-size:16px;padding-left:42%" class="icon-show"><i class="fas fa-ellipsis-v"></i></td>
+       <!-- <td style="font-size:16px;padding-left:42%" class="icon-show"><i class="fas fa-ellipsis-v"></i></td> -->
     </tr>
     <tr>
       <td><input type="checkbox" name="vehicle1" value="Bike"></td>
@@ -114,7 +115,7 @@
       <td >---</td>
       <td style="color:green">Invoice No:79</td>
       <td class="icons-hidden" style="font-size:16px;padding-left:5%" ><i class="fas fa-envelope"></i> &nbsp; &nbsp; &nbsp; &nbsp;<i class="far fa-trash-alt"></i>&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-print"></i></td>
-       <td style="font-size:16px;padding-left:42%" class="icon-show"><i class="fas fa-ellipsis-v"></i></td>
+       <!-- <td style="font-size:16px;padding-left:42%" class="icon-show"><i class="fas fa-ellipsis-v"></i></td> -->
 
     </tr>
      <tr>
@@ -125,15 +126,18 @@
       <td >---</td>
       <td style="color:green">Invoice No:79</td>
       <td class="icons-hidden" style="font-size:16px;padding-left:5%" ><i class="fas fa-envelope"></i> &nbsp; &nbsp;&nbsp; &nbsp; <i class="far fa-trash-alt"></i>&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-print"></i></td>
-       <td v-on:click="show =!show" style="font-size:16px;padding-left:42%" class="icon-show"><i class="fas fa-ellipsis-v"></i></td>
+       <!-- <td v-on:click="show =!show" style="font-size:16px;padding-left:42%" class="icon-show"><i class="fas fa-ellipsis-v"></i></td> -->
 
     </tr>
     
   </tbody>
 </table>
-   <div v-if="show"><i class="fas fa-envelope"></i> &nbsp; &nbsp; &nbsp; &nbsp;<i class="far fa-trash-alt"></i>&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-print"></i></div>
+   <!-- <div><i class="fas fa-envelope"></i> &nbsp; &nbsp; &nbsp; &nbsp;<i class="far fa-trash-alt"></i>&nbsp; &nbsp; &nbsp; &nbsp;<i class="fas fa-print"></i></div> -->
+  
 </div>
-
+<div class="icon-show">
+    <span>Send mail</span>  <i class="fas fa-envelope"></i> &nbsp; &nbsp; &nbsp; &nbsp;<span>Delete</span><i class="far fa-trash-alt"></i>&nbsp; &nbsp; &nbsp; &nbsp;<span>Print</span><i class="fas fa-print"></i>
+</div>
 </div>
 </template>
 <style >

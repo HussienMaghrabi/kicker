@@ -4,18 +4,24 @@
        <div class="columns">
 
            <div class="column is-4">
-               <b><label style="display:block">First Name: </label></b>
-               <b-input type="text" v-model="en_first_name"></b-input>
+              
+                <b-field label="First Name:">
+                    <b-input type="text" v-model="en_first_name" required></b-input>
+                </b-field> 
            </div>
 
             <div class="column is-4">
-                <b><label style="display:block">Middle Name: </label></b>
-                <b-input type="text" v-model="en_middle_name"></b-input>
+              
+                <b-field label="Middle Name:">
+                    <b-input type="text" v-model="en_middle_name" required></b-input>
+                </b-field>
             </div>
 
             <div class="column is-4">
-                <b><label style="display:block">Last Name: </label></b>
-                <b-input type="text" v-model="en_last_name"></b-input>
+                
+                <b-field label="Last Name:">
+                    <b-input type="text" v-model="en_last_name" required></b-input>
+                </b-field>
             </div>
 
        </div>
@@ -23,18 +29,24 @@
         <div class="columns">
 
            <div class="column is-4">
-               <b><label style="display:block">Arabic First Name: </label></b>
-               <b-input type="text" v-model="ar_first_name"></b-input>
+              
+                <b-field label="Arabic First Name:">
+                    <b-input type="text" v-model="ar_first_name" required></b-input>
+                </b-field>
            </div>
 
             <div class="column is-4">
-                <b><label style="display:block">Arabic Middle Name: </label></b>
-                <b-input type="text" v-model="ar_middle_name"></b-input>
+                <!-- <b><label style="display:block">Arabic Middle Name: </label></b>
+                <b-input type="text" v-model="ar_middle_name"></b-input> -->
+                 <b-field label="Arabic Middle Name:">
+                    <b-input type="text" v-model="ar_middle_name" required></b-input>
+                </b-field>
             </div>
 
             <div class="column is-4">
-                <b><label style="display:block">Arabic Last Name: </label></b>
-                <b-input type="text" v-model="ar_last_name"></b-input>
+                 <b-field label="Arabic Last Name: ">
+                    <b-input type="text" v-model="ar_last_name" required></b-input>
+                </b-field>
             </div>
 
        </div>
@@ -43,14 +55,16 @@
         <div class="columns">
 
            <div class="column is-4">
-               <b><label style="display:block">National ID: </label></b>
-               <b-input type="text" v-model="national_id"></b-input>
+               <b-field label="National ID: ">
+                    <b-input type="text" v-model="national_id" required></b-input>
+                </b-field>
+              
            </div>
 
             <div class="column is-4">
                 <b><label style="display:block">Profile Photo: </label></b>
                     <b-field class="file">
-                        <b-upload v-model="file">
+                        <b-upload required v-model="file">
                             <a class="button is-primary">
                                 <b-icon icon="upload"></b-icon>
                                 <span>Click to upload</span>
@@ -63,8 +77,11 @@
             </div>
 
             <div class="column is-4">
-                <b><label style="display:block">Salary: </label></b>
-                <b-input type="number" v-model="salary"></b-input>
+                <!-- <b><label style="display:block">Salary: </label></b>
+                <b-input type="number" v-model="salary"></b-input> -->
+                <b-field label="Salary: ">
+                    <b-input type="number" v-model="salary" required></b-input>
+                </b-field>
             </div>
 
        </div>
@@ -75,7 +92,7 @@
            <div class="column is-4">
                <b><label style="display:block">Gender: </label></b>
               <b-field>
-                    <b-select placeholder="Choose Options" expanded v-model="gender">
+                    <b-select required placeholder="Choose Options" expanded v-model="gender">
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </b-select>
@@ -86,7 +103,7 @@
             <div class="column is-4">
                 <b><label style="display:block">marital_status: </label></b>
                  <b-field>
-                    <b-select placeholder="Choose Options" expanded v-model="marital_status">
+                    <b-select required placeholder="Choose Options" expanded v-model="marital_status">
                         <option value="widowed">Widowed</option>
                         <option value="divorced">Divorced</option>
                         <option value="married">Married</option>
@@ -99,7 +116,7 @@
             <div class="column is-4">
                 <b><label style="display:block">military_status: </label></b>
                 <b-field>
-                    <b-select placeholder="Choose Options" expanded v-model="military_status">
+                    <b-select required placeholder="Choose Options" expanded v-model="military_status">
                         <option value="female">Female</option>
                         <option value="fullfilled">Fullfilled</option>
                         <option value="postoned">Postoned</option>
@@ -114,18 +131,25 @@
          <div class="columns">
 
            <div class="column is-4">
-               <b><label style="display:block">Phone: </label></b>
-               <b-input type="text" v-model="phone"></b-input>
+               
+               <b-field label="Phone: ">
+                    <b-input type="number" v-model="phone" required></b-input>
+                </b-field>
            </div>
 
             <div class="column is-4">
-                <b><label style="display:block">Email: </label></b>
-                <b-input type="text" v-model="personal_mail"></b-input>
+                
+                 <b-field label="Email:">
+                    <b-input type="email" v-model="personal_mail" required></b-input>
+                </b-field>
             </div>
 
             <div class="column is-4">
-                <b><label style="display:block">Company Mail: </label></b>
-                <b-input type="text" v-model="company_mail"></b-input>
+                <!-- <b><label style="display:block">Company Mail: </label></b>
+                <b-input type="text" v-model="company_mail"></b-input> -->
+                <b-field label="Company Mail:">
+                    <b-input type="email" v-model="company_mail" required></b-input>
+                </b-field>
             </div>
 
        </div>
@@ -135,7 +159,7 @@
            <div class="column is-6">
                <b><label style="display:block">Department: </label></b>
                 <b-field>
-                    <b-select placeholder="Choose Options" expanded v-model="department">
+                    <b-select required placeholder="Choose Options" expanded v-model="department">
                         <option v-for="department in departments" :value="department.id" >
                             {{ department.en_name }} 
                         </option>
@@ -147,7 +171,7 @@
             <div class="column is-6">
                 <b><label style="display:block">Job: </label></b>
                  <b-field>
-                    <b-select placeholder="Choose Options" expanded v-model="jobTitle">
+                    <b-select required placeholder="Choose Options" expanded v-model="jobTitle">
                         <option v-for="jobTitle in jobTitles" :value="jobTitle.id">
                             {{ jobTitle.en_name }}
                         </option>
@@ -160,19 +184,23 @@
         <div class="columns">
 
            <div class="column is-3">
-               <b><label style="display:block">Password: </label></b>
-               <b-input type="password" v-model="password"></b-input>
+              
+                <b-field label="Password:">
+                    <b-input type="password" v-model="password" required></b-input>
+                </b-field>
            </div>
 
             <div class="column is-3">
-                <b><label style="display:block">Finger ID: </label></b>
-                <b-input type="number" v-model="finger_id"></b-input>
+                
+                <b-field label="Finger ID:">
+                    <b-input type="number" v-model="finger_id" required></b-input>
+                </b-field>
             </div>
 
              <div class="column is-3">
                 <b><label style="display:block">Role: </label></b>
                  <b-field>
-                    <b-select placeholder="Choose Options" expanded v-model="role">
+                    <b-select required placeholder="Choose Options" expanded v-model="role">
                         <option v-for="role in roles" :value="role.id">
                             {{ role.name }}
                         </option>
@@ -182,7 +210,7 @@
 
             <div class="field column is-3">
                 <b><label style="display:block">Type: </label></b>
-                <b-switch v-model="isSwitchedCustom"
+                <b-switch required v-model="isSwitchedCustom"
                     true-value="Yes"
                     false-value="No">
                     {{ isSwitchedCustom }}
