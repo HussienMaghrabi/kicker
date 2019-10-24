@@ -149,7 +149,13 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('filterCils','CilController@filterCils');    
     Route::post('filterSpecificDepartment','ApplicationController@filterSpecificDepartment');    
     Route::get('getCilFilterData','CilController@getCilFilterData');
-    Route::post('leads_data_store','LeadDataController@leads_data_store');    
+    Route::post('leads_data_store','LeadDataController@leads_data_store'); 
+    Route::get('GetAllRoleDetails','RoleDetailsController@index');
+    Route::get('EditRoleDetails/{id}','RoleDetailsController@edit');
+    Route::post('updateSigleRole/{id}','RoleDetailsController@update');
+    Route::post('saveNewRoleDetails','RoleDetailsController@store');
+    Route::get('DeleteRoleDetails/{id}','RoleDetailsController@destroy');
+    Route::get('GetApiAllRoleDetails','RoleDetailsController@GetAllrolesDetailsApi');    
     Route::post('lead_data_xls','LeadDataController@lead_data_xls');
 
     Route::get('lead_data_xls', 'LeadDataController@leads_data_upload'); 
@@ -196,6 +202,8 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('GetleadHistory','LeadController@gitleadHistory');
     Route::post('GetLeadContracts','LeadController@getleadcontracts');
     Route::post('FromrequestPage','LeadController@FromrequestPage');
+    Route::post('AddEmployeeRequest','EmployeeRequestController@store');
+    Route::get('empRequestVacation/{id}','EmployeeRequestController@getAllForEmployee');
     Route::post('GetLeadContacts','LeadController@getleadcontacts');
     Route::post('Contactlead','LeadController@addleadcontact');
     Route::post('GetleadInterest','LeadController@getleadinterest');
@@ -206,6 +214,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     
     
     Route::get('getonesignal','onesignalController@index');
+    Route::post('StoreAttendanceByEx','employee_attendance_controller@StoreByEx');
     Route::get('getProposedCompanies','ProposedCompanyController@getProposedCompanies');
     Route::get('getNewLeads','ProposedCompanyController@getNewLeads');
     
@@ -620,7 +629,14 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('export_xls','CampaignController@export_xls');
     Route::post('delete_resale_image', 'ResaleUnitController@delete_resale_image');
     Route::post('delete_rental_image', 'RentalUnitController@delete_rental_image');
-    Route::resource('roles', 'RoleController');
+    // Route::resource('roles', 'RoleController');
+    Route::get('getAllRoles','RoleController@index');
+    Route::get('EditSingleRole/{id}','RoleController@edit');
+    Route::post('updateSingleRole/{id}','RoleController@update');
+    Route::get('deleteSingleRole/{id}','RoleController@destroy');
+    Route::post('storeSingleRole','RoleController@store');
+    Route::get('GetRoleAndDetails/{id}','RoleController@DataForCustomePage');
+    Route::get('GetApiAllRole/{id}','RoleController@GetAllrolesApi');
     Route::resource('logs', 'LogController');
     Route::post('get_suggestions', 'AjaxController@get_suggestions');
     Route::post('get_suggestions_new', 'AjaxController@get_suggestions_new');
@@ -858,6 +874,12 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('GetAllVacatonType', 'VacationTypesController@index');
     Route::post('addNewNational', 'NationalVicationController@store');
     Route::get('GetVacationOfNational', 'NationalVicationController@index');
+    Route::get('getVacationType', 'VacationTypesController@indexpage');
+    Route::post('StoreNewNationalVacType', 'VacationTypesController@store');
+    Route::get('DeleteNationalVacType/{id}', 'VacationTypesController@destroy');
+    Route::post('updateVacation/{id}', 'VacationTypesController@update');
+    Route::get('getSinglevacationType/{id}', 'VacationTypesController@edit');
+    Route::get('GetAttendanceReport', 'employee_attendance_controller@reportAllAttendance');
     Route::get('GetAllNationalVacation', 'NationalVicationController@vacationRebort');
     Route::get('getSingleNVacation/{id}', 'NationalVicationController@edit');
     Route::post('updateNVacany', 'NationalVicationController@update');
