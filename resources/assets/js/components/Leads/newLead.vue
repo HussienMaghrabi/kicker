@@ -23,10 +23,10 @@
 
        <div class="columns is-12">
            <div class="column is-2">
-              <b-checkbox v-model="checkboxCustom">Company lead</b-checkbox>
+              <b-checkbox v-model="checkboxcompany">Company lead</b-checkbox>
            </div>
             <div class="column is-6">
-              <b-checkbox v-model="checkboxCustom">Individiual lead</b-checkbox>
+              <b-checkbox v-model="checkboxindividual">Individiual lead</b-checkbox>
            </div>
            <hr>
        </div>
@@ -146,14 +146,32 @@
            
 
             <div class="column is-4">
-                <b-field>
+                <!-- <b-field>
                     <label class="column is-4">Lead Source</label>
                     <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="lead_source_id"></b-input>
-                </b-field>       
+                </b-field>        -->
 
                 <b-field>
+                    <label  class="column is-4">Lead Source</label>
+                    <b-select class="Leaad2" expanded placeholder="Lead Source" v-model="lead_source_id">
+                       <option v-for="leadsource in leadsources" :key="leadsource.id" :value="leadsource.id">
+                           {{ leadsource.name }}
+                       </option>
+                    </b-select>
+                </b-field>
+
+                <!-- <b-field>
                     <label class="column is-4">Industry</label>
                     <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="industry_id"></b-input>
+                </b-field> -->
+
+                <b-field>
+                    <label  class="column is-4">Industry</label>
+                    <b-select class="Leaad2" expanded placeholder="Select Industry" v-model="industry">
+                       <option v-for="industry in industries" :key="industry.id" :value="industry.id">
+                           {{ industry.name }}
+                       </option>
+                    </b-select>
                 </b-field>
 
                 <b-field>
@@ -350,7 +368,7 @@
 </template>
 
 <script>
-import {addNewLead,getcities,getCountries,getTitleData} from './../../calls'
+import {addNewLead,getcities,getCountries,getTitleData,getIndustries,getLeadSources} from './../../calls'
 
 export default {
      data() {
@@ -378,6 +396,7 @@ export default {
             contacts:[{
                 removebtn:'',
                 title:'',
+                industry:'',
                 firtName:'',
                 lastName:'',
                 email:'',
@@ -388,6 +407,8 @@ export default {
                 position:''
             }],
             name:null,
+            checkboxindividual:null,
+            checkboxcompany:null,
             industry_id:null,
             employees_Number:null,
             rating:null,
@@ -397,7 +418,9 @@ export default {
             lead_source_id:null,
             cities:[],
             countries:[],
-            titles:[]
+            titles:[],
+            industries:[],
+            leadsources:[]
 
         }
      },
@@ -405,6 +428,8 @@ export default {
          this.getAllCities()
          this.getAllCountries()
          this.getAllTitles()
+         this.getAllIndustries()
+         this.getAllLeadSources()
      },
       methods: {
         removeAddressfield(indexAddress,address){
@@ -484,8 +509,8 @@ export default {
         },
         addContact(){
             this.contacts.push({
-                removebtn:'',
                 title:'',
+                removebtn:'',
                 firtName:'',
                 lastName:'',
                 email:'',
@@ -519,10 +544,31 @@ export default {
                 console.log(error)
             })
         },
+
+        getAllIndustries(){
+            getIndustries().then(response=>{
+                console.log('all industries',response)
+                this.industries = response.data
+            }).catch(error=>{
+                console.log(error)
+            })
+        },
+
+        getAllLeadSources(){
+            getLeadSources().then(response=>{
+                console.log('all Lead Sources',response)
+                this.leadsources = response.data
+            }).catch(error=>{
+                console.log(error)
+            })
+        },
+
         addNewLead(){
             var data ={
             'name':this.name,
-            'industry_id':this.industry_id,
+            'checkboxcompany':this.checkboxcompany,
+            'checkboxindividual':this.checkboxindividual,
+            'industry_id':this.industry,
             'employees_Number':this.employees_Number,
             'rating':this.rating,
             // 'logo':this.logo,

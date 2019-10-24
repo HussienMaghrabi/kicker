@@ -17,15 +17,27 @@ class LeadsController extends Controller
      */
     public function index()
     {
-        $leads = DB::table('companies as company') 
-            ->leftjoin('phones as phone','company.id','=','phone.company_id')
-            ->leftjoin('emails as email','company.id','=','email.company_id')
-            ->leftjoin('contacts as contact','company.id','=','contact.company_id')
-            ->select('company.id','company.name','company.lead_type','contact.phone','contact.mobile','contact.email','contact.leadstatus')
-            ->paginate(100);
+            $leads = DB::table('leads as lead')
+            ->leftjoin('companies as company','company.id','=','lead.company')
+                ->leftjoin('contacts as contact','company.id','=','contact.company_id')
+                ->select('lead.id','lead.first_name','lead.last_name','company.name','company.lead_type','contact.phone','contact.mobile','contact.email','contact.leadstatus')
+                ->get();
         return response()->json($leads);
         
     }
+
+//     public function index()
+//     {
+//         $leads = DB::table('companies as company')
+//             ->leftjoin('phones as phone','company.id','=','phone.company_id')
+//             ->leftjoin('emails as email','company.id','=','email.company_id')
+//             ->leftjoin('contacts as contact','company.id','=','contact.company_id')
+//             ->select('company.id','company.name','company.lead_type','phone.phone','phone.mobile','email.email','contact.leadstatus')
+//             ->paginate(100);
+// echo dd($leads);
+//         return response()->json($leads);
+        
+//     }
 
     /**
      * Show the form for creating a new resource.
@@ -43,62 +55,29 @@ class LeadsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
+
+    dd($request->all());
+        $company = new Company;
          $saved = Company::create($request->all());
-        if($saved){
-            $address = new Address;
-            $address->street = $request->street;
-            $address->state = $request->state;
-            $address->country_id = $request->country_id;
-            $address->city_id = $request->city_id;
-            $address->zip_code = $request->zip_code;
-            $address->company_id = $saved->id;
-            $address->save();
-        }
-          
-          $lead = new Lead;
-          $lead->prefix_name = 'mr';
-          $lead->first_name = $request->first_name;
-          $lead->last_name = $request->last_name;
-          $lead->ar_first_name = $request->ar_first_name;
-          $lead->ar_last_name = $request->ar_last_name;
-          $lead->email = $request->email;
-          $lead->phone = $request->phone;
-          $lead->lead_source_id = $request->lead_source_id;
-          $lead->company= $saved->id;
-          $lead->status = 'new';
-          $lead->notes = $request->notes;
-          $lead->user_id = auth()->user()->id;
-          if (auth()->user()->residential_commercial == "residential" and auth()->user()->type != 'admin') {
-              $lead->agent_id = auth()->user()->id;
-          } elseif (auth()->user()->residential_commercial == "commercial" and auth()->user()->type != 'admin') {
-              $lead->commercial_agent_id = auth()->user()->id;
-          }
-          if ($request->has('agent_id')) {
-              $lead->agent_id = $request->agent_id;
-          } else {
-              $lead->agent_id = 0;
-          }
-          if ($request->has('commercial_agent_id')) {
-              $lead->commercial_agent_id = $request->commercial_agent_id;
-          } else {
-              $lead->commercial_agent_id = 0;
-          }
-          if ($request->hasFile('image')) {
-              $lead->image = uploads($request, 'image');
-          } else {
-              $lead->image = 'image.jpg';
-          }
-          if (!$request->has('agent_id') and !$request->has('commercial_agent_id')) {
-              if (auth()->user()->residential_commercial == 'commercial') {
-                  $lead->commercial_agent_id = auth()->user()->id;
-              } else {
-                  $lead->agent_id = auth()->user()->id;
-              }
-          }
-          $lead->save();
-          DB::table('contacts')->insert([
+
+        if ($saved) {
+            $address = array(
+                    'street' => $request->street,
+                    'state' => $request->state,
+                    'country_id' => $request->country_id,
+                    'zip_code' => $request->zip_code,
+                    'city_id' => $request->id_city,
+                    'company_id' => $saved->id
+                );
+
+        foreach($address as $ad){
+            $company->Address()->create([$ad]);
+            }
+
+        DB::table('contacts')->insert([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'title_id' => $request->title_id,
@@ -109,12 +88,70 @@ class LeadsController extends Controller
             'position' => $request->position,
             'leadstatus' => $request->leadstatus,
             'company_id' => $saved->id,
-            'name' => $request->first_name,
-            'lead_id' => $lead->id
+            'lead_source_id' => $request->lead_source_id,
+            // 'lead_id' => $request->lead_id,
           ]);
-
+        }
+    }
+    public function edit_comapany_data(Request $request)
+    {
+       //echo dd($request->lead_source);
+        DB::table('companies')
+        ->where('id',$request['company_id'])
+        ->update([
+            'name' => $request->company_name,
+            'rating' => $request->rating,
+            'employees_Number' => $request->employees_Number,
+            'annual_revenue' => $request->annual_revenue,
+            'industry_id' => $request->industry,
+            'lead_source_id' => $request->lead_source,
+            'commercial_registration' => $request->commercial_registration,
+            ]);
+            DB::table('leads')
+            ->where('id',$request['lead_id'])
+            ->update([
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'mobile' => $request->mobile,
+                'fax' => $request->fax,
+                'website' => $request->website,
+                'lead_source_id' => $request->lead_source,
+                ]);     
+                return response()->json([
+                    'massege'=> 'success',
+                ],200);     
+          //  dd($request->all());
     }
 
+    public function edit_address(Request $request)
+    {
+       //echo dd($request->lead_source);
+        DB::table('companies')
+        ->where('id',$request['company_id'])
+        ->update([
+            'name' => $request->company_name,
+            'rating' => $request->rating,
+            'employees_Number' => $request->employees_Number,
+            'annual_revenue' => $request->annual_revenue,
+            'industry_id' => $request->industry,
+            'lead_source_id' => $request->lead_source,
+            'commercial_registration' => $request->commercial_registration,
+            ]);
+            DB::table('leads')
+            ->where('id',$request['lead_id'])
+            ->update([
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'mobile' => $request->mobile,
+                'fax' => $request->fax,
+                'website' => $request->website,
+                'lead_source_id' => $request->lead_source,
+                ]);     
+                return response()->json([
+                    'massege'=> 'success',
+                ],200);     
+          //  dd($request->all());
+    }
 
     /**
      * Display the specified resource.
@@ -161,20 +198,3 @@ class LeadsController extends Controller
         //
     }
 }
-
-
-        // return ($request->all());
-        // if ($saved) {
-        //     $address = array(
-        //             'street' => $request->street,
-        //             'state' => $request->state,
-        //             'country_id' => $request->country_id,
-        //             'zip_code' => $request->zip_code,
-        //             'city_id' => $request->id_city,
-        //             'company_id' => $saved->id
-        //         );
-
-        // foreach($address as $ad){
-        //     $company->Address()->create([$ad]);
-        //     }
-        // }

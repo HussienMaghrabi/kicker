@@ -11,20 +11,24 @@
                 <div class="content">
                     <div class="columns is-mobile is-12">
                         <div class="column is-6 respo-header show-lead" style="display: block; margin-top: 0; margin-left: 0">
-                            <h3 class="lead"> Kirolos &nbsp &nbsp<i class="far fa-user" style="color:#444 !important"></i></h3>
-                            <p>Lead Owner  : --  </p>
-                            <p>Email  : -- </p>
-                            <p>Phone  : -- </p>
-                            <p>Mobile  : -- </p>
+                            <h3 class="lead"> {{ getleads.lead.company_name}} &nbsp &nbsp<i class="far fa-user" style="color:#444 !important"></i></h3>
+                            
+                            <p>Lead Owner  : <span> {{ getleads.lead.first_name }}  </span></p>
+                            <p>Email  : {{ getleads.lead.email }} </p>
+                            <p>Phone  : {{ getleads.lead.phone}}  </p>
+                            <!-- <p>test  : {{ getleads.lead}}  </p> -->
+                            <!-- <p>Mobile  : {{ getleads.prefix_name}}  </p> -->
                             <!-- <div class="columns is-12 is-mobile"> -->
-                               <p class="column">Lead status  : </p>
+                               <p class="column">Lead status  : {{ getleads.lead.status}}</p>
                              
                             <!-- </div> -->
                                <div class="field column is-12" style="margin-bottom: 5%;">
                                         <div class="select">
                                         <select>
-                                            <option value="Contacted" selected>Contacted</option>
-                                            <option value="Not Contacted">Not Contacted</option>
+                                            <option v-if="getleads.contacts[0].leadstatus == 'contacted'" value="contacted" selected>Contacted</option>
+                                            <option v-else value="contacted" >Contacted</option>
+                                            <option v-if="getleads.contacts[0].leadstatus == 'not_contacted'" value="not_contacted" selected>Not Contacted</option>
+                                            <option v-else value="not_contacted">Not Contacted</option>
                                         </select>
                                         </div>
                                 </div>
@@ -58,42 +62,42 @@
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Company Name</label>
-                            <b-input class="sub-input" :disabled="disabled"></b-input>
+                            <b-input class="sub-input" :disabled="disabled" v-model="getleads.lead.company_name"></b-input>
                         </b-field>
                     </div>
                      
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Phone</label>
-                            <b-input class="sub-input" :disabled="disabled"></b-input>
+                            <b-input class="sub-input" :disabled="disabled" v-model="getleads.lead.phone"></b-input>
                         </b-field>
                     </div>
 
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Mobile</label>
-                            <b-input class="sub-input" :disabled="disabled"></b-input>
+                            <b-input class="sub-input" :disabled="disabled" v-model="getleads.lead.mobile"></b-input>
                         </b-field>
                     </div>
 
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Email</label>
-                            <b-input class="sub-input" :disabled="disabled"></b-input>
+                            <b-input class="sub-input" :disabled="disabled" v-model="getleads.lead.email"></b-input>
                         </b-field>
                     </div>
 
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Fax</label>
-                            <b-input class="sub-input" :disabled="disabled"></b-input>
+                            <b-input class="sub-input" :disabled="disabled" v-model="getleads.lead.fax"></b-input>
                         </b-field>
                     </div>
 
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Website</label>
-                            <b-input class="sub-input" :disabled="disabled"></b-input>
+                            <b-input class="sub-input" :disabled="disabled" v-model="getleads.lead.website"></b-input>
                         </b-field>
                     </div>
 
@@ -103,42 +107,50 @@
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Lead source</label>
-                            <b-input class="sub-input" :disabled="disabled"></b-input>
+                            <!-- <b-input class="sub-input" :disabled="disabled" v-model="getleads.lead.lead_source"></b-input> -->
+                            <b-select  v-model="getleads.lead.lead_source_id" class="sub-input" :disabled="disabled" placeholder="Select a Lead source">
+                                <option v-for="lead_source in Alllead_sources" :key="lead_source.id" :value="lead_source.id" >{{ lead_source.name }}</option>
+                            </b-select>
                         </b-field>
                     </div>
 
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Industry</label>
-                            <b-input class="sub-input" :disabled="disabled"></b-input>
+                            <!-- <b-input class="sub-input" :disabled="disabled" v-model="getleads.lead.industry"></b-input>
+                            <label class="column is-3">City</label>Allindustries -->
+                            <b-select  v-model="getleads.lead.industry" class="sub-input" :disabled="disabled" placeholder="Select a Industry">
+                                <option v-for="industry in Allindustries" :key="industry.id" :value="industry.id" >{{ industry.name }}</option>
+                            </b-select>
                         </b-field>
+
                     </div>
 
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Annual revenu</label>
-                            <b-input class="sub-input" :disabled="disabled"></b-input>
+                            <b-input class="sub-input" :disabled="disabled" v-model="getleads.lead.annual_revenue"></b-input>
                         </b-field>
                     </div>
 
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">#Employees</label>
-                            <b-input class="sub-input" :disabled="disabled"></b-input>
+                            <b-input class="sub-input" :disabled="disabled" v-model="getleads.lead.employees_Number"></b-input>
                         </b-field>
                     </div>
 
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Commercial registration</label>
-                            <b-input class="sub-input" :disabled="disabled"></b-input>
+                            <b-input class="sub-input" :disabled="disabled" v-model="getleads.lead.commercial_registration"></b-input>
                         </b-field>
                     </div>
 
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Ratings</label>
-                            <b-input class="sub-input" :disabled="disabled"></b-input>
+                            <b-input class="sub-input" :disabled="disabled" v-model="getleads.lead.rating"></b-input>
                         </b-field>
                     </div>
 
@@ -146,7 +158,7 @@
              </div>   
 
               <div class="columns is-12 is-mobile text-center" style="margin:auto;margin-left:3%;padding-bottom:2%;">
-                   <b-button :disabled="disabled"  type="is-success" icon-right="pen"> Edit </b-button>
+                   <b-button :disabled="disabled"  type="is-success" icon-right="pen" @click="edit_comapany_data"> Edit </b-button>
               </div>
 
         </div> 
@@ -178,37 +190,36 @@
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Street</label>
-                            <b-input  class="sub-input" :disabled="disabled"></b-input>
+                            <b-input  class="sub-input" :disabled="disabled" v-model="getleads.address[0].street"></b-input>
                         </b-field>
                     </div>
 
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">State</label>
-                            <b-input  class="sub-input" :disabled="disabled"></b-input>
+                            <b-input  class="sub-input" :disabled="disabled" v-model="getleads.address[0].state"></b-input>
                         </b-field>
                     </div>
                     
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Country</label>
-                            <b-select  class="sub-input" :disabled="disabled" placeholder="Select a Country">
-                                <option value="flint">Flint</option>
-                                <option value="silver">Silver</option>
+                            <!-- <b-input  class="sub-input" :disabled="disabled" v-model="getleads.address[0].country_name"></b-input> -->
+
+                            <b-select  v-model="getleads.address[0].country_id" class="sub-input" :disabled="disabled" placeholder="Select a Country">
+                                <option v-for="country in AllCountries" :key="country.id" :value="country.id" >{{ country.name }}</option>
                             </b-select>
                         </b-field>
                     </div>
 
-                   
                 </div>
 
                 <div class="column is-6">
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">City</label>
-                            <b-select  class="sub-input" :disabled="disabled" placeholder="Select a City">
-                                <option value="flint">Flint</option>
-                                <option value="silver">Silver</option>
+                            <b-select  v-model="getleads.address[0].city_id" class="sub-input" :disabled="disabled" placeholder="Select a city">
+                                <option v-for="city in AllCities" :key="city.id" :value="city.id" >{{ city.name }}</option>
                             </b-select>
                         </b-field>
                     </div>
@@ -216,7 +227,7 @@
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Zip Code</label>
-                            <b-input  class="sub-input" :disabled="disabled"></b-input>
+                            <b-input  class="sub-input" :disabled="disabled" v-model="getleads.address[0].zip_code"></b-input>
                         </b-field>
                     </div>
 
@@ -224,7 +235,7 @@
              </div>   
 
               <div class="columns is-12 is-mobile text-center" style="margin:auto;margin-left:3%;padding-bottom:2%;">
-                   <b-button :disabled="disabled"  type="is-success" icon-right="pen"> Edit </b-button>
+                   <b-button :disabled="disabled"  type="is-success" icon-right="pen" @click="edit_address" > Edit </b-button>
               </div>
 
        </div>
@@ -254,31 +265,32 @@
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">First Name</label>
-                            <b-input  class="sub-input" type="text" :disabled="disabled"></b-input>
+                            <b-input  class="sub-input" v-model="getleads.contacts[0].first_name" type="text" :disabled="disabled"></b-input>
                         </b-field>
                     </div>
 
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Last Name</label>
-                            <b-input  class="sub-input" type="text" :disabled="disabled"></b-input>
+                            <b-input  class="sub-input" v-model="getleads.contacts[0].last_name"  type="text" :disabled="disabled"></b-input>
                         </b-field>
                     </div>
 
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Email</label>
-                            <b-input  class="sub-input" type="email" :disabled="disabled"></b-input>
+                            <b-input  class="sub-input" v-model="getleads.contacts[0].email"  type="email" :disabled="disabled"></b-input>
                         </b-field>
                     </div>
 
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Nationality</label>
-                            <b-select  class="sub-input" :disabled="disabled" placeholder="Select a Nationality">
+                            <b-input  class="sub-input" v-model="getleads.contacts[0].nationality"  type="email" :disabled="disabled"></b-input>
+                            <!-- <b-select  class="sub-input" :disabled="disabled" placeholder="Select a Nationality">
                                 <option value="flint">Flint</option>
                                 <option value="silver">Silver</option>
-                            </b-select>
+                            </b-select> -->
                         </b-field>
                     </div>
 
@@ -289,14 +301,14 @@
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Phone</label>
-                            <b-input  class="sub-input" type="number" :disabled="disabled"></b-input>
+                            <b-input  class="sub-input" v-model="getleads.contacts[0].phone"  type="number" :disabled="disabled"></b-input>
                         </b-field>
                     </div>
 
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Mobile</label>
-                            <b-input  class="sub-input" type="number" :disabled="disabled"></b-input>
+                            <b-input  class="sub-input" v-model="getleads.contacts[0].mobile"  type="number" :disabled="disabled"></b-input>
                         </b-field>
                     </div>
 
@@ -304,8 +316,10 @@
                         <b-field class="column is-12">
                             <label class="column is-3">Lead Status</label>
                             <b-select  class="sub-input" :disabled="disabled" placeholder="Select a Lead Status">
-                                <option value="flint">Flint</option>
-                                <option value="silver">Silver</option>
+                                            <option v-if="getleads.contacts[0].leadstatus == 'contacted'" value="contacted" selected>Contacted</option>
+                                            <option v-else value="contacted" >Contacted</option>
+                                            <option v-if="getleads.contacts[0].leadstatus == 'not_contacted'" value="not_contacted" selected>Not Contacted</option>
+                                            <option v-else value="not_contacted">Not Contacted</option>
                             </b-select>
                         </b-field>
                     </div>
@@ -313,7 +327,7 @@
                     <div class="column is-12">
                         <b-field class="column is-12">
                             <label class="column is-3">Position</label>
-                            <b-input  class="sub-input" type="number" :disabled="disabled"></b-input>
+                            <b-input  class="sub-input" v-model="getleads.contacts[0].position"  type="text" :disabled="disabled"></b-input>
                         </b-field>
                     </div>
 
@@ -744,7 +758,7 @@
         <div class="column is-8">
             <h4 style="color:#9A9A9A;display:contents">System &nbsp 100%</h4>&nbsp &nbsp&nbsp &nbsp
             <span  style="color:rgb(100, 136, 213);font-size:18px">View progress history</span>
-        </div>
+        </div>name
         <div class="column is-4">
             <i class="fas fa-arrow-circle-down" style="font-size:23px;float:right;cursor:pointer;"></i>
         </div>
@@ -803,11 +817,21 @@
 
 
 <script>
-import {} from './../../calls'
+    import {
+        getLeadData,
+        edit_comapany_data,
+        edit_address,
+    } from "./../../calls"
 export default {
     data() {
             return {
                 isLoading: true,
+                lead_id:null,
+                getleads:[],
+                AllCountries:[],
+                AllCities:[],
+                Alllead_sources:[],
+                Allindustries:[],
                 token: window.auth_user.csrf,
                 id: null,
                 disabled: true,
@@ -829,7 +853,8 @@ export default {
             }
         },
     created() {
-        this.id = this.$route.params.id
+        this.lead_id= this.$route.params.id
+        this.getData()
     },
     mounted() {
     },
@@ -851,8 +876,90 @@ export default {
         },
         openGuranteeModal(){
             this.isComponentModalGuranteeActive = true
+        },
+
+                getData(loading = true) {
+                getLeadData(this.lead_id).then(response=>{
+                     console.log('TEEEEEEEES',response)
+                    this.getleads = response.data
+                    this.AllCountries =response.data.AllCountries 
+                    this.AllCities =response.data.AllCities 
+                    this.Allindustries =response.data.Allindustries
+                    this.Alllead_sources =response.data.Alllead_sources
+                     console.log('tttttttttttttttttttttt',response.data.AllCities)
+                     console.log('this get lead var',this.getleads)
+                    this.first_name_value = response.data.lead.first_name
+                    // console.log('test response get lead',this.getleads)
+                    // new get lead data
+                    this.leadData = response.data.lead
+                    this.contacts = response.data.contacts
+                    this.newCallData.contact_id = 0
+                    this.newMeetingData.contact_id = 0
+                    this.newCallData.phone = this.leadData.phone
+                    this.selectedTags = response.data.lead.tags
+                // end new get lead data
+                    this.isLoading = false;
+
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+
+        edit_comapany_data(){
+            var data ={
+            'lead_id':this.getleads.lead.id,
+            'company_id':this.getleads.lead.company_id,
+            'company_name':this.getleads.lead.company_name,
+            'commercial_registration':this.getleads.lead.commercial_registration,
+            'rating':this.getleads.lead.rating,
+            'employees_Number':this.getleads.lead.employees_Number,
+            'annual_revenue':this.getleads.lead.annual_revenue,
+            'industry':this.getleads.lead.industry,
+            'lead_source':this.getleads.lead.lead_source_id,
+            'fax':this.getleads.lead.fax,
+            'website':this.getleads.lead.website,
+            'email':this.getleads.lead.email,
+            'mobile':this.getleads.lead.mobile,
+            'phone':this.getleads.lead.phone,
+            };
+            console.log('dataaaaaa',data)
+            edit_comapany_data(data).then(response=>{
+                alert('Lead Added Successfully')
+                // $(location).attr('href', '/admin/vue/Leads')
+            })
+            .catch(error => {
+                    console.log(error)
+            })
+        },
+
+        edit_address(){
+            var data ={
+            'lead_id':this.getleads.lead.id,
+            'company_id':this.getleads.lead.company_id,
+            'company_name':this.getleads.lead.company_name,
+            'commercial_registration':this.getleads.lead.commercial_registration,
+            'rating':this.getleads.lead.rating,
+            'employees_Number':this.getleads.lead.employees_Number,
+            'annual_revenue':this.getleads.lead.annual_revenue,
+            'industry':this.getleads.lead.industry,
+            'lead_source':this.getleads.lead.lead_source_id,
+            'fax':this.getleads.lead.fax,
+            'website':this.getleads.lead.website,
+            'email':this.getleads.lead.email,
+            'mobile':this.getleads.lead.mobile,
+            'phone':this.getleads.lead.phone,
+            };
+            console.log('dataaaaaa',data)
+            edit_address(data).then(response=>{
+                alert('Lead Added Successfully')
+                // $(location).attr('href', '/admin/vue/Leads')
+            })
+            .catch(error => {
+                    console.log(error)
+            })
         }
         },
+        
 }
 </script>
 

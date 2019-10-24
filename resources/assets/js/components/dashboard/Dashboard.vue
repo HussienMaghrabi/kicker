@@ -613,6 +613,10 @@ export default {
                    },
                    child: [
                             {
+                                href: '/admin/vue/employee_attendance',
+                                title: 'Employee attendance'
+                            },
+                            {
                                 href: '/admin/vue/jobCategories',
                                 title: 'Job Categories'
                             },
@@ -628,6 +632,26 @@ export default {
                                 href: '/admin/vue/vacancy_type',
                                 title: 'Vacancies Type'
                             },
+                            {
+                                href: '/admin/vue/vacations_type',
+                                title: 'Vacation Type'
+                            },
+                            {
+                                href: '/admin/vue/NationalVacation',
+                                title: 'National vication'
+                            },
+                            {
+                                href: '/admin/vue/request_type',
+                                title: 'Employee Request Vacation Types'
+                            },
+                            {
+                                href: '/admin/vue/request_status',
+                                title: 'Employee Request request status'
+                            },
+                            {
+                                href: '/admin/vue/employee_request',
+                                title: 'Employee Request Vacation'
+                            },
                              {
                                 href: '/admin/vue/application',
                                 title: 'Applications'
@@ -636,9 +660,21 @@ export default {
                                 href: '/admin/vue/employees',
                                 title: 'Employees'
                             },
-                             {
+                            {
                                 href: '/admin/vue/salaries',
                                 title: 'Salaries'
+                            },
+                            {
+                                href: '/admin/vue/GrossReport',
+                                title: 'Gross Salaries'
+                            },
+                            {
+                                href: '/admin/vue/GrossReport',
+                                title: 'Gross Salaries Report'
+                            },
+                            {
+                                href: '/admin/vue/deductionreport',
+                                title: 'Deduction Report'
                             },
                               {
                                 href: '/admin/vue/salariesDetails',
@@ -647,6 +683,10 @@ export default {
                               {
                                 href: '/admin/vue/ruleOfProcedure',
                                 title: 'Rules Of Procedure'
+                            },
+                            {
+                                href: '/admin/vue/attendance',
+                                title: 'Uploads Attendance'
                             },
                             
                         ]
