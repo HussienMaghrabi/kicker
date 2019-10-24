@@ -561,6 +561,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('delete_safe/{id}', 'SafeController@destroy');
     Route::get('confirm_proposal/{id}', 'ProposalController@confirm_proposal');
     Route::resource('proposals', 'ProposalController');
+    Route::POST('addNewProposals', 'ProposalController@store');
     Route::resource('deals', 'ClosedDealController');
     Route::resource('tags', 'TagController');
     Route::resource('icons', 'IconController');
@@ -885,11 +886,12 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('getAllProposedCompany','ProposedCompanyController@getProposedCompany');
     Route::get('getAllCpmpanies','CompanyController@getCompany');
     Route::get('getAllCurrency', 'CurrencyController@getAllCurrency');
+    Route::get('getAllItem/{id}', 'ItemController@getAllItem');
     Route::get('getAllNationality', 'NationalityController@getAllNationality');
     Route::get('getAllCities', 'CityController@getAllCities');
     Route::get('getAllCountries', 'CountryController@getAllCountries');
     Route::post('addNewProposedCompany', 'ProposedCompanyController@store');
-    Route::get('updateProposedCompany/{id}', 'ProposedCompanyController@update');
+    Route::post('UpdateProposedCompany/{id}', 'ProposedCompanyController@update');
     Route::get('getAllContactPerson/{id}','ContactController@getAllContactPerson');
     Route::get('getAllProposalCompanies','ProposedCompanyController@index');
 

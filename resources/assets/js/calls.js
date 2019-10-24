@@ -1451,9 +1451,6 @@ export const updateCampaignType = (data,id) => {
 export const updateForm = (data,id) => {
     return axios.post('/admin/forms/'+id,data)
 }
-export const updatecompany = (data,id) => {
-    return axios.get('/admin/updateProposedCompany/'+id,data)
-}
 export const updateSubCategory = (data,id) => {
     return axios.post('/admin/out_sub_cats/'+id,data)
 }
@@ -2029,15 +2026,6 @@ export const updateJobCategory = (bodyFormData,id) => {
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     });
 }
-// update company
-export const updatecompanies = (bodyFormData,id) => {
-    return axios({
-        method: 'get',
-        url: '/admin/updateProposedCompany/'+id,
-        data: bodyFormData,
-        config: { headers: { 'Content-Type': 'multipart/form-data' } }
-    });
-}
 
 // Get Phase Info
 export const getPhase = (id) => {
@@ -2547,6 +2535,10 @@ export const getAllcampaigns = () => {
 export const getAllProposal = () => {
     return axios.get('/admin/proposals')
 }
+// add new Proposal
+export const addNewProposal = (data) => {
+    return axios.post('/admin/addNewProposals', data)
+}
 export const getAllProposedCpmpany = () => {
     return axios.get('/admin/getAllProposedCompany')
 }
@@ -2575,11 +2567,11 @@ export const addNewProposedCompany=(bodyFormData)=>{
     });
 
 }
-export const updateProposedCompany=(bodyFormData)=>{
-    // return axios.post('/admin/updateProposedCompany',data)
+export const updateCompany=(bodyFormData,id)=>{
+    // return axios.post('/admin/updateCompany',data)
     return axios({
-        method: 'get',
-        url: '/admin/updateProposedCompany',
+        method: 'post',
+        url: '/admin/UpdateProposedCompany/'+id,
         data: bodyFormData,
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     });
@@ -2609,6 +2601,9 @@ export const addNewLead = (data) => {
     return axios.post('/admin/companyLeads', data)
 }
 
+export const getAllItem=(id)=>{
+    return axios.get('/admin/getAllItem/'+id)
+}
 
 export const getAllContactPerson=(id)=>{
     return axios.get('/admin/getAllContactPerson/'+id)
