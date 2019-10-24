@@ -2590,6 +2590,15 @@ export const addNewLead = (data) => {
     return axios.post('/admin/companyLeads', data)
 }
 
+// edit lead
+export const edit_comapany_data = (data) => {
+    return axios.post('/admin/edit_comapany_data', data)
+}
+
+// edit address
+export const edit_address = (data) => {
+    return axios.post('/admin/edit_address', data)
+}
 
 export const getAllContactPerson=(id)=>{
     return axios.get('/admin/getAllContactPerson/'+id)

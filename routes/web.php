@@ -215,6 +215,8 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     
     Route::resource('companyLeads', 'LeadsController');
     Route::post('addNewLead','LeadsController@addNewLead');
+    Route::post('edit_comapany_data','LeadsController@edit_comapany_data');
+    Route::post('edit_address','LeadsController@edit_address');
     
     Route::resource('archive', 'ArchiveController');
     Route::resource('contractSections', 'ContractSectionsController');
