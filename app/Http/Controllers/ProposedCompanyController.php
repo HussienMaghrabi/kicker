@@ -72,11 +72,11 @@ class ProposedCompanyController extends Controller
 
         //Save Contact_proposed
         $contactsProposed=new Contact_proposed;
-        $contactsProposed->first_name           =$request->firstName;
-        $contactsProposed->last_name            =$request->lastName;
+        $contactsProposed->first_name           =$request->first_name;
+        $contactsProposed->last_name            =$request->last_name;
         $contactsProposed->website              =$request->webSite;
         $contactsProposed->position             =$request->position;
-        $contactsProposed->nationality_id       =$request->nationlityId;
+        $contactsProposed->nationality_id       =$request->nationality_id;
         $contactsProposed->proposed_company_id  =$proposedCompany->id;
         $contactsProposed->save();
 
@@ -88,6 +88,7 @@ class ProposedCompanyController extends Controller
                 if($item !=null){
                     $ProposedContact_phone= new ProposedContact_phone;
                     $ProposedContact_phone->phone=$item;
+                    $ProposedContact_phone->proposed_company_id  =$proposedCompany->id;
                     $ProposedContact_phone->contact_id=$contactsProposed->id;
                     $ProposedContact_phone->save();
                 }
@@ -117,6 +118,7 @@ class ProposedCompanyController extends Controller
                 if($fax !=null){
                     $proposedContact_fax= new ProposedContact_fax;
                     $proposedContact_fax->fax=$fax;
+                    $proposedContact_fax->proposed_company_id  =$proposedCompany->id;
                     $proposedContact_fax->contact_id=$contactsProposed->id;
                     $proposedContact_fax->save();
                 }
@@ -130,6 +132,7 @@ class ProposedCompanyController extends Controller
                 if($email !=null){
                     $proposedContact_email= new ProposedContact_email;
                     $proposedContact_email->email=$email;
+                    $proposedContact_email->proposed_company_id  =$proposedCompany->id;
                     $proposedContact_email->contact_id=$contactsProposed->id;
                     $proposedContact_email->save();
                 }
@@ -171,10 +174,8 @@ class ProposedCompanyController extends Controller
     {
         $proposalCompany = proposed_company::where('id',$id)->with('proposalContacts')->with('proposalAddress')->get();
 
-        $arr=[];
-
         foreach($proposalCompany as $item){
-
+//
             $arr['name']=$item['name'];
             $arr['image']=$item['image'];
             $arr['activity']=$item->activity;
@@ -185,10 +186,13 @@ class ProposedCompanyController extends Controller
             $arr['proposalContacts']=$item->proposalContacts;
             $arr['proposalAddress']=$item->proposalAddress;
         }
+
         return response()->json([
             'status'=>'Success',
             'data'=>$arr
         ]);
+
+
     }
 
     /**
@@ -209,9 +213,61 @@ class ProposedCompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $id = $request->id;
+
+        DB::table('proposed_company')
+            ->where('id',$id)
+            ->update([
+                'name' => $request->companyName,
+                'activity' =>  $request->activity,
+                'currency_id' =>  $request->currencyId,
+                'introduction' =>  $request->introduction,
+                'closing' =>  $request->closing,
+                'policy' =>  $request->policy,
+            ]);
+        DB::table('contacts_proposed')
+            ->where('proposed_company_id',$id)
+            ->update([
+                'first_name' => $request->first_name,
+                'last_name' =>  $request->last_name,
+                'website' =>  $request->website,
+                'position' =>  $request->position,
+                'nationality_id' =>  $request->nationality_id,
+                'proposed_company_id' =>  $id,
+            ]);
+
+        DB::table('proposedContact_phones')
+            ->where('proposed_company_id',$id)
+            ->update([
+                'phone' => $request->phone,
+                'proposed_company_id' =>  $id,
+            ]);
+        DB::table('proposedContact_emails')
+            ->where('proposed_company_id',$id)
+            ->update([
+                'email' => $request->email,
+                'proposed_company_id' =>  $id,
+            ]);
+        DB::table('proposedContact_faxes')
+            ->where('proposed_company_id',$id)
+            ->update([
+                'fax' => $request->fax,
+                'proposed_company_id' =>  $id,
+            ]);
+        DB::table('proposedCompany_addresses')
+            ->where('proposed_company_id',$id)
+            ->update([
+                'street' => $request->street,
+                'state' => $request->state,
+                'zip_code' => $request->zip_code,
+                'city_id' => $request->city_id,
+                'country_id' => $request->country_id,
+                'proposed_company_id' =>  $id,
+            ]);
+
     }
 
     /**

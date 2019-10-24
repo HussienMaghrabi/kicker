@@ -224,6 +224,8 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     
     Route::resource('companyLeads', 'LeadsController');
     Route::post('addNewLead','LeadsController@addNewLead');
+    Route::post('edit_comapany_data','LeadsController@edit_comapany_data');
+    Route::post('edit_address','LeadsController@edit_address');
     
     Route::resource('archive', 'ArchiveController');
     Route::resource('contractSections', 'ContractSectionsController');
@@ -570,6 +572,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('delete_safe/{id}', 'SafeController@destroy');
     Route::get('confirm_proposal/{id}', 'ProposalController@confirm_proposal');
     Route::resource('proposals', 'ProposalController');
+    Route::POST('addNewProposals', 'ProposalController@store');
     Route::resource('deals', 'ClosedDealController');
     Route::resource('tags', 'TagController');
     Route::resource('icons', 'IconController');
@@ -783,6 +786,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('get_cities_districts', 'AjaxController@get_cities_districts');
 
     Route::resource('forms', 'FormController');
+
     Route::post('get_form_projects', 'AjaxController@get_form_projects');
     Route::post('get_form_phases', 'AjaxController@get_form_phases');
     Route::resource('contracts', 'ContractController');
@@ -906,10 +910,12 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('getAllProposedCompany','ProposedCompanyController@getProposedCompany');
     Route::get('getAllCpmpanies','CompanyController@getCompany');
     Route::get('getAllCurrency', 'CurrencyController@getAllCurrency');
+    Route::get('getAllItem/{id}', 'ItemController@getAllItem');
     Route::get('getAllNationality', 'NationalityController@getAllNationality');
     Route::get('getAllCities', 'CityController@getAllCities');
     Route::get('getAllCountries', 'CountryController@getAllCountries');
     Route::post('addNewProposedCompany', 'ProposedCompanyController@store');
+    Route::post('UpdateProposedCompany/{id}', 'ProposedCompanyController@update');
     Route::get('getAllContactPerson/{id}','ContactController@getAllContactPerson');
     Route::get('getAllProposalCompanies','ProposedCompanyController@index');
 
@@ -918,9 +924,9 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('delete-Company/{id}', 'ProposedCompanyController@multiDelete');
     Route::post('searchForCompany','ProposedCompanyController@searchForCompany');
 
-    
 
-    
+
+
 
 });
 

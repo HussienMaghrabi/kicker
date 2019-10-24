@@ -18,6 +18,8 @@ class ProposedContactFaxesTable extends Migration
             $table->string('fax');
             $table->unsignedInteger('contact_id')->nullable($value=true);
             $table->foreign('contact_id')->references('id')->on('contacts_proposed')->onDelete('cascade');
+            $table->unsignedInteger('proposed_company_id')->nullable($value=true);
+            $table->foreign('proposed_company_id')->references('id')->on('proposed_company')->onDelete('cascade');
             $table->timestamps();
         });
     }

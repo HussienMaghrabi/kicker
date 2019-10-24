@@ -2624,6 +2624,10 @@ export const getAllcampaigns = () => {
 export const getAllProposal = () => {
     return axios.get('/admin/proposals')
 }
+// add new Proposal
+export const addNewProposal = (data) => {
+    return axios.post('/admin/addNewProposals', data)
+}
 export const getAllProposedCpmpany = () => {
     return axios.get('/admin/getAllProposedCompany')
 }
@@ -2647,6 +2651,16 @@ export const addNewProposedCompany=(bodyFormData)=>{
     return axios({
         method: 'POST',
         url: '/admin/addNewProposedCompany',
+        data: bodyFormData,
+        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    });
+
+}
+export const updateCompany=(bodyFormData,id)=>{
+    // return axios.post('/admin/updateCompany',data)
+    return axios({
+        method: 'post',
+        url: '/admin/UpdateProposedCompany/'+id,
         data: bodyFormData,
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     });
@@ -2676,6 +2690,18 @@ export const addNewLead = (data) => {
     return axios.post('/admin/companyLeads', data)
 }
 
+export const getAllItem=(id)=>{
+    return axios.get('/admin/getAllItem/'+id)
+}
+// edit lead
+export const edit_comapany_data = (data) => {
+    return axios.post('/admin/edit_comapany_data', data)
+}
+
+// edit address
+export const edit_address = (data) => {
+    return axios.post('/admin/edit_address', data)
+}
 
 export const getAllContactPerson=(id)=>{
     return axios.get('/admin/getAllContactPerson/'+id)
@@ -2686,3 +2712,4 @@ export const getAllProposalCompanies=()=>{
 export const getProposedCompanyData=(id)=>{
     return axios.get('/admin/getProposalCompanyById/'+id)
 }
+

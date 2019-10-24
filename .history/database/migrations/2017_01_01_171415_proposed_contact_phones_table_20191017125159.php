@@ -16,6 +16,8 @@ class ProposedContactPhonesTable extends Migration
         Schema::table('proposedContact_phones', function (Blueprint $table) {
             $table->increments('id');
             $table->string('phone');
+            $table->unsignedInteger('proposed_company_id')->nullable($value=true);
+            $table->foreign('proposed_company_id')->references('id')->on('proposed_company')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -1,29 +1,30 @@
 <template>
     <section class="container jobs">
        <b>Job Categories</b><hr>
-       <div class="column is-mobile">
+     
+ <div class="column is-mobile">
            <div class="column is-6">
-               <b><label style="display:block">English Name: </label></b>
-               <b-input type="text" v-model="en_name"></b-input>
+                <b-field label="English Name:">
+                    <b-input type="text" v-model="en_name" required></b-input>
+                </b-field>  
            </div>
 
-        <div class="column is-6">
-            <b><label style="display:block">Arabic Name: </label></b>
-            <b-input type="text" v-model="ar_name"></b-input>
-        </div>
-
+            <div class="column is-6">
+                <b-field label="Arabic Name:">
+                        <b-input type="text" v-model="ar_name" required></b-input>
+                </b-field>      
+            </div>
        </div>
-
         <div class="column is-mobile">
            <div class="column is-6">
                 <b-field label="English Description:">
-                    <b-input type="textarea" v-model="en_description"></b-input>
+                    <b-input type="textarea" v-model="en_description" required></b-input>
                 </b-field>  
            </div>
 
             <div class="column is-6">
                 <b-field label="Arabic Description:">
-                        <b-input type="textarea" v-model="ar_description"></b-input>
+                        <b-input type="textarea" v-model="ar_description" required></b-input>
                 </b-field>      
             </div>
        </div>

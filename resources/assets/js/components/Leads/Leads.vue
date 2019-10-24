@@ -333,7 +333,7 @@ changeLeadFav
             getNewAllLeads(this.page).then(response=>{
                 console.log('responseeee',response)
                 this.perPage = response.data.per_page
-                this.leads = response.data.data
+                this.leads = response.data
                 this.leadsCurrentNumber = Math.min(response.data.total,this.page * this.perPage)
                 this.leadsTotalNumber = response.data.total
                 this.total = response.data.total

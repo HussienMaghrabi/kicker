@@ -49,7 +49,27 @@
                         {{props.row.name}}
                     </router-link>
                 </b-table-column>
+<!--                <b-table-column label="Phone" sortable>-->
+<!--                    <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">-->
+<!--                        {{props.row.phone}}-->
+<!--                    </router-link>-->
 
+<!--                </b-table-column>-->
+<!--                <b-table-column label="Fax" sortable>-->
+<!--                    <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">-->
+<!--                        {{props.row.fax}}-->
+<!--                    </router-link>-->
+<!--                </b-table-column>-->
+<!--                <b-table-column  label="Email" sortable>-->
+<!--                    <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">-->
+<!--                        {{props.row.email}}-->
+<!--                    </router-link>-->
+<!--                </b-table-column>-->
+<!--                <b-table-column  label="Website" sortable>-->
+<!--                    <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">-->
+<!--                        {{props.row.website}}-->
+<!--                    </router-link>-->
+<!--                </b-table-column>-->
                 <b-table-column  label="Send Email" sortable>
                     <i class="fas fa-envelope"></i>
                 </b-table-column>
