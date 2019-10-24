@@ -1,29 +1,31 @@
 <template>
     <section class="container jobs">
        <b>Vacancy</b><hr>
-       <div class="column is-mobile">
+       
+        <div class="column is-mobile">
            <div class="column is-12">
-               <b><label style="display:block">English Name: </label></b>
-               <b-input type="text" v-model="en_name"></b-input>
+                <b-field label="English Name:">
+                    <b-input type="text" v-model="en_name" required></b-input>
+                </b-field>  
            </div>
 
-        <div class="column is-12">
-            <b><label style="display:block">Arabic Name: </label></b>
-            <b-input type="text" v-model="ar_name"></b-input>
-        </div>
-
+            <div class="column is-12">
+                <b-field label="Arabic Name:">
+                        <b-input type="text" v-model="ar_name" required></b-input>
+                </b-field>      
+            </div>
        </div>
 
         <div class="column is-mobile">
            <div class="column is-12">
                 <b-field label="English Description:">
-                    <b-input type="textarea" v-model="en_description"></b-input>
+                    <b-input type="textarea" v-model="en_description" required></b-input>
                 </b-field>  
            </div>
 
             <div class="column is-12">
                 <b-field label="Arabic Description:">
-                        <b-input type="textarea" v-model="ar_description"></b-input>
+                        <b-input type="textarea" v-model="ar_description" required></b-input>
                 </b-field>      
             </div>
        </div>
@@ -32,7 +34,7 @@
         <div class="column is-mobile is-12" style="display:inline-flex;margin-bottom:2%;">
             <div class="column is-4">
                 <b-field label="Job Title">
-                      <b-select expanded v-model="selectedJobTitle">
+                      <b-select required expanded v-model="selectedJobTitle">
                             <option v-for="jobTitle in jobTitles" :key="jobTitle.id" :value="jobTitle.id" >
                                     {{ jobTitle.en_name }} 
                             </option>
@@ -42,7 +44,7 @@
 
             <div class="column is-4">
                 <b-field label="Status">
-                        <b-select expanded v-model="status">
+                        <b-select required expanded v-model="status">
                             <option value="1">Open</option>
                             <option value="2">Closed</option>
                         </b-select>
@@ -51,7 +53,7 @@
 
             <div class="column is-4">
                 <b-field label="Type">
-                        <b-select expanded v-model="type">
+                        <b-select required expanded v-model="type">
                             <option v-for="(type,index) in types" :key="type.id" :value="type.id"> {{ index + 1 }}-{{ type.name }} </option>
                         </b-select>
                 </b-field> 

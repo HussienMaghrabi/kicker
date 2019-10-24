@@ -8,236 +8,15 @@
 
 
 
-<menubar></menubar>
-
+<menubar ></menubar>
+ <sidebar-menu class="hide_mobile" :menu="menu" />
     <div class="container is-fluid header-container">
       <div class="navbar-brand">
         <div class="navbar-item">
           <router-link to="/admin/vue/dashboard">
             <img src="/uploads/logo.png" alt width="50" height="50">                    
           </router-link>
-          <b-dropdown aria-role="menu" class="web_menu" ref="_dropmenu">
-            <button class="button header-menu-icon" slot="trigger" style="border: unset;">
-              <i class="fas fa-bars" style="font-size: 1.25rem; margin-left: 1rem;"></i>
-            </button>
-            <div v-if="userType == 'admin'">
-                <b-dropdown-item :custom="true" aria-role="listitem" class="header-menu-item-hover m-2">
-                  <div>
-                    <p>
-                      <img src="/icon/header-lead.png">
-                      <a @mouseover="openLeadMenu" class="header-menu-item has-child">Lead</a>
-                    </p>
-                  </div>
-
-                  <div id="lead-drop-menu" style="">
-                    <router-link  class="navbar-item is-child" 
-                                  to="/admin/vue/Leads"
-                    >All Leads</router-link>
-                    <hr style="padding: 0px; margin: 8px 0px;">
-      
-                    <!-- <a @click="redirectRoute(2)" class="navbar-item" v-if="permArray.calls == 1 || userType == 'admin'">Calls</a> -->
-
-                  <router-link class="navbar-item is-child"
-                                to="/admin/vue/AllMeeting"
-                  > Meetings</router-link>
-
-                    <!-- <a @click="redirectRoute(3)" class="navbar-item is-child"
-                      v-if="permArray.meetings == 1 || userType == 'admin'">Meetings</a> -->
-
-
-                    <hr style="padding: 0px; margin: 8px 0px;">
-
-                    <router-link  class="navbar-item is-child"
-                                    to="/admin/vue/AllRequests"
-                    > Requests </router-link>
-                    <!--                 
-                    <a @click="redirectRoute(4)" class="navbar-item is-child"
-                      v-if="permArray.requests == 1 || userType == 'admin'">Requests</a> -->
-
-                    <hr style="padding: 0px; margin: 8px 0px;">
-
-                  
-
-                    <!-- <a @click="redirectRoute(5)" class="navbar-item is-child">Events</a> -->
-                    <!-- <hr style="padding: 0px; margin: 8px 0px;"> -->
-                    <!-- <a @click="redirectRoute(6)" class="navbar-item is-child">Requests Broadcast</a> -->
-                  </div>
-                </b-dropdown-item>
-
-                <hr style="padding: 0px; margin: 8px 0px;">
-                <div id="inventory-drop-menu">
-                  <router-link class="navbar-item is-child"
-                                    to="/admin/vue/developers">
-                              Developers
-                  </router-link>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <router-link to="/admin/vue/projects" class="navbar-item is-child">
-                      Projects
-                  </router-link>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <router-link  class="navbar-item is-child" 
-                                  to="/admin/vue/resale_units"
-                    >Resale Units</router-link>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <router-link  class="navbar-item is-child" 
-                                  to="/admin/vue/resale_units"
-                                  >Rental Units</router-link>  
-                </div>
-                <div>
-                    <b-dropdown-item :custom="true" aria-role="listitem">
-                      <div>
-                        <p>
-                          <img src="/icon/header-marketing.png">
-                          <a @mouseover="openMarketingMenu" class="header-menu-item has-child">Marketing</a>
-                        </p>
-                      </div>
-                    </b-dropdown-item>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                </div>
-                <div id="marketing-drop-menu">
-                  <!-- <a @click="redirectRoute(12)" class="navbar-item is-child">Campaigns</a> -->
-                  <router-link class="navbar-item is-child" 
-                                to="/admin/vue/AllCampaigns"
-                  > Campaigns </router-link>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-
-                  <router-link class="navbar-item is-child" 
-                                to="/admin/vue/Campaign_Type"
-                  > Campaigns Types</router-link>
-                  
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <router-link class="navbar-item is-child"
-                              to="/admin/vue/forms"
-                      
-                  > Forms</router-link>
-                  <!-- <a @click="redirectRoute(16)" class="navbar-item is-child">Forms</a> -->
-                </div>
-                <div>
-                  <b-dropdown-item aria-role="listitem">
-                    <p>
-                      <img src="/icon/header-proposals.png">
-                      <router-link to="/admin/vue/allProposals" @mouseover="resethover" class="header-menu-item">
-                          Proposals
-                      </router-link>
-                    </p>
-                  </b-dropdown-item>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                </div>
-                  <div>
-                  <b-dropdown-item aria-role="listitem">
-                    <p>
-                      <img src="/icon/header-proposals.png">
-                      <router-link to="/admin/vue/allContract" @mouseover="resethover" class="header-menu-item">
-                          Contracts
-                      </router-link>
-                    </p>
-                  </b-dropdown-item>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                </div>
-                   <div>
-                  <b-dropdown-item aria-role="listitem">
-                    <p>
-                      <img src="/icon/header-proposals.png">
-                      <router-link to="/admin/vue/allInvoices" @mouseover="resethover" class="header-menu-item">
-                          Invoices
-                      </router-link>
-                    </p>
-                  </b-dropdown-item>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                </div>
-                <div>
-                  <b-dropdown-item aria-role="listitem">
-                    <p>
-                      <img src="/icon/header-closed-deals.png">
-                      <router-link to="/admin/vue/deals" @mouseover="resethover" class="header-menu-item" >
-                          Closed Deals
-                      </router-link>
-                    </p>
-                  </b-dropdown-item>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                </div>
-                <div>
-                  <b-dropdown-item aria-role="listitem">
-                    <p>
-                      <img src="/icon/header-finances.png">
-                      <router-link class="header-menu-item" to="/admin/vue/FinalFinance">Finances</router-link>
-                    </p>
-                    <hr style="padding: 0px; margin: 8px 0px;">
-                  </b-dropdown-item>
-                </div>
-                <div >
-                  <b-dropdown-item :custom="true" aria-role="listitem">
-                    <div>
-                      <p>
-                        <img src="/icon/header-hr.png">
-                        <a @mouseover="openHRMenu" class="header-menu-item has-child">HR</a>
-                      </p>
-                    </div>
-                  </b-dropdown-item>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <b-dropdown-item aria-role="listitem">
-                    <p>
-                      <img src="/icon/header-closed-deals.png">
-                      <router-link to="/admin/vue/traffic" @mouseover="resethover" class="header-menu-item" >
-                          Traffic
-                      </router-link>
-                    </p>
-                  </b-dropdown-item>
-                </div>
-                <div id="hr-drop-menu">
-              
-                  <!-- <a @click="redirectRoute(20)" class="navbar-item is-child">Job Categories</a> -->
-                  <router-link to="/admin/vue/jobCategories" class="navbar-item is-child">Job Categories</router-link>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <!-- <a @click="redirectRoute(21)" class="navbar-item is-child">Job Titles</a> -->
-                  <router-link to="/admin/vue/jobTitle" class="navbar-item is-child">Job Titles</router-link>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <!-- <a @click="redirectRoute(22)" class="navbar-item is-child">Vacancies</a> -->
-                  <router-link to="/admin/vue/vacancy" class="navbar-item is-child">Vacancies</router-link>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <!-- <a @click="redirectRoute(23)" class="navbar-item is-child">Applications</a> -->
-                  <router-link to="/admin/vue/application" class="navbar-item is-child">Applications</router-link>
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <!-- <a @click="redirectRoute(24)" class="navbar-item is-child">Employees</a> -->
-                  <router-link to="/admin/vue/employees" class="navbar-item is-child">Employees</router-link>              
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <!-- <a @click="redirectRoute(25)" class="navbar-item is-child">Salaries</a> -->
-                  <router-link to="/admin/vue/salaries" class="navbar-item is-child">Salaries</router-link>              
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <!-- <a @click="redirectRoute(26)" class="navbar-item is-child">Salaries Details</a> -->
-                  <router-link to="/admin/vue/salariesDetails" class="navbar-item is-child">Salaries Details</router-link>              
-                  <hr style="padding: 0px; margin: 8px 0px;">
-                  <!-- <a @click="redirectRoute(27)" class="navbar-item is-child">Rules Of Procedure</a> -->
-                  <router-link to="/admin/vue/ruleOfProcedure" class="navbar-item is-child">Rules Of Procedure</router-link>              
-                </div>
-                <div>
-                  <b-dropdown-item aria-role="listitem">
-                    <p>
-                      <img src="/icon/header-reports.png">
-                      <!-- <a @mouseover="resethover" class="header-menu-item" 
-                      >Reports</a> -->
-                                <router-link to="/admin/vue/Reports" class="header-menu-item">Reports </router-link>
-                    </p>
-                  </b-dropdown-item>
-                </div>
-                <b-dropdown-item aria-role="listitem">
-                  <a v-if="locale == 'ar'" @click="redirectRoute(31)" class="navbar-item lang-bg-screen"
-                    style="display: block !important; margin-right: 11rem;">
-                    <!-- <i class="fa fa-globe"></i>
-                <span id="num" class="label label-danger" style="font-size: 0.5em">en</span> -->
-                    <img src="/icon/header-en.png">
-                  </a>
-                  <a v-else @click="redirectRoute(32)" style="display: block !important; margin-right: 11rem;"
-                    class="navbar-item lang-bg-screen">
-                    <!-- <i class="fa fa-globe"></i>
-                <span id="num" class="label label-danger" style="font-size: 0.5em">ar</span> -->
-                    <img src="/icon/header-ar.png">
-                  </a>
-                </b-dropdown-item>
-            </div>
-            <!-- End admin vue menu -->
-            <!-- start custome role vue menu -->
-          </b-dropdown>
+         
           <router-link class="navbar-item followUpDivs" id="followUpDiv" style="width: 6rem !important; font-weight: 700"
             to="/admin/vue/followUp" v-if="userType == 'admin' || userType == 'agent'">
             <i class="fas fa-user" style="font-size: 1.35rem; margin-left: 0.9rem;margin-top:.5vw"></i>
@@ -403,6 +182,238 @@ import menubar from './menu'
   export default {
     data() {
       return {
+          menu: [
+                {
+                    href: '',
+                    title: 'Lead',
+                     icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-lead.png"              
+                         
+                     }
+                   },
+                    child: [
+                            {
+                                href: '/admin/vue/Leads',
+                                title: 'All Leads'
+                            },
+                             {
+                                href: '/admin/vue/AllMeeting',
+                                title: 'Meetings'
+                            },
+                             {
+                                href: '/admin/vue/AllRequests',
+                                title: 'Requests'
+                            }
+                        ]
+                },
+                {
+                    href: '',
+                    title: 'Inventory',
+                    icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-inventory.png"           
+                     }
+                     },
+                     child: [
+                            {
+                                href: '/admin/vue/developers',
+                                title: 'Developers'
+                            },
+                             {
+                                href: '/admin/vue/projects',
+                                title: 'Projects'
+                            },
+                             {
+                                href: '/admin/vue/resale_units',
+                                title: 'Resale Units'
+                            },
+                             {
+                                href: '/admin/vue/resale_units',
+                                title: 'Rental Units'
+                            }
+                        ]
+
+                },
+                {
+                   href:'',
+                   title: 'Markiting',
+                   icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-marketing.png"               
+                         
+                     }
+                   },
+                   child: [
+                            {
+                                href: '/admin/vue/AllCampaigns',
+                                title: 'Campaigns'
+                            },
+                             {
+                                href: '/admin/vue/Campaign_Type',
+                                title: 'Campaigns Types'
+                            },
+                             {
+                                href: '/admin/vue/forms',
+                                title: 'Forms'
+                            },
+                            
+                        ]
+
+
+                },
+                {
+                   href:'/admin/vue/allProposals',
+                   title: 'Proposals',
+                   icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-proposals.png"               
+                         
+                     }
+                   }
+
+
+                },
+                {
+                   href:'/admin/vue/allContract',
+                   title: 'Contracts',
+                   icon: 
+                   {
+                     element :'img',
+                      attributes: {
+                     src : "/icon/header-proposals.png"              
+                         
+                     }              
+                   }
+
+
+                },
+                 {
+                   href:'/admin/vue/allInvoices',
+                   title: 'Invoices',
+                   icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-proposals.png"               
+                         
+                     }
+                   }
+
+
+                },
+                 {
+                   href:'/admin/vue/deals',
+                   title: 'Closed Deals',
+                  icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-closed-deals.png"               
+                         
+                     }
+                   }
+
+
+                },
+                 {
+                   href:'/admin/vue/FinalFinance',
+                   title: 'Finances',
+                    icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-finances.png"               
+                         
+                     }
+                   }
+
+
+                },
+                 {
+                   href:'',
+                   title: 'HR',
+                    icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-hr.png"               
+                         
+                     }
+                   },
+                   child: [
+                            {
+                                href: '/admin/vue/jobCategories',
+                                title: 'Job Categories'
+                            },
+                             {
+                                href: '/admin/vue/jobTitle',
+                                title: 'Job Titles'
+                            },
+                             {
+                                href: '/admin/vue/vacancy',
+                                title: 'Vacancies'
+                            },
+                             {
+                                href: '/admin/vue/application',
+                                title: 'Applications'
+                            },
+                             {
+                                href: '/admin/vue/employees',
+                                title: 'Employees'
+                            },
+                             {
+                                href: '/admin/vue/salaries',
+                                title: 'Salaries'
+                            },
+                              {
+                                href: '/admin/vue/salariesDetails',
+                                title: 'Salaries Details'
+                            },
+                              {
+                                href: '/admin/vue/ruleOfProcedure',
+                                title: 'Rules Of Procedure'
+                            },
+                            
+                        ]
+                },
+                 {
+                   href:'/admin/vue/traffic',
+                   title: 'Traffic',
+                   icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-closed-deals.png"               
+                         
+                     }
+                   }
+
+
+                },
+                 {
+                   href:'/admin/vue/Reports',
+                   title: 'Reports',
+                    icon: 
+                   {
+                     element :'img',
+                     attributes: {
+                     src : "/icon/header-reports.png"               
+                         
+                     }
+                   }
+
+
+                },
+            ],
         name: window.auth_user.name,
         id: window.auth_user.id,
         agentType: window.auth_user.agentType,
@@ -1112,11 +1123,20 @@ nav.navbar
       top: 17% !important;
       left: 18% !important;
     }
+    .hide_mobile
+    {
+      display: none
+    }
   }
 
   .followUpDivs {
     display: none;
   }
+.v-sidebar-menu
+{
+  top: 66px;
+  height: 90vh;
+}
 
 </style>
 

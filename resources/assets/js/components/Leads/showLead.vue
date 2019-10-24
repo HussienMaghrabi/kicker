@@ -434,17 +434,17 @@
                             </header>
                             <section class="modal-card-body">
                             <b-field>
-                                <b-select placeholder="Select Contact" expanded>
+                                <b-select v-model="task_contact" placeholder="Select Contact" expanded>
                                     <option>Mohamed</option>
                                 </b-select>
                             </b-field>
 
                             <b-field>
-                                <b-input type="textarea" placeholder="Activity Description"></b-input>                                 
+                                <b-input v-model="task_note" type="textarea" placeholder="Activity Description"></b-input>                                 
                             </b-field>
 
                             <b-field>
-                                <b-datepicker
+                                <b-datepicker v-model="task_date"
                                     icon="calendar-today">
                                 </b-datepicker>
                             </b-field>
@@ -462,7 +462,7 @@
                             
                             </section>
                             <footer class="modal-card-foot">
-                                <b-button type="is-info"><i class="fas fa-save"></i>&nbsp Save</b-button>
+                                <b-button @click="savetask" type="is-info"><i class="fas fa-save"></i>&nbsp Save</b-button>
                                 <button class="button" type="button" @click="isComponentModalActive = false">Cancel</button>
                             </footer>
                         </div>
@@ -568,13 +568,13 @@
      <div class="columns is-12" style="margin-bottom:2%">
             <div class="column is-2">
                 <b-field>
-                    <i class="fas fa-tasks"></i>&nbsp &nbsp
+                    <i class="fas fa-tasks"></i>&nbsp; &nbsp;
                     <span style="color:rgb(100, 136, 213);cursor:pointer" @click="openColsedActivityModal">Add Closed Activity</span>
                 </b-field>
             </div>
             <div class="column is-2">
                 <b-field>
-                    <i class="fas fa-calendar-alt"></i>&nbsp &nbsp
+                    <i class="fas fa-calendar-alt"></i>&nbsp; &nbsp;
                     <span  style="color:rgb(100, 136, 213);cursor:pointer" @click="openEventModal">Add Past Event</span>
                 </b-field>
             </div>
@@ -604,7 +604,7 @@
                             </b-field>
                              
                             <b-field>
-                                <i class="fas fa-bell"></i>&nbsp &nbsp
+                                <i class="fas fa-bell"></i>&nbsp; &nbsp;
                                 <span  style="color:rgb(100, 136, 213)" v-on:click="isHiddenNotifications = !isHiddenNotifications">Notifications</span>
                             </b-field>
 
@@ -616,7 +616,7 @@
                             
                             </section>
                             <footer class="modal-card-foot">
-                                <b-button type="is-info"><i class="fas fa-save"></i>&nbsp Save</b-button>
+                                <b-button type="is-info"><i class="fas fa-save"></i>&nbsp; Save</b-button>
                                 <button class="button" type="button" @click="isComponentModalColsedActivity = false">Cancel</button>
                             </footer>
                         </div>
@@ -825,6 +825,10 @@
 export default {
     data() {
             return {
+                task_contact:"",
+                task_note:"",
+                task_date:"",
+                task_array:[],
                 isLoading: true,
                 lead_id:null,
                 getleads:[],
@@ -862,6 +866,14 @@ export default {
         
     },
     methods: {
+        savetask(){
+                     this.task_array.push({
+                        task_contact:this.task_contact,
+                        task_note:this.task_note,
+                        task_date:this.task_date
+                     })
+                     console.log("task",this.task_array)
+        },
         toggleInputsActive(){
                 this.disabled = !this.disabled
         },
