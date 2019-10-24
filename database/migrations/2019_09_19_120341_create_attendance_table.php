@@ -16,10 +16,10 @@ class CreateAttendanceTable extends Migration
         Schema::create('attendance', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employee_id')->unsigned();
-            $table->date('from_time');
-            $table->date('too_time');
-            $table->double('long',8,2);
-            $table->double('lat',8,2);
+            $table->date('date');
+            $table->time('attend_time');
+            $table->double('long');
+            $table->double('lat');
             $table->timestamps();
             $table->foreign('employee_id')->references('id')->on('employees');
         });

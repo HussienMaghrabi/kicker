@@ -7,122 +7,110 @@
                 </div>
             </div>
 
-          
-
             <div class="level">
                 <div class="level-item filters">
                     <div class="field  mr-10">
                         <div class="control">
-                            <input class="input is-meduim mt-10" type="text" placeholder="Search" v-model="searchInput" @input="search" style="width:70%;margin-bottom: 23px;">
+                            <input class="input is-meduim mt-10" type="text" placeholder="Search" v-model="searchInput" @input="search_Company" style="width:70%;margin-bottom: 23px;">
                             <b-button type="is-info" style="margin-top:8px"><i class="fas fa-plus"></i>&nbsp;
-                                <router-link  :to="'/admin/vue/newProposal'" style="color:#fff">
-                                  New
+                                <router-link  :to="'/admin/vue/newcompany'" style="color:#fff">
+                                    New
                                 </router-link>
-                             </b-button>
+                            </b-button>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
 
-            </div>
-                    <b-table
-                    :data="proposalsCompanies"
-                    bordered
-                    checkable
-                    narrowed
-                    hoverable
+        </div>
+        <b-table
+                :data="proposalsCompanies"
+                bordered
+                checkable
+                narrowed
+                hoverable
 
-                    paginated
-                    backend-pagination
+                paginated
+                backend-pagination
 
-                    :current-page="page"
-                    :total="total"
-                    :per-page="perPage"
-                    @page-change="onPageChange"
+                :current-page="page"
+                :total="total"
+                :per-page="perPage"
+                @page-change="onPageChange"
 
-                    :checked-rows.sync="selectedLeads"
-                    :default-sort-direction="defaultSortDirection"
-                    default-sort="created_at"
-                    >
+                :checked-rows.sync="selectedLeads"
+                :default-sort-direction="defaultSortDirection"
+                default-sort="created_at">
 
-                    <template slot-scope="props">
-                        <b-table-column  label="Company Name" sortable>
-                             <router-link :to="'/admin/vue/showCompany/'+props.row.id" style="color:#000"> 
-                                     {{props.row.name}}
-                             </router-link>
-                        </b-table-column>
+            <template slot-scope="props">
+                <b-table-column  label="Company Name" sortable>
+                    <router-link :to="'/admin/vue/showCompany/'+props.row.id" style="color:#000">
+                        {{props.row.name}}
+                    </router-link>
+                </b-table-column>
+<!--                <b-table-column label="Phone" sortable>-->
+<!--                    <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">-->
+<!--                        {{props.row.phone}}-->
+<!--                    </router-link>-->
 
-                        <!-- <b-table-column label="Phone" sortable>
-                            <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000"> 
-                                      Test
-                            </router-link>
-                           
-                        </b-table-column>
+<!--                </b-table-column>-->
+<!--                <b-table-column label="Fax" sortable>-->
+<!--                    <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">-->
+<!--                        {{props.row.fax}}-->
+<!--                    </router-link>-->
+<!--                </b-table-column>-->
+<!--                <b-table-column  label="Email" sortable>-->
+<!--                    <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">-->
+<!--                        {{props.row.email}}-->
+<!--                    </router-link>-->
+<!--                </b-table-column>-->
+<!--                <b-table-column  label="Website" sortable>-->
+<!--                    <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">-->
+<!--                        {{props.row.website}}-->
+<!--                    </router-link>-->
+<!--                </b-table-column>-->
+                <b-table-column  label="Send Email" sortable>
+                    <i class="fas fa-envelope"></i>
+                </b-table-column>
 
-                        <b-table-column label="Fax" sortable>
-                            <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000"> 
-                            Test
-                            </router-link>
-                        </b-table-column>
+                <b-table-column label="Delete" sortable>
+                    <i class="fas fa-trash-alt" @click="DeleteFromIndex(props.row.id)" style="cursor:pointer"></i>
+                </b-table-column>
 
-                        <b-table-column  label="Email" sortable>
-                             <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000"> 
-                               Test
-                            </router-link>
-                        </b-table-column>
+            </template>
 
-                        <b-table-column  label="Website" sortable>
-                             <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000"> 
-                              Test 
-                            </router-link>
-                        </b-table-column> -->
-
-                      
-                   
-
-                        <b-table-column  label="" sortable>
-                            <i class="fas fa-envelope"></i>
-                        </b-table-column>
-
-                        <b-table-column label="Delete" sortable>
-                           <i class="fas fa-trash-alt" style="cursor:pointer"></i>
-                        </b-table-column>
-
-                    </template>
-
-                    <template slot="empty" v-if="!isLoading && isEmpty">
-                        <section class="section">
-                            <div class="content has-text-grey has-text-centered">
-                                <p>
-                                    <b-icon
+            <template slot="empty" v-if="!isLoading && isEmpty">
+                <section class="section">
+                    <div class="content has-text-grey has-text-centered">
+                        <p>
+                            <b-icon
                                     icon="emoticon-sad"
                                     size="is-large">
-                                </b-icon>
-                            </p>
-                            <p>Nothing here.</p>
-                        </div>
-                    </section>
-                    <hr>
-                </template>
-                
-            </b-table>
-            
-            <div class="leads-number">{{leadsCurrentNumber + ' / ' + leadsTotalNumber}} </div>
-            <div class="buttons">
-                <b-button type="is-success"><i class="fas fa-envelope"></i>  Send Email</b-button>
-                <b-button type="is-danger"><i class="fas fa-trash-alt"></i> Delete</b-button>
-                <b-button type="is-info"><i class="fas fa-print"></i>  Print</b-button>
-            </div>
+                            </b-icon>
+                        </p>
+                        <p>Nothing here.</p>
+                    </div>
+                </section>
+                <hr>
+            </template>
 
-            <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="true"></b-loading>
+        </b-table>
 
+        <div class="leads-number">{{leadsCurrentNumber + ' / ' + leadsTotalNumber}} </div>
+        <div class="buttons">
+            <b-button type="is-success"><i class="fas fa-envelope"></i>  Send Email</b-button>
+            <b-button type="is-danger" @click="bulkDeleteDialog('0')"><i class="fas fa-trash"></i>  Delete</b-button>
+            <b-button type="is-info"><i class="fas fa-print"></i>  Print</b-button>
+        </div>
+
+        <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="true"></b-loading>
 
     </div>
 </template>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <script>
-    import {autoSwitchAPi,getMyLeads,changeLeadFav,changeLeadHot,deleteLead,newLeadsFilter,getPublicData,switchLeads,getAgents,checkUserGroupAndRoles,searchForLead, getLeadSources, getLeadsByAgent, getBtns, addCall,bulkActions,deleteNoActionLeads,getAllProposalCompanies} from './../../calls'
+    import {autoSwitchAPi,getMyLeads,changeLeadFav,deleteThisCompanies,changeLeadHot,deleteLead,deleteCompany,newLeadsFilter,getPublicData,switchLeads,getAgents,checkUserGroupAndRoles,searchForCompany, getLeadSources, getLeadsByAgent, getBtns, addCall,bulkActions,deleteNoActionLeads,getAllProposalCompanies} from './../../calls'
     import Multiselect from 'vue-multiselect'
     export default {
         data() {
@@ -145,12 +133,10 @@
                 total: 0,
                 page: 1,
                 perPage: 100,
-
-                isLoading: true,
                 isFullPage: true,
                 searchInput: '',
+                search: '',
                 selectedLeads: [],
-
                 ShowHint: false,
                 hintId: '',
                 fav: '',
@@ -199,89 +185,115 @@
             this.$router.replace({hash: '#/1'});
             this.page = parseInt(this.$route.hash.split('/')[1])
             this.getSources()
-         },
-         methods: {
-             refreshPage() {
-                 if(Object.keys(this.filter).length < 1){
-                     console.log('No Filters Detected')
-                     this.getData();   
-                 }else{
-                     console.log('Filters Detected')
-                     this.filterLeads();
-                 }
-             },
+        },
+        methods: {
+            refreshPage() {
+                if(Object.keys(this.filter).length < 1){
+                    console.log('No Filters Detected')
+                    this.getData();
+                }else{
+                    console.log('Filters Detected')
+                    this.filterLeads();
+                }
+            },
             checkClass(r){
                 var path = this.$route.path.split('/');
                 if(path[1] == r) return 'tabLinkActive'
-                    else return 'tabLinkNotActive'
-                },
+                else return 'tabLinkNotActive'
+            },
             getLeadsfilter(){
                 getBtns({
-                  "user_id": this.userId,
-                  "agent_id": " ",
-              }).then(response=>{
+                    "user_id": this.userId,
+                    "agent_id": " ",
+                }).then(response=>{
                     this.getLeadsByAgent = response.data.btns
                 })
-              .catch(error => {
-                console.log(error)
-            })
-          },
-
-          getSources(){
-            getLeadSources().then(response=>{
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            getSources(){
+                getLeadSources().then(response=>{
                     this.leadSources = response.data
                 })
-            .catch(error => {
-                console.log(error)
-            })
-        },
-
-        getData(loading = true){
-            this.isLoading = loading
-            getAllProposalCompanies(this.page).then(response=>{
-                this.perPage = response.data.per_page
-                this.proposalsCompanies = response.data.data
-                this.leadsCurrentNumber = Math.min(response.data.total,this.page * this.perPage)
-                this.leadsTotalNumber = response.data.total
-                this.total = response.data.total
-                
-                if(this.leads.length == 0){
-                    this.isEmpty = true
-                }
-                let currentTotal = response.data.total
-                if (response.data.total / this.perPage > 1000) {
-                    currentTotal = this.perPage * 1000
-                }
-
-                this.total = currentTotal
-                this.isLoading = false
-                this.getPublic()
-                    //console.log(response.data)
-
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            destroy(cID){
+                getAllProposalCompanies(this.page).then(response=> {
+                    this.getData()
                 })
-            .catch(error => {
-                console.log(error)
-            })
-        },
-        search(){
-            if(this.searchInput){
-                    //this.isLoading = true
+            },
+            getData(loading = true){
+                this.isLoading = loading
+                getAllProposalCompanies(this.page).then(response=>{
+                    this.perPage = response.data.per_page
+                    this.proposalsCompanies = response.data.data
+                    this.leadsCurrentNumber = Math.min(response.data.total,this.page * this.perPage)
+                    this.leadsTotalNumber = response.data.total
+                    this.total = response.data.total
+
+                    if(this.leads.length == 0){
+                        this.isEmpty = true
+                    }
+                    let currentTotal = response.data.total
+                    if (response.data.total / this.perPage > 1000) {
+                        currentTotal = this.perPage * 1000
+                    }
+                    this.total = currentTotal
+                    this.isLoading = false
+                    this.getPublic()
+                    //console.log(response.data)
+                })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                this.isLoading = false
+
+            },
+            search_Company(){
+
+                if(this.searchInput){
+
                     var data ={
                         'searchInput':this.searchInput,
                         '_token':this.token,
                         'agent_id':this.userId,
                     };
-                    searchForLead(data).then(response=>{
-                        this.leads = response.data
+                    searchForCompany(data).then(response=>{
+                        this.proposalsCompanies = response.data
                     })
-                    .catch(error => {
-                        console.log(error)
-                    })
+                        .catch(error => {
+                            console.log(error)
+                        })
                 }  else if (this.searchInput.trim() === "") {
                     this.getData();
                 }
             },
+            deleteCompany(id){
+                deleteThisCompanies(id).then(response=>{
+                    this.success('Deleted')
+                    this.isLoading = true
+                    this.getData()
+                })
+                    .catch(error => {
+                        this.errorDialog()
+                        console.log(error)
+                    })
+            },
+            DeleteFromIndex(id) {
+                this.$dialog.confirm({
+                    title: 'Deleting ',
+                    message: 'Are you sure you want to <b>delete</b> Company?',
+                    confirmText: 'Delete',
+                    type: 'is-danger',
+                    hasIcon: true,
+                    onConfirm: () => this.deleteCompany(id)
+                })
+            },
             filterLeads(scrollSwitch = false){
+                console.log("asdsadad ");
                 this.isLoading = true
                 this.fitlerFlag = true
                 this.tagIds = []
@@ -300,16 +312,15 @@
                     'agent_id':this.userId,
                     'tags':this.tagIds,
                     'phoneIso': this.phoneIso,
-                    'probability': this.probability
+                    'probability': this.probability,
+                    'searchInput': this.searchInput
                 };
-                newLeadsFilter(this.page, data).then(response=>{
-                  console.log("asdsadad ", response.data.per_page);
+                newLeadsFilter(data).then(response=>{
                     this.perPage = response.data.per_page
                     this.leads = response.data.data;
                     this.leadsCurrentNumber = response.data.to;
                     this.leadsTotalNumber = response.data.total;
                     this.total = response.data.total;
-
                     if(this.leads.length == 0){
                         this.isEmpty = true
                     }
@@ -320,9 +331,9 @@
                     this.total = currentTotal
                     this.isLoading = false
                 })
-                .catch(error => {
-                    console.log(error)
-                })
+                    .catch(error => {
+                        console.log(error)
+                    })
             },
             bulkDeleteDialog(lead=0) {
                 if(this.selectedLeads.length != 0){
@@ -330,19 +341,16 @@
                 }else if(lead != 0){
                     this.selectedLeads.push(lead)
                     this.confirmDeleteBulk()
-
                 }else{
                     this.errorDialog()
                 }
             },
-
             bulkActionDialog(lead=0) {
                 if(this.selectedLeads.length != 0){
                     this.bulkActionModel = true
                 }else if(lead != 0){
                     this.selectedLeads.push(lead)
                     this.bulkActionModel = true
-
                 }else{
                     this.errorDialog()
                 }
@@ -353,14 +361,12 @@
                 this.selectedLeads.forEach(element => {
                     this.leadsIds.push(element.id)
                 });
-
                 // var data = {
                 //     'agent_id':this.bulkActionData.rAgent,
                 //     'commercial_agent_id':this.bulkActionData.cAgent,
                 //     '_token':this.token,
                 //     'leads':this.leadsIds,
                 // }
-
                 var data = {
                     "_token": this.token,
                     "user_id": this.userId,
@@ -375,25 +381,23 @@
                     // "to_do_due_date": this.newCallData.to_do_due_date,
                     // "to_do_description": this.newCallData.to_do_description,
                 };
-
                 bulkActions(data).then(response=>{
                     console.log(response)
                     if(response.data.status == 501){
                         this.error('Call')
                         this.isLoading = false
                     }else {
-                    //this.isLoading = false
-                    this.newCallData = {}
-                    this.call_status_id = 0
-                    this.getData()
-                    this.success('Call')
-                }
-            })
-                .catch(error => {
-                    console.log(error)
+                        //this.isLoading = false
+                        this.newCallData = {}
+                        this.call_status_id = 0
+                        this.getData()
+                        this.success('Call')
+                    }
                 })
+                    .catch(error => {
+                        console.log(error)
+                    })
             },
-
             switchLeadDialog(lead=0) {
                 console.log('this.selectedLeadsssssssssssss')
                 console.log(this.selectedLeads)
@@ -403,7 +407,6 @@
                 }else if(lead != 0){
                     this.selectedLeads.push(lead)
                     this.switchLeadModel = true
-
                 }else{
                     this.errorDialog()
                 }
@@ -414,7 +417,6 @@
                 this.selectedLeads.forEach(element => {
                     this.leadsIds.push(element.id)
                 });
-
                 var data = {
                     'agent_id':this.switchLeadData.rAgent,
                     'commercial_agent_id':this.switchLeadData.cAgent,
@@ -429,9 +431,9 @@
                     this.leadsIds = []
                     this.success('Switched')
                 })
-                .catch(error => {
-                    console.log(error)
-                })
+                    .catch(error => {
+                        console.log(error)
+                    })
             },
             changeLeadStatus(type,id){
                 if(type == 'fav'){
@@ -439,17 +441,17 @@
                         console.log(response)
                         this.getData()
                     })
-                    .catch(error => {
-                        console.log(error)
-                    })
+                        .catch(error => {
+                            console.log(error)
+                        })
                 }else if (type == 'hot'){
                     changeLeadHot({id:id}).then(response=>{
                         console.log(response)
                         this.getData()
                     })
-                    .catch(error => {
-                        console.log(error)
-                    })
+                        .catch(error => {
+                            console.log(error)
+                        })
                 }
             },
             leadActions(event,id){
@@ -472,19 +474,19 @@
             },
             deleteThisLead(id){
                 this.isLoading = true
-                deleteLead(id).then(response=>{
+                deleteCompany(id).then(response=>{
                     console.log(response)
                     this.getData()
                     this.success('Deleted')
                 })
-                .catch(error => {
-                    console.log(error)
-                })
+                    .catch(error => {
+                        console.log(error)
+                    })
             },
             confirmDeleteBulk() {
                 this.$dialog.confirm({
                     title: 'Deleting Leads',
-                    message: 'Are you sure you want to <b>delete</b> Bulk Leads ?',
+                    message: 'Are you sure you want to <b>delete</b> Companies ?',
                     confirmText: 'Delete Leads',
                     type: 'is-danger',
                     hasIcon: true,
@@ -505,9 +507,9 @@
                     this.locations = response.data.locations
                     this.tags = response.data.tags
                 })
-                .catch(error => {
-                    console.log(error)
-                })
+                    .catch(error => {
+                        console.log(error)
+                    })
             },
             dateFormatterFrom(dt){
                 var date = dt.toLocaleDateString();
@@ -536,142 +538,139 @@
                 this.hot = hot
                 this.fav = fav
                 this.reloadData = true
-
                 if(id == this.hintId)
-                this.flag = Math.random();
-
+                    this.flag = Math.random();
                 setInterval(function () {
                     if(this.reloadData) {
-                            // this.getData(false)
-                            this.reloadData = false
-                        }
-                    }.bind(this), 5000);
-
-
+                        // this.getData(false)
+                        this.reloadData = false
+                    }
+                }.bind(this), 5000);
             },
             getRowClass(row) {
                 if (!row.seen) return 'rowDanger'
             },
-        success(action) {
-            this.$toast.open({
-                message: 'Lead '+action+' Successfully',
-                type: 'is-success',
-                position: 'is-bottom',
-                duration: 5000,
-            })
+            success(action) {
+                this.$toast.open({
+                    message: 'Lead '+action+' Successfully',
+                    type: 'is-success',
+                    position: 'is-bottom',
+                    duration: 5000,
+                })
+            },
+            errorDialog() {
+                this.$dialog.alert({
+                    title: 'Error',
+                    message: 'Please select the leads you want to switch frist',
+                    type: 'is-danger',
+                })
+            },
+            getCompanyAgents(){
+                getAgents().then(response=>{
+                    this.commercialAgents = response.data.commercialAgents
+                    this.residentialAgents = response.data.residentialAgents
+                })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            checkUserHasGroup(){
+                checkUserGroupAndRoles().then(response=>{
+                    this.teamLeader = response.data.leaderHasGroup
+                    this.permArray = response.data.permArray
+                })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            deleteLeadsDialog(){
+                console.log("Delete Leads Modal")
+                this.deleteLeadsModal = true
+            },
+            deleteNoActionLeads(){
+                console.log("deleteNoActionLeads Test")
+                deleteNoActionLeads().then(response=>{
+                    console.log(response)
+                    this.deleteLeadsModal = false
+                })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                this.getData()
+            },
+            autoSwitchDialog(lead=0) {
+                console.clear()
+                console.log('sssssssssssssss')
+                if(window.auth_user.type == "admin"){
+                    if(this.selectedLeads.length != 0){
+                        this.autoSwitchModel = true
+                        // this.confirmAutoSwitch()
+                    }else if(lead != 0){
+                        this.selectedLeads.push(lead)
+                        this.autoSwitchModel = true
+                        // this.confirmAutoSwitch()
+                    }else{
+                        this.errorDialog()
+                    }
+                }else{
+                    console.log("You are not admin , permission denied")
+                }
+            },
+            autoSwitch(){
+                var data = {
+                    'agent_id':this.autoSwitchData.rAgent,
+                    'commercial_agent_id':this.autoSwitchData.cAgent,
+                    'perAgent':this.autoSwitchData.perAgent,
+                    'selectedLeads':this.selectedLeads,
+                    '_token':this.token,
+                }
+                autoSwitchAPi(data)
+                    .then(response=>{
+                        this.autoSwitchModel = false;
+                        this.getData();
+                        this.selectedLeads = [];
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
         },
-        errorDialog() {
-            this.$dialog.alert({
-                title: 'Error',
-                message: 'Please select the leads you want to switch frist',
-                type: 'is-danger',
-            })
-        },
-        getCompanyAgents(){
-            getAgents().then(response=>{
-                this.commercialAgents = response.data.commercialAgents
-                this.residentialAgents = response.data.residentialAgents
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        },
-        checkUserHasGroup(){
-            checkUserGroupAndRoles().then(response=>{
-                this.teamLeader = response.data.leaderHasGroup
-                this.permArray = response.data.permArray
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        },
-        deleteLeadsDialog(){
-          console.log("Delete Leads Modal")
-          this.deleteLeadsModal = true
-        },
-        deleteNoActionLeads(){
-          console.log("deleteNoActionLeads Test")
-            deleteNoActionLeads().then(response=>{
-                console.log(response)
-                this.deleteLeadsModal = false
-            })
-            .catch(error => {
-                console.log(error)
-            })
-            this.getData()
-        },
-        autoSwitchDialog(lead=0) {
-            console.clear()
-            console.log('sssssssssssssss')
-            if(window.auth_user.type == "admin"){
-              if(this.selectedLeads.length != 0){
-                  this.autoSwitchModel = true
-                  // this.confirmAutoSwitch()
-              }else if(lead != 0){
-                  this.selectedLeads.push(lead)
-                  this.autoSwitchModel = true
-                  // this.confirmAutoSwitch()
-
-              }else{
-                  this.errorDialog()
-              }
-            }else{
-              console.log("You are not admin , permission denied")
+        computed:{
+            filteredBlogs:function(){
+                return this.blogs.filter((blog)=>{
+                    return blog.title.match(this.search);
+                });
             }
-
-        },
-        autoSwitch(){
-            var data = {
-                'agent_id':this.autoSwitchData.rAgent,
-                'commercial_agent_id':this.autoSwitchData.cAgent,
-                'perAgent':this.autoSwitchData.perAgent,
-                'selectedLeads':this.selectedLeads,
-                '_token':this.token,
-            }
-            autoSwitchAPi(data)
-            .then(response=>{
-                this.autoSwitchModel = false;
-                this.getData();
-                this.selectedLeads = [];
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        },
+        }
     }
-}
 </script>
 
 <style type="text/css" scoped="">
-.leads-number
-{
-    position: absolute;
-    bottom: 122px;
-
-}
-@media screen and (max-width: 767px) {
-.leads-number{
-    margin-bottom: 17%;
-}
-}
-@media screen and (max-width: 767px) {
-    .filters {
-        display: block;
+    .leads-number
+    {
+        position: absolute;
+        bottom: 122px;
     }
-
-    .filter-btn {
-        margin-right: 2% !important;
-        margin-bottom: 2% !important;
+    @media screen and (max-width: 767px) {
+        .leads-number{
+            margin-bottom: 17%;
+        }
     }
-
-    .leads-number{
-        right: 10% !important;
-        bottom: 10px !important;
-        left: unset !important;
+    @media screen and (max-width: 767px) {
+        .filters {
+            display: block;
+        }
+        .filter-btn {
+            margin-right: 2% !important;
+            margin-bottom: 2% !important;
+        }
+        .leads-number{
+            right: 10% !important;
+            bottom: 10px !important;
+            left: unset !important;
+        }
+        .filter-content{
+            margin-top: 2%;
+        }
     }
-
-    .filter-content{
-        margin-top: 2%;
-    }
-}
 </style>

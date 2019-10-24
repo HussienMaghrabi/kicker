@@ -335,7 +335,7 @@ export default {
         };
         addEmployee(data).then(response=>{
             this.success("Added")
-            $(location).attr('href', '/admin/vue/employees')
+            // $(location).attr('href', '/admin/vue/employees')
         })
         .catch(error => {
                 this.errorDialog()

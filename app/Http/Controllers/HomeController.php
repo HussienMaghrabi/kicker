@@ -2405,7 +2405,7 @@ class HomeController extends Controller {
           return view('website.testpop');
       }
       public function getMasterView(){
-            return view('admin.master');        
+            return view('admin.master');
       }
       public function changeAssistantStatus(Request $request){
         //   dd($request->all());

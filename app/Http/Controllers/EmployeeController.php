@@ -12,7 +12,11 @@ use App\HrSetting;
 use App\JobCategory;
 use App\JobTitle;
 use App\Photo;
+use App\employee_image;
 use App\Rate;
+use App\employeeContact;
+use App\employeecontactemail;
+use App\employeecontactphone;
 use App\Salary;
 use App\SalaryDetail;
 use App\User;
@@ -87,7 +91,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         // return $request->all();
         $rules = [
             'en_first_name' => 'required',
@@ -145,37 +149,37 @@ class EmployeeController extends Controller
                 $employee->military_status = $request->military_status;
                 $employee->phone = $request->phone;
                 $employee->personal_mail = $request->personal_mail;
-                $employee->company_mail = $request->company_mail;
+                // $employee->company_mail = $request->company_mail;
                 $employee->job_category_id = $request->job_category_id;
                 $employee->job_title_id = $request->job_title_id;
                 $employee->day_value = $request->salary / 30;
-                $employee->photo_id = $request->profile_photo;
+                // $employee->photo_id = $request->profile_photo;
                 $employee->user_id = $user->id;
                 if ('admin' == $request->type) {
                     $employee->is_hr = 1;
                 }
-                $hr_setting_anuual = HrSetting::where('name', '=', 'annual_vacation')->first();
-                if($hr_setting_anuual){
-                    $employee->annual_vacations = $hr_setting_anuual->value;
-                }
-                $hr_setting_unscheduled = HrSetting::where('name', '=', 'unscheduled_vacation')->first();
-                if($hr_setting_unscheduled){
-                    $employee->unscheduled_vacation = $hr_setting_unscheduled->value;                
-                }
+                // $hr_setting_anuual = HrSetting::where('name', '=', 'annual_vacation')->first();
+                // if($hr_setting_anuual){
+                //     $employee->annual_vacations = $hr_setting_anuual->value;
+                // }
+                // $hr_setting_unscheduled = HrSetting::where('name', '=', 'unscheduled_vacation')->first();
+                // if($hr_setting_unscheduled){
+                //     $employee->unscheduled_vacation = $hr_setting_unscheduled->value;                
+                // }
                 $employee->save();
 
                 if ($file = $request->file('profile_photo')) {
                     $image = uploads($request, 'profile_photo');
-                    $photo = Photo::create(['image' => $image, 'employee_id' => $employee->id, 'code' => 'profile']);
+                    $photo = employee_image::create(['image' => $image, 'employee_id' => $employee->id]);
                     $em = Employee::where('photo_id', $request->profile_photo)->first();
                     $em->photo_id = $photo->id;
                     $em->save();
                 }
 
-                $us = User::where('id', $request->id)->first();
+                $us = User::where('id', $employee->id)->first();
                 if($us){
                     $us->employee_id = $employee->id;  
-                    $us->save();            
+                    $us->save();
                 }
              
 
@@ -398,11 +402,11 @@ class EmployeeController extends Controller
             }
 
             $employee->save();
-            $user = User::where('id', $employee->user_id);
-            $user->email = $request->personal_mail;
-            $user->password = bcrypt($request->password);
-            $user->name = $request->en_first_name;
-            $user->phone = $request->phone;
+            // $user = User::where('id', Auth::user()->id);
+            // $user->email = $request->personal_mail;
+            // $user->password = bcrypt($request->password);
+            // $user->name = $request->en_first_name;
+            // $user->phone = $request->phone;
 
             // session()->flash('success', trans('admin.updated'));
             // return redirect(adminPath() . '/employees/');
@@ -474,6 +478,16 @@ class EmployeeController extends Controller
                 'new_cities' => $new_cities,
             ]);
         }
+    }
+
+    public function getAllContacts($id){
+        $getContacts = DB::table('employee_contact as contact')
+        ->leftJoin('employee_contact_email as contact_mail','contact_mail.employee_contact_id','=','contact.id')
+        ->leftJoin('employee_contact_phone as contact_phone','contact_phone.employee_contact_id','=','contact.id')
+        ->select('contact.id as id','contact.name','contact.email','contact.phone','contact.relation')
+        ->where('contact.id',$id)
+        ->get();
+        return $getContacts;
     }
 
     public function imageCollector(Request $request)
@@ -555,34 +569,75 @@ class EmployeeController extends Controller
         }
     }
 
-    public function addErContact(request $request)
-    {
-        if ($request->has('contact_name')) {
-            foreach ($request->contact_name as $k => $v) {
-                $contact = new Contact;
-                $contact->employee_id = $request->employee_id;
-                $contact->name = $request->contact_name[$k];
-                $contact->relation = $request->contact_relation[$k];
-                $contact->nationality = $request->contact_nationality[$k];
-                $contact->title_id = $request->contact_title_id[$k];
-                $contact->email = $request->contact_email[$k];
-                $contact->other_emails = json_encode($request->contact_other_emails[$k]);
-                $contact->phone = $request->contact_phone[$k];
-                $contact->other_phones = json_encode($request->contact_other_phones[$k]);
-                $contact->social = json_encode($request->contact_social[$k]);
-                if ($request->has('contact_other_phones')) {
-                    foreach ($request->contact_other_phones[$k] as $k1 => $v1) {
-                        $contactPhones[] = [
-                            $request->contact_other_phones[$k][$k1] => $request->contact_other_socials[$k][$k1],
-                        ];
-                    }
-                    $contact->other_phones = json_encode($contactPhones);
-                };
-                $contact->save();
-            }
-        }
-        return back();
+    public function addErContact(request $request){
+        // dd($request->all());
+        $employeeContact = new employeeContact;
+        $employeeContact->name = $request->name;
+        $employeeContact->email = $request->email;
+        $employeeContact->employee_id = $request->employee_id;
+        $employeeContact->relation = $request->relation;
+        $employeeContact->relation = $request->relation;
+        $employeeContact->phone = $request->phone;
+        $employeeContact->save();
+         foreach($request->phones as $phone){
+             $EatcPhone = json_decode($phone);
+             if($EatcPhone){
+                 foreach($EatcPhone as $objectPhone){
+                     $contactPhone = new employeecontactphone;
+                     $contactPhone->phone = $objectPhone->phone;
+                     $contactPhone->employee_contact_id = $employeeContact->id;
+                     $contactPhone->save();
+                 }
+             }
+         }
+         foreach($request->emails as $email){
+             $eatchEmail = json_decode($email);
+             if($eatchEmail){
+                foreach($eatchEmail as $objectEmail){
+                    $contactEmail = new employeecontactemail;
+                    $contactEmail->email = $objectEmail->email;
+                    $contactEmail->employee_contact_id = $employeeContact->id;
+                    $contactEmail->save();
+                }
+             }
+         }
     }
+
+    // public function oldaddErContact(request $request)
+    // {
+    //     // dd($request->all());
+    //     foreach ($request->emails as $email) {
+    //         $A = json_decode($email);
+    //         return $A;
+    //     }
+    //     // $A = json_decode($request->emails);
+    //     // return $request->emails;
+    //     // if ($request->has('contact_name')) {
+    //         foreach ($request->contact_name as $k => $v) {
+    //             $contact = new Contact;
+    //             $contact->employee_id = $request->employee_id;
+    //             $contact->name = $request->contact_name[$k];
+    //             $contact->relation = $request->contact_relation[$k];
+    //             $contact->nationality = $request->contact_nationality[$k];
+    //             $contact->title_id = $request->contact_title_id[$k];
+    //             $contact->email = $request->contact_email[$k];
+    //             $contact->other_emails = json_encode($request->contact_other_emails[$k]);
+    //             $contact->phone = $request->contact_phone[$k];
+    //             $contact->other_phones = json_encode($request->contact_other_phones[$k]);
+    //             $contact->social = json_encode($request->contact_social[$k]);
+    //             if ($request->has('contact_other_phones')) {
+    //                 foreach ($request->contact_other_phones[$k] as $k1 => $v1) {
+    //                     $contactPhones[] = [
+    //                         $request->contact_other_phones[$k][$k1] => $request->contact_other_socials[$k][$k1],
+    //                     ];
+    //                 }
+    //                 $contact->other_phones = json_encode($contactPhones);
+    //             };
+    //             $contact->save();
+    //         }
+    //     // }
+    //     return back();
+    // }
 
     public function addCustody(Request $request)
     {
@@ -667,10 +722,10 @@ class EmployeeController extends Controller
         return response()->json($jobTitles);
     }
     
-    public function getAllRoles(){
-        $roles= DB::table('roles')->select('id','name')->get();
-        return response()->json($roles);
-    }
+    // public function getAllRoles(){
+    //     $roles= DB::table('roles')->select('id','name')->get();
+    //     return response()->json($roles);
+    // }
 
     public function updateEmployees(Request $request)
 	{

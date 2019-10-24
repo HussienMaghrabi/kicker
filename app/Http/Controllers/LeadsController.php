@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Company;
 use App\Address;
+use App\Lead;
 use DB;
 
 class LeadsController extends Controller
@@ -16,16 +17,27 @@ class LeadsController extends Controller
      */
     public function index()
     {
-        $leads = DB::table('companies as company')
-            ->leftjoin('phones as phone','company.id','=','phone.company_id')
-            ->leftjoin('emails as email','company.id','=','email.company_id')
-            ->leftjoin('contacts as contact','company.id','=','contact.company_id')
-            ->select('company.id','company.name','company.lead_type','phone.phone','phone.mobile','email.email','contact.leadstatus')
-            ->paginate(100);
-
+            $leads = DB::table('leads as lead')
+            ->leftjoin('companies as company','company.id','=','lead.company')
+                ->leftjoin('contacts as contact','company.id','=','contact.company_id')
+                ->select('lead.id','lead.first_name','lead.last_name','company.name','company.lead_type','contact.phone','contact.mobile','contact.email','contact.leadstatus')
+                ->get();
         return response()->json($leads);
         
     }
+
+//     public function index()
+//     {
+//         $leads = DB::table('companies as company')
+//             ->leftjoin('phones as phone','company.id','=','phone.company_id')
+//             ->leftjoin('emails as email','company.id','=','email.company_id')
+//             ->leftjoin('contacts as contact','company.id','=','contact.company_id')
+//             ->select('company.id','company.name','company.lead_type','phone.phone','phone.mobile','email.email','contact.leadstatus')
+//             ->paginate(100);
+// echo dd($leads);
+//         return response()->json($leads);
+        
+//     }
 
     /**
      * Show the form for creating a new resource.
@@ -43,22 +55,13 @@ class LeadsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        $company = new Company;
-        // return ($request->all());
-         $saved = Company::create($request->all());
 
-        // if($saved > 0){
-        //     $address = new Address;
-        //     $address->street = $request->street;
-        //     $address->state = $request->state;
-        //     $address->country_id = $request->country_id;
-        //     $address->city_id = $request->city_id;
-        //     $address->zip_code = $request->zip_code;
-        //     $address->company_id = $request->company_id;
-        //     $address->save();
-        // }
+    dd($request->all());
+        $company = new Company;
+         $saved = Company::create($request->all());
 
         if ($saved) {
             $address = array(
@@ -67,7 +70,7 @@ class LeadsController extends Controller
                     'country_id' => $request->country_id,
                     'zip_code' => $request->zip_code,
                     'city_id' => $request->id_city,
-                    'company_id' => $request->company_id
+                    'company_id' => $saved->id
                 );
 
         foreach($address as $ad){
@@ -84,9 +87,71 @@ class LeadsController extends Controller
             'mobile' => $request->mobile,
             'position' => $request->position,
             'leadstatus' => $request->leadstatus,
+            'company_id' => $saved->id,
+            'lead_source_id' => $request->lead_source_id,
+            // 'lead_id' => $request->lead_id,
           ]);
         }
-}
+    }
+    public function edit_comapany_data(Request $request)
+    {
+       //echo dd($request->lead_source);
+        DB::table('companies')
+        ->where('id',$request['company_id'])
+        ->update([
+            'name' => $request->company_name,
+            'rating' => $request->rating,
+            'employees_Number' => $request->employees_Number,
+            'annual_revenue' => $request->annual_revenue,
+            'industry_id' => $request->industry,
+            'lead_source_id' => $request->lead_source,
+            'commercial_registration' => $request->commercial_registration,
+            ]);
+            DB::table('leads')
+            ->where('id',$request['lead_id'])
+            ->update([
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'mobile' => $request->mobile,
+                'fax' => $request->fax,
+                'website' => $request->website,
+                'lead_source_id' => $request->lead_source,
+                ]);     
+                return response()->json([
+                    'massege'=> 'success',
+                ],200);     
+          //  dd($request->all());
+    }
+
+    public function edit_address(Request $request)
+    {
+       //echo dd($request->lead_source);
+        DB::table('companies')
+        ->where('id',$request['company_id'])
+        ->update([
+            'name' => $request->company_name,
+            'rating' => $request->rating,
+            'employees_Number' => $request->employees_Number,
+            'annual_revenue' => $request->annual_revenue,
+            'industry_id' => $request->industry,
+            'lead_source_id' => $request->lead_source,
+            'commercial_registration' => $request->commercial_registration,
+            ]);
+            DB::table('leads')
+            ->where('id',$request['lead_id'])
+            ->update([
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'mobile' => $request->mobile,
+                'fax' => $request->fax,
+                'website' => $request->website,
+                'lead_source_id' => $request->lead_source,
+                ]);     
+                return response()->json([
+                    'massege'=> 'success',
+                ],200);     
+          //  dd($request->all());
+    }
 
     /**
      * Display the specified resource.

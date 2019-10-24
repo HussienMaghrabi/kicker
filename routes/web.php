@@ -56,7 +56,7 @@ Route::group(['prefix' => adminPath().'/vue', 'middleware' => ['admin']], functi
 
 Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], function () {
     
-        
+    Route::post('testagax','AjaxController@testAgax');
     Route::get('getAllProjects','ProjectController@getAllProjects');
     Route::get('getAllevents','EventController@getAllevents');
     Route::get('getAllcampaigns','CampaignController@getAllcampaigns');
@@ -149,7 +149,13 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('filterCils','CilController@filterCils');    
     Route::post('filterSpecificDepartment','ApplicationController@filterSpecificDepartment');    
     Route::get('getCilFilterData','CilController@getCilFilterData');
-    Route::post('leads_data_store','LeadDataController@leads_data_store');    
+    Route::post('leads_data_store','LeadDataController@leads_data_store'); 
+    Route::get('GetAllRoleDetails','RoleDetailsController@index');
+    Route::get('EditRoleDetails/{id}','RoleDetailsController@edit');
+    Route::post('updateSigleRole/{id}','RoleDetailsController@update');
+    Route::post('saveNewRoleDetails','RoleDetailsController@store');
+    Route::get('DeleteRoleDetails/{id}','RoleDetailsController@destroy');
+    Route::get('GetApiAllRoleDetails','RoleDetailsController@GetAllrolesDetailsApi');    
     Route::post('lead_data_xls','LeadDataController@lead_data_xls');
 
     Route::get('lead_data_xls', 'LeadDataController@leads_data_upload'); 
@@ -196,6 +202,8 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('GetleadHistory','LeadController@gitleadHistory');
     Route::post('GetLeadContracts','LeadController@getleadcontracts');
     Route::post('FromrequestPage','LeadController@FromrequestPage');
+    Route::post('AddEmployeeRequest','EmployeeRequestController@store');
+    Route::get('empRequestVacation/{id}','EmployeeRequestController@getAllForEmployee');
     Route::post('GetLeadContacts','LeadController@getleadcontacts');
     Route::post('Contactlead','LeadController@addleadcontact');
     Route::post('GetleadInterest','LeadController@getleadinterest');
@@ -203,16 +211,22 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('GetleadSwitchHistory','LeadController@GetleadSwitchHistory');
     Route::post('Getcilslead','LeadController@Getcilslead');
     Route::post('GetleadInfo','LeadController@GetleadInfo');
-
-
+    
+    
     Route::get('getonesignal','onesignalController@index');
+    Route::post('StoreAttendanceByEx','employee_attendance_controller@StoreByEx');
     Route::get('getProposedCompanies','ProposedCompanyController@getProposedCompanies');
     Route::get('getNewLeads','ProposedCompanyController@getNewLeads');
-
+    
     Route::post('getonesignal','onesignalController@store');
     
     
+    
     Route::resource('companyLeads', 'LeadsController');
+    Route::post('addNewLead','LeadsController@addNewLead');
+    Route::post('edit_comapany_data','LeadsController@edit_comapany_data');
+    Route::post('edit_address','LeadsController@edit_address');
+    
     Route::resource('archive', 'ArchiveController');
     Route::resource('contractSections', 'ContractSectionsController');
     Route::resource('contracts', 'ContractController');
@@ -279,6 +293,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('updaterequesttype/{id}', 'RequestTypeController@update');
     Route::get('DeleteRequestType/{id}', 'RequestTypeController@destroy');
     Route::get('getRequestStatus', 'RequestStatusController@AllStatus');
+    Route::get('EmployeeContacts/{id}', 'EmployeeController@getAllContacts');
     Route::post('AddRequestStatus', 'RequestStatusController@store');
     Route::get('editRequestStatus/{id}', 'RequestStatusController@edit');
     Route::post('updaterequeststatus/{id}', 'RequestStatusController@update');
@@ -399,8 +414,8 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('getOrder','DashboardController@getOrder');
 
     // get cities and contries
-    Route::get('getCountries','CountryController@returnapi');
-    Route::get('getcities','CityController@index');
+    Route::get('getCountries','CountryController@getAllCountries');
+    Route::get('getcities','CityController@getAllCities');
 
     Route::post('count_notify','AjaxController@count_notify');
     Route::post('send_notify','AjaxController@send_notify');
@@ -533,15 +548,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('searchTeam','RequestController@searchTeam');  
     Route::post('searchBroadcast','RequestController@searchBroadcast');  
     Route::post('searchEvent','EventController@searchEvent');  
-    Route::post('searchCampaign','CampaignController@searchCampaign');  
-
-
-
-
-
-             
-
-
+    Route::post('searchCampaign','CampaignController@searchCampaign'); 
 
 
     Route::resource('properties', 'PropertyController');
@@ -565,6 +572,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('delete_safe/{id}', 'SafeController@destroy');
     Route::get('confirm_proposal/{id}', 'ProposalController@confirm_proposal');
     Route::resource('proposals', 'ProposalController');
+    Route::POST('addNewProposals', 'ProposalController@store');
     Route::resource('deals', 'ClosedDealController');
     Route::resource('tags', 'TagController');
     Route::resource('icons', 'IconController');
@@ -622,7 +630,14 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('export_xls','CampaignController@export_xls');
     Route::post('delete_resale_image', 'ResaleUnitController@delete_resale_image');
     Route::post('delete_rental_image', 'RentalUnitController@delete_rental_image');
-    Route::resource('roles', 'RoleController');
+    // Route::resource('roles', 'RoleController');
+    Route::get('getAllRoles','RoleController@index');
+    Route::get('EditSingleRole/{id}','RoleController@edit');
+    Route::post('updateSingleRole/{id}','RoleController@update');
+    Route::get('deleteSingleRole/{id}','RoleController@destroy');
+    Route::post('storeSingleRole','RoleController@store');
+    Route::get('GetRoleAndDetails/{id}','RoleController@DataForCustomePage');
+    Route::get('GetApiAllRole/{id}','RoleController@GetAllrolesApi');
     Route::resource('logs', 'LogController');
     Route::post('get_suggestions', 'AjaxController@get_suggestions');
     Route::post('get_suggestions_new', 'AjaxController@get_suggestions_new');
@@ -709,7 +724,11 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('updateEmployees','EmployeeController@updateEmployees');
     Route::post('StoreNewEmpRequest','EmployeeRequestController@Store');
     Route::post('UpdateGroosSalary','grossSalaryController@Store');
+    Route::get('GrossEmployeeSalary','grossSalaryController@GrossReport');
+    Route::get('GetEmpDetails/{id}','grossSalaryController@customeEmployee');
+    Route::get('getAlldeduction','deductionController@getAlldeduction');
     Route::post('employeeDeductionUpdate','deductionController@Store');
+    Route::post('storeEmployeeContact','EmployeeController@addErContact');
    
 
     // New Vue Dashboard
@@ -767,6 +786,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('get_cities_districts', 'AjaxController@get_cities_districts');
 
     Route::resource('forms', 'FormController');
+
     Route::post('get_form_projects', 'AjaxController@get_form_projects');
     Route::post('get_form_phases', 'AjaxController@get_form_phases');
     Route::resource('contracts', 'ContractController');
@@ -853,6 +873,19 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('update-custody', 'CustodiesController@deliverCustody');
     Route::post('request-vacation', 'VacationController@requestVacation');
     Route::post('approve_vacation', 'VacationController@approveVacation');
+    Route::get('GetAllVacatonType', 'VacationTypesController@index');
+    Route::post('addNewNational', 'NationalVicationController@store');
+    Route::get('GetVacationOfNational', 'NationalVicationController@index');
+    Route::get('getVacationType', 'VacationTypesController@indexpage');
+    Route::post('StoreNewNationalVacType', 'VacationTypesController@store');
+    Route::get('DeleteNationalVacType/{id}', 'VacationTypesController@destroy');
+    Route::post('updateVacation/{id}', 'VacationTypesController@update');
+    Route::get('getSinglevacationType/{id}', 'VacationTypesController@edit');
+    Route::get('GetAttendanceReport', 'employee_attendance_controller@reportAllAttendance');
+    Route::get('GetAllNationalVacation', 'NationalVicationController@vacationRebort');
+    Route::get('getSingleNVacation/{id}', 'NationalVicationController@edit');
+    Route::post('updateNVacany', 'NationalVicationController@update');
+    Route::delete('DeleteNationalVacation/{id}', 'NationalVicationController@destroy');
     Route::post('disapprove_vacation', 'VacationController@disApproveVacation');
     Route::post('update-settings', 'HrSettingsController@updateSetting');
     Route::get('cal-salary', 'HrSettingsController@calculateSalary');
@@ -877,18 +910,23 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('getAllProposedCompany','ProposedCompanyController@getProposedCompany');
     Route::get('getAllCpmpanies','CompanyController@getCompany');
     Route::get('getAllCurrency', 'CurrencyController@getAllCurrency');
+    Route::get('getAllItem/{id}', 'ItemController@getAllItem');
     Route::get('getAllNationality', 'NationalityController@getAllNationality');
     Route::get('getAllCities', 'CityController@getAllCities');
     Route::get('getAllCountries', 'CountryController@getAllCountries');
     Route::post('addNewProposedCompany', 'ProposedCompanyController@store');
+    Route::post('UpdateProposedCompany/{id}', 'ProposedCompanyController@update');
     Route::get('getAllContactPerson/{id}','ContactController@getAllContactPerson');
     Route::get('getAllProposalCompanies','ProposedCompanyController@index');
 
     Route::get('getProposalCompanyById/{id}','ProposedCompanyController@show');
+    Route::get('allCompanies/{id}','ProposedCompanyController@destroy');
+    Route::get('delete-Company/{id}', 'ProposedCompanyController@multiDelete');
+    Route::post('searchForCompany','ProposedCompanyController@searchForCompany');
 
-    
 
-    
+
+
 
 });
 

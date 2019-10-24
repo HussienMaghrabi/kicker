@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Item;
 use App\Proposal;
 use App\Company;
 use Illuminate\Http\Request;
@@ -69,71 +70,21 @@ class ProposalController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->unit_type != 'land') {
-            $rules = [
-                'unit_type' => 'required',
-                // 'unit_id' => 'required',
-                'lead_id' => 'required',
-                'description' => 'required',
-                'price' => 'required',
-                'personal_commercial' => 'required',
-            ];
-        } else {
-            $rules = [
-                'unit_type' => 'required',
-                // 'unit_id' => 'required',
-                'lead_id' => 'required',
-                'description' => 'required',
-                'price' => 'required',
-                // 'personal_commercial' => 'required',
-            ];
-        }
-        $validator = Validator::make($request->all(), $rules);
-        $validator->SetAttributeNames([
-            'unit_type' => trans('admin.unit_type'),
-            'unit_id' => trans('admin.unit'),
-            'lead_id' => trans('admin.lead'),
-            'description' => trans('admin.description'),
-            'personal_commercial' => trans('admin.personal_commercial'),
-            'price' => trans('admin.price'),
-        ]);
-        if ($validator->fails()) {
-            return back()->withInput()->withErrors($validator);
-        } else {
-            $proposal = new Proposal;
-            $proposal->unit_type = $request->unit_type;
-            if ($request->unit_type == 'land') {
-                $proposal->personal_commercial = 'personal';
-            } else {
-                $proposal->personal_commercial = $request->personal_commercial;
-            }
-            $proposal->unit_id = $request->unit_id;
-            $proposal->lead_id = $request->lead_id;
-            $proposal->price = $request->price;
-            $proposal->description = $request->description;
-            $proposal->developer_id = $request->developer_id;
-            $proposal->project_id = $request->project_id;
-            $proposal->phase_id = $request->phase_id;
-            if ($request->hasFile('file')) {
-                $proposal->file = $request->file('file')->store('proposal');
-            }
-            $proposal->user_id = auth()->user()->id;
-            $proposal->save();
+        dd($request->all());
 
-            $old_data = json_encode($proposal);
-            LogController::add_log(
-                __('admin.created', [], 'ar') . ' ' . __('admin.proposal', [], 'ar'),
-                __('admin.created', [], 'en') . ' ' . __('admin.proposal', [], 'en'),
-                'proposals',
-                $proposal->id,
-                'create',
-                auth()->user()->id,
-                $old_data
-            );
+        $proposal=new Proposal;
+        $proposal->proposed_company_id  =$request->proposedCompanyId;
+        $proposal->company_id           =$request->company_id;
+        $proposal->contact_id      =$request->contactPersonId;
+        $proposal->valid_until  =$request->validUntil;
+        $proposal->currency_id       =$request->currencyId;
+        $proposal->payment        =$request->payment;
+        $proposal->discount        =$request->discount;
+        $proposal->total        =$request->total;
+        $proposal->save();
 
-            session()->flash('success', trans('admin.created'));
-            return response()->json($proposal);
-        }
+        $item = new Item ;
+
     }
 
     /**

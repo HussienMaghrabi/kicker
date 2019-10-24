@@ -36,6 +36,8 @@ use App\UnitType;
 use App\LeadAction;
 use App\Tag;
 use App\Archive;
+use App\Company;
+use App\Address;
 use Auth;
 use Config;
 use Excel;
@@ -324,7 +326,6 @@ class LeadController extends Controller
 			$lead->email = $request->email;
 			// $lead->phone = $request->phone;
 			$contact = $leadInstance->reformPhone($request->phone);
-
 			$lead->phone = $contact->phone;
 			$lead->phone_iso = $contact->iso;
 			$lead->reference = $request->reference;
@@ -2986,12 +2987,24 @@ class LeadController extends Controller
 
 	public function getLeadData($id)
 	{
-		if(auth()->user()->role->name == 'operation'){
-			$obj = (object)[];
-			$obj->data = [];
-			return response()->json($obj);
-		}
+		//echo dd(auth()->user()->id);
+		// if(auth()->user()){
+		// 	$obj = (object)[];
+		// 	$obj->data = [];
+		// 	return response()->json($obj);
+		// }
+		// $action = LeadAction::where('lead_id',$id)->count();
+		// $leads = DB::table('companies')
+		//     ->where('id',$id)
+        //     ->first();
+	
+  // echo dd($action);
+	//return response()->json($leads);
+
 		$lead = Lead::find($id);
+		$company = Company::find($lead->company)->first();
+		//return $lead;
+		//echo dd($id); 
 		$leadInstance = new Lead;
 		if ($lead) {
 			if ($lead->image == 'image.jpg') {
@@ -3114,6 +3127,19 @@ class LeadController extends Controller
 			}
 
 			$contacts = Contact::where('lead_id', $lead->id)->get();
+			$AllCountries = Country::get(); 
+			$AllCities= City::get();
+			$Alllead_sources= LeadSource::get();
+			$Allindustries= Industry::get();
+			$address = DB::table('addresses as address')
+			->where('company_id', $lead->company)
+			->leftjoin('countries as country','country.id','=','address.country_id')
+			->leftjoin('cities as city','city.id','=','address.city_id')
+			->leftjoin('companies as company','company.id','=','address.company_id')
+            ->select('address.id','address.state','address.street','address.zip_code','company.name as company_name','city.name as city_name','city.id as city_id','country.name as country_name','country.id as country_id')
+		    ->get();
+
+			//$address = Address::where('company_id', $lead->company)->get();
 			$tags = $leadInstance->getLeadTags($lead->id);
 			
 			$data = [
@@ -3125,7 +3151,17 @@ class LeadController extends Controller
 				'ar_last_name' => $lead->ar_last_name,
 				'image' => $lead->image,
 				'phone' => $lead->phone,
-				// 'nationality' => $lead->nationality,
+				'company_name' => @$company->name,
+				'company_id' => @$company->id,
+				'rating' => @$company->rating,
+				'annual_revenue' => @$company->annual_revenue,
+				'employees_Number' => @$company->employees_Number,
+				'industry' => @$company->industry_id,
+				'commercial_registration' => @$company->commercial_registration,
+				// 'nationality' => $lead->nationality,Industry mobile 
+				'mobile' => $lead->mobile,
+				'fax' => $lead->fax,
+				'website' => $lead->website,
 				'country_id' => $lead->country_id,
 				'city_id' => $lead->city_id,
 				'lead_source_id' => @$lead->lead_source_id,
@@ -3133,7 +3169,6 @@ class LeadController extends Controller
 				'lead_source' => @$lead->source->name,
 				'reference' => $lead->reference,
 				'title' => @$lead->title->name,
-				'industry' => @$lead->industry->name,
 				'email' => $lead->email,
 				'status' => @$seen,
 				'created_by' =>@ $lead->user->name,
@@ -3162,7 +3197,8 @@ class LeadController extends Controller
 				'hot' => $lead->hot,
 				'lead_note' => $lead->notes
 			];
-			return ['status' => 'ok', 'lead' => $data,'contacts'=>$contacts];
+
+			return ['status' => 'ok','lead' => $data,'contacts'=>$contacts,'address'=>$address,'AllCountries'=>$AllCountries,'AllCities'=>$AllCities,'Alllead_sources'=>$Alllead_sources,'Allindustries'=>$Allindustries];
 		} else {
 			return ['status' => 'not_found'];
 		}
@@ -3508,7 +3544,7 @@ class LeadController extends Controller
 	}
 
 	public function searchForLead(Request $request){
-
+dd($request->all());
 		$search = $request->searchInput;
 		$teamLead = Group::where('team_leader_id', Auth::user()->id)->count();
 		$commercialAgents = @\App\User::where('residential_commercial', 'commercial')->pluck('id')->toArray();

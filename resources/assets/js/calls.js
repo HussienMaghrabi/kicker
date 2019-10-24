@@ -31,6 +31,15 @@ export const saveNewKey = (bodyFormData) => {
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     });
 }
+// store Employee attendance by exiel
+export const StoreAttendanceByEx = (bodyFormData) => {
+    return axios({
+        method: 'POST',
+        url: '/admin/StoreAttendanceByEx',
+        data: bodyFormData,
+        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    });
+}
 
 // Get My Leads
 export const getLeadsByAgent = (data) => {
@@ -290,6 +299,15 @@ export const getcities = () => {
 export const deleteLead = (id) => {
     return axios.get('/admin/delete-lead/'+id)
 }
+
+export const deleteCompany = (id) => {
+    return axios.get('/admin/delete-Company/'+id)
+}
+// Delete a allCompanies
+export const deleteThisCompanies = (id) => {
+    return axios.get('/admin/allCompanies/'+id)
+}
+
 //delete Resale
 export const deleteResale = (id) => {
     return axios.get('/admin/delete-resale/'+id)
@@ -334,12 +352,12 @@ export const getPublicData = () => {
 
 // Get Agents
 export const getAgents = () => {
-    return axios.get('/admin/getAgents')
+    return axios.get('/admin/getAgents') 
 }
 
 // Filter Leads
-export const newLeadsFilter = (page,data) => {
-    return axios.post('/admin/newLeadsFilter?page='+page,data)
+export const newLeadsFilter = (data) => {
+    return axios.post('/admin/newLeadsFilter',data)
 }
 //newResaleFilter
 export const newResaleFilter = (page,data) => {
@@ -385,6 +403,10 @@ export const getUnitTypes = (data) => {
 // Get Unit Types
 export const searchForLead = (data) => {
     return axios.post('/admin/searchForLead',data)
+}
+// Get Unit Types
+export const searchForCompany = (data) => {
+    return axios.post('/admin/searchForCompany',data)
 }
 
 // Add New ToDo
@@ -437,12 +459,61 @@ export const leadShortAdding = (data) => {
 export const getResales = (data, page) => {
     return axios.post('/api/agent/get_resales?page='+page, data)
 }
+export const getVacationType = (page) => {
+    return axios.get('/admin/getVacationType?page='+page)
+}
+export const updateVacation = (id,data) => {
+    return axios.post('/admin/updateVacation/'+id,data)
+}
+export const StoreNewNationalVacType = (data) => {
+    return axios.post('/admin/StoreNewNationalVacType',data)
+}
+export const DeleteNationalVacType = (id) => {
+    return axios.get('/admin/DeleteNationalVacType/'+id)
+}
+export const GetAttendanceReport = () => {
+    return axios.get('/admin/GetAttendanceReport/')
+}
+export const getSinglevacationType = (id) => {
+    return axios.get('/admin/getSinglevacationType/'+id)
+}
 export const getRental = (data, page) => {
     return axios.post('/api/agent/get_rentals?page='+page, data)
 }
 // get employee requests
 export const GetEmployeeRequests = (page) => {
     return axios.get('/api/agent/GetEmployeeRequests?page='+page)
+}
+// get All Vacation type
+export const GetAllVacatonType = () => {
+    return axios.get('/admin/GetAllVacatonType')
+}
+export const Testagajx = (data) => {
+    return axios.post('/admin/testagax',data)
+}
+// get All Vacation type
+export const addNewNational = (bodyFormData) => {
+    return axios.post('/admin/addNewNational',bodyFormData)
+}
+// get All National vacation get limit
+export const GetVacationOfNational = () => {
+    return axios.get('/admin/GetVacationOfNational')
+}
+// get All National vacation get All
+export const GetAllNationalVacation = () => {
+    return axios.get('/admin/GetAllNationalVacation')
+}
+// edit National vacation
+export const getSingleNVacation = (VID) => {
+    return axios.get('/admin/getSingleNVacation/'+VID)
+}
+// update national vication
+export const updateNVacany = (bodyFormData) => {
+    return axios.post('/admin/updateNVacany',bodyFormData)
+}
+// Delete DeleteNationalVacation
+export const DeleteNationalVacation = (id) => {
+    return axios.delete('/admin/DeleteNationalVacation/'+id)
 }
 // store employee request
 export const StoreNewEmpRequest = (bodyFormData) => {
@@ -451,6 +522,15 @@ export const StoreNewEmpRequest = (bodyFormData) => {
 // store employee gross slaray
 export const UpdateGroosSalary = (bodyFormData) => {
     return axios.post('/admin/UpdateGroosSalary',bodyFormData)
+}
+// Get All  gross slaray
+export const GrossEmployeeSalary = () => {
+    return axios.get('/admin/GrossEmployeeSalary',)
+}
+
+// Get All  Employee deductions
+export const getAlldeduction = () => {
+    return axios.get('/admin/getAlldeduction',)
 }
 // store employee Deduction slaray
 export const employeeDeductionUpdate = (bodyFormData) => {
@@ -1447,7 +1527,6 @@ export const addLeadSource = (data) => {
     return axios.post('/admin/lead_sources', data)
 }
 
-
 // begin settings
         export const getdatasetting = () => {
             return axios.get('/admin/settings')
@@ -1521,6 +1600,21 @@ export const addLeadSource = (data) => {
         // // events
         export const getAllEvents = () => {
             return axios.get('/admin/events')
+        }
+        export const GetAllRoleDetails = (page) => {
+            return axios.get('/admin/GetAllRoleDetails?page='+page)
+        }
+        export const DeleteRoleDetails = (id) => {
+            return axios.get('/admin/DeleteRoleDetails/'+id)
+        }
+        export const EditRoleDetails = (id) => {
+            return axios.get('/admin/EditRoleDetails/'+id)
+        }
+        export const updateSigleRole = (id,data) => {
+            return axios.post('/admin/updateSigleRole/'+id,data)
+        }
+        export const saveNewRoleDetails = (data) => {
+            return axios.post('/admin/saveNewRoleDetails/',data)
         }
         export const singleEventData = (id) => {
             return axios.get('/admin/events/'+id)
@@ -1750,6 +1844,10 @@ export const getTitleData = () => {
     return axios.get('/admin/titles')
 }
 
+// Show Industries 
+export const getIndustries = () => {
+    return axios.get('/admin/industries')
+}
 
 // Show title
 export const titleShow = (id) => {
@@ -2114,9 +2212,26 @@ export const getRequestTypes = () => {
     return axios.get('/admin/getAPIRequestTypes')
 }
 
+export const EmployeeSalaryDetails = (id) => {
+    return axios.get('/admin/GetEmpDetails/'+id)
+}
+
+export const storeEmployeeContact = (bodyFormData) => {
+    return axios.post('/admin/storeEmployeeContact',bodyFormData)
+}
+
 // reject Request status
 export const getRequestStatus = () => {
     return axios.get('/admin/getRequestStatus')
+}
+
+// reject Request status
+export const EmployeeContacts = (id) => {
+    return axios.get('/admin/EmployeeContacts/'+id)
+}
+// reject Request status
+export const empRequestVacation = (id) => {
+    return axios.get('/admin/empRequestVacation/'+id)
 }
 
 // add employee
@@ -2129,6 +2244,16 @@ export const addEmployee = (data) => {
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     });
 }
+// add Employee request
+export const uploadEmployeeRequest = (bodyformdata) => {
+    // console.log('data before sending',data)
+    return axios({
+        method: 'POST',
+        url: '/admin/AddEmployeeRequest/',
+        data: bodyformdata,
+        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    });
+}
 
 // get job title 
 export const getAllJobTitles = () => {
@@ -2138,6 +2263,36 @@ export const getAllJobTitles = () => {
 // get roles
 export const getAllRoles = () => {
     return axios.get('/admin/getAllRoles')
+}
+// edit roles
+export const EditSingleRole = (id) => {
+    return axios.get('/admin/EditSingleRole/'+id)
+}
+
+// edit roles
+export const updateSingleRole = (id,data) => {
+    return axios.post('/admin/updateSingleRole/'+id,data)
+
+}
+// delete role
+export const deleteSingleRole = (id) => {
+    return axios.get('/admin/deleteSingleRole/'+id)
+}
+// get data for custome role page
+export const GetRoleAndDetails = (id) => {
+    return axios.get('/admin/GetRoleAndDetails/'+id)
+}
+// get data for Api role 
+export const GetApiAllRole = (id) => {
+    return axios.get('/admin/GetApiAllRole/'+id)
+}
+// get data for Api role Details 
+export const GetApiAllRoleDetails = () => {
+    return axios.get('/admin/GetApiAllRoleDetails/')
+}
+// store role
+export const storeSingleRole = (data) => {
+    return axios.post('/admin/storeSingleRole/',data)
 }
 
 // Show employee
@@ -2469,6 +2624,10 @@ export const getAllcampaigns = () => {
 export const getAllProposal = () => {
     return axios.get('/admin/proposals')
 }
+// add new Proposal
+export const addNewProposal = (data) => {
+    return axios.post('/admin/addNewProposals', data)
+}
 export const getAllProposedCpmpany = () => {
     return axios.get('/admin/getAllProposedCompany')
 }
@@ -2492,6 +2651,16 @@ export const addNewProposedCompany=(bodyFormData)=>{
     return axios({
         method: 'POST',
         url: '/admin/addNewProposedCompany',
+        data: bodyFormData,
+        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    });
+
+}
+export const updateCompany=(bodyFormData,id)=>{
+    // return axios.post('/admin/updateCompany',data)
+    return axios({
+        method: 'post',
+        url: '/admin/UpdateProposedCompany/'+id,
         data: bodyFormData,
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     });
@@ -2521,6 +2690,18 @@ export const addNewLead = (data) => {
     return axios.post('/admin/companyLeads', data)
 }
 
+export const getAllItem=(id)=>{
+    return axios.get('/admin/getAllItem/'+id)
+}
+// edit lead
+export const edit_comapany_data = (data) => {
+    return axios.post('/admin/edit_comapany_data', data)
+}
+
+// edit address
+export const edit_address = (data) => {
+    return axios.post('/admin/edit_address', data)
+}
 
 export const getAllContactPerson=(id)=>{
     return axios.get('/admin/getAllContactPerson/'+id)
@@ -2531,3 +2712,4 @@ export const getAllProposalCompanies=()=>{
 export const getProposedCompanyData=(id)=>{
     return axios.get('/admin/getProposalCompanyById/'+id)
 }
+

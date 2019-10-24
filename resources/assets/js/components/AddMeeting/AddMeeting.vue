@@ -3,7 +3,7 @@
     <section class="container style">
      
       <b-field label="Lead">
-            <select class="form-control lead" v-on:change="LeadInfo($event.target.value)" v-model="lead_id">
+            <select class="form-control lead" v-on:change="LeadInfo($event.target.value)" v-model="lead_id" >
                 <option v-for="lead in leads" :key="lead.id" :value="lead.id">{{ lead.first_name +' '+lead.last_name}}</option>
             </select>    
       </b-field>
@@ -40,9 +40,6 @@
         </b-datepicker>
     </b-field>
 
-    <b-field  :active.sync="action" label="Description">
-            <b-input  type="textarea"></b-input>
-    </b-field>
 
 <b-field label="Projects">
      <div class="is-fullwidth">
@@ -52,7 +49,7 @@
 <!-- end next action -->
  
       <b-field label="Duraiton">
-            <b-input type="number" v-model="duration"></b-input>
+            <b-input type="number" v-model="duration" required></b-input>
       </b-field>
 
        <b-field label="Date">
@@ -67,13 +64,13 @@
     </b-field>
 
       
-    <b-field label="Location On Map">
+    <!-- <b-field label="Location On Map">
         <b-select v-model="location" expanded>
             <option v-for="locationn in locations" :key="locationn.id" :value="locationn.id">
                 {{ locationn.name }}
             </option>
         </b-select>  
-    </b-field> 
+    </b-field>  -->
 
     <b-field label=" Probability">
         <b-select expanded v-model="probability">
@@ -93,10 +90,12 @@
         </b-select>    
     </b-field> -->
     
-    
+   <b-field label="Address">
+        <b-input type="text" v-model="location" required></b-input>
+    </b-field> 
 
     <b-field label="Description">
-        <b-input type="textarea" v-model="description"></b-input>
+        <b-input type="textarea" v-model="description" required></b-input>
     </b-field>
         
         

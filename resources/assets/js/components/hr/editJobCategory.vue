@@ -66,8 +66,9 @@ export default {
             .catch(error => {
                 console.log(error)
             })
-        },
-      updateForm(id){
+     },
+
+     updateForm(id){
                 const bodyFormData = new FormData();
                 for (let key in this.JobCategory) {
                     const value = this.JobCategory[key];
@@ -81,7 +82,7 @@ export default {
                 }).catch(error=>{
                     console.log(error)
                 })
-      }
+     }
 
     },
 }

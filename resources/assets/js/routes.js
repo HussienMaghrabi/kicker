@@ -111,22 +111,30 @@ import showApplicaton from './components/hr/showApplicaton.vue'
 import addApplication from './components/hr/addApplication.vue'
 import vacancy from './components/hr/vacancy.vue'
 import vacancy_type from './components/hr/vacancyType.vue'
+import vacations_type from './components/hr/vacationTypes.vue'
 import addVacancy from './components/hr/addVacancy.vue'
 import showVacancy from './components/hr/showVacancy.vue'
 import editVacancy from './components/hr/editVacancy.vue'
 import showApp from './components/hr/showApp.vue'
 import salaries from './components/hr/salaries.vue'
 import editSalary from './components/hr/editSalary.vue'
+import RoleDetails from './components/hr/RoleDetails.vue'
+import NewRoels from './components/hr/Roles.vue'
+import CustomeRole from './components/hr/CustomeRole.vue'
 
 
 import request_type from './components/hr/req_type.vue'
 import request_status from './components/hr/req_status.vue'
 import employeerequest from './components/hr/employee_request.vue'
 import employee_attendance from './components/hr/employeeattendance.vue'
+import GrossEmployeeSalary from './components/hr/grossempsalary.vue'
+import deductionReport from './components/hr/deductionReport.vue'
+import NationalVacation from './components/hr/allNatVacation.vue'
 
 import salariesDetails from './components/hr/salariesDetails.vue'
 import employees from './components/hr/employees.vue'
 import addEmployee from './components/hr/addEmployee.vue'
+import attendance_report from './components/hr/attendanceReport.vue'
 import editEmployee from './components/hr/editEmployee.vue'
 import profileEmployee from './components/hr/profileEmployee.vue'
 import ruleOfProcedure from './components/hr/ruleOfProcedure.vue'
@@ -198,6 +206,7 @@ import traffic from './components/traffic/traffic.vue'
 import trafficTasks from './components/trafficTasks/trafficTasks.vue'
 import newCompany from './components/newCompany/newCompany.vue'
 import showCompany from './components/showCompany/showCompany.vue'
+import testvue from './components/test.vue'
 
 import test1 from './components/test1/test1.vue'
 import allitems from './components/items/allitems.vue'
@@ -1030,6 +1039,14 @@ export const routes = [
         }
     },
     {
+        path: '/admin/vue/vacations_type',
+        name: 'vacation type',
+        component: vacations_type,
+        meta: {
+            title: 'vacation Type',
+        }
+    },
+    {
         path: '/admin/vue/showVacancy/:id',
         name: 'showVacancy',
         component: showVacancy,
@@ -1522,6 +1539,33 @@ export const routes = [
         }
     },
 
+    {
+        path: '/admin/vue/RoleDetails',
+        name: 'All Role Details',
+        component: RoleDetails,
+        meta: {
+            title: 'Role Details',
+        }
+    },
+
+    {
+        path: '/admin/vue/NewRoels',
+        name: 'All Roles',
+        component: NewRoels,
+        meta: {
+            title: 'All Role',
+        }
+    },
+
+    {
+        path: '/admin/vue/CustomeRole/:id',
+        name: 'Custom Roles',
+        component: CustomeRole,
+        meta: {
+            title: 'Custom Role',
+        }
+    },
+
 
     {
         path: '/admin/vue/request_type',
@@ -1554,6 +1598,41 @@ export const routes = [
         component: employee_attendance,
         meta: {
             title: 'attendance',
+        }
+    },
+    {
+        path: '/admin/vue/attendance_report',
+        name: 'attendance Report',
+        component: attendance_report,
+        meta: {
+            title: 'attendance Report',
+        }
+    },
+
+    {
+        path: '/admin/vue/GrossReport',
+        name: 'gross salary',
+        component: GrossEmployeeSalary,
+        meta: {
+            title: 'Gross salary',
+        }
+    },
+
+    {
+        path: '/admin/vue/deductionreport',
+        name: 'deduction',
+        component: deductionReport,
+        meta: {
+            title: 'Deduction salary',
+        }
+    },
+
+    {
+        path: '/admin/vue/NationalVacation',
+        name: 'National Vacation',
+        component: NationalVacation,
+        meta: {
+            title: 'National Vacation',
         }
     },
     
@@ -1670,7 +1749,7 @@ export const routes = [
         name: 'trafficTasks',
         component: trafficTasks,
         meta: {
-            title: ' Traffic Tasks',
+            title: 'Traffic Tasks',
         }
     },
     {
@@ -1695,6 +1774,14 @@ export const routes = [
         component: showCompany,
         meta: {
             title: ' Show Company',
+        }
+    },
+    {
+        path: '/admin/vue/TestVue',
+        name: 'test',
+        component: testvue,
+        meta: {
+            title: 'Test AAA',
         }
     },
  
