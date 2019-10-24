@@ -422,5 +422,9 @@ class ProposalController extends Controller
         return response()->json($proposal);
     }
 
+    public function getProposal(){
+        return Proposal::allProposal();
+    }
+
 
 }

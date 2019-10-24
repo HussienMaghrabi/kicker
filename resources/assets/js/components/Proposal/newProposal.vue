@@ -10,7 +10,7 @@
                 <div class="field">
                     <div class="select">
                         <b-select v-model="proposedCompanyId" placeholder="Select Event" expanded>
-                            <option v-for="propCompany in proposedCompanies" :value="propCompany.id" :key="propCompany.id">{{propCompany.name}}</option>
+                            <option v-for="propCompany in proposedCompanies"  :key="propCompany.id" :value="propCompany.id">{{propCompany.name}}</option>
                         </b-select>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                 <h6 class="column is-2"  style="color:red;margin-right:1%" >*Company Name</h6>
                 <b-field>
                     <!-- <label  class="column is-8">Currency</label> -->
-                    <select v-model="companyId" placeholder="Select Company Name" expanded v-on:change="getAllContactPersonById($event.target.value)"  >
+                    <select v-model="companyId" placeholder="Select Company Name" expanded  v-on:change="getAllContactPersonById($event.target.value)" >
                         <option v-for="company in companies" :value="company.id" :key="company.id" >{{company.name}}</option>
                     </select>
                 </b-field>
@@ -259,7 +259,7 @@
 </template>
 
 <script>
-    import {getAllProposedCpmpany,getAllCpmpanies,getAllContactPerson,getAllCurrency,addNewProposal,getAllItem} from './../../calls'
+    import {getAllProposedCompany,getAllCompanies,getAllContactPerson,getAllCurrency,addNewProposal,getAllItem} from './../../calls'
     export default {
         data() {
             return {
@@ -330,8 +330,8 @@
         },
         mounted() {
             this.getAllCurrency()
-            this.getAllProposedCpmpany(),
-            this.getAllCpmpanies()
+            this.getAllProposedCompany(),
+            this.getAllCompanies()
 
         },
         components: {
@@ -364,15 +364,15 @@
                     console.log(error);
                 })
             },
-            getAllProposedCpmpany(){
-                getAllProposedCpmpany().then(Response=>{
+            getAllProposedCompany(){
+                getAllProposedCompany().then(Response=>{
                     this.proposedCompanies=Response.data.data
                 }).catch(error => {
                     console.log("there are error ".error)
                 })
             },
-            getAllCpmpanies(){
-                getAllCpmpanies().then(Response=>{
+            getAllCompanies(){
+                getAllCompanies().then(Response=>{
                     this.companies=Response.data.data
                 }).catch(error=>{
                     console.log(error)

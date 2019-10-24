@@ -88,7 +88,7 @@ class ProposedCompanyController extends Controller
                 if($item !=null){
                     $ProposedContact_phone= new ProposedContact_phone;
                     $ProposedContact_phone->phone=$item;
-                    $ProposedContact_phone->proposed_company_id  =$proposedCompany->id;
+                    $ProposedContact_phone->company_id  =$proposedCompany->id;
                     $ProposedContact_phone->contact_id=$contactsProposed->id;
                     $ProposedContact_phone->save();
                 }

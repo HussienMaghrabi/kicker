@@ -2628,11 +2628,18 @@ export const getAllProposal = () => {
 export const addNewProposal = (data) => {
     return axios.post('/admin/addNewProposals', data)
 }
-export const getAllProposedCpmpany = () => {
+// add new Proposal
+export const addNewInvoice = (data) => {
+    return axios.post('/admin/addNewInvoice', data)
+}
+export const getAllProposedCompany = () => {
     return axios.get('/admin/getAllProposedCompany')
 }
-export const getAllCpmpanies = () => {
-    return axios.get('/admin/getAllCpmpanies')
+export const getAllProposals = () => {
+    return axios.get('/admin/getAllProposal')
+}
+export const getAllCompanies = () => {
+    return axios.get('/admin/getAllCompanies')
 }
 export const getAllCurrency=()=>{
     return axios.get('/admin/getAllCurrency')

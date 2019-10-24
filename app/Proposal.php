@@ -13,4 +13,12 @@ class Proposal extends Model
           return $this->hasMany('App\Item','proposal_id');
     }
 
+    static function allProposal(){
+        $allProposal=Proposal::all();
+        return response()->json([
+            'status'=>'Success',
+            'data'=>$allProposal
+        ]);
+    }
+
 }

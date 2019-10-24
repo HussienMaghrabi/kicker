@@ -11,10 +11,9 @@
                 <h6 style="color:red;margin-right:5%">*Company</h6>
                 <div class="field column is-5">
                     <div class="select" style="width:100%">
-                        <select expanded style="width:100%">
-                            <option>Circle ERP</option>
-                            <option selected>PropertzCRM</option>
-                        </select>
+                        <b-select v-model="proposedCompanyId" placeholder="Select Company" expanded>
+                            <option v-for="propCompany in proposedCompanies" :value="propCompany.id" :key="propCompany.id">{{propCompany.name}}</option>
+                        </b-select>
                     </div>
                 </div>
             </div>
@@ -27,10 +26,9 @@
                     <h6 style="color:red;margin-right:6%">Proposal</h6>
                     <div class="field column is-5">
                         <div class="select" style="width:100%">
-                            <select expanded style="width:100%">
-                                <option>Circle ERP</option>
-                                <option selected>Proposal No. 79</option>
-                            </select>
+                            <b-select v-model="proposalId" placeholder="Select Company" expanded>
+                                <option v-for="prop in proposal" :value="prop.id" :key="prop.id">Proposal no.{{prop.id}}</option>
+                            </b-select>
                         </div>
                     </div>
                 </div>
@@ -47,10 +45,9 @@
                 <h6 style="color:red;margin-right:1%" class="column is-2">*Company Name</h6>
                 <div class="field column is-8">
                     <div class="select" style="width:42%">
-                        <b-select expanded>
-                            <option>Circle ERP</option>
-                            <option>PropertzCRM</option>
-                        </b-select>
+                        <select v-model="companyId" placeholder="Select Company Name" expanded v-on:change="getAllContactPersonById($event.target.value)"  >
+                            <option v-for="company in companies" :value="company.id" :key="company.id" >{{company.name}}</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -61,9 +58,8 @@
                 <h6 style="color:red;margin-right:1%" class="column is-2">*Contact Person</h6>
                 <div class="field column is-8">
                     <div class="select" style="width:42%">
-                        <b-select expanded>
-                            <option>Circle ERP</option>
-                            <option>PropertzCRM</option>
+                        <b-select v-model="contactPersonId" placeholder="Select Contact Person"  expanded>
+                            <option v-for="item in contactPersonArr " :key="item.id" :value="item.id" >{{item.first_name+' '+item.last_name}}</option>
                         </b-select>
                     </div>
                 </div>
@@ -104,9 +100,9 @@
                 <h6 class="column is-2" style="margin-right:1%">Invoice Currency</h6>
                 <b-field class="column is-4">
                     <div class="select" style="width:100%">
-                        <select expanded style="width:100%">
-                            <option selected>EGP</option>
-                        </select>
+                        <b-select v-model="currencyId" placeholder="Select Currency"  expanded>
+                            <option v-for="currency in currencies " :key="currency.id" :value="currency.id" >{{currency.name}}</option>
+                        </b-select>
                     </div>
                 </b-field>
             </div>
@@ -277,7 +273,7 @@
     </div> 
  
         <div class="columns is-12" style="margin-top:3%;;margin-left:77%">
-            <b-button type="is-info" style="margin-right:2%"><i class="fas fa-save"></i>&nbsp Save</b-button>
+            <b-button type="is-info" style="margin-right:2%"><i class="fas fa-save" @click="addNewInvoice()"></i>&nbsp Save</b-button>
             <b-button type="is-danger" style="margin-right:2%"><i class="fas fa-ban"></i>&nbsp Cancel</b-button>
         </div>
 
@@ -285,19 +281,19 @@
 </template>
 
 <script>
-import {} from './../../calls'
+import {addNewInvoice,getAllCompanies,getAllContactPerson,getAllCurrency,getAllProposedCompany,getAllProposals} from './../../calls'
 export default {
     data() {
         return {
             token: window.auth_user.csrf,
-            isComponentModalActive: false, 
+            isComponentModalActive: false,
             // itemPrice:'',
             // itemQuantity:'',
             // discount:'',
             // total:null,
             // percent:null,
             // discountValue:null,
-            invoice:'',
+            invoice: '',
             invoices: [{
                 itemQuantity: '',
                 itemPrice: '',
@@ -305,69 +301,85 @@ export default {
                 total: '',
                 discount: ''
             }],
-            collectionDate:'',
+            proposedCompanies:[],
+            proposedCompanyId:null,
+            companies:[],
+            companyId:null,
+            proposal:[],
+            proposalId:null,
+            currencies:[],
+            currencyId:null,
+            contactPersonId:null,
+            contactPersonArr:[],
+            collectionDate: '',
             collectionDates: [{
                 date: '',
                 percentage: '',
                 value: '',
                 status: '',
             }],
-            isComponentItemActive:false,
-            items:[{
-                newItem:''
-                }],
+            isComponentItemActive: false,
+            items: [{
+                newItem: ''
+            }],
         }
-     },
+    },
     created() {
         this.id = this.$route.params.id
     },
     mounted() {
+        this.getAllCurrency()
+        this.getAllProposedCompany()
+        this.getAllProposal()
+        this.getAllCompanies()
+
 
     },
     components: {
-        
+
     },
+
     methods: {
-        ChangeInvoice(event){
+        ChangeInvoice(event) {
 
         },
-        ChangePrice(event){
-          for(var i=0 ;i < this.invoices.length; i++){
+        ChangePrice(event) {
+            for (var i = 0; i < this.invoices.length; i++) {
                 this.invoices[i].total = this.invoices[i].itemQuantity * this.invoices[i].itemPrice
-          }
+            }
         },
-        ChangeDiscount(event){
-            for(var i=0 ;i < this.invoices.length;i++){
-                if(this.invoices[i].discount == 0 ){
-                   this.invoices[i].discountValue = '0.00'
-                   this.invoices[i].discount = '0.00'
-                   this.invoices[i].total = this.invoices[i].itemQuantity * this.invoices[i].itemPrice
-                }else{
-                   this.invoices[i].discountValue = this.invoices[i].total *this.invoices[i].discount /100
-                   this.invoices[i].total = this.invoices[i].total - this.invoices[i].discountValue
+        ChangeDiscount(event) {
+            for (var i = 0; i < this.invoices.length; i++) {
+                if (this.invoices[i].discount == 0) {
+                    this.invoices[i].discountValue = '0.00'
+                    this.invoices[i].discount = '0.00'
+                    this.invoices[i].total = this.invoices[i].itemQuantity * this.invoices[i].itemPrice
+                } else {
+                    this.invoices[i].discountValue = this.invoices[i].total * this.invoices[i].discount / 100
+                    this.invoices[i].total = this.invoices[i].total - this.invoices[i].discountValue
                 }
-          }
+            }
         },
-        openModal(){
+        openModal() {
             this.isComponentModalActive = true
         },
-        AddInvoicefield(){
-           this.invoices.push({
+        AddInvoicefield() {
+            this.invoices.push({
                 itemQuantity: '',
                 itemPrice: '',
                 discountValue: '',
                 total: '',
                 discount: ''
-            });   
-       },
-       AddCollectionDates(){
+            });
+        },
+        AddCollectionDates() {
             this.collectionDates.push({
                 date: '',
                 percentage: '',
                 value: '',
                 status: '',
-            });    
-       },
+            });
+        },
         deleteRow(index, invoice) {
             var idx = this.invoices.indexOf(invoice);
             console.log(idx, index);
@@ -375,29 +387,87 @@ export default {
                 this.invoices.splice(idx, 1);
             }
         },
-        deleteCollection(collectionIndex,collectionDate){
-             var idx = this.collectionDates.indexOf(collectionDate);
+        deleteCollection(collectionIndex, collectionDate) {
+            var idx = this.collectionDates.indexOf(collectionDate);
             console.log(idx, collectionIndex);
             if (idx > -1) {
                 this.collectionDates.splice(idx, 1);
             }
         },
-        openAddItem(){
+        openAddItem() {
             this.isComponentItemActive = true
         },
-        AddItemfield(){
+        AddItemfield() {
             this.items.push({
-               newItem: '',
-            });   
+                newItem: '',
+            });
         },
-        deleteItem(k, item){
+        deleteItem(k, item) {
             var idx = this.items.indexOf(item);
             console.log(idx, k);
             if (idx > 0) {
                 this.items.splice(idx, 1);
             }
+        },
+        getAllCurrency(){
+            getAllCurrency().then(Response=>{
+                this.currencies=Response.data.data
+            }).catch(error=>{
+                console.log(error);
+            })
+        },
+        getAllContactPersonById(value){
+
+            // console.log("the id is ",value);
+            var id = value;
+            getAllContactPerson(id).then(Response=>{
+                this.contactPersonArr=Response.data.data
+                // console.log(Response);
+            }).catch(error=>{
+                console.log(error);
+            })
+        },
+        getAllProposal(){
+            getAllProposals().then(Response=>{
+                this.proposal=Response.data.data
+            }).catch(error => {
+                console.log("there are error ".error)
+            })
+        },
+        getAllCompanies(){
+            getAllCompanies().then(Response=>{
+                this.companies=Response.data.data
+            }).catch(error=>{
+                console.log(error)
+            })
+        },
+        getAllProposedCompany(){
+            getAllProposedCompany().then(Response=>{
+                this.proposedCompanies=Response.data.data
+            }).catch(error => {
+                console.log("there are error ".error)
+            })
+        },
+        addNewInvoice() {
+            var data = {
+                'proposal_id': this.proposedCompanyId,
+                'companyId': this.companyId,
+                'contactPersonId': this.contactPersonId,
+                'validUntil': this.validUntil,
+                'currencyId': this.currencyId,
+                'payment': this.payment,
+                'invoices': this.invoices,
+
+            };
+            console.log('dddddd',data)
+            addNewInvoice(data).then(response=>{
+                alert('Success')
+            }).catch(error => {
+                    console.log(error)
+            })
         }
-}}
+    }
+}
 
 </script>
 
