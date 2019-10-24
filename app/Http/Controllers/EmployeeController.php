@@ -722,10 +722,10 @@ class EmployeeController extends Controller
         return response()->json($jobTitles);
     }
     
-    public function getAllRoles(){
-        $roles= DB::table('roles')->select('id','name')->get();
-        return response()->json($roles);
-    }
+    // public function getAllRoles(){
+    //     $roles= DB::table('roles')->select('id','name')->get();
+    //     return response()->json($roles);
+    // }
 
     public function updateEmployees(Request $request)
 	{

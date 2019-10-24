@@ -118,6 +118,9 @@ import editVacancy from './components/hr/editVacancy.vue'
 import showApp from './components/hr/showApp.vue'
 import salaries from './components/hr/salaries.vue'
 import editSalary from './components/hr/editSalary.vue'
+import RoleDetails from './components/hr/RoleDetails.vue'
+import NewRoels from './components/hr/Roles.vue'
+import CustomeRole from './components/hr/CustomeRole.vue'
 
 
 import request_type from './components/hr/req_type.vue'
@@ -1529,6 +1532,33 @@ export const routes = [
         component: editSalary,
         meta: {
             title: 'Edit Salary',
+        }
+    },
+
+    {
+        path: '/admin/vue/RoleDetails',
+        name: 'All Role Details',
+        component: RoleDetails,
+        meta: {
+            title: 'Role Details',
+        }
+    },
+
+    {
+        path: '/admin/vue/NewRoels',
+        name: 'All Roles',
+        component: NewRoels,
+        meta: {
+            title: 'All Role',
+        }
+    },
+
+    {
+        path: '/admin/vue/CustomeRole/:id',
+        name: 'Custom Roles',
+        component: CustomeRole,
+        meta: {
+            title: 'Custom Role',
         }
     },
 
