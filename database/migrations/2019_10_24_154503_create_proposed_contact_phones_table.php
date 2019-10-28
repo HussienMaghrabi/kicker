@@ -18,8 +18,8 @@ class CreateProposedContactPhonesTable extends Migration
             $table->string('phone');
             $table->unsignedInteger('contact_id');
             $table->foreign('contact_id')->references('id')->on('contacts_proposed');
-            $table->unsignedInteger('company_id');
-            $table->foreign('company_id')->references('id')->on('proposed_company');
+            $table->unsignedInteger('proposed_company_id');
+            $table->foreign('proposed_company_id')->references('id')->on('proposed_company');
 
             $table->timestamps();
         });

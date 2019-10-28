@@ -2653,15 +2653,8 @@ export const getAllCities=()=>{
 export const getAllCountries=()=>{
     return axios.get('/admin/getAllCountries')
 }
-export const addNewProposedCompany=(bodyFormData)=>{
-    // return axios.post('/admin/addNewProposedCompany',data)
-    return axios({
-        method: 'POST',
-        url: '/admin/addNewProposedCompany',
-        data: bodyFormData,
-        config: { headers: { 'Content-Type': 'multipart/form-data' } }
-    });
-
+export const addNewProposedCompany=(data)=>{
+    return axios.post('/admin/addNewProposedCompany',data)
 }
 export const updateCompany=(bodyFormData,id)=>{
     // return axios.post('/admin/updateCompany',data)

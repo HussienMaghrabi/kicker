@@ -117,7 +117,7 @@
 
                  <b-field v-for="(data, index) in faxes" :key="'c'+index" >
                       <label class="column is-4">Fax</label>
-                      <b-input class="Leaad" type="number" style="margin-left:5%;" min="0"   v-model="fax" ></b-input>
+                      <b-input class="Leaad" type="number" style="margin-left:5%;" min="0"   v-model="faxArr[index]" ></b-input>
                       <div class="column is-1">
                         <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeFaxField(index,data)"></span> 
                         <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addFaxField"></span> 
@@ -302,7 +302,7 @@
 
                 mobileArr:[],
                 emailArr:[],
-                fax:[],
+                faxArr:[],
                 contact_array: [],
                 address_array:[],
                 // newPhoneArr:[],
@@ -399,17 +399,17 @@
                 bodyFormData.append('currencyId',this.currencyId)
                 bodyFormData.append('first_name',this.first_name)
                 bodyFormData.append('last_name',this.last_name)
-                bodyFormData.append('phone',JSON.stringify(this.phone))
+                bodyFormData.append('phone',this.phone)
                 bodyFormData.append('position',this.position)
-                bodyFormData.append('fax',JSON.stringify(this.fax))
-                bodyFormData.append('email',JSON.stringify(this.email))
+                bodyFormData.append('faxies',this.faxArr)
+                bodyFormData.append('email',this.email)
                 bodyFormData.append('nationality_id',this.nationality_id)
                 bodyFormData.append('website',this.website)
-                bodyFormData.append('street',JSON.stringify(this.street))
-                bodyFormData.append('state',JSON.stringify(this.state))
-                bodyFormData.append('country_id',JSON.stringify(this.country_id))
-                bodyFormData.append('city_id',JSON.stringify(this.city_id))
-                bodyFormData.append('zip_code',JSON.stringify(this.zip_code))
+                bodyFormData.append('street',this.street)
+                bodyFormData.append('state',this.state)
+                bodyFormData.append('country_id',this.country_id)
+                bodyFormData.append('city_id',this.city_id)
+                bodyFormData.append('zip_code',this.zip_code)
                 bodyFormData.append( 'introduction',this.Introduction)
                 bodyFormData.append( 'closing',this.Closing)
                 bodyFormData.append('policy',this.Policy)

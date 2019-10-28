@@ -58,99 +58,16 @@ class LeadsController extends Controller
 
     public function store(Request $request)
     {
-
-    dd($request->all());
-        $company = new Company;
-         $saved = Company::create($request->all());
-
-        if ($saved) {
-            $address = array(
-                    'street' => $request->street,
-                    'state' => $request->state,
-                    'country_id' => $request->country_id,
-                    'zip_code' => $request->zip_code,
-                    'city_id' => $request->id_city,
-                    'company_id' => $saved->id
-                );
-
-        foreach($address as $ad){
-            $company->Address()->create([$ad]);
-            }
-
-        DB::table('contacts')->insert([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'title_id' => $request->title_id,
-            'email' => $request->email,
-            'nationality' => $request->nationality,
-            'phone' => $request->phone,
-            'mobile' => $request->mobile,
-            'position' => $request->position,
-            'leadstatus' => $request->leadstatus,
-            'company_id' => $saved->id,
-            'lead_source_id' => $request->lead_source_id,
-            // 'lead_id' => $request->lead_id,
-          ]);
-        }
+        return Company::getStore($request);
     }
-    public function edit_comapany_data(Request $request)
+    public function edit_company_data(Request $request)
     {
-       //echo dd($request->lead_source);
-        DB::table('companies')
-        ->where('id',$request['company_id'])
-        ->update([
-            'name' => $request->company_name,
-            'rating' => $request->rating,
-            'employees_Number' => $request->employees_Number,
-            'annual_revenue' => $request->annual_revenue,
-            'industry_id' => $request->industry,
-            'lead_source_id' => $request->lead_source,
-            'commercial_registration' => $request->commercial_registration,
-            ]);
-            DB::table('leads')
-            ->where('id',$request['lead_id'])
-            ->update([
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'mobile' => $request->mobile,
-                'fax' => $request->fax,
-                'website' => $request->website,
-                'lead_source_id' => $request->lead_source,
-                ]);     
-                return response()->json([
-                    'massege'=> 'success',
-                ],200);     
-          //  dd($request->all());
+        return Company::getEditCompany($request);
     }
 
     public function edit_address(Request $request)
     {
-       //echo dd($request->lead_source);
-        DB::table('companies')
-        ->where('id',$request['company_id'])
-        ->update([
-            'name' => $request->company_name,
-            'rating' => $request->rating,
-            'employees_Number' => $request->employees_Number,
-            'annual_revenue' => $request->annual_revenue,
-            'industry_id' => $request->industry,
-            'lead_source_id' => $request->lead_source,
-            'commercial_registration' => $request->commercial_registration,
-            ]);
-            DB::table('leads')
-            ->where('id',$request['lead_id'])
-            ->update([
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'mobile' => $request->mobile,
-                'fax' => $request->fax,
-                'website' => $request->website,
-                'lead_source_id' => $request->lead_source,
-                ]);     
-                return response()->json([
-                    'massege'=> 'success',
-                ],200);     
-          //  dd($request->all());
+       return Company::getEditAddress($request);
     }
 
     /**

@@ -155,7 +155,7 @@
 
                     <b-field>
                         <label  class="column is-3">Nationality</label>
-                        <b-select v-model="nationalityId[indexContact]" placeholder="Select Nationality"  expanded>
+                        <b-select v-model="nationalityId" placeholder="Select Nationality"  expanded>
                             <option v-for="nationality in nationalities " :key="nationality.id" :value="nationality.id" >{{nationality.nationality}}</option>
                         </b-select>
                     </b-field>
@@ -309,6 +309,7 @@
     export default {
         data() {
             return {
+                companyImage:'',
                 contactsArray:[],
                 removebtn:'',
                 title:'',
@@ -335,7 +336,7 @@
                 countries:[],
                 activity:'',
                 currencyId:null,
-                nationalityId:[],
+                nationalityId:null,
                 cityId:[],
                 countryId:[],
                 companyName:'',
@@ -378,40 +379,14 @@
         methods: {
 
             addNewProposedCompany(){
-                //   var contactsArray=this.contacts.length+1;
-                //   var p;
-                //  for (let key in this.phones) {
-                //     const value = this.phones[key];
-                //   p=this.phones[key].phone;
-                //     }
-                // for (var i = 1; i < contactsArray; i++) {
-
-
-                //   this.contactsArray.push({
-                //   contactindex:i,
-                //   firstName: this.firstName[i],
-                //   lastName:this.lastName[i],
-                //   pArray:this.p,
-
-                //   mArray:this.mobileArr[i],
-                //   fArray:this.faxArr[i],
-                //   eArray:this.emailArr[i],
-                //   nationality:this.nationalityId[i],
-                //   webiste:this.WebSite[i]
-                //  });
-
-
-                // }
                 const bodyFormData = new FormData();
                 for (let key in this.NewCompany) {
                     const value = this.NewCompany[key];
-                    // bodyFormData.set(key, value);
+
                 }
                 bodyFormData.append('image',this.NewCompany.dropFiles[0])
                 bodyFormData.append('companyName',this.companyName);
 
-
-                //     '_token':this.token,
                 bodyFormData.append('activity',this.activity)
                 bodyFormData.append('currencyId',this.currencyId)
                 bodyFormData.append('firstName',this.firstName)
@@ -421,7 +396,7 @@
                 bodyFormData.append('position',this.position)
                 bodyFormData.append('faxies',JSON.stringify(this.faxArr))
                 bodyFormData.append('emails',JSON.stringify(this.emailArr))
-                bodyFormData.append('nationlityId',this.nationalityId)
+                bodyFormData.append('nationalityId',this.nationalityId)
                 bodyFormData.append('webSite',this.WebSite)
                 bodyFormData.append('street',JSON.stringify(this.street))
                 bodyFormData.append('state',JSON.stringify(this.state))
@@ -433,10 +408,12 @@
                 bodyFormData.append('policy',this.Policy)
                 bodyFormData.append('contactsArray',JSON.stringify(this.contactsArray))
 
-
+                console.log('dddddd',bodyFormData)
                 addNewProposedCompany(bodyFormData).then(Response=>{
-                    //   console.log("the returned Value is ",Response.data)
+                    alert('Success')
                     window.location.href="allCompanies"
+                }).catch(error => {
+                    console.log(error)
                 })
 
             },
