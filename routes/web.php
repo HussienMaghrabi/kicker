@@ -111,7 +111,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('getleadContact/{id}','ProposedCompanyController@getleadContact');
     Route::get('getVacancyJob/{id}','ApplicationController@getVacancyJob');
     
-    Route::get('getAllRoles','EmployeeController@getAllRoles');
+    Route::get('getAllRolesNew','RoleController@getAllRoles');
     
     Route::get('getTaskInputs','TaskController@getTaskInputs');
     Route::get('getMeetingsInputs','MeetingController@getMeetingsInputs');
@@ -630,7 +630,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('export_xls','CampaignController@export_xls');
     Route::post('delete_resale_image', 'ResaleUnitController@delete_resale_image');
     Route::post('delete_rental_image', 'RentalUnitController@delete_rental_image');
-    // Route::resource('roles', 'RoleController');
+    Route::resource('roles', 'RoleController');
     Route::get('getAllRoles','RoleController@index');
     Route::get('EditSingleRole/{id}','RoleController@edit');
     Route::post('updateSingleRole/{id}','RoleController@update');

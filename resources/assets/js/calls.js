@@ -2262,7 +2262,7 @@ export const getAllJobTitles = () => {
 
 // get roles
 export const getAllRoles = () => {
-    return axios.get('/admin/getAllRoles')
+    return axios.get('/admin/getAllRolesNew')
 }
 // edit roles
 export const EditSingleRole = (id) => {
