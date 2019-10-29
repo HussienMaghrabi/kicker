@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Currency;
 use Illuminate\Http\Request;
+use DB;
 
 class CurrencyController extends Controller
 {
@@ -33,6 +34,19 @@ class CurrencyController extends Controller
 		return response()->json([
 			'status'=>'success',
 			'data'=>$allcurrency
+		]);
+	}
+	public function getAllCurrencyCo($id)
+	{
+		$currCompany = DB::table('proposedCurrency_companies as propCurrncyC')
+		->leftJoin('proposed_company as p_company','propCurrncyC.proposed_company_id','=','p_company.id')
+		->leftJoin('currencies as currency','propCurrncyC.currency_id','=','currency.id')
+		->where('p_company.id',$id)
+		->select('currency.id as id','currency.name as currName')
+		->get();
+		return response()->json([
+			'status'=>'success',
+			'data'=>$currCompany
 		]);
 	}
 }

@@ -71,7 +71,6 @@ class ProposalController extends Controller
     public function store(Request $request)
     {
         dd($request->all());
-
         $proposal=new Proposal;
         $proposal->proposed_company_id  =$request->proposedCompanyId;
         $proposal->company_id           =$request->company_id;

@@ -146,6 +146,15 @@ class ProposedCompanyController extends Controller
         return response()->json($leadContacts);
     }
 
+    public function Getproposed($id)
+    {
+        $GetPolicy=proposed_company::find($id)->policy;
+        return response()->json([
+            'status'=>'Success',
+            'data'=>$GetPolicy
+        ]);
+    }
+
     public function searchForCompany(Request $request){
 
         return proposed_company::getSearch($request);

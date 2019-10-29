@@ -430,6 +430,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('get_property', 'AjaxController@get_property');
     Route::post('save_main_slider', 'AjaxController@save_main_slider');
     Route::get('delete_currency/{id}', 'CurrencyController@delete_currency');
+    Route::get('getAllCurrencyCo/{id}', 'CurrencyController@getAllCurrencyCo');
     Route::put('edit_currency/{id}', 'CurrencyController@edit_currency');
     Route::post('get_proposal', 'AjaxController@get_proposal');
     Route::post('get_proposal_html', 'AjaxController@get_proposal_html');
@@ -920,6 +921,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('UpdateProposedCompany/{id}', 'ProposedCompanyController@update');
     Route::get('getAllContactPerson/{id}','ContactController@getAllContactPerson');
     Route::get('getAllProposalCompanies','ProposedCompanyController@index');
+    Route::get('Getproposed/{id}','ProposedCompanyController@Getproposed');
 
     Route::get('getProposalCompanyById/{id}','ProposedCompanyController@show');
     Route::get('allCompanies/{id}','ProposedCompanyController@destroy');

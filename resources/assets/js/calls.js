@@ -2706,6 +2706,12 @@ export const edit_address = (data) => {
 export const getAllContactPerson=(id)=>{
     return axios.get('/admin/getAllContactPerson/'+id)
 }
+export const getAllCurrencyCo=(id)=>{
+    return axios.get('/admin/getAllCurrencyCo/'+id)
+}
+export const Getproposed=(id)=>{
+    return axios.get('/admin/Getproposed/'+id)
+}
 export const getAllProposalCompanies=()=>{
     return axios.get('/admin/getAllProposalCompanies')
 }
