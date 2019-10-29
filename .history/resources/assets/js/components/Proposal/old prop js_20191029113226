@@ -1,0 +1,213 @@
+
+// on tampleat
+
+v-on:change="getAllContactPersonById($event.target.value)"
+
+// end teampleat
+
+// Old js proposed company
+
+
+    import {getAllProposedCompany,getAllCompanies,getAllContactPerson,getAllCurrency,addNewProposal,getAllItem} from './../../calls'
+    export default {
+        data() {
+            return {
+                policy:null,
+                currencies:[],
+                Items:[],
+                currencyId:null,
+                validUntil:null,
+                proposedCompanies:[],
+                companies:[],
+                contactPersonArr:[],
+                proposedCompanyId:null,
+                companyId:null,
+                contactPersonId:null,
+                payment:'',
+                token: window.auth_user.csrf,
+                isComponentModalActive: false,
+                // itemPrice:'',
+                // itemQuantity:'',
+                // discount:'',
+                // total:null,
+                // percent:null,
+                // discountValue:null,
+                invoice:'',
+                invoices: [{
+                    itemQuantity: '',
+                    itemPrice: '',
+                    discountValue: '',
+                    total: '',
+                    discount: '',
+                    name: ''
+                }],
+                isComponentItemActive:false,
+                items:[{
+                    newItem:''
+                }],
+                itemsArray:[],
+            }
+        },
+        watch:{
+
+            //  'itemQuantity' :function(val){
+            //     console.log('vaaal',val)
+            //     this.itemQuantity = val
+            //     console.log(this.itemQuantity)
+            //     this.total = this.itemQuantity * this.itemPrice
+            // },
+            // 'itemPrice':function(val){
+            //     this.itemPrice = val
+            //     this.total = this.itemQuantity * this.itemPrice
+            // },
+            // 'discount':function(val){
+            //     this.discount = val
+            //     if(val == 0 ){
+            //         this.discountValue = '0.00'
+            //         this.discount = '0.00'
+            //         this.total = this.itemQuantity * this.itemPrice
+            //     }else{
+            //         this.discountValue = this.total * this.discount /100
+            //         this.total = this.total - this.discountValue
+
+            //     }
+            // },
+
+        },
+        created() {
+            this.id = this.$route.params.id
+        },
+        mounted() {
+            this.getAllCurrency()
+            this.getAllProposedCompany(),
+            this.getAllCompanies()
+
+        },
+        components: {
+
+        },
+        methods: {
+            getAllCurrency(){
+                getAllCurrency().then(Response=>{
+                    this.currencies=Response.data.data
+                }).catch(error=>{
+                    console.log(error);
+                })
+            },
+            getAllItemById(value){
+                var id = value;
+                getAllItem(id).then(Response=>{
+                    this.itemsArray=Response.data.data
+                }).catch(error=>{
+                    console.log(error);
+                })
+            },
+            getAllContactPersonById(value){
+
+                // console.log("the id is ",value);
+                var id = value;
+                getAllContactPerson(id).then(Response=>{
+                    this.contactPersonArr=Response.data.data
+                    // console.log(Response);
+                }).catch(error=>{
+                    console.log(error);
+                })
+            },
+            getAllProposedCompany(){
+                getAllProposedCompany().then(Response=>{
+                    this.proposedCompanies=Response.data.data
+                }).catch(error => {
+                    console.log("there are error ".error)
+                })
+            },
+            getAllCompanies(){
+                getAllCompanies().then(Response=>{
+                    this.companies=Response.data.data
+                }).catch(error=>{
+                    console.log(error)
+                })
+            },
+            ChangeInvoice(event){
+
+            },
+            ChangePrice(event){
+                for(var i=0 ;i < this.invoices.length; i++){
+                    this.invoices[i].total = this.invoices[i].itemQuantity * this.invoices[i].itemPrice
+                }
+            },
+            ChangeDiscount(event){
+                for(var i=0 ;i < this.invoices.length;i++){
+                    if(this.invoices[i].discount == 0 ){
+                        this.invoices[i].discountValue = '0.00'
+                        this.invoices[i].discount = '0.00'
+                        this.invoices[i].total = this.invoices[i].itemQuantity * this.invoices[i].itemPrice
+                    }else{
+                        this.invoices[i].discountValue = this.invoices[i].total *this.invoices[i].discount /100
+                        this.invoices[i].total = this.invoices[i].total - this.invoices[i].discountValue
+                    }
+                }
+            },
+            openModal(){
+                this.isComponentModalActive = true
+            },
+            AddInvoicefield(){
+                this.invoices.push({
+                    itemQuantity: '',
+                    itemPrice: '',
+                    discountValue: '',
+                    total: '',
+                    discount: ''
+                });
+            },
+            deleteRow(index, invoice) {
+                var idx = this.invoices.indexOf(invoice);
+                //   console.log(idx, index);
+                if (idx > -1) {
+                    this.invoices.splice(idx, 1);
+                }
+            },
+            openAddItem(){
+                this.isComponentItemActive = true
+            },
+            AddItemfield(){
+                this.items.push({
+                    newItem: '',
+                });
+            },
+            deleteItem(k, item){
+                var idx = this.items.indexOf(item);
+                //console.log(idx, k);
+                if (idx > 0) {
+                    this.items.splice(idx, 1);
+                }
+            },
+            addNewProposal(){
+                var data ={
+                    'proposed_company_id':this.proposedCompanyId,
+                    'companyId':this.companyId,
+                    'contactPersonId':this.contactPersonId,
+                    'validUntil':this.validUntil,
+                    'currencyId':this.currencyId,
+                    'payment':this.payment,
+                    'invoices':this.invoices,
+
+                };
+                console.log('dadadadadadada',data)
+                addNewProposal(data).then(response=>{
+                    alert('Success')
+
+                })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            }
+        }
+    }
+
+
+
+
+
+
+
+// end proposed 
