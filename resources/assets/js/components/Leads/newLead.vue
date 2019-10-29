@@ -37,23 +37,37 @@
 
         <div class="columns is-12" style="margin-top:10px;padding-bottom:15px">
             <div class="column is-2">
-                <b-field style="padding-right: 6px;">
-                    <b-upload v-model="dropFiles" 
-                        multiple
-                        drag-drop>
-                        <section class="section">
-                            <div class="content has-text-centered">
-                                <p>
-                                    <b-icon
-                                        icon="upload"
-                                        size="is-large">
-                                    </b-icon>
-                                </p>
-                                <p>Drop your files here or click to upload</p>
-                            </div>
-                        </section>
-                    </b-upload>
-                </b-field>
+                <section>
+                    <b-field>
+                        <b-upload v-model="newLead.dropFiles"
+                                  multiple
+                                  drag-drop>
+                            <section class="section">
+                                <div class="content has-text-centered">
+                                    <p>
+                                        <b-icon
+                                                icon="upload"
+                                                size="is-large">
+                                        </b-icon>
+                                    </p>
+                                    <p>Drop your files here or click to upload</p>
+                                </div>
+                            </section>
+                        </b-upload>
+                    </b-field>
+
+                    <div class="tags">
+            <span v-for="(file, index) in newLead.dropFiles"
+                  :key="index"
+                  class="tag is-primary" >
+                {{file.name}}
+                <button class="delete is-small"
+                        type="button"
+                        @click="deleteDropFile(index)">
+                </button>
+            </span>
+                    </div>
+                </section>
             </div>
 
              <div class="column is-5">
@@ -61,13 +75,13 @@
                 <b-field>
                     <label class="column is-4">Company Name</label>
                     <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="name"></b-input>
-                </b-field>   
+                </b-field>
 
                 <b-field>
                       <label class="column is-4">Phone</label>
                       <b-input class="Leaad" type="number" style="margin-left:5%;" v-once v-model="newPhone"></b-input>
                       <div class="column is-1">
-                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addPhoneField"></span> 
+                          <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addPhoneField"></span>
                       </div>
                 </b-field>
 
@@ -75,7 +89,7 @@
                       <label class="column is-4">Phone</label>
                       <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="newPhone"></b-input>
                       <div class="column is-1">
-                          <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removePhoneField(index,phone)"></span> 
+                          <span><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removePhoneField(index,phone)"></span>
                       </div>
                 </b-field>
 
@@ -126,7 +140,7 @@
 
                 <b-field>
                     <label class="column is-4">Fax</label>
-                    <b-input  class="Leaad" style="margin-left:5%;" v-model="newFax"></b-input>
+                    <b-input  class="Leaad" type="number" style="margin-left:5%;" v-model="newFax"></b-input>
                     <div class="column is-1">
                           <span><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addFaxField"></span> 
                     </div>
@@ -186,8 +200,7 @@
 
                 <b-field>
                     <label  class="column is-4">Rating</label>
-                    <b-select expanded class="Leaad2" v-model="rating"> 
-                        <option selected>Rate</option>
+                    <b-select expanded class="Leaad2" v-model="rating">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -305,14 +318,6 @@
                     <b-input class="Leaad" type="email" style="margin-left:5%;" v-model="email"></b-input>
                 </b-field>
 
-                <b-field>
-                    <label  class="column is-4">Nationality</label>
-                    <b-select class="Leaad2" expanded v-model="nationality">
-                        <option value="egyptian">Egyptian</option>
-                        <option value="2">Mrs.</option>
-                        <option value="3">Ms.</option>
-                    </b-select>
-                </b-field>
             </div>
 
             <div class="column is-5"  style="margin-top:6%">
@@ -418,6 +423,8 @@ export default {
             lead_source_id:null,
             cities:[],
             countries:[],
+            nationalities:[],
+            newLead:[],
             titles:[],
             industries:[],
             leadsources:[]
@@ -430,17 +437,18 @@ export default {
          this.getAllTitles()
          this.getAllIndustries()
          this.getAllLeadSources()
+
      },
       methods: {
-        removeAddressfield(indexAddress,address){
-           var idx = this.addresses.indexOf(address);
-            console.log(idx, indexAddress);
-            if (idx > -1) {
-                this.addresses.splice(idx, 1);
-            }
-        },
+         removeAddressfield(indexAddress,address,){
+             var idx = this.addresses.indexOf(address);
+             console.log(idx, indexAddress);
+             if (idx > -1) {
+                 this.addresses.splice(idx, 1);
+             }
+         },
         removeContactfield(indexContact,contact){
-            var idx = this.contacts.indexOf(contact);
+                var idx = this.contacts.indexOf(contact);
             console.log(idx, indexContact);
             if (idx > -1) {
                 this.contacts.splice(idx, 1);
@@ -580,36 +588,45 @@ export default {
         },
 
         addNewLead(){
-            var data ={
-            'name':this.name,
-            'checkboxcompany':this.checkboxcompany,
-            'checkboxindividual':this.checkboxindividual,
-            'industry_id':this.industry,
-            'employees_Number':this.employees_Number,
-            'rating':this.rating,
-            // 'logo':this.logo,
-            'description':this.description,
-            'annual_revenue':this.annual_revenue,
-            'lead_source_id':this.lead_source_id,
-            'street':this.street,
-            'state':this.state,
-            'country_id':this.country,
-            'city_id':this.city,
-            'zip_code':this.zipCode,
-            // 'company_id':this.company_id,
+            const bodyFormData = new FormData();
+            for (let key in this.newLead) {
+                const value = this.newLead[key];
 
-            'first_name':this.firtName ,
-            'last_name':this.lastName,
-            'title_id':this.title ,
-            'email':this.email,
-            'nationality':this.nationality ,
-            'phone':this.phone,
-            'mobile':this.mobile,
-            'position':this.position,
-            'leadstatus':this.leadStatus,
-            };
-            console.log('dataaaaaa',data)
-            addNewLead(data).then(response=>{
+            }
+            bodyFormData.append('image',this.newLead.dropFiles[0])
+            bodyFormData.append('name',this.name);
+            bodyFormData.append('checkboxcompany',this.checkboxcompany);
+            bodyFormData.append('checkboxindividual',this.checkboxindividual);
+            bodyFormData.append('industry_id',this.industry);
+            bodyFormData.append('employees_Number',this.employees_Number);
+            bodyFormData.append('phones',this.phones);
+            bodyFormData.append('mobiles',this.mobiles);
+            bodyFormData.append('emails',this.emails);
+            bodyFormData.append('faxes',this.faxes);
+            bodyFormData.append('rating',this.rating);
+            // bodyFormData.append('logo',this.logo);
+            bodyFormData.append('description',this.description);
+            bodyFormData.append('annual_revenue',this.annual_revenue);
+            bodyFormData.append('lead_source_id',this.lead_source_id);
+            bodyFormData.append('street',this.street);
+            bodyFormData.append('state',this.state);
+            bodyFormData.append('country_id',this.country);
+            bodyFormData.append('city_id',this.city);
+            bodyFormData.append('zip_code',this.zipCode);
+            // bodyFormData.append('company_id',this.company_id);
+            bodyFormData.append('first_name',this.firtName);
+            bodyFormData.append('last_name',this.lastName);
+            bodyFormData.append('title_id',this.title);
+            bodyFormData.append('email',this.email);
+            bodyFormData.append('nationality',this.nationality);
+            bodyFormData.append('phone',this.phone);
+            bodyFormData.append('mobile',this.mobile);
+
+            bodyFormData.append('position',this.position);
+            bodyFormData.append('leadstatus',this.leadStatus);
+
+            console.log('dataaaaaa',bodyFormData)
+            addNewLead(bodyFormData).then(response=>{
                 alert('Lead Added Successfully')
                 // $(location).attr('href', '/admin/vue/Leads')
             })

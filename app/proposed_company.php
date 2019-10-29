@@ -21,7 +21,7 @@ class proposed_company extends Model
 
      static function gitStore(Request $request){
 
-//dd($request);
+dd($request);
         //static Data Of Proposed Company
         $proposedCompany=new proposed_company;
         $proposedCompany->name          =$request->companyName;

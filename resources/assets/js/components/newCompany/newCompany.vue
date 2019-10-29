@@ -13,30 +13,37 @@
 
         <div class="columns is-12" style="margin-top:10px;padding-bottom:15px">
             <div class="column is-2">
-                <b-field style="padding-right: 6px; max-height: 200px; max-width: 200px;">
-                    <b-upload v-model="NewCompany.dropFiles"
-                              multiple
-                              drag-drop  @change="onFileChange" required>
-                        <section class="section">
-                            <div class="content has-text-centered">
-                                <img src="/img/placeholder.png">
-                            </div>
-                        </section>
-                    </b-upload>
-                    <!-- add image  -->
-                    <div class="tags" >
-                            <span v-for="(file, index) in NewCompany.dropFiles"
-                                  :key="index"
-                                  class="tag is-primary" >
-                                {{file.name}}
-                                <button class="delete is-small"
-                                        type="button"
-                                        @click="deleteDropFile(index)">
-                                </button>
-                            </span>
+                <section>
+                    <b-field>
+                        <b-upload v-model="NewCompany.dropFiles"
+                                  multiple
+                                  drag-drop>
+                            <section class="section">
+                                <div class="content has-text-centered">
+                                    <p>
+                                        <b-icon
+                                                icon="upload"
+                                                size="is-large">
+                                        </b-icon>
+                                    </p>
+                                    <p>Drop your files here or click to upload</p>
+                                </div>
+                            </section>
+                        </b-upload>
+                    </b-field>
+
+                    <div class="tags">
+            <span v-for="(file, index) in NewCompany.dropFiles"
+                  :key="index"
+                  class="tag is-primary" >
+                {{file.name}}
+                <button class="delete is-small"
+                        type="button"
+                        @click="deleteDropFile(index)">
+                </button>
+            </span>
                     </div>
-                    <!-- drop image -->
-                </b-field>
+                </section>
             </div>
             <!-- image  -->
             <div class="column is-6">

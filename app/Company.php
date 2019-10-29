@@ -54,6 +54,7 @@ class Company extends Model
 
      static function getStore(Request $request){
 
+        dd($request);
          $company = new Company;
          $saved = Company::create($request->all());
 
