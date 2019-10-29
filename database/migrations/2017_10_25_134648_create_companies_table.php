@@ -16,6 +16,10 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('phone')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('email')->nullable();
+            $table->string('fax')->nullable();
             $table->unsignedInteger('industry_id');
             $table->foreign('industry_id')->references('id')->on('industries');
             $table->integer('employees_Number');
