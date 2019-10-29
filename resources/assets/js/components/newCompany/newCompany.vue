@@ -53,9 +53,7 @@
                 <!-- Activity -->
                 <b-field>
                     <label  class="column is-3">Currency</label>
-                    <b-select v-model="currencyId" placeholder="Select Currency"  expanded>
-                        <option v-for="currency in currencies " :key="currency.id" :value="currency.id" >{{currency.name}}</option>
-                    </b-select>
+                    <multiselect v-model="currencyId"  label="name" track-by="id" value="id" :options="currencies" :multiple="true" :taggable="true"></multiselect>
                 </b-field>
                 <!-- Currency  -->
 
@@ -304,7 +302,11 @@
 
 </template>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
+
 <script>
+    import Multiselect from 'vue-multiselect'
     import{getAllCurrency,getAllNationality,getAllCities,getAllCountries, dashgetstatus,addNewProposedCompany}   from './../../calls'
     export default {
         data() {
@@ -335,7 +337,7 @@
                 cities:[],
                 countries:[],
                 activity:'',
-                currencyId:null,
+                currencyId:[],
                 nationalityId:null,
                 cityId:[],
                 countryId:[],
@@ -369,6 +371,7 @@
             }
         },
 
+        components: { Multiselect },
         mounted() {
             this.getAllCurrency()
             this.getAllNationality()
@@ -388,7 +391,10 @@
                 bodyFormData.append('companyName',this.companyName);
 
                 bodyFormData.append('activity',this.activity)
-                bodyFormData.append('currencyId',this.currencyId)
+                for (var i = 0; i < this.currencyId.length; i++) {
+                    bodyFormData.append('currencyId[]', this.currencyId[i].id);
+                }
+
                 bodyFormData.append('firstName',this.firstName)
                 bodyFormData.append('lastName',this.lastName)
                 bodyFormData.append('phones',JSON.stringify(this.phoneArr))

@@ -21,10 +21,10 @@ class proposed_company extends Model
 
      static function gitStore(Request $request){
 
+//dd($request);
         //static Data Of Proposed Company
         $proposedCompany=new proposed_company;
         $proposedCompany->name          =$request->companyName;
-        $proposedCompany->currency_id   =$request->currencyId;
         $proposedCompany->activity      =$request->activity;
         $proposedCompany->introduction  =$request->introduction;
         $proposedCompany->closing       =$request->closing;
@@ -47,6 +47,22 @@ class proposed_company extends Model
         $contactsProposed->nationality_id       =$request->nationalityId;
         $contactsProposed->proposed_company_id  =$proposedCompany->id;
         $contactsProposed->save();
+
+        //save Currency_company
+
+         $cArray=$request->currencyId;
+         if($cArray > 0){
+             foreach($cArray as $currencyId){
+                 if($currencyId !=null){
+                     $Currency_company =new proposedCurrency_company;
+                     $Currency_company->currency_id =$currencyId;
+                     $Currency_company->proposed_company_id =$proposedCompany->id;
+                     $Currency_company->save();
+                 }
+             }
+         }
+
+
         //save ProposedContact_phone
         $pArray = json_decode($request->phones);
 
