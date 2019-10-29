@@ -17,8 +17,6 @@ class ProposedCompanyTable extends Migration
             $table->increments('id');
             //$table->unsignedInteger('company_id');
            // $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
-            $table->unsignedInteger('currency_id');
-            $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
             // $table->unsignedInteger('contact_id');
             // $table->foreign('contact_id')->references('id')->on('contacts_proposed')->onDelete('cascade');
             // $table->unsignedInteger('address_id');
