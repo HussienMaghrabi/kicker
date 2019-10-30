@@ -293,6 +293,9 @@ export const changeLeadHot = (data) => {
 export const getCountries = () => {
     return axios.get('/admin/getCountries')
 }
+export const getAllCities=(id)=>{
+    return axios.get('/admin/getAllCities/'+id)
+}
 export const getcities = () => {
     return axios.get('/admin/getcities')
 }
@@ -2646,9 +2649,6 @@ export const getAllCurrency=()=>{
 }
 export const getAllNationality=()=>{
     return axios.get('/admin/getAllNationality')
-}
-export const getAllCities=()=>{
-    return axios.get('/admin/getAllCities')
 }
 export const getAllCountries=()=>{
     return axios.get('/admin/getAllCountries')
