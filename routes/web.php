@@ -724,6 +724,8 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('updatelead','LeadController@updatelead');
     Route::post('updateEmployees','EmployeeController@updateEmployees');
     Route::post('StoreNewEmpRequest','EmployeeRequestController@Store');
+    Route::get('GetEmpVacationData/{id}','EmployeeRequestController@employeeRequestdata');
+    Route::post('updateRequestvacation/{id}','EmployeeRequestController@updateRequestdata');
     Route::post('UpdateGroosSalary','grossSalaryController@Store');
     Route::get('GrossEmployeeSalary','grossSalaryController@GrossReport');
     Route::get('GetEmpDetails/{id}','grossSalaryController@customeEmployee');

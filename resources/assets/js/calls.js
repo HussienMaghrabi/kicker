@@ -484,6 +484,12 @@ export const getRental = (data, page) => {
 export const GetEmployeeRequests = (page) => {
     return axios.get('/api/agent/GetEmployeeRequests?page='+page)
 }
+export const GetEmpVacationData = (id) => {
+    return axios.get('/admin/GetEmpVacationData/'+id)
+}
+export const updateRequestvacation = (id,data) => {
+    return axios.post('/admin/updateRequestvacation/'+id,data)
+}
 // get All Vacation type
 export const GetAllVacatonType = () => {
     return axios.get('/admin/GetAllVacatonType')
