@@ -13,4 +13,16 @@ class ItemController extends Controller
     {
         return Item::GetItemsByCompany($CId);
     }
+
+    public function addNewItems(Request $request){
+        return Item::getStore($request);
+    }
+
+    public function getMyItem(){
+        return Item::getItem();
+    }
+
+    public function destroy($id){
+        return Item::getDestroy($id);
+    }
 }

@@ -301,11 +301,18 @@ export const deleteLead = (id) => {
 }
 
 export const deleteCompany = (id) => {
-    return axios.get('/admin/delete-Company/'+id)
+    return axios.get('/admin/c/'+id)
+}
+export const deleteItem = (id) => {
+    return axios.get('/admin/delete-Item/'+id)
 }
 // Delete a allCompanies
 export const deleteThisCompanies = (id) => {
     return axios.get('/admin/allCompanies/'+id)
+}
+// Delete a allCompanies
+export const deleteThisItem = (id) => {
+    return axios.get('/admin/allItems/'+id)
 }
 
 //delete Resale
@@ -2692,6 +2699,10 @@ export const getNewLeads = () => {
 export const addNewLead = (data) => {
     return axios.post('/admin/companyLeads', data)
 }
+// add new lead
+export const addNewItems = (data) => {
+    return axios.post('/admin/addNewItems', data)
+}
 
 export const getAllItem=(id)=>{
     return axios.get('/admin/getAllItem/'+id)
@@ -2723,5 +2734,9 @@ export const getProposedCompanyData=(id)=>{
 }
 export const getAllCities=(id)=>{
     return axios.get('/admin/getAllCities/'+id)
-}
+};
+export const getMyItem=()=>{
+    return axios.get('/admin/getMyItem')
+};
+
 
