@@ -12,12 +12,12 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getAllCities()
-    {
-        $City = City::all();
+
+    public function getAllCities($id){
+        $allCity=City::where('country_id',$id)->get();
         return response()->json([
-            'status' => 'success',
-            'data' => $City
+            'status'=>'success',
+            'data'=>$allCity
         ]);
     }
 

@@ -293,9 +293,6 @@ export const changeLeadHot = (data) => {
 export const getCountries = () => {
     return axios.get('/admin/getCountries')
 }
-export const getAllCities=(id)=>{
-    return axios.get('/admin/getAllCities/'+id)
-}
 export const getcities = () => {
     return axios.get('/admin/getcities')
 }
@@ -2717,5 +2714,8 @@ export const getAllProposalCompanies=()=>{
 }
 export const getProposedCompanyData=(id)=>{
     return axios.get('/admin/getProposalCompanyById/'+id)
+}
+export const getAllCities=(id)=>{
+    return axios.get('/admin/getAllCities/'+id)
 }
 

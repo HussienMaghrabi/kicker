@@ -914,7 +914,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('getAllCurrency', 'CurrencyController@getAllCurrency');
     Route::get('getAllItem/{id}', 'ItemController@getAllItem');
     Route::get('getAllNationality', 'NationalityController@getAllNationality');
-    Route::get('getAllCities', 'CityController@getAllCities');
+    Route::get('getAllCities/{id}', 'CityController@getAllCities');
     Route::get('getAllCountries', 'CountryController@getAllCountries');
     Route::post('addNewProposedCompany', 'ProposedCompanyController@store');
     Route::post('addNewInvoice', 'invoicesController@store');

@@ -6,28 +6,32 @@
             </div>
             <div class="column is-8">
                 <div class="select">
-                    <select>
+                    <b-select v-model="lead_privacy">
                         <option value="only_me" selected>Only Me</option>
                         <option value="friends">Friends</option>
                         <option value="public">Public</option>
-                    </select>
+                    </b-select >
                 </div>
             </div>
             <div class="column is-1 save">
-                <b-button type="is-info">Save</b-button>
+                <b-button type="is-info" @click="addNewLead()">Save</b-button>
             </div>
             <div  class="column is-1 cancel">
-                <b-button type="is-danger">Cancel</b-button>
+                <b-button type="is-danger">
+                    <router-link :to="'/admin/vue/Leads'" style="color:#000">
+                        Cancel
+                    </router-link>
+                </b-button>
             </div>
         </div>
 
         <div class="columns is-12">
             <div class="columns is-12">
                 <div class="column is-2">
-                    <b-checkbox>Company lead</b-checkbox>
+                    <b-checkbox v-model="checkboxCompany" >Company lead</b-checkbox>
                 </div>
                 <div class="column is-6">
-                    <b-checkbox>Individiual lead</b-checkbox>
+                    <b-checkbox v-model="checkboxIndividiual" >Individiual lead</b-checkbox>
                 </div>
                 <hr>
             </div>
@@ -144,7 +148,7 @@
 
                 <b-field>
                     <label class="column is-4">Annual revenu</label>
-                    <b-input class="Leaad" style="margin-left:5%;" placeholder="Annual revenu" v-model="annualRevenu"></b-input>
+                    <b-input class="Leaad" type="number"  style="margin-left:5%;" placeholder="Annual revenu" v-model="annualRevenu"></b-input>
                 </b-field>
                 <!-- Annual revenu field -->
 
@@ -213,22 +217,23 @@
                 <div class="column is-5" style="margin-top:5%">
                     <b-field>
                         <label  class="column is-4">City</label>
-                        <b-select class="Leaad2" expanded>
-                            <option>City</option>
-                            <option>City</option>
-                            <option>City</option>
+                        <b-select v-model="CityId" class="Leaad2" expanded>
+                            <option v-for="city in cities " :key="city.id" :value="city.id" >{{city.name}}</option>
                         </b-select>
                     </b-field>
+                    <!-- City select -->
 
                     <b-field>
                         <label class="column is-4">Zip Code</label>
-                        <b-input class="Leaad" type="text" style="margin-left:5%;"></b-input>
+                        <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="zipCode"></b-input>
                     </b-field>
+                    <!-- Zip Code field -->
                 </div>
             </div>
         </div>
         <!-- End Address Data  -->
 
+        <!-- Start Contact Person  -->
         <div class="columns is-12 plusSign contact" style="border-bottom: solid 1px lightgray;padding-bottom: 28px;">
             <h4 style="color:#9A9A9A">Contact Person</h4>
             <div class="column is-1">
@@ -244,61 +249,74 @@
                 </div>
             </div>
 
+
             <div class="columns is-12">
+                <!-- Start line 1 -->
                 <div class="column is-2" style="margin-top:6%"></div>
                 <div class="column is-5"  style="margin-top:6%">
                     <b-field>
                         <label  class="column is-4">Title</label>
-                        <b-select class="Leaad2" expanded>
-                            <option>Title</option>
+                        <b-select v-model="titleId" class="Leaad2" expanded>
+                            <option v-for="title in titles " :key="title.id" :value="title.id" >{{title.name}}</option>
                         </b-select>
                     </b-field>
+                    <!-- Title select -->
 
                     <b-field>
                         <label class="column is-4">First Name</label>
-                        <b-input class="Leaad" type="text" style="margin-left:5%;"></b-input>
+                        <b-input class="Leaad" type="text" style="margin-left:5%;" placeholder="First Name" v-model="firstName"></b-input>
                     </b-field>
+                    <!-- First Name field -->
 
                     <b-field>
                         <label class="column is-4">Last Name</label>
-                        <b-input class="Leaad" type="text" style="margin-left:5%;"></b-input>
+                        <b-input class="Leaad" type="text" style="margin-left:5%;" placeholder="Last Name" v-model="lastName"></b-input>
                     </b-field>
+                    <!-- Last Name field -->
 
                     <b-field>
                         <label class="column is-4">Email</label>
-                        <b-input class="Leaad" type="email" style="margin-left:5%;"></b-input>
+                        <b-input class="Leaad" type="email" style="margin-left:5%;" v-model="personalMail"></b-input>
                     </b-field>
+                    <!-- Personal Email field -->
                 </div>
+                <!-- End line 1 -->
 
+                <!-- Start line 2 -->
                 <div class="column is-5"  style="margin-top:6%">
                     <b-field>
                         <label class="column is-4">Phone</label>
-                        <b-input class="Leaad" type="number" style="margin-left:5%;"></b-input>
+                        <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="personalPhone"></b-input>
                     </b-field>
+                    <!-- Personal Phone field -->
 
                     <b-field>
                         <label class="column is-4">Mobile</label>
-                        <b-input class="Leaad" type="number" style="margin-left:5%;"></b-input>
+                        <b-input class="Leaad" type="number" style="margin-left:5%;" v-model="personalMobile"></b-input>
                     </b-field>
-
+                    <!-- Personal Mobile field -->
 
                     <b-field>
                         <label  class="column is-4">Lead Status</label>
-                        <b-select class="Leaad2" expanded>
+                        <b-select v-model="leadStatus" class="Leaad2" expanded>
                             <option value="contacted">Contacted</option>
                             <option value="not_contacted">Not Contacted</option>
                         </b-select>
                     </b-field>
+                    <!-- Lead Status select -->
 
                     <b-field>
                         <label class="column is-4">Position</label>
-                        <b-input class="Leaad" type="text" style="margin-left:5%;"></b-input>
+                        <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="position"></b-input>
                     </b-field>
-
+                    <!-- Position field -->
                 </div>
+                <!-- End line 2 -->
             </div>
         </div>
+        <!-- End Contact Person  -->
 
+        <!-- Start Additional info  -->
         <div class="columns is-12 plusSign contact" style="border-bottom: solid 1px lightgray;padding-bottom: 28px;">
             <h4 style="color:#9A9A9A;border-bottom:#solid 1px #000">Additional info</h4>
             <div class="column is-1">
@@ -316,16 +334,21 @@
                 <label class="column is-1">Description</label>
                 <b-input type="textarea" style="margin-left:5%;" class="column is-9" v-model="description"></b-input>
             </b-field>
+            <!-- Description field -->
         </div>
+        <!-- End Additional info  -->
     </div>
 </template>
 
 <script>
-import {getLeadSources,getIndustries,getCountries} from './../../calls'
+import {getLeadSources,getIndustries,getCountries,getAllCities,getTitleData,addNewLead} from './../../calls'
 
 export default {
      data() {
          return {
+             lead_privacy:'',
+             checkboxCompany:'',
+             checkboxIndividiual:'',
              dropFiles: [],
              NewLead:[],
              companyName:'',
@@ -348,23 +371,38 @@ export default {
              annualRevenu:'',
              employee:'',
              rating:'',
-             addresses:[
-                 {
-                     street:'',
-                     state:'',
-                     CountryId:'',
-                     city:'',
-                     zipCode:''
-                 }
-             ],
+             addresses:[{}],
+             street:'',
+             state:'',
+             CountryId:'',
+             city:'',
+             zipCode:'',
              countries:[],
+             cities:[],
+             contacts:[{}],
+             titles:[],
+             titleId:null,
+             firstName:'',
+             lastName:'',
+             personalMail:'',
+             personalPhone:'',
+             personalMobile:'',
+             leadStatus:'',
+             position:'',
+             description:'',
 
          }
      },
+    watch:{
+        'CountryId': function(newId, oldId){
+            this.AllCityForCountries(newId)
+        }
+    },
      mounted(){
          this.getLeadSources();
          this.getIndustries();
          this.getCountries();
+         this.getTitleData();
      },
       methods: {
           deleteDropFile(index) {
@@ -453,10 +491,10 @@ export default {
                   removebtn:'',
                   firtName:'',
                   lastName:'',
-                  email:'',
+                  personalMail:'',
                   nationality:'',
-                  phone:'',
-                  mobile:'',
+                  personalPhone:'',
+                  personalMobile:'',
                   leadStatus:'',
                   position:''
               });
@@ -495,22 +533,65 @@ export default {
               })
           },
 
+          AllCityForCountries(CountryId){
+              console.log(CountryId);
+              this.CountryId = CountryId;
+              getAllCities(CountryId).then(response=>{
+                  this.cities = response.data.data
+              }).catch(error=>{
+                  console.log(error)
+              })
+          },
+
+          getTitleData(){
+              getTitleData().then(Response=>{
+                  this.titles = Response.data.data
+              }).catch(error =>{
+                  console.log(error)
+              })
+          },
+
           addNewLead(){
               const bodyFormData = new FormData();
               for (let key in this.NewLead) {
                   const value = this.NewLead[key];
               }
+              bodyFormData.append('lead_privacy',this.lead_privacy);
+              bodyFormData.append('checkboxCompany',this.checkboxCompany);
+              bodyFormData.append('checkboxIndividiual',this.checkboxIndividiual);
               bodyFormData.append('image',this.NewLead.dropFiles[0]);
               bodyFormData.append('companyName',this.companyName);
-              bodyFormData.append('phones',JSON.stringify(this.phoneArr));
-              bodyFormData.append( 'mobiles',JSON.stringify(this.mobileArr));
-              bodyFormData.append('emails',JSON.stringify(this.emailArr));
-              bodyFormData.append('faxes',JSON.stringify(this.faxArr));
+              bodyFormData.append('phones',this.phoneArr);
+              bodyFormData.append('mobiles',this.mobileArr);
+              bodyFormData.append('emails',this.emailArr);
+              bodyFormData.append('faxes',this.faxArr);
               bodyFormData.append('leadSourceId',this.leadSourceId);
               bodyFormData.append('industryId',this.industryId);
               bodyFormData.append('annualRevenu',this.annualRevenu);
               bodyFormData.append('employee',this.employee);
               bodyFormData.append('rating',this.rating);
+              bodyFormData.append('street',this.street);
+              bodyFormData.append('state',this.state);
+              bodyFormData.append('CountryId',this.CountryId);
+              bodyFormData.append('CityId',this.CityId);
+              bodyFormData.append('zipCode',this.zipCode);
+              bodyFormData.append('titleId',this.titleId);
+              bodyFormData.append('firstName',this.firstName);
+              bodyFormData.append('lastName',this.lastName);
+              bodyFormData.append('personalMail',this.personalMail);
+              bodyFormData.append('personalPhone',this.personalPhone);
+              bodyFormData.append('personalMobile',this.personalMobile);
+              bodyFormData.append('leadStatus',this.leadStatus);
+              bodyFormData.append('position',this.position);
+              bodyFormData.append('description',this.description);
+
+              console.log('dddddd',bodyFormData)
+              addNewLead(bodyFormData).then(Response=>{
+                  alert('Success')
+                  window.location.href="Leads"
+              }).catch(error => {
+                  console.log(error)
+              })
           }
       }
 
