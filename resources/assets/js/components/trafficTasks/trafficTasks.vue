@@ -546,6 +546,10 @@
   
 </template>
 <style>
+.web-site
+{
+     padding-left:80px
+}
 .trans
 {
   opacity: 0.3;
@@ -743,6 +747,7 @@
   color: white;
   font-weight: bold;
   padding: 10px;
+  margin-left: 89px
 }
 .section1 .fa-star
 {
@@ -772,6 +777,7 @@
       margin-top: 10px;
       margin-right: 10px;
       margin-left: 10px;
+      padding: 5px
 }
 .section1 .free
 {
@@ -793,6 +799,7 @@
       height: 35px;
       margin-top: 10px;
       margin-right: 10px;
+      padding: 5px
 }
 
 .vsbl i{
@@ -806,6 +813,7 @@
       box-shadow: none;
       height: 35px;
       margin-top: 10px;
+      padding: 5px
 }
 .show
 {
