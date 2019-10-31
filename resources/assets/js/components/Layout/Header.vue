@@ -9,8 +9,9 @@
 
 
 <menubar ></menubar>
- <sidebar-menu class="hide_mobile" :menu="menu" />
-    <div class="container is-fluid header-container">
+ <sidebar-menu v-if="show_hide" class="hide_mobile vsm_collapsed " :menu="menu"  />
+ <img style="height: 47px;width: 47px;padding: 5px;" v-on:click="show_hide=!show_hide" src="/images/download-icon.png" />
+    <div style="padding:5px" class="container is-fluid header-container">
       <div class="navbar-brand">
         <div class="navbar-item">
           <router-link to="/admin/vue/dashboard">
@@ -182,7 +183,12 @@ import menubar from './menu'
   export default {
     data() {
       return {
+       show_hide:false,
+        
+      
           menu: [
+          
+
                 {
                     href: '',
                     title: 'Lead',
@@ -208,37 +214,9 @@ import menubar from './menu'
                                 title: 'Requests'
                             }
                         ]
+                      
                 },
-                {
-                    href: '',
-                    title: 'Inventory',
-                    icon: 
-                   {
-                     element :'img',
-                     attributes: {
-                     src : "/icon/header-inventory.png"           
-                     }
-                     },
-                     child: [
-                            {
-                                href: '/admin/vue/developers',
-                                title: 'Developers'
-                            },
-                             {
-                                href: '/admin/vue/projects',
-                                title: 'Projects'
-                            },
-                             {
-                                href: '/admin/vue/resale_units',
-                                title: 'Resale Units'
-                            },
-                             {
-                                href: '/admin/vue/resale_units',
-                                title: 'Rental Units'
-                            }
-                        ]
-
-                },
+           
                 {
                    href:'',
                    title: 'Markiting',
@@ -411,10 +389,11 @@ import menubar from './menu'
                      }
                    }
 
-
                 },
-            ],
-        name: window.auth_user.name,
+                
+              
+          ],
+       name: window.auth_user.name,
         id: window.auth_user.id,
         agentType: window.auth_user.agentType,
         token: window.auth_user.token,
@@ -1137,7 +1116,10 @@ nav.navbar
   top: 66px;
   height: 90vh;
 }
-
+.display_hide
+{
+  display: none
+}
 </style>
 
 <style>

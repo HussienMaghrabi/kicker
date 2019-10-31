@@ -213,6 +213,8 @@ import allitems from './components/items/allitems.vue'
 import update_item from './components/items/update_item.vue'
 import dashboard_hr from './components/dashboard_hr/dashboard_hr.vue'
 import dashboard_pm from './components/dashboard_pm/dashboard_pm.vue'
+import test from './components/test/test.vue'
+
 
 
 
@@ -1827,6 +1829,14 @@ export const routes = [
     component: dashboard_pm,
     meta: {
         title: 'Dashboard pm',
+    }
+},
+{
+    path: '/admin/vue/dashboard_pmanager',
+    name: 'test',
+    component: test,
+    meta: {
+        title: 'Dashboard',
     }
 },
 
