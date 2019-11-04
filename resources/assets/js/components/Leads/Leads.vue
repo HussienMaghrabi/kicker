@@ -396,10 +396,10 @@ changeLeadFav
             axios.get('http://127.0.0.1:8000/api/lead').then((res)=>{
                
 
-            this.all_leads=(res.data.data)
+            this.all_leads=(res.data.Leads)
              console.log("--------------------------------")
 
-                console.log("rahmaaaaaaaaaaaaaaaa",this.all_leads)
+                console.log(this.all_leads)
                 console.log("--------------------------------")
             })
         },
