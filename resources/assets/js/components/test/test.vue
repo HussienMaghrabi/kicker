@@ -13,7 +13,7 @@
     <p>A</p>
     <p>A</p>
     <p>A</p>
-     <p>A</p>
+    <p>A</p>
     <p>A</p>
     <p>A</p>
     <p>A</p>
@@ -25,7 +25,8 @@
     <div class="App">
       <div class="wrapper">
         <div class="workspace" ref="workspace"> <hr style="margin-top:30px">
-        <hr style="margin-top:38px"><hr style="margin-top:39px"><hr style="margin-top:40px"><hr style="margin-top:40px"><hr style="margin-top:40px"><hr style="margin-top:40px">
+        <hr style="margin-top:38px"><hr style="margin-top:39px"><hr style="margin-top:40px">
+        <hr style="margin-top:40px"><hr style="margin-top:40px"><hr style="margin-top:40px">
         <hr style="margin-top:40px"><hr style="margin-top:40px"><hr style="margin-top:40px">
         <hr style="margin-top:40px"><hr style="margin-top:40px"><hr style="margin-top:40px">
         <hr style="margin-top:40px"><hr style="margin-top:40px"><hr style="margin-top:40px">
@@ -283,7 +284,9 @@ export default {
     display: inline-block;
     box-shadow:  2px  2px  gray;
     border: 1px solid #dcdcdc;
-    text-align: center
+    text-align: center;
+    height: 713px;
+    overflow: scroll;
 
 }
 .users p 
@@ -293,12 +296,13 @@ export default {
 .workspace {
     position: absolute;
     top: 68px;
-    width: 981px;
-    right: 28.2%;
+    width: 87%;
+    right: 3%;
     height: 716px;
 }
 hr
 {
     color: gray
 }
+
 </style>
