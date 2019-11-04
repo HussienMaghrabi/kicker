@@ -15,29 +15,12 @@ class LeadsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-            $leads = DB::table('leads as lead')
-            ->leftjoin('companies as company','company.id','=','lead.company')
-                ->leftjoin('contacts as contact','company.id','=','contact.company_id')
-                ->select('lead.id','lead.first_name','lead.last_name','company.name','company.lead_type','contact.phone','contact.mobile','contact.email','contact.leadstatus')
-                ->get();
-        return response()->json($leads);
-        
+    public function index(){
+
+        $data = Company::getIndex();
+        return $this->successResponse($data);
     }
 
-//     public function index()
-//     {
-//         $leads = DB::table('companies as company')
-//             ->leftjoin('phones as phone','company.id','=','phone.company_id')
-//             ->leftjoin('emails as email','company.id','=','email.company_id')
-//             ->leftjoin('contacts as contact','company.id','=','contact.company_id')
-//             ->select('company.id','company.name','company.lead_type','phone.phone','phone.mobile','email.email','contact.leadstatus')
-//             ->paginate(100);
-// echo dd($leads);
-//         return response()->json($leads);
-        
-//     }
 
     /**
      * Show the form for creating a new resource.

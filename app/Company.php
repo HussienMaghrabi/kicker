@@ -20,6 +20,9 @@ class Company extends Model
 //     protected $fillable = [
 //         'name'
 //     ];
+
+
+
     public function phones()
     {
          return $this->hasMany('App\Phone','company_id');
@@ -50,6 +53,11 @@ class Company extends Model
      {
      return $this->hasMany(Address::class);
      //return $this->belongsTo('App\Note');
+     }
+
+     static function getIndex(){
+         $data['Lead'] = Company::select("id", "name", "lead_type", "phone", "mobile", "email", "lead_privacy as lead status")->paginate(10);
+         return $data;
      }
 
      static function getStore(Request $request){
