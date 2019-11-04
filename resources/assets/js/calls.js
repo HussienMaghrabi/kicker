@@ -293,9 +293,6 @@ export const changeLeadHot = (data) => {
 export const getCountries = () => {
     return axios.get('/admin/getCountries')
 }
-export const getAllCities=(id)=>{
-    return axios.get('/admin/getAllCities/'+id)
-}
 export const getcities = () => {
     return axios.get('/admin/getcities')
 }
@@ -304,11 +301,18 @@ export const deleteLead = (id) => {
 }
 
 export const deleteCompany = (id) => {
-    return axios.get('/admin/delete-Company/'+id)
+    return axios.get('/admin/c/'+id)
+}
+export const deleteItem = (id) => {
+    return axios.get('/admin/delete-Item/'+id)
 }
 // Delete a allCompanies
 export const deleteThisCompanies = (id) => {
     return axios.get('/admin/allCompanies/'+id)
+}
+// Delete a allCompanies
+export const deleteThisItem = (id) => {
+    return axios.get('/admin/allItems/'+id)
 }
 
 //delete Resale
@@ -486,6 +490,12 @@ export const getRental = (data, page) => {
 // get employee requests
 export const GetEmployeeRequests = (page) => {
     return axios.get('/api/agent/GetEmployeeRequests?page='+page)
+}
+export const GetEmpVacationData = (id) => {
+    return axios.get('/admin/GetEmpVacationData/'+id)
+}
+export const updateRequestvacation = (id,data) => {
+    return axios.post('/admin/updateRequestvacation/'+id,data)
 }
 // get All Vacation type
 export const GetAllVacatonType = () => {
@@ -2638,8 +2648,8 @@ export const addNewInvoice = (data) => {
 export const getAllProposedCompany = () => {
     return axios.get('/admin/getAllProposedCompany')
 }
-export const getAllProposals = () => {
-    return axios.get('/admin/getAllProposal')
+export const getAllProposals = (page) => {
+    return axios.get('/admin/getAllProposal?page='+page)
 }
 export const getAllCompanies = () => {
     return axios.get('/admin/getAllCompanies')
@@ -2689,6 +2699,10 @@ export const getNewLeads = () => {
 export const addNewLead = (data) => {
     return axios.post('/admin/companyLeads', data)
 }
+// add new lead
+export const addNewItems = (data) => {
+    return axios.post('/admin/addNewItems', data)
+}
 
 export const getAllItem=(id)=>{
     return axios.get('/admin/getAllItem/'+id)
@@ -2718,4 +2732,11 @@ export const getAllProposalCompanies=()=>{
 export const getProposedCompanyData=(id)=>{
     return axios.get('/admin/getProposalCompanyById/'+id)
 }
+export const getAllCities=(id)=>{
+    return axios.get('/admin/getAllCities/'+id)
+};
+export const getMyItem=()=>{
+    return axios.get('/admin/getMyItem')
+};
+
 

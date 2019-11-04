@@ -224,6 +224,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     
     Route::resource('companyLeads', 'LeadsController');
     Route::post('addNewLead','LeadsController@addNewLead');
+    Route::post('addNewItems','ItemController@addNewItems');
     Route::post('edit_comapany_data','LeadsController@edit_comapany_data');
     Route::post('edit_address','LeadsController@edit_address');
     
@@ -724,6 +725,8 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('updatelead','LeadController@updatelead');
     Route::post('updateEmployees','EmployeeController@updateEmployees');
     Route::post('StoreNewEmpRequest','EmployeeRequestController@Store');
+    Route::get('GetEmpVacationData/{id}','EmployeeRequestController@employeeRequestdata');
+    Route::post('updateRequestvacation/{id}','EmployeeRequestController@updateRequestdata');
     Route::post('UpdateGroosSalary','grossSalaryController@Store');
     Route::get('GrossEmployeeSalary','grossSalaryController@GrossReport');
     Route::get('GetEmpDetails/{id}','grossSalaryController@customeEmployee');
@@ -914,17 +917,19 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('getAllCurrency', 'CurrencyController@getAllCurrency');
     Route::get('getAllItem/{id}', 'ItemController@getAllItem');
     Route::get('getAllNationality', 'NationalityController@getAllNationality');
-    Route::get('getAllCities', 'CityController@getAllCities');
+    Route::get('getAllCities/{id}', 'CityController@getAllCities');
     Route::get('getAllCountries', 'CountryController@getAllCountries');
     Route::post('addNewProposedCompany', 'ProposedCompanyController@store');
     Route::post('addNewInvoice', 'invoicesController@store');
     Route::post('UpdateProposedCompany/{id}', 'ProposedCompanyController@update');
     Route::get('getAllContactPerson/{id}','ContactController@getAllContactPerson');
     Route::get('getAllProposalCompanies','ProposedCompanyController@index');
+    Route::get('getMyItem','ItemController@getMyItem');
     Route::get('Getproposed/{id}','ProposedCompanyController@Getproposed');
 
     Route::get('getProposalCompanyById/{id}','ProposedCompanyController@show');
     Route::get('allCompanies/{id}','ProposedCompanyController@destroy');
+    Route::get('allItems/{id}','ItemController@destroy');
     Route::get('delete-Company/{id}', 'ProposedCompanyController@multiDelete');
     Route::post('searchForCompany','ProposedCompanyController@searchForCompany');
 
@@ -933,6 +938,8 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
 
 
 });
+
+
 
 Route::post('fblead1',function (){
     return ['status'=>'ok'];

@@ -15,8 +15,8 @@ class CreateProposedcompanyItemTable extends Migration
     {
         Schema::create('proposedcompany_item', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('proposed_company_id')->unsignedInteger();
-            $table->integer('item_id')->unsignedInteger();
+            $table->unsignedInteger('proposed_company_id')->nullable();
+            $table->unsignedInteger('item_id')->nullable();
             $table->foreign('proposed_company_id')->references('id')->on('proposed_company');
             $table->foreign('item_id')->references('id')->on('items');
             $table->timestamps();

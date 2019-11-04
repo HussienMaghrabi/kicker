@@ -20,6 +20,9 @@ class Company extends Model
 //     protected $fillable = [
 //         'name'
 //     ];
+
+
+
     public function phones()
     {
          return $this->hasMany('App\Phone','company_id');
@@ -52,41 +55,64 @@ class Company extends Model
      //return $this->belongsTo('App\Note');
      }
 
+     static function getIndex(){
+         $data['Lead'] = Company::select("id", "name", "lead_type", "phone", "mobile", "email", "lead_privacy as lead status")->paginate(10);
+         return $data;
+     }
+
      static function getStore(Request $request){
 
-        dd($request);
+//        dd($request);
          $company = new Company;
-         $saved = Company::create($request->all());
-
-         if ($saved) {
-             $address = array(
-                 'street' => $request->street,
-                 'state' => $request->state,
-                 'country_id' => $request->country_id,
-                 'zip_code' => $request->zip_code,
-                 'city_id' => $request->id_city,
-                 'company_id' => $saved->id
-             );
-
-             foreach($address as $ad){
-                 $company->Address()->create([$ad]);
-             }
-
-             DB::table('contacts')->insert([
-                 'first_name' => $request->first_name,
-                 'last_name' => $request->last_name,
-                 'title_id' => $request->title_id,
-                 'email' => $request->email,
-                 'nationality' => $request->nationality,
-                 'phone' => $request->phone,
-                 'mobile' => $request->mobile,
-                 'position' => $request->position,
-                 'leadstatus' => $request->leadstatus,
-                 'company_id' => $saved->id,
-                 'lead_source_id' => $request->lead_source_id,
-                 // 'lead_id' => $request->lead_id,
-             ]);
+         if($request->checkboxCompany == "true"){
+             $company->lead_type = "company";
+         }else{
+             $company->lead_type = "individual";
          }
+         $company->lead_privacy =       $request->lead_privacy;
+         $company->name =               $request->companyName;
+         $company->phone =              $request->phones;
+         $company->mobile =             $request->mobiles;
+         $company->email =              $request->emails;
+         $company->fax =                $request->faxes;
+         $company->lead_source_id =     $request->leadSourceId;
+         $company->industry_id =        $request->industryId;
+         $company->annual_revenue =     $request->annualRevenu;
+         $company->employees_Number =   $request->employee;
+         $company->rating =             $request->rating;
+         $company->description =        $request->description;
+         if ($request->hasFile('image')) {
+             $image = $request->file('image');
+             $name = md5($image->getClientOriginalName() . time()) . "." . $image->getClientOriginalExtension();
+             $destinationPath = public_path('/img');
+             $image->move($destinationPath, $name);
+             $company->image   = $name;
+         }
+         $company->save();
+
+         $address = new Address;
+         $address->street =     $request->street;
+         $address->state =      $request->state;
+         $address->zip_code =   $request->zipCode;
+         $address->company_id = $company->id;
+         $address->city_id =    $request->CityId;
+         $address->country_id = $request->CountryId;
+         $address->save();
+
+         $contact = new Contact;
+         $contact->first_name = $request->firstName;
+         $contact->last_name =  $request->lastName;
+         $contact->title_id =   $request->titleId;
+         $contact->phone =      $request->personalPhone;
+         $contact->mobile =     $request->personalMobile;
+         $contact->email =      $request->personalMail;
+         $contact->position =   $request->position;
+         $contact->company_id = $company->id;
+         $contact->leadstatus = $request->leadStatus;
+         $contact->save();
+
+
+
      }
 
      static function getEditCompany(Request $request){

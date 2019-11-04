@@ -18,11 +18,8 @@ class Proposal extends Model
         ->leftJoin('currencies as currency','prop.currency_id','=','currency.id')
         ->leftJoin('proposed_company as prop_company','prop.proposed_company_id','=','prop_company.id')
         ->select('prop.id as id','company.name as company_name','contact.first_name as contact_first_name','contact.last_name as contact_last_name','currency.name as currency_name','prop_company.name as MCompany_name','prop.valid_until')
-        ->get();
-        return response()->json([
-            'status'=>'Success',
-            'data'=>$allProposal
-        ]);
+        ->paginate(100);
+        return response()->json($allProposal);
     }
 
     static function storeData($request)

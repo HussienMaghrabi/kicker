@@ -4,8 +4,10 @@
             <router-link style="color:white" to="/admin/vue/dashboard_hr"> Dashboard HR  </router-link>
       </button>
       <button style="margin-left:9%" class="button is-primary is-medium">  
-            <router-link style="color:white" to="/admin/vue/dashboard_pm"> Dashboard Project Manger  </router-link>
+            <router-link style="color:white" to="/admin/vue/dashboard_pmanager"> Dashboard Project Manger  </router-link>
       </button>
+
+
   <!-- <sidebar-menu :menu="menu" /> -->
     
   <!-- <section class="overlaySec" id="loadd" :is-full-page="true">
