@@ -22,7 +22,5 @@ class ItemController extends Controller
         return Item::getItem();
     }
 
-    public function destroy($id){
-        return Item::getDestroy($id);
-    }
+
 }
