@@ -19,9 +19,15 @@ class proposed_company extends Model
         return $this->hasMany('App\ProposedCompany_address','proposed_company_id');
     }
 
-     static function gitStore(Request $request){
+    static function getIndex(){
 
-dd($request);
+        $data['company'] = proposed_company::select("id", "name")->get();
+        return $data;
+    }
+
+     static function gitStore(Request $request){
+//
+//dd($request);
         //static Data Of Proposed Company
         $proposedCompany=new proposed_company;
         $proposedCompany->name          =$request->companyName;
