@@ -180,7 +180,7 @@
                         </div>
 
                         <div class="column is-7">
-                            <h6>Subtotal {{ invoices.total }}</h6><br>
+                            <h6>Subtotalll</h6><br>
                         </div>
 
                         <div class="columns is-12">
@@ -254,6 +254,8 @@ import {
 export default {
     data() {
         return {
+            oldsubtotal:null,
+            newtotal:null,
             AllCompanies:[],
             CompanyCurncies:[],
             AllcompanyLeads:[],
@@ -271,6 +273,8 @@ export default {
             items:[],
             choseItem:[],
             isComponentItemActive:false,
+            xtotal: 0,
+        
         }
     },
     watch:{
@@ -363,7 +367,7 @@ export default {
                 console.log(error)
             })
         },
-        AddInvoicefield(){
+        AddInvoicefield(){  
             this.invoices.push({
                 itemQuantity: '',
                 itemPrice: '',
@@ -371,6 +375,23 @@ export default {
                 total: '',
                 discount: ''
             });
+            
+        
+            console.log(this.invoices);
+        
+        var x = 0;
+        this.invoices.forEach(function(item, index){
+            if(item.subTotal != undefined){
+                x += item.subTotal;
+                item.total=x
+                console.log("xxx",item.total)
+                // this.invoices.total=item.total
+                console.log(x);
+            }
+        });
+
+        console.log(x);
+
         },
         deleteRow(index, invoice) {
             var idx = this.invoices.indexOf(invoice);
