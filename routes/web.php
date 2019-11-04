@@ -183,6 +183,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::get('getProjectsInfoWithPaginate','ProjectController@getProjectsInfoWithPaginate');
 
     Route::post('cils/export_xsl', 'CilController@export_xsl');
+    Route::post('exportEmployeeCheet', 'employee_attendance_controller@export_xsl');
     Route::get('getCilData/{id}', 'CilController@getCilData');
     Route::post('updateCilData', 'CilController@updateCilData');
     Route::post('downloadCilExcel', 'CilController@export_xsl');    

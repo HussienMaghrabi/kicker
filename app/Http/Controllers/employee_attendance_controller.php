@@ -9,6 +9,8 @@ use \App\attendaceReport;
 use \App\Setting;
 use \App\work_info;
 use DB;
+use Excel;
+use \Carbon\Carbon;
 
 class employee_attendance_controller extends Controller
 {
@@ -81,5 +83,27 @@ class employee_attendance_controller extends Controller
                 }
             }
         }
+    }
+    public function export_xsl(Request $request)
+    {
+        $data = array();
+        // Specify the start date. This date can be any English textual format  
+        $date_from = $request->From;
+        $date_from = strtotime($date_from); // Convert date to a UNIX timestamp  
+        
+        // Specify the end date. This date can be any English textual format  
+        $date_to = $request->To;  
+        $date_to = strtotime($date_to); // Convert date to a UNIX timestamp  
+        
+        // Loop from the start date to end date and output all dates inbetween  
+        for ($i=$date_from; $i<=$date_to; $i+=86400) {  
+            // echo date("Y-m-d", $i).'<br />';
+            $data[] = date("Y-m-d", $i);
+        }
+        Excel::create('Attendance_Cheet', function ($excel) {
+            $excel->sheet('Attendance', function ($sheet) {
+                $sheet->loadView('admin.employee.attendance_cheet',['dateArray',$data]);
+            });
+        })->export('xls');
     }
 }

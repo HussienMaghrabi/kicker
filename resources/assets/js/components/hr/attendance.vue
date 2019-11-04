@@ -3,7 +3,37 @@
       
     <sidebarmenu></sidebarmenu>
 
-    <b>Upload Attendance File</b><hr>
+    <div>
+        <b>Upload Attendance File</b>
+            <div class="level">
+                <div class="level-item">
+                    <b-datepicker
+                        placeholder="Click to select..."
+                        icon="calendar-today"
+                        :date-formatter="dateFormatterFrom">
+                    </b-datepicker>
+                    
+                    <b-datepicker
+                        placeholder="Click to select..."
+                        icon="calendar-today"
+                        :date-formatter="dateFormatterTo">
+                    </b-datepicker>
+
+                </div>
+                <div class="level-item">
+                    <form action="/admin/exportEmployeeCheet" method="post" style="margin-top:10px;margin-bottom:10px" enctype="multipart/form-data">
+                        <input type="hidden" name="_token" :value="csrf"> 
+                        <input type="hidden" name="From" :value="parsedDateFrom"> 
+                        <input type="hidden" name="To" :value="parsedDateTo"> 
+                        <button class="button is-success is-meduim mr-10 import-excel" type="submit">Export</button>
+                    </form>
+                    <!-- <router-link to="/ExportAttendCheet" class="button is-success is-meduim mr-10 import-excel">
+                        Export From Excel
+                    </router-link> -->
+                </div>
+            </div>
+    </div>
+    <hr>
 
     <b-field>
         <b-upload v-model="dropFiles"
@@ -95,12 +125,15 @@ import Vue from 'vue'
 import sidebarmenu from './sidebarmenu'
 import ProgressBar from 'vue-simple-progress'
 
-import {StoreAttendanceByEx} from './../../calls'
+import {StoreAttendanceByEx,exportEmployeeCheet} from './../../calls'
 export default {
     data() {
             return {
                 file:null,
                 dropFiles: [],
+                parsedDateFrom:{date: new Date()},
+                csrf: window.auth_user.csrf,
+                parsedDateTo:{date: new Date()},
             }
         },
         components: {
@@ -132,6 +165,29 @@ export default {
                     this.uploadedFile = reader.result
                 })
             },
+            dateFormatterFrom(dt){
+                var date = dt.toLocaleDateString();
+                const [month, day, year] = date.split('/')
+                this.parsedDateFrom = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+                return date
+            },
+            dateFormatterTo(dt){
+                var date = dt.toLocaleDateString();
+                const [month, day, year] = date.split('/')
+                this.parsedDateTo = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+                return date
+            },
+            exportExilCheet(){
+                const Data = {
+                    'From':this.parsedDateFrom,
+                    'To':this.parsedDateTo
+                }
+                exportEmployeeCheet(Data).then(response=>{
+                    console.log(response)
+                }).catch(error=>{
+                    console.log(error)
+                })
+            }
         },
 }
 </script>
