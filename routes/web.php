@@ -939,6 +939,8 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
 
 });
 
+
+
 Route::post('fblead1',function (){
     return ['status'=>'ok'];
 });
