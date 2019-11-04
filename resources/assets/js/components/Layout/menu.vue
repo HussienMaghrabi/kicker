@@ -188,11 +188,11 @@
             <b-menu-item v-if=" userType == 'admin'" label="Traffic"></b-menu-item>
         </router-link>
         </div>
-        <div class="wui-content">
+        <!-- <div class="wui-content">
         <div class="wui-content-header">
             <a href="#" class="wui-side-menu-trigger"><i class="fa fa-bars menu_filter"></i></a>
         </div> 
-        </div>
+        </div> -->
         <div class="wui-overlay"></div>
     </div>
 </template>

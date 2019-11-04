@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Invoices;
 use Illuminate\Http\Request;
 
 class invoicesController extends Controller
@@ -35,6 +36,8 @@ class invoicesController extends Controller
     public function store(Request $request)
     {
         //
+        return Invoices::getStore();
+
     }
 
     /**

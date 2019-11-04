@@ -49,7 +49,27 @@
                         {{props.row.name}}
                     </router-link>
                 </b-table-column>
+<!--                <b-table-column label="Phone" sortable>-->
+<!--                    <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">-->
+<!--                        {{props.row.phone}}-->
+<!--                    </router-link>-->
 
+<!--                </b-table-column>-->
+<!--                <b-table-column label="Fax" sortable>-->
+<!--                    <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">-->
+<!--                        {{props.row.fax}}-->
+<!--                    </router-link>-->
+<!--                </b-table-column>-->
+<!--                <b-table-column  label="Email" sortable>-->
+<!--                    <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">-->
+<!--                        {{props.row.email}}-->
+<!--                    </router-link>-->
+<!--                </b-table-column>-->
+<!--                <b-table-column  label="Website" sortable>-->
+<!--                    <router-link :to="'/admin/vue/showProposal/'+props.row.id" style="color:#000">-->
+<!--                        {{props.row.website}}-->
+<!--                    </router-link>-->
+<!--                </b-table-column>-->
                 <b-table-column  label="Send Email" sortable>
                     <i class="fas fa-envelope"></i>
                 </b-table-column>
@@ -77,12 +97,12 @@
 
         </b-table>
 
-        <div class="leads-number">{{leadsCurrentNumber + ' / ' + leadsTotalNumber}} </div>
-        <div class="buttons">
-            <b-button type="is-success"><i class="fas fa-envelope"></i>  Send Email</b-button>
-            <b-button type="is-danger" @click="bulkDeleteDialog('0')"><i class="fas fa-trash"></i>  Delete</b-button>
-            <b-button type="is-info"><i class="fas fa-print"></i>  Print</b-button>
-        </div>
+<!--        <div class="leads-number">{{leadsCurrentNumber + ' / ' + leadsTotalNumber}} </div>-->
+<!--        <div class="buttons">-->
+<!--            <b-button type="is-success"><i class="fas fa-envelope"></i>  Send Email</b-button>-->
+<!--            <b-button type="is-danger" @click="bulkDeleteDialog('0')"><i class="fas fa-trash"></i>  Delete</b-button>-->
+<!--            <b-button type="is-info"><i class="fas fa-print"></i>  Print</b-button>-->
+<!--        </div>-->
 
         <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="true"></b-loading>
 

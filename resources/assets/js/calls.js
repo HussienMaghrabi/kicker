@@ -31,6 +31,15 @@ export const saveNewKey = (bodyFormData) => {
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     });
 }
+// store Employee attendance by exiel
+export const StoreAttendanceByEx = (bodyFormData) => {
+    return axios({
+        method: 'POST',
+        url: '/admin/StoreAttendanceByEx',
+        data: bodyFormData,
+        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    });
+}
 
 // Get My Leads
 export const getLeadsByAgent = (data) => {
@@ -343,7 +352,7 @@ export const getPublicData = () => {
 
 // Get Agents
 export const getAgents = () => {
-    return axios.get('/admin/getAgents')
+    return axios.get('/admin/getAgents') 
 }
 
 // Filter Leads
@@ -450,12 +459,36 @@ export const leadShortAdding = (data) => {
 export const getResales = (data, page) => {
     return axios.post('/api/agent/get_resales?page='+page, data)
 }
+export const getVacationType = (page) => {
+    return axios.get('/admin/getVacationType?page='+page)
+}
+export const updateVacation = (id,data) => {
+    return axios.post('/admin/updateVacation/'+id,data)
+}
+export const StoreNewNationalVacType = (data) => {
+    return axios.post('/admin/StoreNewNationalVacType',data)
+}
+export const DeleteNationalVacType = (id) => {
+    return axios.get('/admin/DeleteNationalVacType/'+id)
+}
+export const GetAttendanceReport = () => {
+    return axios.get('/admin/GetAttendanceReport/')
+}
+export const getSinglevacationType = (id) => {
+    return axios.get('/admin/getSinglevacationType/'+id)
+}
 export const getRental = (data, page) => {
     return axios.post('/api/agent/get_rentals?page='+page, data)
 }
 // get employee requests
 export const GetEmployeeRequests = (page) => {
     return axios.get('/api/agent/GetEmployeeRequests?page='+page)
+}
+export const GetEmpVacationData = (id) => {
+    return axios.get('/admin/GetEmpVacationData/'+id)
+}
+export const updateRequestvacation = (id,data) => {
+    return axios.post('/admin/updateRequestvacation/'+id,data)
 }
 // get All Vacation type
 export const GetAllVacatonType = () => {
@@ -1500,7 +1533,6 @@ export const addLeadSource = (data) => {
     return axios.post('/admin/lead_sources', data)
 }
 
-
 // begin settings
         export const getdatasetting = () => {
             return axios.get('/admin/settings')
@@ -1574,6 +1606,21 @@ export const addLeadSource = (data) => {
         // // events
         export const getAllEvents = () => {
             return axios.get('/admin/events')
+        }
+        export const GetAllRoleDetails = (page) => {
+            return axios.get('/admin/GetAllRoleDetails?page='+page)
+        }
+        export const DeleteRoleDetails = (id) => {
+            return axios.get('/admin/DeleteRoleDetails/'+id)
+        }
+        export const EditRoleDetails = (id) => {
+            return axios.get('/admin/EditRoleDetails/'+id)
+        }
+        export const updateSigleRole = (id,data) => {
+            return axios.post('/admin/updateSigleRole/'+id,data)
+        }
+        export const saveNewRoleDetails = (data) => {
+            return axios.post('/admin/saveNewRoleDetails/',data)
         }
         export const singleEventData = (id) => {
             return axios.get('/admin/events/'+id)
@@ -1803,6 +1850,10 @@ export const getTitleData = () => {
     return axios.get('/admin/titles')
 }
 
+// Show Industries 
+export const getIndustries = () => {
+    return axios.get('/admin/industries')
+}
 
 // Show title
 export const titleShow = (id) => {
@@ -2184,6 +2235,10 @@ export const getRequestStatus = () => {
 export const EmployeeContacts = (id) => {
     return axios.get('/admin/EmployeeContacts/'+id)
 }
+// reject Request status
+export const empRequestVacation = (id) => {
+    return axios.get('/admin/empRequestVacation/'+id)
+}
 
 // add employee
 export const addEmployee = (data) => {
@@ -2195,6 +2250,16 @@ export const addEmployee = (data) => {
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     });
 }
+// add Employee request
+export const uploadEmployeeRequest = (bodyformdata) => {
+    // console.log('data before sending',data)
+    return axios({
+        method: 'POST',
+        url: '/admin/AddEmployeeRequest/',
+        data: bodyformdata,
+        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    });
+}
 
 // get job title 
 export const getAllJobTitles = () => {
@@ -2203,7 +2268,37 @@ export const getAllJobTitles = () => {
 
 // get roles
 export const getAllRoles = () => {
-    return axios.get('/admin/getAllRoles')
+    return axios.get('/admin/getAllRolesNew')
+}
+// edit roles
+export const EditSingleRole = (id) => {
+    return axios.get('/admin/EditSingleRole/'+id)
+}
+
+// edit roles
+export const updateSingleRole = (id,data) => {
+    return axios.post('/admin/updateSingleRole/'+id,data)
+
+}
+// delete role
+export const deleteSingleRole = (id) => {
+    return axios.get('/admin/deleteSingleRole/'+id)
+}
+// get data for custome role page
+export const GetRoleAndDetails = (id) => {
+    return axios.get('/admin/GetRoleAndDetails/'+id)
+}
+// get data for Api role 
+export const GetApiAllRole = (id) => {
+    return axios.get('/admin/GetApiAllRole/'+id)
+}
+// get data for Api role Details 
+export const GetApiAllRoleDetails = () => {
+    return axios.get('/admin/GetApiAllRoleDetails/')
+}
+// store role
+export const storeSingleRole = (data) => {
+    return axios.post('/admin/storeSingleRole/',data)
 }
 
 // Show employee
@@ -2535,11 +2630,22 @@ export const getAllcampaigns = () => {
 export const getAllProposal = () => {
     return axios.get('/admin/proposals')
 }
-export const getAllProposedCpmpany = () => {
+// add new Proposal
+export const addNewProposal = (data) => {
+    return axios.post('/admin/addNewProposals', data)
+}
+// add new Proposal
+export const addNewInvoice = (data) => {
+    return axios.post('/admin/addNewInvoice', data)
+}
+export const getAllProposedCompany = () => {
     return axios.get('/admin/getAllProposedCompany')
 }
-export const getAllCpmpanies = () => {
-    return axios.get('/admin/getAllCpmpanies')
+export const getAllProposals = () => {
+    return axios.get('/admin/getAllProposal')
+}
+export const getAllCompanies = () => {
+    return axios.get('/admin/getAllCompanies')
 }
 export const getAllCurrency=()=>{
     return axios.get('/admin/getAllCurrency')
@@ -2547,17 +2653,17 @@ export const getAllCurrency=()=>{
 export const getAllNationality=()=>{
     return axios.get('/admin/getAllNationality')
 }
-export const getAllCities=()=>{
-    return axios.get('/admin/getAllCities')
-}
 export const getAllCountries=()=>{
     return axios.get('/admin/getAllCountries')
 }
-export const addNewProposedCompany=(bodyFormData)=>{
-    // return axios.post('/admin/addNewProposedCompany',data)
+export const addNewProposedCompany=(data)=>{
+    return axios.post('/admin/addNewProposedCompany',data)
+}
+export const updateCompany=(bodyFormData,id)=>{
+    // return axios.post('/admin/updateCompany',data)
     return axios({
-        method: 'POST',
-        url: '/admin/addNewProposedCompany',
+        method: 'post',
+        url: '/admin/UpdateProposedCompany/'+id,
         data: bodyFormData,
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     });
@@ -2587,9 +2693,27 @@ export const addNewLead = (data) => {
     return axios.post('/admin/companyLeads', data)
 }
 
+export const getAllItem=(id)=>{
+    return axios.get('/admin/getAllItem/'+id)
+}
+// edit lead
+export const edit_comapany_data = (data) => {
+    return axios.post('/admin/edit_comapany_data', data)
+}
+
+// edit address
+export const edit_address = (data) => {
+    return axios.post('/admin/edit_address', data)
+}
 
 export const getAllContactPerson=(id)=>{
     return axios.get('/admin/getAllContactPerson/'+id)
+}
+export const getAllCurrencyCo=(id)=>{
+    return axios.get('/admin/getAllCurrencyCo/'+id)
+}
+export const Getproposed=(id)=>{
+    return axios.get('/admin/Getproposed/'+id)
 }
 export const getAllProposalCompanies=()=>{
     return axios.get('/admin/getAllProposalCompanies')
@@ -2597,3 +2721,7 @@ export const getAllProposalCompanies=()=>{
 export const getProposedCompanyData=(id)=>{
     return axios.get('/admin/getProposalCompanyById/'+id)
 }
+export const getAllCities=(id)=>{
+    return axios.get('/admin/getAllCities/'+id)
+}
+

@@ -72,12 +72,12 @@
                                                 <b-datepicker
                                                 placeholder="Click to select..."
                                                 :date-formatter="dateFormatterTo"
-                                                position="is-bottom-left" v-model="filter.to"> 
+                                                position="is-bottom-left" v-model="filter.to">
                                             </b-datepicker>
                                         </b-field>
                                         </div>
                                     </div>
-                                    
+
                             <div class="column is-2">
                                 <div class="field">
                                     <label class="label">Meeting Status</label>
@@ -100,7 +100,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="column is-2">
                                 <label class="label">Location</label>
                                 <div class="field has-addons">
@@ -120,7 +120,7 @@
                                 <label class="label">Tags</label>
                                 <div class="control">
                                     <div class=" is-fullwidth">
-                                        <multiselect :close-on-select="false" v-model="selectedTags"  tag-placeholder="Add this as new tag" placeholder="Select Tags" label="en_name" track-by="id" value="id" :options="tags" :multiple="true" :taggable="true" style="/*z-index: 1000000000;*/"></multiselect>                            
+                                        <multiselect :close-on-select="false" v-model="selectedTags"  tag-placeholder="Add this as new tag" placeholder="Select Tags" label="en_name" track-by="id" value="id" :options="tags" :multiple="true" :taggable="true" style="/*z-index: 1000000000;*/"></multiselect>
                                     </div>
                                 </div>
                                 <div class="control">
@@ -154,7 +154,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                     <b-table
                     :data="leads"
@@ -178,13 +178,13 @@
 
                     <template slot-scope="props">
                         <b-table-column label="Lead" sortable>
-                             <router-link :to="'/admin/vue/showLead/'+props.row.id" style="color:#4AAED5"> 
+                             <router-link :to="'/admin/vue/showLead/'+props.row.id" style="color:#4AAED5">
                                       {{ props.row.name }}
                              </router-link>
                         </b-table-column>
 
                         <b-table-column label="Lead Type" sortable>
-                            <router-link :to="'/admin/vue/showLead/'+props.row.id" style="color:#4AAED5"> 
+                            <router-link :to="'/admin/vue/showLead/'+props.row.id" style="color:#4AAED5">
                                       {{ props.row.lead_type }}
                             </router-link>
                         </b-table-column>
@@ -202,11 +202,11 @@
                         </b-table-column>
 
                         <b-table-column label="Status" sortable>
-                            <router-link :to="'/admin/vue/showLead/'+props.row.id" style="color:#4AAED5"> 
+                            <router-link :to="'/admin/vue/showLead/'+props.row.id" style="color:#4AAED5">
                                     {{props.row.leadstatus}}
                              </router-link>
                         </b-table-column>
-                        
+
                         <b-table-column label="" sortable>
                             <i class="fas fa-envelope"></i>
                         </b-table-column>
@@ -227,10 +227,10 @@
                     </section>
                     <hr>
                 </template>
-                
+
             </b-table>
-            
-           
+
+
 
             <div class="leads-number btns-leads">{{leadsCurrentNumber + ' / ' + leadsTotalNumber}}</div>
 
@@ -241,8 +241,8 @@
 
             <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="true"></b-loading>
 
-       
-       
+
+
         <!-- Hint Component -->
 
         <!-- <Hint :class="{openSide: ShowHint}" @closeSide="ShowHint = $event" :hintId='hintId' :fav="fav" :hot="hot" :flag="flag" :sideView='ShowHint' @changeHint="refreshPage"></Hint> -->
@@ -333,11 +333,11 @@ changeLeadFav
             getNewAllLeads(this.page).then(response=>{
                 console.log('responseeee',response)
                 this.perPage = response.data.per_page
-                this.leads = response.data.data
+                this.leads = response.data
                 this.leadsCurrentNumber = Math.min(response.data.total,this.page * this.perPage)
                 this.leadsTotalNumber = response.data.total
                 this.total = response.data.total
-                
+
                 if(this.leads.length == 0){
                     this.isEmpty = true
                 }
@@ -355,7 +355,7 @@ changeLeadFav
             .catch(error => {
                 console.log(error)
             })
-        }, 
+        },
         dateFormatterFrom(dt){
             var date = dt.toLocaleDateString();
             const [month, day, year] = date.split('/')
@@ -376,7 +376,7 @@ changeLeadFav
             }else {
                 this.getData()
             }
-        },   
+        },
         success(action) {
             this.$toast.open({
                 message: 'Lead '+action+' Successfully',
@@ -408,7 +408,7 @@ changeLeadFav
     margin-bottom: 6%;
 }
 .btns-leads{
-   margin-bottom: 35%; 
+   margin-bottom: 35%;
 }
 }
 @media screen and (max-width: 767px) {

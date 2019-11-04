@@ -342,7 +342,7 @@ export default {
          },
          methods: {
          getData(){
-            this.isLoading = true
+            this.isLoading = false
                 requests(this.page).then(response=>{
                 console.log("TEST",response)
                 this.perPage = response.data.per_page

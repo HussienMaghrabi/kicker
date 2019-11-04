@@ -29,15 +29,14 @@ class CreateProposalsTable extends Migration
             $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
             $table->unsignedInteger('currency_id')->nullable($value=true);
             // $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
-            $table->enum('personal_commercial',['personal','commercial']);
-            $table->enum('unit_type',['resale','rental','new_home','land']);
-            $table->unsignedInteger('unit_id');
-            $table->unsignedInteger('lead_id');
-            $table->text('description');
-            $table->string('price');
-            $table->text('file')->nullable();
+            // $table->enum('personal_commercial',['personal','commercial']);
+            // $table->enum('unit_type',['resale','rental','new_home','land']);
+            // $table->unsignedInteger('unit_id');
+            // $table->unsignedInteger('lead_id');
+            // $table->string('price');
+            // $table->text('file')->nullable();
             $table->unsignedInteger('user_id');
-            $table->enum('status',['pending','confirmed']);
+            // $table->enum('status',['pending','confirmed']);
             $table->timestamps();
         });
     }

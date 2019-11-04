@@ -40,9 +40,6 @@
         </b-datepicker>
     </b-field>
 
-    <b-field  :active.sync="action" label="Description">
-            <b-input  type="textarea" required></b-input>
-    </b-field>
 
 <b-field label="Projects">
      <div class="is-fullwidth">
@@ -67,13 +64,13 @@
     </b-field>
 
       
-    <b-field label="Location On Map">
+    <!-- <b-field label="Location On Map">
         <b-select v-model="location" expanded>
             <option v-for="locationn in locations" :key="locationn.id" :value="locationn.id">
                 {{ locationn.name }}
             </option>
         </b-select>  
-    </b-field> 
+    </b-field>  -->
 
     <b-field label=" Probability">
         <b-select expanded v-model="probability">
@@ -93,7 +90,9 @@
         </b-select>    
     </b-field> -->
     
-    
+   <b-field label="Address">
+        <b-input type="text" v-model="location" required></b-input>
+    </b-field> 
 
     <b-field label="Description">
         <b-input type="textarea" v-model="description" required></b-input>

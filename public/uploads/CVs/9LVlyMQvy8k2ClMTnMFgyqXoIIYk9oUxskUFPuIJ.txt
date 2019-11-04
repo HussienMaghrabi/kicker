@@ -1,0 +1,14 @@
+public function send(Request $request)
+    { 
+        $validator = Validator::make($request->all(), [
+        'name' => 'required',
+        'subject' => 'required',
+          'msg' => 'required',
+          'email'=> 'required|email',
+        ]);
+//echo dd($request);
+        if($validator->fails())
+        {
+            $errorarr = array();
+            return $this->sendError($errorarr, $validator->errors());       
+        }

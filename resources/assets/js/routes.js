@@ -111,12 +111,16 @@ import showApplicaton from './components/hr/showApplicaton.vue'
 import addApplication from './components/hr/addApplication.vue'
 import vacancy from './components/hr/vacancy.vue'
 import vacancy_type from './components/hr/vacancyType.vue'
+import vacations_type from './components/hr/vacationTypes.vue'
 import addVacancy from './components/hr/addVacancy.vue'
 import showVacancy from './components/hr/showVacancy.vue'
 import editVacancy from './components/hr/editVacancy.vue'
 import showApp from './components/hr/showApp.vue'
 import salaries from './components/hr/salaries.vue'
 import editSalary from './components/hr/editSalary.vue'
+import RoleDetails from './components/hr/RoleDetails.vue'
+import NewRoels from './components/hr/Roles.vue'
+import CustomeRole from './components/hr/CustomeRole.vue'
 
 
 import request_type from './components/hr/req_type.vue'
@@ -130,6 +134,7 @@ import NationalVacation from './components/hr/allNatVacation.vue'
 import salariesDetails from './components/hr/salariesDetails.vue'
 import employees from './components/hr/employees.vue'
 import addEmployee from './components/hr/addEmployee.vue'
+import attendance_report from './components/hr/attendanceReport.vue'
 import editEmployee from './components/hr/editEmployee.vue'
 import profileEmployee from './components/hr/profileEmployee.vue'
 import ruleOfProcedure from './components/hr/ruleOfProcedure.vue'
@@ -206,6 +211,10 @@ import testvue from './components/test.vue'
 import test1 from './components/test1/test1.vue'
 import allitems from './components/items/allitems.vue'
 import update_item from './components/items/update_item.vue'
+import dashboard_hr from './components/dashboard_hr/dashboard_hr.vue'
+import dashboard_pm from './components/dashboard_pm/dashboard_pm.vue'
+
+
 
 
 
@@ -1030,6 +1039,14 @@ export const routes = [
         }
     },
     {
+        path: '/admin/vue/vacations_type',
+        name: 'vacation type',
+        component: vacations_type,
+        meta: {
+            title: 'vacation Type',
+        }
+    },
+    {
         path: '/admin/vue/showVacancy/:id',
         name: 'showVacancy',
         component: showVacancy,
@@ -1522,6 +1539,33 @@ export const routes = [
         }
     },
 
+    {
+        path: '/admin/vue/RoleDetails',
+        name: 'All Role Details',
+        component: RoleDetails,
+        meta: {
+            title: 'Role Details',
+        }
+    },
+
+    {
+        path: '/admin/vue/NewRoels',
+        name: 'All Roles',
+        component: NewRoels,
+        meta: {
+            title: 'All Role',
+        }
+    },
+
+    {
+        path: '/admin/vue/CustomeRole/:id',
+        name: 'Custom Roles',
+        component: CustomeRole,
+        meta: {
+            title: 'Custom Role',
+        }
+    },
+
 
     {
         path: '/admin/vue/request_type',
@@ -1554,6 +1598,14 @@ export const routes = [
         component: employee_attendance,
         meta: {
             title: 'attendance',
+        }
+    },
+    {
+        path: '/admin/vue/attendance_report',
+        name: 'attendance Report',
+        component: attendance_report,
+        meta: {
+            title: 'attendance Report',
         }
     },
 
@@ -1759,6 +1811,22 @@ export const routes = [
     component: update_item,
     meta: {
         title: 'Update Item',
+    }
+},
+{
+    path: '/admin/vue/dashboard_hr',
+    name: 'dashboard_hr',
+    component: dashboard_hr,
+    meta: {
+        title: 'Dashboard HR',
+    }
+},
+{
+    path: '/admin/vue/dashboard_pm',
+    name: 'dashboard_pm',
+    component: dashboard_pm,
+    meta: {
+        title: 'Dashboard pm',
     }
 },
 
