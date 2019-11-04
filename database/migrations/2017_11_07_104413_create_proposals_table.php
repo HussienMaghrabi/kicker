@@ -33,7 +33,7 @@ class CreateProposalsTable extends Migration
             // $table->enum('unit_type',['resale','rental','new_home','land']);
             // $table->unsignedInteger('unit_id');
             // $table->unsignedInteger('lead_id');
-            $table->text('payment');
+            // $table->text('payment');
             // $table->string('price');
             // $table->text('file')->nullable();
             $table->unsignedInteger('user_id');
