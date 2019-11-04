@@ -56,8 +56,8 @@ class Company extends Model
      }
 
      static function getIndex(){
-         $data['Lead'] = Company::select("id", "name", "lead_type", "phone", "mobile", "email", "lead_privacy as lead status")->paginate(10);
-         return $data;
+         $leads= Company::select("id", "name", "lead_type", "phone", "mobile", "email", "lead_privacy as lead status")->get();
+         return $leads;
      }
 
      static function getStore(Request $request){
@@ -171,6 +171,10 @@ class Company extends Model
              'massege'=> 'success',
          ],200);
          //  dd($request->all());
+     }
+
+     static function getDestroy($id){
+        Company::findOrFail($id)->delete();
      }
 
 }

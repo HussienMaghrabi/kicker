@@ -17,11 +17,8 @@ class ProposedCompanyController extends Controller
      */
     public function index()
     {
-        $allData=proposed_company::all();
-        return response()->json([
-            'status'=>'success',
-            'data'=>$allData
-        ]);
+        $data = proposed_company::getIndex();
+        return $this->successResponse($data);
     }
 
     /**

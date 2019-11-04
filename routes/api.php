@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('api')->group(function () {
-    Route::get('lead', 'LeadsController@index');
+Route::middleware('api')->namespace('Api')->group(function () {
+    Route::resource('lead', 'LeadsController');
+    Route::resource('item', 'ItemController');
+    Route::resource('company', 'ProposedCompanyController');
 });
