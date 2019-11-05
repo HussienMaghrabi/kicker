@@ -203,7 +203,7 @@
 
                         <b-table-column label="Status" sortable>
                             <router-link :to="'/admin/vue/showLead/'+props.row.id" style="color:#4AAED5">
-                                    {{props.row.leadstatus}}
+                                    {{props.row.lead_status}}
                              </router-link>
                         </b-table-column>
 
@@ -211,6 +211,9 @@
                             <i class="fas fa-envelope"></i>
                         </b-table-column>
 
+                         <b-table-column label="Delete" sortable>
+                            <i class="fas fa-trash-alt" @click="DeleteFromIndex(props.row.id)"></i>
+                        </b-table-column>
                     </template>
 
                     <template slot="empty" v-if="!isLoading && isEmpty">
@@ -392,7 +395,7 @@ changeLeadFav
             axios.get('http://127.0.0.1:8000/api/lead').then((res)=>{
                
 
-            this.all_leads=(res.data.Leads)
+            this.all_leads=(res.data.data)
              console.log("--------------------------------")
 
                 console.log(this.all_leads)
@@ -472,6 +475,18 @@ changeLeadFav
                 type: 'is-danger',
             })
         },
+
+         DeleteFromIndex(id) {
+                this.$dialog.confirm({
+                    title: 'Deleting ',
+                    message: 'Are you sure you want to <b>delete</b> Company?',
+                    confirmText: 'Delete',
+                    type: 'is-danger',
+                    hasIcon: true,
+                    onConfirm: () => this.deleteItem(id)
+                })
+            },
+
     }
 }
 </script>
