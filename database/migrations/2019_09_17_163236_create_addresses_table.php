@@ -21,9 +21,9 @@ class CreateAddressesTable extends Migration
             $table->unsignedInteger('company_id')->nullable($value=true);
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->unsignedInteger('city_id')->nullable($value=true);
-            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('no action');
             $table->unsignedInteger('country_id')->nullable($value=true);
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('no action');
             $table->timestamps();
         });
     }

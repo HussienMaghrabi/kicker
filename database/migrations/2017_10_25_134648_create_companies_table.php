@@ -21,15 +21,18 @@ class CreateCompaniesTable extends Migration
             $table->string('email')->nullable();
             $table->string('fax')->nullable();
             $table->unsignedInteger('industry_id');
-            $table->foreign('industry_id')->references('id')->on('industries');
             $table->integer('employees_Number');
             $table->enum('rating',['1','2','3','4','5']);
             $table->text('logo');
             $table->string('description');
             $table->integer('annual_revenue');    
             $table->unsignedInteger('lead_source_id');
-            $table->foreign('lead_source_id')->references('id')->on('lead_sources');
+            $table->enum('lead_type',['company','individual']);
+            $table->enum('lead_privacy',['only_me','friends','public']);
             $table->timestamps();
+
+            $table->foreign('industry_id')->references('id')->on('industries');
+            $table->foreign('lead_source_id')->references('id')->on('lead_sources');
         });
     }
 

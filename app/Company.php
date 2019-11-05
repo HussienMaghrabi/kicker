@@ -56,7 +56,7 @@ class Company extends Model
      }
 
      static function getIndex(){
-         $leads= Company::select("id", "name", "lead_type", "phone", "mobile", "email", "lead_privacy as lead status")->get();
+         $leads= Company::select("id", "name", "lead_type", "phone", "mobile", "email", "lead_privacy as lead_status")->get();
          return $leads;
      }
 
