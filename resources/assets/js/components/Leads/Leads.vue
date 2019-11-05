@@ -323,11 +323,7 @@ changeLeadFav
     import Multiselect from 'vue-multiselect'
     import axios from 'axios'
     export default {
-        props:{
-            data:{
-                required:true
-            }
-        },
+       
         data() {
             return {
                 all_leads:[],
