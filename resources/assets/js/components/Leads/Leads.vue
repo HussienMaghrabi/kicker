@@ -203,7 +203,7 @@
 
                         <b-table-column label="Status" sortable>
                             <router-link :to="'/admin/vue/showLead/'+props.row.id" style="color:#4AAED5">
-                                    {{props.row.leadstatus}}
+                                    {{props.row.lead_status}}
                              </router-link>
                         </b-table-column>
 
@@ -396,7 +396,7 @@ changeLeadFav
             axios.get('http://127.0.0.1:8000/api/lead').then((res)=>{
                
 
-            this.all_leads=(res.data.Leads)
+            this.all_leads=(res.data.data)
              console.log("--------------------------------")
 
                 console.log(this.all_leads)
