@@ -157,7 +157,7 @@
 
                     </div>
                     <b-table
-                    :data="leads"
+                    :data="all_leads"
                     bordered
                     checkable
                     narrowed
@@ -230,9 +230,76 @@
 
             </b-table>
 
+            <!-- <div >
+
+               <b-table  :data="all_leads"  
+               
+                bordered
+                    checkable
+                    narrowed
+                    hoverable
+
+                    paginated
+                    backend-pagination
+
+                    :current-page="page"
+                    :total="total"
+                    :per-page="perPage"
+                    @page-change="onPageChange"
+
+                    :checked-rows.sync="selectedLeads"
+                    :default-sort-direction="defaultSortDirection"
+                    default-sort="created_at"
+               >
+
+                   <b-table-column label="ID" sortable>
+                          {{all_leads.id}}
+                           
+                        </b-table-column>
 
 
-            <div class="leads-number btns-leads">{{leadsCurrentNumber + ' / ' + leadsTotalNumber}}</div>
+                   <b-table-column label="Name" sortable>
+                          {{all_leads.name}}
+                           
+                        </b-table-column>
+
+                   <b-table-column label="Lead type" sortable>
+                          {{all_leads.lead_type}}
+                           
+                        </b-table-column>
+
+                   <b-table-column label="Phone" sortable>
+                          {{all_leads.phone}}
+                           
+                        </b-table-column>
+
+                   <b-table-column label="Mobile" sortable>
+                          {{all_leads.mobile}}
+                           
+                        </b-table-column>
+
+                   <b-table-column label="Email" sortable>
+                          {{all_leads.email}}
+                           
+                        </b-table-column>
+
+                   <b-table-column label="Lead status" sortable>
+                          {{all_leads.lead}}
+                           
+                        </b-table-column>
+
+            
+               </b-table>
+            
+
+            </div>  -->
+
+
+
+            <!-- <div class="leads-number btns-leads">{{leadsCurrentNumber + ' / ' + leadsTotalNumber}}</div> -->
+
+
+
 
             <div class="buttons">
                     <b-button type="is-success"><i class="fas fa-envelope"></i>  Send Email</b-button>
@@ -254,9 +321,12 @@ changeLeadFav
     import {getNewAllLeads} from './../../calls'
     import Hint from './Hint'
     import Multiselect from 'vue-multiselect'
+    import axios from 'axios'
     export default {
+       
         data() {
             return {
+                all_leads:[],
                 authType: '',
                 call_status_id: null,
                 dateFormatter: null,
@@ -274,7 +344,7 @@ changeLeadFav
                 total: 0,
                 page: 1,
                 perPage: 100,
-
+                search:'',
                 isLoading: true,
                 isFullPage: true,
                 searchInput: '',
@@ -312,12 +382,22 @@ changeLeadFav
                 tagIds : [],
                 phoneIso: '',
                 probability: '',
-                project_id:null
+                project_id:null,
+               
             }
         },
         mounted() {
             this.authType = window.auth_user.type
             this.getData()
+            axios.get('http://127.0.0.1:8000/api/lead').then((res)=>{
+               
+
+            this.all_leads=(res.data.Leads)
+             console.log("--------------------------------")
+
+                console.log(this.all_leads)
+                console.log("--------------------------------")
+            })
         },
         components: {
             Hint,

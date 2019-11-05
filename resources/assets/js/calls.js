@@ -2625,6 +2625,10 @@ export const filterSuggestions = (data) => {
     return axios.post('/admin/searchSuggestions',data)
 }
 
+export const exportEmployeeCheet = (data) => {
+    return axios.post('/admin/exportEmployeeCheet',data)
+}
+
 export const getAllProjects = () => {
     return axios.get('/admin/getAllProjects')
 }

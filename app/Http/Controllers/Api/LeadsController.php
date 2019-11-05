@@ -19,7 +19,7 @@ class LeadsController extends Controller
     public function index(){
 
         $leads = Company::getIndex();
-        return $this->successResponse($leads,null, 'Leads');
+        return $this->successResponse($leads);
     }
 
     /**

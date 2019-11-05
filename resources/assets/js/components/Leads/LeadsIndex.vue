@@ -329,7 +329,7 @@ import Multiselect from 'vue-multiselect'
             this.getSources()
             this.getCompanyAgents()
             this.newLeadData.r_agent = this.id
-            console.window(this.newLeadData)
+            // console.window(this.newLeadData)
         },
         methods: {
             getPublic(){
