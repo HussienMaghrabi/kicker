@@ -321,6 +321,8 @@
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 changeLeadFav
 <script>
+    import {deleteThislead} from './../../calls'
+
     import {getNewAllLeads} from './../../calls'
     import Hint from './Hint'
     import Multiselect from 'vue-multiselect'
@@ -391,16 +393,13 @@ changeLeadFav
         },
         mounted() {
             this.authType = window.auth_user.type
-            this.getData()
+           
             axios.get('http://127.0.0.1:8000/api/lead').then((res)=>{
-               
 
             this.all_leads=(res.data.data)
-             console.log("--------------------------------")
-
-                console.log(this.all_leads)
-                console.log("--------------------------------")
+            console.log(this.all_leads)
             })
+             this.getData()
         },
         components: {
             Hint,
@@ -431,6 +430,8 @@ changeLeadFav
 
                 this.total = currentTotal
                 this.isLoading = false
+
+                this.all_leads = response.data.data;
                 //this.getPublic()
                     //console.log(response.data)
 
@@ -439,6 +440,9 @@ changeLeadFav
                 console.log(error)
             })
         },
+
+       
+
         dateFormatterFrom(dt){
             var date = dt.toLocaleDateString();
             const [month, day, year] = date.split('/')
@@ -475,8 +479,28 @@ changeLeadFav
                 type: 'is-danger',
             })
         },
+          errorDialog() {
+                this.$dialog.alert({
+                    title: 'Error',
+                    message: 'Please select the leads you want to switch frist',
+                    type: 'is-danger',
+                })
+            },
 
-         DeleteFromIndex(id) {
+             deleteItem(id){
+                deleteThislead (id).then(response=>{
+                    this.success('Deleted')
+                    this.isLoading = true
+                    this.getData()
+                   
+                })
+                    .catch(error => {
+                        this.errorDialog()
+                        console.log(error)
+                    })
+            },
+
+      DeleteFromIndex(id) {
                 this.$dialog.confirm({
                     title: 'Deleting ',
                     message: 'Are you sure you want to <b>delete</b> Company?',
@@ -486,7 +510,7 @@ changeLeadFav
                     onConfirm: () => this.deleteItem(id)
                 })
             },
-
+       
     }
 }
 </script>
