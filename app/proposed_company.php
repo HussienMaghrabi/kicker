@@ -21,7 +21,7 @@ class proposed_company extends Model
 
     static function getIndex(){
 
-        $data['company'] = proposed_company::select("id", "name")->get();
+        $data= proposed_company::select("id", "name")->get();
         return $data;
     }
 
