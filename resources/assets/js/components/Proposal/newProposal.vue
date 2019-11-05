@@ -23,19 +23,6 @@
             </div>
         </div>
 
-        <!-- <div class="columns is-12">
-            <div class="column is-12" style="display:-webkit-inline-box;padding-left:10%">
-                <h6 style="color:red;margin-right:1%" class="column is-2">*Company Name</h6>
-                <div class="field column is-8">
-                     <div class="select" style="width:100%">
-                        <select v-model="companyId" placeholder="Select Event" expanded v-on:change="getAllContactPersonById($event.target.value)">
-                         <option v-for="company in companies" :value="company.id" :key="company.id" >{{company.name}}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
 
         <div class="columns is-12">
             <div class="column is-12" style="padding-left:10%;display:-webkit-inline-box">
@@ -311,7 +298,7 @@ export default {
         },
         getAllCompanies(){
             getAllProposalCompanies().then(response=>{
-                this.AllCompanies = response.data.data
+                this.AllCompanies = response.data.data.company
             })
         },
         AllCurrencyForCompany(companyId){
