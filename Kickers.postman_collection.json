@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "afc805a0-ae25-4da7-8673-92323bbdf4dd",
+		"name": "Kickers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Leads",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "lang",
+						"value": "ar",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "e64b5ae45611fd9dc50d7fb2eeeaaa1c",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}lead",
+					"host": [
+						"{{url}}lead"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Leads",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "lang",
+						"value": "ar",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "e64b5ae45611fd9dc50d7fb2eeeaaa1c",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}lead/16",
+					"host": [
+						"{{url}}lead"
+					],
+					"path": [
+						"16"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Items",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "lang",
+						"value": "ar",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "e64b5ae45611fd9dc50d7fb2eeeaaa1c",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}item/1",
+					"host": [
+						"{{url}}item"
+					],
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Company",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "e64b5ae45611fd9dc50d7fb2eeeaaa1c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}company",
+					"host": [
+						"{{url}}company"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
