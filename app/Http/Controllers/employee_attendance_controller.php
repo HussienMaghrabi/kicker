@@ -7,8 +7,11 @@ use \App\employee_attendance;
 use \App\hrSettings;
 use \App\attendaceReport;
 use \App\Setting;
+use \App\Employee;
 use \App\work_info;
 use DB;
+use File;
+use Validator;
 use Excel;
 use \Carbon\Carbon;
 
@@ -60,33 +63,57 @@ class employee_attendance_controller extends Controller
         ->leftJoin('employees as employee','attendance.employee_id','=','employee.id')
         ->leftJoin('attendance_report as report','report.attendance_id','=','attendance.id')
         ->select('attendance.id as id','attendance.attend_time as from_time','attendance.created_at','employee.en_first_name','employee.en_last_name','employee.email','report.location','report.date_status')
+        ->orderBy('attendance.id')
         ->get();
         return $allAtendance;
     }
     public function StoreByEx(Request $request)
     {
-        // dd('sa');
-        $getLocation = Setting::select('lat','lng')->first();        
-        if($request->hasFile('Employee_Sheet')){
-            $path = $request->file('Employee_Sheet')->getRealPath();
-            $data = \Excel::load($path)->get();
-            if($data->count()){
-                // dd($data);
-                foreach ($data as $key => $value) {
-                    $arr[] = ['employee_id' => $value->employee_id, 'attend_time' => $value->time, 'date'=>$value->date, 'long'=> $getLocation->lng ,'lat'=> $getLocation->lat];
+        $getLocation = Setting::select('lat','lng')->first();
+        $rules = [
+            'Employee_Sheet' => 'required',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            // return back()->withInput()->withErrors($validator);
+            return response()->json(['massege' => 'not file uploaded'],500);
+        } else {
+            if($request->hasFile('Employee_Sheet')){
+                $extension = File::extension($request->Employee_Sheet->getClientOriginalName());
+                if ($extension == "xlsx" || $extension == "xls" || $extension == "csv") {
+    
+                    $path = $request->Employee_Sheet->getRealPath();
+                    $data = Excel::load($path, function($reader) {
+                    })->get();
+                    if(!empty($data) && $data->count()){
+                        foreach ($data as $key => $value) {
+                            $insert[] = [
+                            'date' => $value->date,
+                            'employee_id' => $value->employee_id,
+                            'attend_time' => $value->time_in,
+                            'checkout_time' => $value->time_out,
+                            'note' => $value->comment,
+                            'long' => $getLocation->lng,
+                            'lat' => $getLocation->lat,
+                            ];
+                        }
+    
+                        if(!empty($insert)){
+                            $insertData = DB::table('attendance')->insert($insert);
+                        }
+                    }
                 }
-                dd($arr);
-                if(!empty($arr)){
-                    \DB::table('attendance')->insert($arr);
-                    // dd('Insert Record successfully.');
-                    return response()->json('Insert Record successfully',200);
-                }
+                return 'success';
             }
         }
     }
     public function export_xsl(Request $request)
     {
         $data = array();
+        $countEmployee = '';
+        $countDate = '';
+        $employee = Employee::select('id','en_first_name','en_middle_name','en_last_name')->get()->toArray();
+        $countEmployee = count($employee);
         // Specify the start date. This date can be any English textual format  
         $date_from = $request->From;
         $date_from = strtotime($date_from); // Convert date to a UNIX timestamp  
@@ -100,9 +127,14 @@ class employee_attendance_controller extends Controller
             // echo date("Y-m-d", $i).'<br />';
             $data[] = date("Y-m-d", $i);
         }
-        Excel::create('Attendance_Cheet', function ($excel) {
-            $excel->sheet('Attendance', function ($sheet) {
-                $sheet->loadView('admin.employee.attendance_cheet',['dateArray',$data]);
+        // dd($data);
+        foreach ($data as $date) {
+            $command[$date] = $employee;
+        }
+        $countDate = count($data);
+        Excel::create('Attendance_Cheet', function ($excel) use ($command,$data,$employee,$countDate,$countEmployee) {
+            $excel->sheet('Attendance', function ($sheet) use ($command,$data,$employee,$countDate,$countEmployee) {
+                $sheet->loadView('admin.employee.attendance_cheet',['AllData'=>$command,'dateArray' => $data,'employees' => $employee , 'countDate' => $countDate , 'countEmployee' => $countEmployee]);
             });
         })->export('xls');
     }

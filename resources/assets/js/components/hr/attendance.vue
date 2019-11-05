@@ -75,7 +75,7 @@
     <div id="app" class="column is-5" style="margin-top:10%;">
          <progress-bar size="large" bar-color="#dc720f" val="0" text="0%"></progress-bar>
     </div>
-    
+        <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="false"></b-loading>
       </section>
 </template>
 
@@ -131,6 +131,8 @@ export default {
             return {
                 file:null,
                 dropFiles: [],
+                isFullPage: true,
+                isLoading: false,
                 parsedDateFrom:{date: new Date()},
                 csrf: window.auth_user.csrf,
                 parsedDateTo:{date: new Date()},
@@ -142,11 +144,16 @@ export default {
         },
          methods:{
              SubmitSheet(){
+                 this.isLoading = true
                  const bodyFormData = new FormData
                  bodyFormData.append('Employee_Sheet',this.dropFiles[0])
                 StoreAttendanceByEx(bodyFormData).then(response=>{
+                    this.isLoading = false
+                    this.alertsuccess('upload new attendance')
                     console.log(response)
                 }).catch(error=>{
+                    this.isLoading = false
+                    this.alerterror('got Some error')
                     console.log(error)
                 })
              },
@@ -186,6 +193,20 @@ export default {
                     console.log(response)
                 }).catch(error=>{
                     console.log(error)
+                })
+            },
+            alertsuccess(massege){
+                this.$toast.open({
+                    message: massege,
+                    position: 'is-bottom',
+                    type: 'is-success'
+                })
+            },
+            alerterror(massege){
+                this.$toast.open({
+                    message: massege,
+                    position: 'is-bottom',
+                    type: 'is-danger'
                 })
             }
         },

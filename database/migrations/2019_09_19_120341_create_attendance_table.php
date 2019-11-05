@@ -17,9 +17,11 @@ class CreateAttendanceTable extends Migration
             $table->increments('id');
             $table->integer('employee_id')->unsigned();
             $table->date('date');
-            $table->time('attend_time');
+            $table->time('attend_time')->nullable();
+            $table->time('checkout_time')->nullable();
             $table->double('long');
             $table->double('lat');
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->foreign('employee_id')->references('id')->on('employees');
         });

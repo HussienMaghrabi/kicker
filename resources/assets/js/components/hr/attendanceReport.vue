@@ -24,8 +24,6 @@
                                 :current-page.sync="currentPage"
                                 :pagination-simple="isPaginationSimple"
                                 :pagination-position="paginationPosition"
-                                :default-sort-direction="defaultSortDirection"
-                                default-sort="user.first_name"
                                 aria-next-label="Next page"
                                 aria-previous-label="Previous page"
                                 aria-page-label="Page"
@@ -45,11 +43,11 @@
                                         {{ props.row.email }}
                                     </b-table-column>
                                     <b-table-column field="attendance.location" label="Location" width="40" sortable>
-                                        {{ props.row.location }}
+                                        <span v-if="props.row.location">{{ props.row.location }}</span> <span v-else>In</span>
                                     </b-table-column>
 
                                     <b-table-column field="attendance.date_status" label="Date status" width="40" sortable>
-                                        {{ props.row.date_status }}
+                                        <span v-if="props.row.date_status">{{ props.row.date_status }}</span> <span v-else>From Cheet</span>
                                     </b-table-column>
 
                                     <b-table-column field="attendance.from_time" label="Time" width="40" sortable>

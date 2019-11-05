@@ -23,6 +23,7 @@ class CreateProposalsTable extends Migration
             $table->string('sub_total')->nullable($value=true);
             $table->string('discount')->nullable($value=true);
             $table->string('total')->nullable($value=true);
+            $table->date('date')->nullable($value=true);
             $table->unsignedInteger('company_id')->nullable($value=true);
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->unsignedInteger('contact_id')->nullable($value=true);
@@ -33,7 +34,6 @@ class CreateProposalsTable extends Migration
             // $table->enum('unit_type',['resale','rental','new_home','land']);
             // $table->unsignedInteger('unit_id');
             // $table->unsignedInteger('lead_id');
-            $table->text('payment');
             // $table->string('price');
             // $table->text('file')->nullable();
             $table->unsignedInteger('user_id');
