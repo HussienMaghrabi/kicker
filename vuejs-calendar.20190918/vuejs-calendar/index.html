@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8"/>
+    <title>Vue.js Weekly Calendar Tutorial</title>
+
+    <link href="index.css" rel="stylesheet" type="text/css">
+    <link href="icons/style.css" rel="stylesheet" type="text/css">
+
+    <!-- DayPilot library -->
+    <script src="js/daypilot/daypilot-all.min.js"></script>
+
+    <!-- Vue.js -->
+    <script src="https://unpkg.com/vue"></script>
+
+</head>
+<body>
+
+<div class="header">
+    <h1><a href='https://code.daypilot.org/10748/vue-js-weekly-calendar-tutorial'>Vue.js Weekly Calendar Tutorial</a></h1>
+    <div><a href="https://javascript.daypilot.org/">DayPilot for JavaScript</a> - AJAX Calendar/Scheduling Widgets for JavaScript/HTML5/jQuery/AngularJS</div>
+</div>
+
+<div class="main">
+
+    <div id="calendar-app">
+        <calendar id="dp" :config="initConfig" ref="calendar"></calendar>
+    </div>
+
+</div>
+
+<script>
+    Vue.component('calendar', {
+        props: ['id', 'config'],
+        template: '<div :id="id"></div>',
+        mounted: function () {
+            this.control = new DayPilot.Calendar(this.id, this.config).init();
+        }
+    });
+
+    var app = new Vue({
+        el: '#calendar-app',
+        data: {
+            initConfig: {
+                viewType: "Week",
+                timeRangeSelectedHandling: "Enabled",
+                onTimeRangeSelected: function (args) {
+                    DayPilot.Modal.prompt("Create a new event:", "Event 1").then(function (modal) {
+                        var dp = args.control;
+                        dp.clearSelection();
+                        if (!modal.result) {
+                            return;
+                        }
+                        dp.events.add(new DayPilot.Event({
+                            start: args.start,
+                            end: args.end,
+                            id: DayPilot.guid(),
+                            text: modal.result
+                        }));
+                    });
+                },
+                eventDeleteHandling: "Disabled",
+                onEventMoved: function (args) {
+                    this.message("Event moved");
+                },
+                onEventResized: function (args) {
+                    this.message("Event resized");
+                },
+                onBeforeEventRender: function (args) {
+                    args.data.barColor = args.data.color;
+                    args.data.areas = [
+                        {
+                            top: 6,
+                            right: 2,
+                            icon: "icon-triangle-down",
+                            visibility: "Hover",
+                            action: "ContextMenu",
+                            style: "font-size: 12px; background-color: #f9f9f9; border: 1px solid #ccc; padding: 2px 2px 0px 2px; cursor:pointer;"
+                        }
+                    ];
+                },
+                contextMenu: new DayPilot.Menu({
+                    items: [
+                        {
+                            text: "Delete",
+                            onClick: function (args) {
+                                var e = args.source;
+                                app.calendar.events.remove(e);
+                                app.calendar.message("Deleted.");
+                            }
+                        },
+                        {
+                            text: "-"
+                        }, {
+                            text: "Blue",
+                            icon: "icon icon-blue",
+                            color: "#1155cc",
+                            onClick: function (args) {
+                                app.updateColor(args.source, args.item.color);
+                            }
+                        },
+                        {
+                            text: "Green",
+                            icon: "icon icon-green",
+                            color: "#6aa84f",
+                            onClick: function (args) {
+                                app.updateColor(args.source, args.item.color);
+                            }
+                        },
+                        {
+                            text: "Yellow",
+                            icon: "icon icon-yellow",
+                            color: "#f1c232",
+                            onClick: function (args) {
+                                app.updateColor(args.source, args.item.color);
+                            }
+                        },
+                        {
+                            text: "Red",
+                            icon: "icon icon-red",
+                            color: "#cc0000",
+                            onClick: function (args) {
+                                app.updateColor(args.source, args.item.color);
+                            }
+                        },
+
+                    ]
+                })
+            }
+        },
+        computed: {
+            // DayPilot.Calendar object
+            // https://api.daypilot.org/daypilot-calendar-class/
+            calendar: function () {
+                return this.$refs.calendar.control;
+            }
+        },
+        methods: {
+            loadEvents: function () {
+                // placeholder for an AJAX call
+                var data = [
+                    {
+                        id: 1,
+                        start: DayPilot.Date.today().addHours(10),
+                        end: DayPilot.Date.today().addHours(11),
+                        text: "Event 1"
+                    },
+                    {
+                        id: 2,
+                        start: DayPilot.Date.today().addHours(13),
+                        end: DayPilot.Date.today().addHours(16),
+                        text: "Event 2"
+                    }
+                ];
+                this.calendar.update({events: data});
+            },
+            updateColor: function(e, color) {
+                var dp = this.calendar;
+                e.data.color = color;
+                dp.events.update(e);
+                dp.message("Color updated");
+            }
+        },
+        mounted: function () {
+            this.loadEvents();
+        }
+    });
+</script>
+</body>
+</html>

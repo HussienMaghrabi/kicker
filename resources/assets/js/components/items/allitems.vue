@@ -6,20 +6,17 @@
 
                 </div>
             </div>
-        
 
             <div class="field" style="margin-right:50%">
-            <div class="control has-icons-left ">
-                <div class="select">
-                <select>
-                    <option value="all OPen Leads" selected>All projects</option>
-                    <option value="Closed Leads">Closed Leads</option>
-                </select>
+                <div class="control has-icons-left ">
+                    <div class="select">
+                        <select>
+                            <option value="all OPen Leads" selected>All projects</option>
+                            <option value="Closed Leads">Closed Leads</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            </div>
-
-           
 
             <div class="level">
                 <div class="level-item filters">
@@ -27,148 +24,126 @@
                         <div class="control  filter-newitem">
                             <input class="input is-meduim mt-10 filter-input" type="text" placeholder="Search" v-model="searchInput" @input="search" style="width:70%;margin-bottom: 23px;     margin-left: -9%;">
                             <b-button type="is-info" style="margin-top:8px" @click="openModal()" ><i class="fas fa-plus"></i>&nbsp;
-                                  New item
-                             </b-button>
+                                New item
+                            </b-button>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
 
-                <b-modal :active.sync="isComponentModalActive" has-modal-card>
-                        <div class="modal-card" style="width: auto">
-                            <header class="modal-card-head">
-                                <p class="modal-card-title">New Item</p>
-                            </header>
-                            <section class="modal-card-body">
-                           <div class="field">
-                                    <div class="control has-icons-left ">
-                                        <div class="select">
-                                        <select>
-                                            <option value="all OPen Leads" selected>Select Company</option>
-                                            <option value="Closed Leads">Closed Leads</option>
-                                            <option value="Closed Leads">Closed Leads</option>
-                                        </select>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                            <b-field >
-                                 <b-input  type="text" placeholder="item name"></b-input>
-                            </b-field>
-
-                        
-                            
-                            <b-field >
-                                <b-input type="textarea" placeholder="Description"></b-input>
-                            </b-field>
-                            
-                            </section>
-                            <footer class="modal-card-foot">
-                                <b-button type="is-success"><i class="fas fa-save"></i> &nbsp;Save</b-button>
-                                <b-button type="is-danger"  @click="isComponentModalActive = false" ><i class="fas fa-window-close"></i> &nbsp;Cancel</b-button>
-                            </footer>
+            <b-modal :active.sync="isComponentModalActive" has-modal-card>
+                <div class="modal-card" style="width: auto">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">New Item</p>
+                    </header>
+                    <section class="modal-card-body">
+                        <div class="field">
+                            <div class="control has-icons-left ">
+                                <div class="select">
+                                    <b-select v-model="companyId">
+                                        <option v-for="company in AllCompanies" :key="company.id" :value="company.id">{{ company.name }}</option>
+                                    </b-select>
+                                </div>
+                            </div>
                         </div>
-                     </b-modal>
 
+                        <b-field >
+                            <b-input  type="text" placeholder="item name" v-model="name"></b-input>
+                        </b-field>
 
-            </div>
+                        <b-field >
+                            <b-input type="textarea" placeholder="Description" v-model="disc"></b-input>
+                        </b-field>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <b-button type="is-success" @click="addNewItems()"><i class="fas fa-save"></i> &nbsp;Save</b-button>
+                        <b-button type="is-danger"  @click="isComponentModalActive = false" ><i class="fas fa-window-close"></i> &nbsp;Cancel</b-button>
+                    </footer>
+                </div>
+            </b-modal>
+        </div>
+        <b-table
+            :data="items"
+            bordered
+            checkable
+            narrowed
+            hoverable
 
+            paginated
+            backend-pagination
 
-            
-                    <b-table
-                    :data="leads"
-                    bordered
-                    checkable
-                    narrowed
-                    hoverable
+            :current-page="page"
+            :total="total"
+            :per-page="perPage"
+            @page-change="onPageChange"
 
-                    paginated
-                    backend-pagination
+            :checked-rows.sync="selectedLeads"
+            :default-sort-direction="defaultSortDirection"
+            default-sort="created_at"
+        >
 
-                    :current-page="page"
-                    :total="total"
-                    :per-page="perPage"
-                    @page-change="onPageChange"
+            <template slot-scope="props">
+                <b-table-column  label="Item name" sortable>
+                    <router-link :to="'/admin/vue/update_item/'+props.row.id" style="color:#000">
+                        {{props.row.name}}
+                    </router-link>
+                </b-table-column>
 
-                    :checked-rows.sync="selectedLeads"
-                    :default-sort-direction="defaultSortDirection"
-                    default-sort="created_at"
-                    >
+                <b-table-column label="Description" sortable>
+                    <router-link :to="'/admin/vue/update_item/'+props.row.id" style="color:#000">
+                        {{props.row.description}}
+                    </router-link>
+                </b-table-column>
 
-                    <template slot-scope="props">
-                        <b-table-column  label="Item name" sortable>
-                             <router-link :to="'/admin/vue/update_item/'+props.row.id" style="color:#000"> 
-                                      test
-                             </router-link>
-                        </b-table-column>
+                <b-table-column  label="" sortable>
+                    <i class="fas fa-envelope"></i>
+                </b-table-column>
 
-                        <b-table-column label="Company" sortable>
-                            <router-link :to="'/admin/vue/update_item/'+props.row.id" style="color:#000"> 
-                                   test
-                            </router-link>
-                           
-                        </b-table-column>
+                <b-table-column label="Delete" sortable>
+                    <i class="fas fa-trash-alt" style="cursor:pointer" @click="DeleteFromIndex(props.row.id)"></i>
+                </b-table-column>
+            </template>
 
-                        <b-table-column label="Description" sortable>
-                            <router-link :to="'/admin/vue/update_item/'+props.row.id" style="color:#000"> 
-                               test
-                            </router-link>
-                        </b-table-column>
-
-                        
-                        
-
-                       
-                   
-
-                        <b-table-column  label="" sortable>
-                            <i class="fas fa-envelope"></i>
-                        </b-table-column>
-
-                        <b-table-column label="Delete" sortable>
-                           <i class="fas fa-trash-alt" style="cursor:pointer"></i>
-                        </b-table-column>
-
-                    </template>
-
-                    <template slot="empty" v-if="!isLoading && isEmpty">
-                        <section class="section">
-                            <div class="content has-text-grey has-text-centered">
-                                <p>
-                                    <b-icon
+            <template slot="empty" v-if="!isLoading && isEmpty">
+                <section class="section">
+                    <div class="content has-text-grey has-text-centered">
+                        <p>
+                            <b-icon
                                     icon="emoticon-sad"
                                     size="is-large">
-                                </b-icon>
-                            </p>
-                            <p>Nothing here.</p>
-                        </div>
-                    </section>
-                    <hr>
-                </template>
-                
-            </b-table>
-            
-            <div class="leads-number">{{leadsCurrentNumber + ' / ' + leadsTotalNumber}}</div>
+                            </b-icon>
+                        </p>
+                        <p>Nothing here.</p>
+                    </div>
+                </section>
+                <hr>
+            </template>
+        </b-table>
 
-                  <div class="buttons">
-                    <b-button type="is-success"><i class="fas fa-envelope"></i>  Send Email</b-button>
-                    <b-button type="is-danger"><i class="fas fa-trash-alt"></i> Delete</b-button>
-                    <b-button type="is-info"><i class="fas fa-print"></i>  Print</b-button>
-                  </div>
+<!--        <div class="leads-number">{{leadsCurrentNumber + ' / ' + leadsTotalNumber}}</div>-->
 
-            <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="true"></b-loading>
-
-
+<!--        <div class="buttons">-->
+<!--            <b-button type="is-success"><i class="fas fa-envelope"></i>  Send Email</b-button>-->
+<!--            <b-button type="is-danger"><i class="fas fa-trash-alt"></i> Delete</b-button>-->
+<!--            <b-button type="is-info"><i class="fas fa-print"></i>  Print</b-button>-->
+<!--        </div>-->
+        <b-loading :is-full-page="isFullPage" :active.sync="isLoading" :can-cancel="true"></b-loading>
     </div>
 </template>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 changeLeadFav
 <script>
-    import {autoSwitchAPi,getMyLeads,changeLeadFav,changeLeadHot,deleteLead,newLeadsFilter,getPublicData,switchLeads,getAgents,checkUserGroupAndRoles,searchForLead, getLeadSources, getLeadsByAgent, getBtns, addCall,bulkActions,deleteNoActionLeads} from './../../calls'
+    import {getAllProposalCompanies,addNewItems,getMyItem,deleteThisItem} from './../../calls'
     import Multiselect from 'vue-multiselect'
     export default {
         data() {
             return {
+                AllCompanies:[],
+                name:'',
+                disc:'',
+                items:[],
+
+                companyId:null,
                 authType: '',
                 call_status_id: null,
                 dateFormatter: null,
@@ -226,14 +201,14 @@ changeLeadFav
                 phoneIso: '',
                 probability: '',
                 project_id:null,
-                isComponentModalActive: false, 
+                isComponentModalActive: false,
             }
         },
         mounted() {
-            this.authType = window.auth_user.type
+            this.authType = window.auth_user.type;
             // this.checkUserHasGroup()
             // this.getCompanyAgents()
-            this.getData()
+            this.getData();
         },
         components: {
             Multiselect
@@ -242,72 +217,77 @@ changeLeadFav
             this.$router.replace({hash: '#/1'});
             this.page = parseInt(this.$route.hash.split('/')[1])
             this.getSources()
-         },
-         methods: {
-             refreshPage() {
-                 if(Object.keys(this.filter).length < 1){
-                     console.log('No Filters Detected')
-                     this.getData();   
-                 }else{
-                     console.log('Filters Detected')
-                     this.filterLeads();
-                 }
-             },
+        },
+        methods: {
+            getAllCompanies(){
+                getAllProposalCompanies().then(Response=>{
+                    this.AllCompanies = Response.data.data
+                }).catch(error =>{
+                    console.log(error);
+                })
+            },
+            refreshPage() {
+                if(Object.keys(this.filter).length < 1){
+                    console.log('No Filters Detected')
+                    this.getData();
+                }else{
+                    console.log('Filters Detected')
+                    this.filterLeads();
+                }
+            },
             checkClass(r){
                 var path = this.$route.path.split('/');
                 if(path[1] == r) return 'tabLinkActive'
-                    else return 'tabLinkNotActive'
-                },
+                else return 'tabLinkNotActive'
+            },
             getLeadsfilter(){
                 getBtns({
-                  "user_id": this.userId,
-                  "agent_id": " ",
-              }).then(response=>{
+                    "user_id": this.userId,
+                    "agent_id": " ",
+                }).then(response=>{
                     this.getLeadsByAgent = response.data.btns
                 })
-              .catch(error => {
-                console.log(error)
-            })
-          },
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
 
-          getSources(){
-            getLeadSources().then(response=>{
+            getSources(){
+                getLeadSources().then(response=>{
                     this.leadSources = response.data
                 })
-            .catch(error => {
-                console.log(error)
-            })
-        },
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
 
-        getData(loading = true){
-            this.isLoading = loading
-            getMyLeads(this.page).then(response=>{
-                this.perPage = response.data.per_page
-                this.leads = response.data.data
-                this.leadsCurrentNumber = Math.min(response.data.total,this.page * this.perPage)
-                this.leadsTotalNumber = response.data.total
-                this.total = response.data.total
-                
-                if(this.leads.length == 0){
-                    this.isEmpty = true
-                }
-                let currentTotal = response.data.total
-                if (response.data.total / this.perPage > 1000) {
-                    currentTotal = this.perPage * 1000
-                }
+            getData(loading = true){
+                this.isLoading = loading;
+                getMyItem(this.page).then(response=>{
+                    this.perPage = response.data.per_page;
+                    this.items = response.data.data;
+                    this.leadsTotalNumber = response.data.total
+                    this.total = response.data.total
 
-                this.total = currentTotal
-                this.isLoading = false
-                this.getPublic()
+                    if(this.leads.length == 0){
+                        this.isEmpty = true
+                    }
+                    let currentTotal = response.data.total
+                    if (response.data.total / this.perPage > 1000) {
+                        currentTotal = this.perPage * 1000
+                    }
+                    this.total = currentTotal
+                    this.isLoading = false
+                    this.getPublic()
                     //console.log(response.data)
 
                 })
-            .catch(error => {
-                console.log(error)
-            })
-        },
-        search(){
-            if(this.searchInput){
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            search(){
+                if(this.searchInput){
                     //this.isLoading = true
                     var data ={
                         'searchInput':this.searchInput,
@@ -317,9 +297,9 @@ changeLeadFav
                     searchForLead(data).then(response=>{
                         this.leads = response.data
                     })
-                    .catch(error => {
-                        console.log(error)
-                    })
+                        .catch(error => {
+                            console.log(error)
+                        })
                 }  else if (this.searchInput.trim() === "") {
                     this.getData();
                 }
@@ -346,7 +326,7 @@ changeLeadFav
                     'probability': this.probability
                 };
                 newLeadsFilter(this.page, data).then(response=>{
-                  console.log("asdsadad ", response.data.per_page);
+                    console.log("asdsadad ", response.data.per_page);
                     this.perPage = response.data.per_page
                     this.leads = response.data.data;
                     this.leadsCurrentNumber = response.data.to;
@@ -363,9 +343,9 @@ changeLeadFav
                     this.total = currentTotal
                     this.isLoading = false
                 })
-                .catch(error => {
-                    console.log(error)
-                })
+                    .catch(error => {
+                        console.log(error)
+                    })
             },
             bulkDeleteDialog(lead=0) {
                 if(this.selectedLeads.length != 0){
@@ -425,22 +405,42 @@ changeLeadFav
                         this.error('Call')
                         this.isLoading = false
                     }else {
-                    //this.isLoading = false
-                    this.newCallData = {}
-                    this.call_status_id = 0
-                    this.getData()
-                    this.success('Call')
-                }
-            })
-                .catch(error => {
-                    console.log(error)
+                        //this.isLoading = false
+                        this.newCallData = {}
+                        this.call_status_id = 0
+                        this.getData()
+                        this.success('Call')
+                    }
                 })
+                    .catch(error => {
+                        console.log(error)
+                    })
             },
 
             openModal(){
                 this.isComponentModalActive=true;
-
-
+                this.getAllCompanies();
+            },
+            deleteItem(id){
+                deleteThisItem(id).then(response=>{
+                    this.success('Deleted')
+                    this.isLoading = true
+                    this.getData()
+                })
+                    .catch(error => {
+                        this.errorDialog()
+                        console.log(error)
+                    })
+            },
+            DeleteFromIndex(id) {
+                this.$dialog.confirm({
+                    title: 'Deleting ',
+                    message: 'Are you sure you want to <b>delete</b> Company?',
+                    confirmText: 'Delete',
+                    type: 'is-danger',
+                    hasIcon: true,
+                    onConfirm: () => this.deleteItem(id)
+                })
             },
 
             switchLeadDialog(lead=0) {
@@ -478,9 +478,9 @@ changeLeadFav
                     this.leadsIds = []
                     this.success('Switched')
                 })
-                .catch(error => {
-                    console.log(error)
-                })
+                    .catch(error => {
+                        console.log(error)
+                    })
             },
             changeLeadStatus(type,id){
                 if(type == 'fav'){
@@ -488,17 +488,17 @@ changeLeadFav
                         console.log(response)
                         this.getData()
                     })
-                    .catch(error => {
-                        console.log(error)
-                    })
+                        .catch(error => {
+                            console.log(error)
+                        })
                 }else if (type == 'hot'){
                     changeLeadHot({id:id}).then(response=>{
                         console.log(response)
                         this.getData()
                     })
-                    .catch(error => {
-                        console.log(error)
-                    })
+                        .catch(error => {
+                            console.log(error)
+                        })
                 }
             },
             leadActions(event,id){
@@ -520,15 +520,15 @@ changeLeadFav
                 })
             },
             deleteThisLead(id){
-                this.isLoading = true
-                deleteLead(id).then(response=>{
-                    console.log(response)
-                    this.getData()
+                this.isLoading = true;
+                deleteThisItem(id).then(response=>{
+                    console.log(response);
+                    this.getData();
                     this.success('Deleted')
                 })
-                .catch(error => {
-                    console.log(error)
-                })
+                    .catch(error => {
+                        console.log(error)
+                    })
             },
             confirmDeleteBulk() {
                 this.$dialog.confirm({
@@ -554,9 +554,9 @@ changeLeadFav
                     this.locations = response.data.locations
                     this.tags = response.data.tags
                 })
-                .catch(error => {
-                    console.log(error)
-                })
+                    .catch(error => {
+                        console.log(error)
+                    })
             },
             dateFormatterFrom(dt){
                 var date = dt.toLocaleDateString();
@@ -587,144 +587,158 @@ changeLeadFav
                 this.reloadData = true
 
                 if(id == this.hintId)
-                this.flag = Math.random();
+                    this.flag = Math.random();
 
                 setInterval(function () {
                     if(this.reloadData) {
-                            // this.getData(false)
-                            this.reloadData = false
-                        }
-                    }.bind(this), 5000);
+                        // this.getData(false)
+                        this.reloadData = false
+                    }
+                }.bind(this), 5000);
 
 
             },
             getRowClass(row) {
                 if (!row.seen) return 'rowDanger'
             },
-        success(action) {
-            this.$toast.open({
-                message: 'Lead '+action+' Successfully',
-                type: 'is-success',
-                position: 'is-bottom',
-                duration: 5000,
-            })
-        },
-        errorDialog() {
-            this.$dialog.alert({
-                title: 'Error',
-                message: 'Please select the leads you want to switch frist',
-                type: 'is-danger',
-            })
-        },
-        getCompanyAgents(){
-            getAgents().then(response=>{
-                this.commercialAgents = response.data.commercialAgents
-                this.residentialAgents = response.data.residentialAgents
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        },
-        checkUserHasGroup(){
-            checkUserGroupAndRoles().then(response=>{
-                this.teamLeader = response.data.leaderHasGroup
-                this.permArray = response.data.permArray
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        },
-        deleteLeadsDialog(){
-          console.log("Delete Leads Modal")
-          this.deleteLeadsModal = true
-        },
-        deleteNoActionLeads(){
-          console.log("deleteNoActionLeads Test")
-            deleteNoActionLeads().then(response=>{
-                console.log(response)
-                this.deleteLeadsModal = false
-            })
-            .catch(error => {
-                console.log(error)
-            })
-            this.getData()
-        },
-        autoSwitchDialog(lead=0) {
-            console.clear()
-            console.log('sssssssssssssss')
-            if(window.auth_user.type == "admin"){
-              if(this.selectedLeads.length != 0){
-                  this.autoSwitchModel = true
-                  // this.confirmAutoSwitch()
-              }else if(lead != 0){
-                  this.selectedLeads.push(lead)
-                  this.autoSwitchModel = true
-                  // this.confirmAutoSwitch()
+            success(action) {
+                this.$toast.open({
+                    message: 'Lead '+action+' Successfully',
+                    type: 'is-success',
+                    position: 'is-bottom',
+                    duration: 5000,
+                })
+            },
+            errorDialog() {
+                this.$dialog.alert({
+                    title: 'Error',
+                    message: 'Please select the leads you want to switch frist',
+                    type: 'is-danger',
+                })
+            },
+            getCompanyAgents(){
+                getAgents().then(response=>{
+                    this.commercialAgents = response.data.commercialAgents
+                    this.residentialAgents = response.data.residentialAgents
+                })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            checkUserHasGroup(){
+                checkUserGroupAndRoles().then(response=>{
+                    this.teamLeader = response.data.leaderHasGroup
+                    this.permArray = response.data.permArray
+                })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            deleteLeadsDialog(){
+                console.log("Delete Leads Modal")
+                this.deleteLeadsModal = true
+            },
+            deleteNoActionLeads(){
+                console.log("deleteNoActionLeads Test")
+                deleteNoActionLeads().then(response=>{
+                    console.log(response)
+                    this.deleteLeadsModal = false
+                })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                this.getData()
+            },
+            autoSwitchDialog(lead=0) {
+                console.clear()
+                console.log('sssssssssssssss')
+                if(window.auth_user.type == "admin"){
+                    if(this.selectedLeads.length != 0){
+                        this.autoSwitchModel = true
+                        // this.confirmAutoSwitch()
+                    }else if(lead != 0){
+                        this.selectedLeads.push(lead)
+                        this.autoSwitchModel = true
+                        // this.confirmAutoSwitch()
 
-              }else{
-                  this.errorDialog()
-              }
-            }else{
-              console.log("You are not admin , permission denied")
-            }
+                    }else{
+                        this.errorDialog()
+                    }
+                }else{
+                    console.log("You are not admin , permission denied")
+                }
 
-        },
-        autoSwitch(){
-            var data = {
-                'agent_id':this.autoSwitchData.rAgent,
-                'commercial_agent_id':this.autoSwitchData.cAgent,
-                'perAgent':this.autoSwitchData.perAgent,
-                'selectedLeads':this.selectedLeads,
-                '_token':this.token,
+            },
+            autoSwitch(){
+                var data = {
+                    'agent_id':this.autoSwitchData.rAgent,
+                    'commercial_agent_id':this.autoSwitchData.cAgent,
+                    'perAgent':this.autoSwitchData.perAgent,
+                    'selectedLeads':this.selectedLeads,
+                    '_token':this.token,
+                }
+                autoSwitchAPi(data)
+                    .then(response=>{
+                        this.autoSwitchModel = false;
+                        this.getData();
+                        this.selectedLeads = [];
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            addNewItems(){
+                var data ={
+                    'name':this.name,
+                    'disc':this.disc,
+                    'companyId':this.companyId,
+                };
+                console.log('dataaaaaa',data);
+                addNewItems(data).then(response=>{
+                    alert('Successfully')
+                    window.location.href="allitems"
+                }).catch(error => {
+                        console.log(error)
+                })
             }
-            autoSwitchAPi(data)
-            .then(response=>{
-                this.autoSwitchModel = false;
-                this.getData();
-                this.selectedLeads = [];
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        },
+        }
     }
-}
 </script>
 
 <style type="text/css" scoped="">
-.leads-number
-{
-    position: absolute;
-    bottom: 36px;
-     margin-bottom: 5.5%  !important;
+    .leads-number
+    {
+        position: absolute;
+        bottom: 36px;
+        margin-bottom: 5.5%  !important;
 
-}
-
-@media screen and (max-width: 767px) {
-    .filters {
-        display: block;
     }
 
-    .filter-btn {
-        margin-right: 2% !important;
-        margin-bottom: 2% !important;
-    }
+    @media screen and (max-width: 767px) {
+        .filters {
+            display: block;
+        }
 
-    .leads-number{
-        margin-bottom: 11% !important;
-    }
+        .filter-btn {
+            margin-right: 2% !important;
+            margin-bottom: 2% !important;
+        }
 
-    .filter-content{
-        margin-top: 2%;
-    }
+        .leads-number{
+            margin-bottom: 11% !important;
+        }
 
-    .filter-input{
+        .filter-content{
+            margin-top: 2%;
+        }
 
-        margin-left: -2% !important;
-        margin-right: 2% !important;
+        .filter-input{
+
+            margin-left: -2% !important;
+            margin-right: 2% !important;
+        }
+        .filter-newitem{
+            display: flex;
+        }
     }
-    .filter-newitem{
-       display: flex;
-    }
-}
 </style>

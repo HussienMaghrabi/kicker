@@ -224,6 +224,7 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     
     Route::resource('companyLeads', 'LeadsController');
     Route::post('addNewLead','LeadsController@addNewLead');
+    Route::post('addNewItems','ItemController@addNewItems');
     Route::post('edit_comapany_data','LeadsController@edit_comapany_data');
     Route::post('edit_address','LeadsController@edit_address');
     
@@ -923,10 +924,12 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
     Route::post('UpdateProposedCompany/{id}', 'ProposedCompanyController@update');
     Route::get('getAllContactPerson/{id}','ContactController@getAllContactPerson');
     Route::get('getAllProposalCompanies','ProposedCompanyController@index');
+    Route::get('getMyItem','ItemController@getMyItem');
     Route::get('Getproposed/{id}','ProposedCompanyController@Getproposed');
 
     Route::get('getProposalCompanyById/{id}','ProposedCompanyController@show');
     Route::get('allCompanies/{id}','ProposedCompanyController@destroy');
+    Route::get('allItems/{id}','ItemController@destroy');
     Route::get('delete-Company/{id}', 'ProposedCompanyController@multiDelete');
     Route::post('searchForCompany','ProposedCompanyController@searchForCompany');
 
@@ -935,6 +938,8 @@ Route::group(['prefix' => adminPath(), 'middleware' => ['lang', 'admin']], funct
 
 
 });
+
+
 
 Route::post('fblead1',function (){
     return ['status'=>'ok'];

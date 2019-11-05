@@ -10,6 +10,30 @@ use Illuminate\Support\Facades\Session;
 
 class Controller extends BaseController
 {
+    # --------------------successResponse------------------
+    public function successResponse($data, $message = NULL, $dataTitle = null)
+    {
+        $response = array(
+            'status'  => TRUE,
+            'message' => $message,
+            $dataTitle ? $dataTitle : 'data'    => $data
+        );
+        return response()->json($response, 200);
+    }
+
+    # --------------------errorResponse------------------
+    public function errorResponse($errors , $data = NULL)
+    {
+        $response = array(
+            'status'  => FALSE,
+            'message' => $errors,
+            'data'    => $data
+        );
+        return response()->json($response);
+    }
+
+
+    # --------------------__construct------------------
     public function __construct(){
         if(Session::get("Newlang") == null){
             Session::put("Newlang","en");}
