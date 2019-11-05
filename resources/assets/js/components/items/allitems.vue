@@ -133,8 +133,9 @@
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 changeLeadFav
 <script>
-    import {getAllProposalCompanies,addNewItems,getMyItem,deleteThisItem} from './../../calls'
+    import {getAllProposalCompanies,addNewItems,getMyItem,deleteThisItems} from './../../calls'
     import Multiselect from 'vue-multiselect'
+    // import axios from 'axios'
     export default {
         data() {
             return {
@@ -216,7 +217,7 @@ changeLeadFav
         created() {
             this.$router.replace({hash: '#/1'});
             this.page = parseInt(this.$route.hash.split('/')[1])
-            this.getSources()
+        
         },
         methods: {
             getAllCompanies(){
@@ -252,14 +253,6 @@ changeLeadFav
                     })
             },
 
-            getSources(){
-                getLeadSources().then(response=>{
-                    this.leadSources = response.data
-                })
-                    .catch(error => {
-                        console.log(error)
-                    })
-            },
 
             getData(loading = true){
                 this.isLoading = loading;
@@ -421,8 +414,8 @@ changeLeadFav
                 this.isComponentModalActive=true;
                 this.getAllCompanies();
             },
-            deleteItem(id){
-                deleteThisItem(id).then(response=>{
+             deleteItems(id){
+               axios.delete('/api/item/'+id).then(response=>{
                     this.success('Deleted')
                     this.isLoading = true
                     this.getData()
@@ -439,7 +432,7 @@ changeLeadFav
                     confirmText: 'Delete',
                     type: 'is-danger',
                     hasIcon: true,
-                    onConfirm: () => this.deleteItem(id)
+                    onConfirm: () => this.deleteItems(id)
                 })
             },
 

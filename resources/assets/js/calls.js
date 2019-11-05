@@ -311,8 +311,8 @@ export const deleteThisCompanies = (id) => {
     return axios.get('/admin/allCompanies/'+id)
 }
 // Delete a allCompanies
-export const deleteThisItem = (id) => {
-    return axios.get('/admin/allItems/'+id)
+export const deleteThisItems = (id) => {
+    return axios.delete('/api/item/'+id)
 }
 
 //delete Resale

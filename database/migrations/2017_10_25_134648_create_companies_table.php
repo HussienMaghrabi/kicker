@@ -27,7 +27,7 @@ class CreateCompaniesTable extends Migration
             $table->string('description');
             $table->integer('annual_revenue');    
             $table->unsignedInteger('lead_source_id');
-            $table->enum('lead_type',['company','individual']);
+    //    $table->enum('lead_type',['company','individual']);
             $table->enum('lead_privacy',['only_me','friends','public']);
             $table->timestamps();
 
