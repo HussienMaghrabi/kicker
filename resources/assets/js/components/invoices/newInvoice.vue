@@ -138,7 +138,8 @@
             </div>
         </div>
 
-        <div class="columns is-12">
+<!------------iitem----------->
+        <!-- <div class="columns is-12">
             <div class="column is-12">
                     <table class="responsive-table">
                     <thead>
@@ -218,9 +219,107 @@
                 <b-button type="is-info"  @click="AddInvoicefield" style="margin-top:10px"><i class="fas fa-plus-square"></i>&nbsp Add item</b-button>
                 
             </div>
+        </div> -->
+
+
+<!--new item ------------------------------------------------------>
+
+
+  <div class="columns is-12">
+            <div class="column is-12">
+                <table class="responsive-table">
+                    <thead>
+                    <tr style="background-color:#F6F6F6;height:50px">
+                        <th style="width:32%;padding-left:2%">Item</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th style="width:10%">Subtotal</th>
+                        <th scope="col">Discount</th>
+                        <th></th>
+                        <th style="width:10%">Line Total</th>
+                        <th></th>
+                    </tr>
+                    </thead><br>
+                    <tr  v-for="(invoice,index) in invoices" :key="index">
+                        <td>
+                            <b-field>
+                                <b-select v-model="invoices[index].itemId" placeholder="Select item"  expanded >
+                                <option  v-for="item in items" :key="item.id" :value="item.id">{{ item.name }}</option>
+                                </b-select>
+                                <!-- <i class="fas fa-edit" @click="isComponentItemActive = true" style="font-size:23px;cursor:pointer;margin-left:1%"></i> -->
+                            </b-field>
+                        </td>
+                        <td>
+                            <div class="cell-with-input"><b-input type="number" min="0" v-model="invoices[index].itemQuantity"/></div>
+                        </td>
+                        <td>
+                            <div class="cell-with-input"><b-input type="number" min="0"  v-model="invoices[index].itemPrice"/></div>
+                        </td>
+                        <td>
+                            <!-- <div class="cell-with-input"><strong>{{ invoices[index].itemQuantity * invoices[index].itemPrice }}</strong></div> -->
+                            <strong>{{ invoices[index].subTotal = invoices[index].itemQuantity * invoices[index].itemPrice }}</strong>
+                        </td>
+                        <td>
+                            <!-- <b-input type="number" placeholder="Value" min="0"  readonly v-model="invoices[index].discountValue" :value="invoices[index].itemPrice - invoices[index].discount / 100"/> -->
+                            {{invoices[index].discountValue = invoices[index].discount / invoices[index].subTotal * 100 }} %
+                        </td>
+                        <td>
+                            <b-input type="number" placeholder="Value of discount" min="0" @input="ChangeDiscount"  v-model="invoices[index].discount"/>
+                        </td>
+                        <td class="text-right"> 
+                            {{ invoices[index].total =  invoices[index].subTotal - invoices[index].discount}}
+                        </td>
+                        <td>
+                            <i @click="deleteRow(idex, invoice)" class="fas fa-trash-alt" style="cursor:pointer"></i>
+                        </td>
+                        <hr>
+                        <!-- total -->
+                    </tr>
+                </table>
+                <b-button type="is-info"  @click="AddInvoicefield" style="margin-top:10px;margin-bottom:2%"><i class="fas fa-plus-square"></i>&nbsp; Add item</b-button>
+
+            <!-- div total -->
+                <div class="columns is-12">
+                    <div class="column is-12">
+                        <h6 style="font-weight:700">PAYMENT:</h6>
+                        <div class="column is-5">
+                            <b-input type="textarea" v-model="payment"></b-input>
+                        </div>
+
+                        <div class="column is-7">
+                            <h6>Subtotalll</h6><br>
+                        </div>
+
+                        <div class="columns is-12">
+                            <div class="column is-1">
+                                <h6>Discount</h6>
+                            </div>
+                            <div class="column is-2">
+                                <b-input type="number" placeholder="Value" min="0"/>
+                            </div>
+                            <div class="column is-2">
+                                <b-input type="text"/>
+                            </div>
+                            <div class="column is-1">
+                                <h6 style="color:red">Total {{ invoices.total }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end div total -->
+
+            </div>
         </div>
 
-        <div style="float:right">
+
+
+
+
+
+
+
+
+        <!-- <div style="float:right">
             <h3 style="margin-bottom:4%">Subtotal 89,000.00</h3>
             <div class="columns is-12  is-mobile">
                 <div class="column is-5" style="display:flex">
@@ -233,11 +332,11 @@
                 </div>
             </div>
             <h3>Total 89,000.00</h3>
-        </div>
+        </div> -->
 
          <div class="columns is-12  is-mobile">
         <div class="column is-12">
-            <h6 style="color:#bbb;">Collection Dates</h6><hr>
+            <h6 style="color:#bbb; margin-top: 32px;">Collection Dates</h6><hr>
         </div>
     </div>
 
@@ -294,13 +393,8 @@ export default {
             // percent:null,
             // discountValue:null,
             invoice: '',
-            invoices: [{
-                itemQuantity: '',
-                itemPrice: '',
-                discountValue: '',
-                total: '',
-                discount: ''
-            }],
+            invoices: [],
+          
             proposedCompanies:[],
             proposedCompanyId:null,
             companies:[],
@@ -363,7 +457,9 @@ export default {
         openModal() {
             this.isComponentModalActive = true
         },
-        AddInvoicefield() {
+    
+
+         AddInvoicefield(){  
             this.invoices.push({
                 itemQuantity: '',
                 itemPrice: '',
@@ -371,7 +467,25 @@ export default {
                 total: '',
                 discount: ''
             });
+            
+        
+            console.log(this.invoices);
+        
+        var x = 0;
+        this.invoices.forEach(function(item, index){
+            if(item.subTotal != undefined){
+                x += item.subTotal;
+                item.total=x
+                console.log("xxx",item.total)
+                // this.invoices.total=item.total
+                console.log(x);
+            }
+        });
+
+        console.log(x);
+
         },
+
         AddCollectionDates() {
             this.collectionDates.push({
                 date: '',

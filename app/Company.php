@@ -23,6 +23,10 @@ class Company extends Model
 
 
 
+    public function contact()
+    {
+         return $this->hasMany('App\Contact','company_id');
+    }
     public function phones()
     {
          return $this->hasMany('App\Phone','company_id');

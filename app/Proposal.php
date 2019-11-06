@@ -11,6 +11,16 @@ class Proposal extends Model
 {
     protected $fillable=[];
 
+    public function company ()
+    {
+        return $this->belongsTo('App\Company','company_id');
+    }
+
+    public function currency ()
+    {
+        return $this->belongsTo('App\Currency','currency_id');
+    }
+
     static function allProposal(){
         $allProposal = DB::table('proposals as prop')
         ->leftJoin('companies as company','prop.company_id','=','company.id')
@@ -61,6 +71,22 @@ class Proposal extends Model
         return response()->json([
             'data' => 'success'
         ],200);
+    }
+
+    static function getProposalCompany($id){
+        $data = Proposal::select('id as proposal', 'company_id','currency_id')->where('proposed_company_id', $id)->get();
+        $data->map(function ($item)  {
+            $item->company_name = $item->company["name"];
+            $item->person = $item->company->contact;
+            $item->contact_person = $item->person[0]['first_name'];
+            $item->invoic_currency = $item->currency['name'];
+            unset($item->company);
+            unset($item->person);
+            unset($item->currency);
+            unset($item->company_id);
+            unset($item->currency_id);
+        });
+        return $data ;
     }
 
     public function items()
