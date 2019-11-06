@@ -2643,9 +2643,12 @@ export const getAllevents = () => {
 export const getAllcampaigns = () => {
     return axios.get('/admin/getAllcampaigns')
 }
-export const getAllProposal = () => {
-    return axios.get('/admin/proposals')
-}
+
+
+
+
+
+
 // add new Proposal
 export const addNewProposal = (data) => {
     return axios.post('/admin/addNewProposals', data)
@@ -2657,8 +2660,8 @@ export const addNewInvoice = (data) => {
 export const getAllProposedCompany = () => {
     return axios.get('/api/company')
 }
-export const getAllProposals = (page) => {
-    return axios.get('/admin/getAllProposal?page='+page)
+export const getAllProposals = (id) => {
+    return axios.get('/api/allProposalById/'+id)
 }
 export const getAllCompanies = () => {
     return axios.get('/admin/getAllCompanies')
@@ -2746,6 +2749,19 @@ export const getAllCities=(id)=>{
 };
 export const getMyItem=()=>{
     return axios.get('/admin/getMyItem')
+};
+
+export const getallporposal=(id)=>{
+    return axios.get('/api/allProposalById/'+id)
+    
+};
+export const getcompanyname=(id)=>{
+    return axios.get('/api/leadsById/'+id)
+    
+};
+export const getContactPerson=(id)=>{
+    return axios.get('/api/contactBYId/'+id)
+    
 };
 
 
