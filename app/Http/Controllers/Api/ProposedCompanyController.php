@@ -22,4 +22,18 @@ class ProposedCompanyController extends Controller
         $data = proposed_company::getIndex();
         return $this->successResponse($data);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $data = proposed_company::getShow($id);
+        return $this->successResponse($data);
+    }
+
+
 }

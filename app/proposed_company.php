@@ -19,6 +19,10 @@ class proposed_company extends Model
         return $this->hasMany('App\ProposedCompany_address','proposed_company_id');
     }
 
+    public function currencies(){
+        return $this->hasMany('App\proposedCurrency_company');
+    }
+
     static function getIndex(){
 
         $data= proposed_company::select("id", "name")->get();
@@ -182,6 +186,22 @@ class proposed_company extends Model
              'country_id' => $request->country_id,
              'proposed_company_id' =>  $id,
          ]);
+     }
+
+     static function getShow($id){
+         $data = proposed_company::where('id', $id)->select(
+             "id",
+             'name as Company Name',
+             'activity',
+             "introduction",
+             'closing',
+             'policy',
+             'image'
+         )->first();
+
+
+
+         return $data ;
      }
 
      static function getDestroy($id){
