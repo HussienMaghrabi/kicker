@@ -16,4 +16,8 @@ class ProposalController extends Controller
        $data = Proposal::getProposalCompany($id);
         return $this->successResponse($data);
     }
+    public function show($id)
+    {
+        return Proposal::ShowProposal($id);
+    }
 }
