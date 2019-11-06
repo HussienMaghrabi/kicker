@@ -22,6 +22,11 @@ class LeadsController extends Controller
         return $this->successResponse($leads);
     }
 
+    public function leads_by_id($id){
+        $data = Company::getLeadByProposal($id);
+        return $this->successResponse($data);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

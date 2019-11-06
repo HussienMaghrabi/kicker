@@ -106,18 +106,7 @@ class Proposal extends Model
     }
 
     static function getProposalCompany($id){
-        $data = Proposal::select('id as proposal', 'company_id','currency_id')->where('proposed_company_id', $id)->get();
-        $data->map(function ($item)  {
-            $item->company_name = $item->company["name"];
-            $item->person = $item->company->contact;
-            $item->contact_person = $item->person[0]['first_name'];
-            $item->invoic_currency = $item->currency['name'];
-            unset($item->company);
-            unset($item->person);
-            unset($item->currency);
-            unset($item->company_id);
-            unset($item->currency_id);
-        });
+        $data = Proposal::select('id as proposal')->where('proposed_company_id', $id)->get();
         return $data ;
     }
 

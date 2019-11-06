@@ -15,9 +15,14 @@ use Illuminate\Http\Request;
 
 Route::middleware('api')->namespace('Api')->group(function () {
     Route::resource('lead', 'LeadsController');
+    Route::get('leadsById/{id}', 'LeadsController@leads_by_id');
     Route::resource('item', 'ItemController');
     Route::resource('company', 'ProposedCompanyController');
     Route::get('allProposalById/{id}', 'ProposalController@all_proposal_by_id');
     Route::get('itemById/{id}', 'ItemsControler@itemCompany');
+<<<<<<< HEAD
     Route::get('editProposal/{id}', 'ProposalController@show');
+=======
+    Route::get('contactBYId/{id}', 'contactsController@contact_by_id');
+>>>>>>> Maghrabi
 });

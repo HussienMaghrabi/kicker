@@ -177,6 +177,15 @@ class Company extends Model
          //  dd($request->all());
      }
 
+     static function getLeadByProposal($id){
+         $data = Proposal::select('company_id')->where('id', $id)->get();
+         $data->map(function ($item) {
+             $item->company_name = $item->company["name"];
+             unset($item->company);
+         });
+         return $data;
+     }
+
      static function getDestroy($id){
         Company::findOrFail($id)->delete();
      }
