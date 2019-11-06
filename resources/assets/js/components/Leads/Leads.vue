@@ -233,69 +233,7 @@
 
             </b-table>
 
-            <!-- <div >
-
-               <b-table  :data="all_leads"  
-               
-                bordered
-                    checkable
-                    narrowed
-                    hoverable
-
-                    paginated
-                    backend-pagination
-
-                    :current-page="page"
-                    :total="total"
-                    :per-page="perPage"
-                    @page-change="onPageChange"
-
-                    :checked-rows.sync="selectedLeads"
-                    :default-sort-direction="defaultSortDirection"
-                    default-sort="created_at"
-               >
-
-                   <b-table-column label="ID" sortable>
-                          {{all_leads.id}}
-                           
-                        </b-table-column>
-
-
-                   <b-table-column label="Name" sortable>
-                          {{all_leads.name}}
-                           
-                        </b-table-column>
-
-                   <b-table-column label="Lead type" sortable>
-                          {{all_leads.lead_type}}
-                           
-                        </b-table-column>
-
-                   <b-table-column label="Phone" sortable>
-                          {{all_leads.phone}}
-                           
-                        </b-table-column>
-
-                   <b-table-column label="Mobile" sortable>
-                          {{all_leads.mobile}}
-                           
-                        </b-table-column>
-
-                   <b-table-column label="Email" sortable>
-                          {{all_leads.email}}
-                           
-                        </b-table-column>
-
-                   <b-table-column label="Lead status" sortable>
-                          {{all_leads.lead}}
-                           
-                        </b-table-column>
-
-            
-               </b-table>
-            
-
-            </div>  -->
+           
 
 
 

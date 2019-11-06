@@ -2655,7 +2655,7 @@ export const addNewInvoice = (data) => {
     return axios.post('/admin/addNewInvoice', data)
 }
 export const getAllProposedCompany = () => {
-    return axios.get('/admin/getAllProposedCompany')
+    return axios.get('/api/company')
 }
 export const getAllProposals = (page) => {
     return axios.get('/admin/getAllProposal?page='+page)
