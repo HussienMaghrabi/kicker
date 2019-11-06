@@ -138,93 +138,6 @@
             </div>
         </div>
 
-<!------------iitem----------->
-        <!-- <div class="columns is-12">
-            <div class="column is-12">
-                    <table class="responsive-table">
-                    <thead>
-                        <tr style="background-color:#F6F6F6;height:50px">
-                            <th style="width:32%;padding-left:2%">Item</th>
-                            <th>Quantity</th>
-                            <th>Unit Price</th>
-                            <th style="width:10%">Subtotal</th>
-                            <th scope="col">Discount</th>
-                            <th></th>
-                            <th style="width:10%">Line Total</th>
-                            <th></th>
-                        </tr>
-                    </thead><br>
-                    <tr  v-for="(invoice, k) in invoices" :key="k">
-                        <td> 
-                            <b-field>
-                                 <b-autocomplete :open-on-focus="true" dir="ltr"></b-autocomplete>
-                                  <i class="fas fa-edit" style="font-size:23px;cursor:pointer;margin-left:1%" 
-                                  @click="openAddItem" ></i>
-                            </b-field>
-
-                            <b-modal :active.sync="isComponentItemActive" has-modal-card>
-                                <div class="modal-card" style="width: 400px">
-                                    <header class="modal-card-head">
-                                        <p class="modal-card-title">Add New Item</p>
-                                    </header>
-                                    <section class="modal-card-body">
-                                    <b-field>
-                                         <b-input type="textarea" placeholder="Description"></b-input>
-                                    </b-field>
-
-                                    <b-field>
-                                        <label>Item Specifications</label>
-                                    </b-field>
-                                    
-                                    <div class="columns is-12" v-for="(item, k) in items" :key="k">
-                                        <div class="column is-5">
-                                            <b-field>
-                                                <b-input placeholder="Item Name" v-model="item.newItem"></b-input>
-                                            </b-field>
-                                        </div>
-                                        <div class="column is-5">
-                                            <b-field>
-                                                <b-input placeholder="Item Name" v-model="item.newItem"></b-input>
-                                            </b-field>
-                                        </div>
-                                        <div class="column is-2" v-if="k == 0">
-                                            <i  @click="AddItemfield" class="fas fa-plus" style="background-color:lightgray;padding:5px;border-radius:50%;cursor:pointer"></i>
-                                        </div>
-
-                                         <div class="column is-2" v-if="k > 0">
-                                            <img src="/images/remove.png"  style="cursor:pointer" @click="deleteItem(k, item)">
-                                        </div>
-                                        
-                                    </div>
-                                    </section>
-                                    <footer class="modal-card-foot">
-                                        <b-button type="is-info"><i class="fas fa-save"></i>&nbsp Save</b-button>
-                                        <button class="button" type="button" @click="isComponentItemActive = false">Cancel</button>
-                                    </footer>
-                                </div>
-                            </b-modal>
-
-                            
-                        </td>
-                        <td><div class="cell-with-input"><b-input type="number" @input="ChangeInvoice" min="0" v-model="invoice.itemQuantity"/></div></td>
-                        <td><div class="cell-with-input"><b-input type="number" min="0" @input="ChangePrice" v-model="invoice.itemPrice"/></div></td>
-                        <td>{{ invoice.total }} </td>
-                        <td><b-input type="number" placeholder="Value" min="0"  readonly v-model="invoice.discountValue"/></td>
-                        <td><b-input type="number" placeholder="Percent %" min="0" @input="ChangeDiscount"  v-model="invoice.discount"/></td>
-                        <td class="text-right"> {{ invoice.total }} </td>
-                        <td><i @click="deleteRow(k, invoice)" class="fas fa-trash-alt" style="cursor:pointer"></i></td>
-                        <hr>
-                    </tr>
-                </table>
-                <b-button type="is-info"  @click="AddInvoicefield" style="margin-top:10px"><i class="fas fa-plus-square"></i>&nbsp Add item</b-button>
-                
-            </div>
-        </div> -->
-
-
-<!--new item ------------------------------------------------------>
-
-
   <div class="columns is-12">
             <div class="column is-12">
                 <table class="responsive-table">
@@ -278,35 +191,21 @@
                 </table>
                 <b-button type="is-info"  @click="AddInvoicefield" style="margin-top:10px;margin-bottom:2%"><i class="fas fa-plus-square"></i>&nbsp; Add item</b-button>
 
-            <!-- div total -->
-                <div class="columns is-12">
-                    <div class="column is-12">
-                        <h6 style="font-weight:700">PAYMENT:</h6>
-                        <div class="column is-5">
-                            <b-input type="textarea" v-model="payment"></b-input>
-                        </div>
 
-                        <div class="column is-7">
-                            <h6>Subtotalll</h6><br>
+                <div style="float:right">
+                    <h3 style="margin-bottom:4%">Subtotal 89,000.00</h3>
+                    <div class="columns is-12  is-mobile">
+                        <div class="column is-5" style="display:flex">
+                            <label class="column is-4">Discount</label>
+                            <b-input type="text">0.00</b-input>
                         </div>
-
-                        <div class="columns is-12">
-                            <div class="column is-1">
-                                <h6>Discount</h6>
-                            </div>
-                            <div class="column is-2">
-                                <b-input type="number" placeholder="Value" min="0"/>
-                            </div>
-                            <div class="column is-2">
-                                <b-input type="text"/>
-                            </div>
-                            <div class="column is-1">
-                                <h6 style="color:red">Total {{ invoices.total }}</h6>
-                            </div>
+                        <div class="column is-5" style="display:flex">
+                            <label class="column is-4"> EGP</label>
+                            <b-input type="text">0.00</b-input>
                         </div>
                     </div>
+                    <h3>Total 89,000.00</h3>
                 </div>
-                <!-- end div total -->
 
             </div>
         </div>
@@ -319,20 +218,7 @@
 
 
 
-        <!-- <div style="float:right">
-            <h3 style="margin-bottom:4%">Subtotal 89,000.00</h3>
-            <div class="columns is-12  is-mobile">
-                <div class="column is-5" style="display:flex">
-                    <label class="column is-4">Discount</label>
-                    <b-input type="text">0.00</b-input>
-                </div>
-                    <div class="column is-5" style="display:flex">
-                    <label class="column is-4"> EGP</label>
-                    <b-input type="text">0.00</b-input>
-                </div>
-            </div>
-            <h3>Total 89,000.00</h3>
-        </div> -->
+
 
          <div class="columns is-12  is-mobile">
         <div class="column is-12">
