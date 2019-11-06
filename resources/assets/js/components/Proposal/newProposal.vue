@@ -23,19 +23,6 @@
             </div>
         </div>
 
-        <!-- <div class="columns is-12">
-            <div class="column is-12" style="display:-webkit-inline-box;padding-left:10%">
-                <h6 style="color:red;margin-right:1%" class="column is-2">*Company Name</h6>
-                <div class="field column is-8">
-                     <div class="select" style="width:100%">
-                        <select v-model="companyId" placeholder="Select Event" expanded v-on:change="getAllContactPersonById($event.target.value)">
-                         <option v-for="company in companies" :value="company.id" :key="company.id" >{{company.name}}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
 
         <div class="columns is-12">
             <div class="column is-12" style="padding-left:10%;display:-webkit-inline-box">
@@ -170,6 +157,7 @@
                     </tr>
                 </table>
                 <b-button type="is-info"  @click="AddInvoicefield" style="margin-top:10px;margin-bottom:2%"><i class="fas fa-plus-square"></i>&nbsp; Add item</b-button>
+                <b-button style="margin-left:80%;margin-top:9px" type="is-info" @click="getTotal">Get Total</b-button>
 
             <!-- div total -->
                 <div class="columns is-12">
@@ -180,7 +168,7 @@
                         </div>
 
                         <div class="column is-7">
-                            <h6>Subtotalll</h6><br>
+                            <h6>Subtotal &nbsp;&nbsp;&nbsp; <span style="font-weight:bold">{{xtotal}}</span></h6><br>
                         </div>
 
                         <div class="columns is-12">
@@ -188,13 +176,14 @@
                                 <h6>Discount</h6>
                             </div>
                             <div class="column is-2">
-                                <b-input type="number" placeholder="Value" min="0"/>
+                                <b-input @input="discount_calc" id="desc" type="number" placeholder="Value" min="0"/>
                             </div>
                             <div class="column is-2">
                                 <b-input type="text"/>
                             </div>
+                            <b-button></b-button>
                             <div class="column is-1">
-                                <h6 style="color:red">Total {{ invoices.total }}</h6>
+                                <h6 style="color:red">Total &nbsp;&nbsp; <span style="font-weight:bold"> {{ final_total }} </span></h6>
                             </div>
                         </div>
                     </div>
@@ -254,8 +243,6 @@ import {
 export default {
     data() {
         return {
-            oldsubtotal:null,
-            newtotal:null,
             AllCompanies:[],
             CompanyCurncies:[],
             AllcompanyLeads:[],
@@ -274,6 +261,8 @@ export default {
             choseItem:[],
             isComponentItemActive:false,
             xtotal: 0,
+            final_disc:0,
+            final_total:0
         
         }
     },
@@ -379,19 +368,41 @@ export default {
         
             console.log(this.invoices);
         
-        var x = 0;
-        this.invoices.forEach(function(item, index){
-            if(item.subTotal != undefined){
-                x += item.subTotal;
-                item.total=x
-                console.log("xxx",item.total)
+        // var x = 0;
+        // this.invoices.forEach(function(item, index){
+        //     if(item.subTotal != undefined){
+        //         x += item.subTotal
+        //         item.total=x
+                // console.log("xxx",item.total)
                 // this.invoices.total=item.total
-                console.log(x);
+                // console.log(x);
+        //     }
+        // });
+
+        // console.log(x);
+
+        },
+        getTotal()
+{
+
+        this.xtotal=0
+        
+            for (var i=0; i<this.invoices.length;i++)
+            {
+                
+                console.log("total",this.invoices[i].total)
+                this.xtotal = this.xtotal + this.invoices[i].total
+
             }
-        });
+            console.log("finaltotaaal",this.xtotal)
 
-        console.log(x);
-
+        
+},
+        discount_calc()
+        {
+           this.final_disc = document.getElementById("desc").value;
+              this.final_total=this.xtotal-(this.xtotal*this.final_disc/100)
+              console.log("valueeee",this.final_total)
         },
         deleteRow(index, invoice) {
             var idx = this.invoices.indexOf(invoice);

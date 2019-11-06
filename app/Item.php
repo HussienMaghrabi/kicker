@@ -29,7 +29,6 @@ class Item extends Model
     static function getStore(Request $request){
        $item = new Item ;
        $item->name = $request->name;
-       $item->description = $request->disc;
        $item->save();
 
        $company = new proposedCompany_items;

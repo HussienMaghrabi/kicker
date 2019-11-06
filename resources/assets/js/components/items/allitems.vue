@@ -50,10 +50,6 @@
                         <b-field >
                             <b-input  type="text" placeholder="item name" v-model="name"></b-input>
                         </b-field>
-
-                        <b-field >
-                            <b-input type="textarea" placeholder="Description" v-model="disc"></b-input>
-                        </b-field>
                     </section>
                     <footer class="modal-card-foot">
                         <b-button type="is-success" @click="addNewItems()"><i class="fas fa-save"></i> &nbsp;Save</b-button>
@@ -88,13 +84,7 @@
                         {{props.row.name}}
                     </router-link>
                 </b-table-column>
-
-                <b-table-column label="Description" sortable>
-                    <router-link :to="'/admin/vue/update_item/'+props.row.id" style="color:#000">
-                        {{props.row.description}}
-                    </router-link>
-                </b-table-column>
-
+                
                 <b-table-column  label="" sortable>
                     <i class="fas fa-envelope"></i>
                 </b-table-column>
@@ -141,7 +131,6 @@ changeLeadFav
             return {
                 AllCompanies:[],
                 name:'',
-                disc:'',
                 items:[],
 
                 companyId:null,
@@ -683,7 +672,6 @@ changeLeadFav
             addNewItems(){
                 var data ={
                     'name':this.name,
-                    'disc':this.disc,
                     'companyId':this.companyId,
                 };
                 console.log('dataaaaaa',data);
