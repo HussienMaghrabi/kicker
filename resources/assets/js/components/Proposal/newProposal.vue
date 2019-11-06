@@ -298,7 +298,7 @@ export default {
         },
         getAllCompanies(){
             getAllProposalCompanies().then(response=>{
-                this.AllCompanies = response.data.data.company
+                this.AllCompanies = response.data.data
             })
         },
         AllCurrencyForCompany(companyId){
