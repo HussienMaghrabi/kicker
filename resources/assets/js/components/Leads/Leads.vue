@@ -479,6 +479,11 @@ changeLeadFav
     bottom: 80px;
 
 }
+.card {
+    
+    margin-left: -2%;
+   
+}
 @media screen and (max-width: 767px) {
 .contacts{
     margin-bottom: 6%;
