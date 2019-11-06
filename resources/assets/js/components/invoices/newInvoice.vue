@@ -336,7 +336,7 @@
 
          <div class="columns is-12  is-mobile">
         <div class="column is-12">
-            <h6 style="color:#bbb;">Collection Dates</h6><hr>
+            <h6 style="color:#bbb; margin-top: 32px;">Collection Dates</h6><hr>
         </div>
     </div>
 
@@ -393,13 +393,8 @@ export default {
             // percent:null,
             // discountValue:null,
             invoice: '',
-            invoices: [{
-                itemQuantity: '',
-                itemPrice: '',
-                discountValue: '',
-                total: '',
-                discount: ''
-            }],
+            invoices: [],
+          
             proposedCompanies:[],
             proposedCompanyId:null,
             companies:[],
@@ -490,6 +485,7 @@ export default {
         console.log(x);
 
         },
+
         AddCollectionDates() {
             this.collectionDates.push({
                 date: '',
