@@ -382,7 +382,7 @@ export default {
         // console.log(x);
 
         },
-        getTotal()
+     getTotal()
 {
 
         this.xtotal=0
