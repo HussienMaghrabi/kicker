@@ -314,7 +314,12 @@ export const deleteThisCompanies = (id) => {
 export const deleteThisItems = (id) => {
     return axios.delete('/api/item/'+id)
 }
+// Delete a allleads
+export const deleteThislead = (id) => {
+    return axios.delete('/api/lead/'+id)
 
+    
+}
 //delete Resale
 export const deleteResale = (id) => {
     return axios.get('/admin/delete-resale/'+id)
@@ -442,7 +447,7 @@ export const getAllLeads = () => {
 
 // Get All Leads kickers
 export const getNewAllLeads = () => {
-    return axios.get('/admin/companyLeads')
+    return axios.get('/api/lead')
 }
 
 
