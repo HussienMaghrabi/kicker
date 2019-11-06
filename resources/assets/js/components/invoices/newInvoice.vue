@@ -191,20 +191,21 @@
                 </table>
                 <b-button type="is-info"  @click="AddInvoicefield" style="margin-top:10px;margin-bottom:2%"><i class="fas fa-plus-square"></i>&nbsp; Add item</b-button>
 
+                <b-button type="is-info"  @click="getTotal" style="margin-top:10px;margin-bottom:2%"><i class="fas fa-plus-square"></i>&nbsp; Get Total</b-button>
 
                 <div style="float:right">
-                    <h3 style="margin-bottom:4%">Subtotal 89,000.00</h3>
+                    <h3 style="margin-bottom:4%">Subtotal {{xtotal}} </h3>
                     <div class="columns is-12  is-mobile">
                         <div class="column is-5" style="display:flex">
-                            <label class="column is-4">Discount</label>
-                            <b-input type="text">0.00</b-input>
+                            <label class="column is-4">Discounttt</label>
+                            <b-input @input="discount_calc" id="desc" type="text"></b-input>
                         </div>
                         <div class="column is-5" style="display:flex">
                             <label class="column is-4"> EGP</label>
-                            <b-input type="text">0.00</b-input>
+                            <b-input type="text"></b-input>
                         </div>
                     </div>
-                    <h3>Total 89,000.00</h3>
+                    <h3>Total {{ final_total }} </h3>
                 </div>
 
             </div>
@@ -280,7 +281,9 @@ export default {
             // discountValue:null,
             invoice: '',
             invoices: [],
-          
+          xtotal:0,
+          final_total:0,
+          final_disc:0,
             proposedCompanies:[],
             proposedCompanyId:null,
             companies:[],
@@ -320,6 +323,28 @@ export default {
     },
 
     methods: {
+         getTotal()
+{
+
+        this.xtotal=0
+        
+            for (var i=0; i<this.invoices.length;i++)
+            {
+                
+                console.log("total",this.invoices[i].total)
+                this.xtotal = this.xtotal + this.invoices[i].total
+
+            }
+            console.log("finaltotaaal",this.xtotal)
+
+        
+},
+discount_calc()
+        {
+           this.final_disc = document.getElementById("desc").value;
+              this.final_total=this.xtotal-(this.xtotal*this.final_disc/100)
+              console.log("valueeee",this.final_total)
+        },
         ChangeInvoice(event) {
 
         },
