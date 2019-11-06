@@ -333,17 +333,8 @@ changeLeadFav
             this.authType = window.auth_user.type;
            
             axios.get('http://127.0.0.1:8000/api/lead').then((res)=>{
-            this.all_leads=(res.data.data);
-             console.log("--------------------------------");
 
-
-
-            this.all_leads=(res.data.data);
-            console.log(this.all_leads);
-
-                console.log(this.all_leads);
-                console.log("--------------------------------");
-
+            this.all_leads=(res.data.data)
             console.log(this.all_leads)
 
 

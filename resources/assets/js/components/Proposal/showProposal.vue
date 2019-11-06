@@ -17,8 +17,7 @@
                 <div class="field column is-5">
                     <div class="select" style="width:100%">
                         <select expanded style="width:100%">
-                            <option>Circle ERP</option>
-                            <option selected>PropertzCRM</option>
+                            <option >{{ prop.company_name }}</option>
                         </select>
                     </div>
                 </div>
@@ -37,8 +36,8 @@
                 <div class="field column is-5">
                     <div class="select" style="width:100%">
                         <select expanded style="width:100%">
-                            <option>Circle ERP</option>
-                            <option selected>PropertzCRM</option>
+                            <option>{{prop.lead_name}}</option>
+                       
                         </select>
                     </div>
                 </div>
@@ -51,8 +50,8 @@
                 <div class="field column is-5">
                     <div class="select" style="width:100%">
                         <select expanded style="width:100%">
-                            <option>Circle ERP</option>
-                            <option selected>PropertzCRM</option>
+                            <option>{{prop.contact_first_name  +  prop.contact_last_name}}</option>
+              
                         </select>
                     </div>
                 </div>
@@ -89,7 +88,7 @@
                 <b-field class="column is-4">
                     <div class="select" style="width:100%">
                         <select expanded style="width:100%">
-                            <option selected>EGP</option>
+                            <option selected>{{prop.carrancy_name}}</option>
                         </select>
                     </div>
                 </b-field>
@@ -198,12 +197,12 @@
 
                             
                         </td>
-                        <td><div class="cell-with-input"><b-input type="number" @input="ChangeInvoice" min="0" v-model="invoice.itemQuantity"/></div></td>
+                        <td><div class="cell-with-input"><b-input type="number" @input="ChangeInvoice" min="0" v-model="prop_item.quantity"/></div></td>
                         <td><div class="cell-with-input"><b-input type="number" min="0" @input="ChangePrice" v-model="invoice.itemPrice"/></div></td>
                         <td>{{ invoice.total }} </td>
-                        <td><b-input type="number" placeholder="Value" min="0"  readonly v-model="invoice.discountValue"/></td>
+                        <td><b-input type="number" placeholder="Value" min="0"  readonly v-model="prop_item.discaount"/></td>
                         <td><b-input type="number" placeholder="Percent %" min="0" @input="ChangeDiscount"  v-model="invoice.discount"/></td>
-                        <td class="text-right"> {{ invoice.total }} </td>
+                        <td class="text-right"> {{ prop_item.final_total }} </td>
                         <td><i @click="deleteRow(k, invoice)" class="fas fa-trash-alt" style="cursor:pointer"></i></td>
                         <hr>
                     </tr>
@@ -275,6 +274,9 @@ export default {
             items:[{
                 newItem:''
                 }],
+            id:null,
+            prop:[],
+            prop_item:[]
         }
      },
      watch:{
@@ -307,12 +309,39 @@ export default {
         this.id = this.$route.params.id
     },
     mounted() {
-
+        this.getData()
     },
     components: {
         
     },
     methods: {
+       getData(loading = true){
+                this.isLoading = loading;
+               axios.get('/api/editProposal/'+this.id).then(response=>{
+                    this.perPage = response.data.per_page;
+                    this.prop = response.data.propsal[0],
+                    this.prop_item = response.data.items[0]
+                    console.log("===================",response.data.items[0])
+
+                    this.leadsTotalNumber = response.data.total
+                    this.total = response.data.total
+                    if(this.leads.length == 0){
+                        this.isEmpty = true
+                    }
+                    let currentTotal = response.data.total
+                    if (response.data.total / this.perPage > 1000) {
+                        currentTotal = this.perPage * 1000
+                    }
+                    this.total = currentTotal
+                    this.isLoading = false
+                    this.getPublic()
+            
+
+                })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
         ChangeInvoice(event){
 
         },
