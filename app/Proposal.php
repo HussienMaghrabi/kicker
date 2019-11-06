@@ -21,6 +21,11 @@ class Proposal extends Model
         return $this->belongsTo('App\Currency','currency_id');
     }
 
+    public function propsal_item ()
+    {
+        return $this->hasMany('App\propsal_item');
+    }
+
     static function allProposal(){
         $allProposal = DB::table('proposals as prop')
         ->leftJoin('companies as company','prop.company_id','=','company.id')
@@ -70,6 +75,33 @@ class Proposal extends Model
         }
         return response()->json([
             'data' => 'success'
+        ],200);
+    }
+
+    static function ShowProposal($id)
+    {
+        // proposal
+        // $items
+
+        $propsal = DB::table('proposals as proposal')
+        ->join('companies as company','proposal.company_id','=','company.id')
+        ->join('contacts as contact','proposal.contact_id','=','contact.id')
+        ->join('currencies as carrancy','proposal.currency_id','=','carrancy.id')
+        ->join('proposed_company as p_company','proposal.proposed_company_id','=','p_company.id')
+        ->select('proposal.id as id','company.id as lead_id','company.name as lead_name','contact.id as contact_id','contact.first_name as contact_first_name','contact.last_name as contact_last_name','carrancy.id as carrancy_id','carrancy.name as carrancy_name','p_company.id as company_id','p_company.name as company_name')
+        ->where('proposal.id',$id)
+        ->get();
+
+        $items = DB::table('propsal_items as p_item')
+        ->join('proposals as proposal','p_item.proposal_id','=','proposal.id')
+        ->join('items as item','p_item.item_id','=','item.id')
+        ->select('p_item.item_id as item_id','item.name as item_name','p_item.quantity','p_item.line_total','p_item.discaount','p_item.final_total')
+        ->where('proposal.id',$id)
+        ->get();
+        return response()->json([
+            'data' => 'success',
+            'propsal' => $propsal,
+            'items' => $items,
         ],200);
     }
 
