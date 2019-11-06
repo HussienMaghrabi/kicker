@@ -19,8 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone');
-            $table->unsignedInteger('agent_type_id');
-            $table->unsignedInteger('user_id');
             $table->string('image');
             $table->string('remember_token', 100);
             $table->string('commission')->nullable();
