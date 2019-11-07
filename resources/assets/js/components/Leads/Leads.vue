@@ -332,6 +332,7 @@ changeLeadFav
         mounted() {
             this.authType = window.auth_user.type;
            
+<<<<<<< HEAD
             axios.get('http://127.0.0.1:8000/api/lead').then((res)=>{
 
             this.all_leads=(res.data.data)
@@ -339,6 +340,13 @@ changeLeadFav
 
 
             });
+=======
+            axios.get('/api/lead').then((res)=>{
+
+            this.all_leads=(res.data.data)       
+            console.log(this.all_leads)
+            })
+>>>>>>> pc_Rahma
              this.getData()
         },
         components: {

@@ -20,14 +20,14 @@
 
            </div>
 
-
             <div class="columns is-12  is-mobile" style="padding-left:10%">        
                 <div class="column is-12" style="display:-webkit-inline-box;margin-bottom:2%">
                     <h6 style="color:red;margin-right:6%">Proposal</h6>
                     <div class="field column is-5">
                         <div class="select" style="width:100%">
                             <b-select v-model="proposalId" placeholder="Select Company" expanded>
-                                <option v-for="prop in proposal" :value="prop.id" :key="prop.id">Proposal no.{{prop.id}}</option>
+                                <option v-for="prop in proposal " :key="prop.id" :value="prop.id" >{{prop.proposal}}</option>                          
+                                
                             </b-select>
                         </div>
                     </div>
@@ -45,9 +45,9 @@
                 <h6 style="color:red;margin-right:1%" class="column is-2">*Company Name</h6>
                 <div class="field column is-8">
                     <div class="select" style="width:42%">
-                        <select v-model="companyId" placeholder="Select Company Name" expanded v-on:change="getAllContactPersonById($event.target.value)"  >
-                            <option v-for="company in companies" :value="company.id" :key="company.id" >{{company.name}}</option>
-                        </select>
+                        <b-select v-model="companyId" placeholder="Select Company Name" expanded v-on:change="getAllContactPersonById($event.target.value)"  >
+                            <option v-for="company in companies" :value="company.id" :key="company.id" >{{company.companies}}</option>
+                        </b-select>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                 <div class="field column is-8">
                     <div class="select" style="width:42%">
                         <b-select v-model="contactPersonId" placeholder="Select Contact Person"  expanded>
-                            <option v-for="item in contactPersonArr " :key="item.id" :value="item.id" >{{item.first_name+' '+item.last_name}}</option>
+                            <option v-for="item in contactPersonArr " :key="item.id" :value="item.id" >{{item.contactPersonArr}}</option>
                         </b-select>
                     </div>
                 </div>
@@ -223,7 +223,7 @@
 
          <div class="columns is-12  is-mobile">
         <div class="column is-12">
-            <h6 style="color:#bbb; margin-top: 32px;">Collection Dates</h6><hr>
+            <h6 style="color:#bbb; margin-top: 40px;">Collection Dates</h6><hr>
         </div>
     </div>
 
@@ -267,10 +267,11 @@
 </template>
 
 <script>
-import {addNewInvoice,getAllCompanies,getAllContactPerson,getAllCurrency,getAllProposedCompany,getAllProposals} from './../../calls'
+import {addNewInvoice,getAllCompanies,getAllContactPerson,getAllCurrency,getAllProposedCompany,getallporposal ,getcompanyname,getContactPerson} from './../../calls'
 export default {
     data() {
         return {
+            payment:'',
             token: window.auth_user.csrf,
             isComponentModalActive: false,
             // itemPrice:'',
@@ -281,9 +282,12 @@ export default {
             // discountValue:null,
             invoice: '',
             invoices: [],
+<<<<<<< HEAD
           xtotal:0,
           final_total:0,
           final_disc:0,
+=======
+>>>>>>> pc_Rahma
             proposedCompanies:[],
             proposedCompanyId:null,
             companies:[],
@@ -317,6 +321,19 @@ export default {
         this.getAllCompanies()
 
 
+    },
+     watch:{
+        'proposedCompanyId': function(newId){
+            this.AllProposalFromCompany(newId)
+        },
+        
+        'proposalId': function(newId){
+            this.AllCompanynameFromProposal(newId)
+        },
+
+        'companyId': function(newId){
+            this.AllContactPersonFromCompanyName(newId)
+        },
     },
     components: {
 
@@ -396,7 +413,6 @@ discount_calc()
         console.log(x);
 
         },
-
         AddCollectionDates() {
             this.collectionDates.push({
                 date: '',
@@ -452,20 +468,7 @@ discount_calc()
                 console.log(error);
             })
         },
-        getAllProposal(){
-            getAllProposals().then(Response=>{
-                this.proposal=Response.data.data
-            }).catch(error => {
-                console.log("there are error ".error)
-            })
-        },
-        getAllCompanies(){
-            getAllCompanies().then(Response=>{
-                this.companies=Response.data.data
-            }).catch(error=>{
-                console.log(error)
-            })
-        },
+     
         getAllProposedCompany(){
             getAllProposedCompany().then(Response=>{
                 this.proposedCompanies=Response.data.data
@@ -473,6 +476,42 @@ discount_calc()
                 console.log("there are error ".error)
             })
         },
+
+          AllProposalFromCompany(proposedCompanyId){
+              console.log(proposedCompanyId);
+              this.proposedCompanyId = proposedCompanyId;
+              getallporposal(proposedCompanyId).then(response=>{
+                  this.proposal = response.data.data                  
+              }).catch(error=>{
+                  console.log(error)
+              })
+          },
+             AllCompanynameFromProposal(proposalId){
+              console.log('sadasdsadasdasdsada',proposalId);
+            //   this.proposalId = proposalId;
+              getcompanyname(proposalId).then(response=>{ 
+                  this.companies = response.data
+                //   console.log("company-------" ,response)
+              }).catch(error=>{
+                  console.log(error)
+              })
+          },
+
+            AllContactPersonFromCompanyName(companyId){
+              console.log(companyId);
+              this.companyId = companyId;
+              getContactPerson(companyId).then(response=>{
+                  this.contactPersonArr = response.data
+                  console.log("--------------------" ,this.contactPersonArr)
+              }).catch(error=>{
+                  console.log(error)
+              })
+          },
+
+
+
+
+
         addNewInvoice() {
             var data = {
                 'proposal_id': this.proposedCompanyId,
