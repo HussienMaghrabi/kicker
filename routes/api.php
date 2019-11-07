@@ -23,4 +23,5 @@ Route::middleware('api')->namespace('Api')->group(function () {
     Route::get('editProposal/{id}', 'ProposalController@show');
     Route::get('contactBYId/{id}', 'contactsController@contact_by_id');
     Route::get('currencyById/{id}', 'CurrenciesController@currency_by_id');
+    Route::post('searchFormLead', 'LeadsController@Search');
 });
