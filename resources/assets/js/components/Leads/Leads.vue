@@ -320,12 +320,21 @@ changeLeadFav
         },
         mounted() {
             this.authType = window.auth_user.type;
+<<<<<<< HEAD
            
+=======
+
+
+>>>>>>> Maghrabi
             axios.get('/api/lead').then((res)=>{
 
             this.all_leads=(res.data.data)       
             console.log(this.all_leads)
             })
+<<<<<<< HEAD
+=======
+
+>>>>>>> Maghrabi
              this.getData()
         },
         components: {

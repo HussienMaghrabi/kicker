@@ -21,5 +21,9 @@ class Contact_proposed extends Model
     {
         return $this->hasMany('App\ProposedContact_email','contact_id');
     }
+
+    public function nationality(){
+         return $this->belongsTo('App\Nationality');
+    }
     
 }

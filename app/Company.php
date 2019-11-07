@@ -144,8 +144,9 @@ class Company extends Model
      }
 
      static function getEditCompany(Request $request,$id){
-        dd($request);
-         DB::table("companies")::where('id',$id)
+
+         DB::table("companies")
+             ->where('id',$id)
              ->update([
                  'lead_privacy' => $request->lead_privacy,
                  'name' => $request->companyName,
@@ -160,7 +161,8 @@ class Company extends Model
                  'lead_source_id' => $request->lead_source,
              ]);
 
-         DB::table("addresses")::where('company_id',$id)
+         DB::table("addresses")
+             ->where('company_id',$id)
              ->update([
                  'street' => $request->street,
                  'state' => $request->state,
@@ -169,8 +171,9 @@ class Company extends Model
                  'country_id' => $request->country_id,
              ]);
 
-         DB::table("contacts")::where("company_id",$id)
-             ->updata([
+         DB::table("contacts")
+             ->where("company_id",$id)
+             ->update([
                  'first_name' => $request->first_name,
                  'last_name' => $request->last_name,
                  'title_id' => $request->title_id,

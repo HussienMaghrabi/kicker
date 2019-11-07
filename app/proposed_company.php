@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-use App\Contact_proposed;
+
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -11,8 +11,8 @@ class proposed_company extends Model
 {
     protected $table = 'proposed_company';
 
-    public function proposalContacts(){
-        return $this->hasMany('App\Contact_proposed')->with('proposedContact_phones')->with('proposedContact_faxes')->with('proposedContact_emails');
+    public function Contact(){
+        return $this->hasMany('App\Contact_proposed');
     }
      public function proposalAddress()
     {
@@ -22,6 +22,23 @@ class proposed_company extends Model
     public function currencies(){
         return $this->hasMany('App\proposedCurrency_company');
     }
+
+    public function phone(){
+        return $this->hasMany('App\proposedContact_phone');
+    }
+
+    public function email(){
+        return $this->hasMany('App\ProposedContact_email');
+    }
+
+    public function fax(){
+        return $this->hasMany('App\ProposedContact_fax');
+    }
+
+    public function address(){
+        return $this->hasMany('App\ProposedCompany_address');
+    }
+
 
     static function getIndex(){
 
@@ -158,7 +175,7 @@ class proposed_company extends Model
              'proposed_company_id' =>  $id,
          ]);
 
-         DB::table('proposedContact_phones')
+         DB::table('proposed_contact_phones')
          ->where('proposed_company_id',$id)
          ->update([
              'phone' => $request->phone,
@@ -189,18 +206,29 @@ class proposed_company extends Model
      }
 
      static function getShow($id){
-         $data = proposed_company::where('id', $id)->select(
-             "id",
-             'name as Company Name',
-             'activity',
-             "introduction",
-             'closing',
-             'policy',
-             'image'
-         )->first();
-
-
-
+         $data = proposed_company::select("id", 'name as Company Name', 'activity', "introduction",'closing', 'policy', 'image')
+             ->where('id', $id)
+             ->get();
+         $data->map(function ($item) {
+             $item->first_name = $item->Contact[0]['first_name'];
+             $item->last_name = $item->Contact[0]['last_name'];
+             $item->website = $item->Contact[0]['website'];
+             $item->position = $item->Contact[0]['position'];
+             $item->nationality = $item->Contact[0]->nationality['nationality'];
+             $item->personal_phone = $item->phone[0]['phone'];
+             $item->personal_mail = $item->email[0]['email'];
+             $item->personal_fax = $item->fax[0]['fax'];
+             $item->street = $item->address[0]['street'];
+             $item->state = $item->address[0]['state'];
+             $item->zip_code = $item->address[0]['zip_code'];
+             $item->city = $item->address[0]->city['name'];
+             $item->country = $item->address[0]->country['name'];
+             unset($item->Contact);
+             unset($item->phone);
+             unset($item->email);
+             unset($item->fax);
+             unset($item->address);
+         });
          return $data ;
      }
 

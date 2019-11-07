@@ -47,9 +47,10 @@ class LeadsController extends Controller
      * @param  \App\Company  $Company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-       $data = Company::getEditCompany($request,$id);
+
+        Company::getEditCompany($request , $id);
         $message ='updated';
         return $this->successResponse(null,$message);
     }
