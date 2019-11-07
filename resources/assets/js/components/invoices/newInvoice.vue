@@ -282,12 +282,11 @@ export default {
             // discountValue:null,
             invoice: '',
             invoices: [],
-<<<<<<< HEAD
+
           xtotal:0,
           final_total:0,
           final_disc:0,
-=======
->>>>>>> pc_Rahma
+
             proposedCompanies:[],
             proposedCompanyId:null,
             companies:[],
