@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Company;
 use App\Address;
 use App\Lead;
+use Validator;
 use DB;
 
 class LeadsController extends Controller
@@ -28,6 +29,33 @@ class LeadsController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Company $Company
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $leads = Company::getShow($id);
+        return $this->successResponse($leads);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Company  $Company
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request,$id)
+    {
+       $data = Company::getEditCompany($request,$id);
+        $message ='updated';
+        return $this->successResponse(null,$message);
+    }
+
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -38,5 +66,12 @@ class LeadsController extends Controller
         Company::getDestroy($id);
         $message = "Deleted Successfully";
         return $this->successResponse(null, $message);
+    }
+
+    public function Search(Request $request){
+
+       $data = Company::getSearch($request);
+       return $this->successResponse($data);
+
     }
 }

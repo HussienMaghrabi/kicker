@@ -55,13 +55,37 @@ class Company extends Model
 
      public function address()
      {
-     return $this->hasMany(Address::class);
+     return $this->hasMany('App\Address');
      //return $this->belongsTo('App\Note');
      }
 
      static function getIndex(){
          $leads= Company::select("id", "name", "lead_type", "phone", "mobile", "email", "lead_privacy as lead_status")->get();
          return $leads;
+     }
+
+     static function getShow($id){
+         $data= Company::select("id", "name as company_name", "lead_type", "phone", "mobile", "email", "lead_privacy as lead_status")
+             ->where('id',$id)
+             ->get();
+         $data->map(function ($item) {
+             $item->street = $item->address[0]['street'];
+             $item->state = $item->address[0]['state'];
+             $item->zip_code = $item->address[0]['zip_code'];
+             $item->country = $item->address[0]->country['name'];
+             $item->city = $item->address[0]->city['name'];
+             $item->first_name = $item->contact[0]['first_name'];
+             $item->last_name = $item->contact[0]['last_name'];
+             $item->title = $item->contact[0]->title['name'];
+             $item->personal_phone = $item->contact[0]['phone'];
+             $item->personal_mobile = $item->contact[0]['mobile'];
+             $item->personal_mail = $item->contact[0]['email'];
+             $item->position = $item->contact[0]['position'];
+             $item->leadstatus = $item->contact[0]['leadstatus'];
+             unset($item->address);
+             unset($item->contact);
+         });
+         return $data;
      }
 
      static function getStore(Request $request){
@@ -119,63 +143,46 @@ class Company extends Model
 
      }
 
-     static function getEditCompany(Request $request){
-         DB::table('companies')
-             ->where('id',$request['company_id'])
+     static function getEditCompany(Request $request,$id){
+        dd($request);
+         DB::table("companies")::where('id',$id)
              ->update([
-                 'name' => $request->company_name,
+                 'lead_privacy' => $request->lead_privacy,
+                 'name' => $request->companyName,
+                 'phone' => $request->phones,
+                 'mobile' => $request->mobiles,
+                 'fax' => $request->faxes,
+                 'description' => $request->description,
                  'rating' => $request->rating,
                  'employees_Number' => $request->employees_Number,
                  'annual_revenue' => $request->annual_revenue,
                  'industry_id' => $request->industry,
                  'lead_source_id' => $request->lead_source,
-                 'commercial_registration' => $request->commercial_registration,
              ]);
-         DB::table('leads')
-             ->where('id',$request['lead_id'])
+
+         DB::table("addresses")::where('company_id',$id)
              ->update([
-                 'email' => $request->email,
-                 'phone' => $request->phone,
-                 'mobile' => $request->mobile,
-                 'fax' => $request->fax,
-                 'website' => $request->website,
-                 'lead_source_id' => $request->lead_source,
+                 'street' => $request->street,
+                 'state' => $request->state,
+                 'zip_code' => $request->zip_code,
+                 'city_id' => $request->city_id,
+                 'country_id' => $request->country_id,
              ]);
-         return response()->json([
-             'massege'=> 'success',
-         ],200);
-         //  dd($request->all());
-         //echo dd($request->lead_source);
+
+         DB::table("contacts")::where("company_id",$id)
+             ->updata([
+                 'first_name' => $request->first_name,
+                 'last_name' => $request->last_name,
+                 'title_id' => $request->title_id,
+                 'phone' => $request->personalPhone,
+                 'mobile' => $request->personalMobile,
+                 'email' => $request->personalMail,
+                 'position' => $request->position,
+                 'leadstatus' => $request->leadstatus,
+             ]);
      }
 
-     static function getEditAddress(Request $request){
-         //echo dd($request->lead_source);
-         DB::table('companies')
-             ->where('id',$request['company_id'])
-             ->update([
-                 'name' => $request->company_name,
-                 'rating' => $request->rating,
-                 'employees_Number' => $request->employees_Number,
-                 'annual_revenue' => $request->annual_revenue,
-                 'industry_id' => $request->industry,
-                 'lead_source_id' => $request->lead_source,
-                 'commercial_registration' => $request->commercial_registration,
-             ]);
-         DB::table('leads')
-             ->where('id',$request['lead_id'])
-             ->update([
-                 'email' => $request->email,
-                 'phone' => $request->phone,
-                 'mobile' => $request->mobile,
-                 'fax' => $request->fax,
-                 'website' => $request->website,
-                 'lead_source_id' => $request->lead_source,
-             ]);
-         return response()->json([
-             'massege'=> 'success',
-         ],200);
-         //  dd($request->all());
-     }
+
 
      static function getLeadByProposal($id){
          $data = Proposal::select('company_id')->where('id', $id)->get();
@@ -189,5 +196,20 @@ class Company extends Model
      static function getDestroy($id){
         Company::findOrFail($id)->delete();
      }
+
+    static function getSearch(Request $request){
+
+        $data = Company::where('name', 'LIKE', '%' . $request->searchInput . '%')
+        ->orwhere('lead_type', 'LIKE', '%' . $request->searchInput . '%')
+        ->orwhere('phone', 'LIKE', '%' . $request->searchInput . '%')
+        ->orwhere('mobile', 'LIKE', '%' . $request->searchInput . '%')
+        ->orwhere('mobile', 'LIKE', '%' . $request->searchInput . '%')
+        ->orwhere('email', 'LIKE', '%' . $request->searchInput . '%')
+        ->orwhere('lead_privacy', 'LIKE', '%' . $request->searchInput . '%')
+        ->get();
+        return $data;
+
+
+    }
 
 }

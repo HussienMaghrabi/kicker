@@ -6,11 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
-    protected $table = 'addresses';
-    protected $primaryKey = 'id';
-    public $incrementing = true;
-    protected $keyType = 'integer';
-    public $timestamps = true;
-    protected $fillable = ['street','state','country_id','city_id','zip_code','company_id'];
+    protected $guarded = [];
+
+    public function city(){
+        return $this->belongsTo('App\City' , 'city_id');
+    }
+
+    public function country(){
+        return $this->belongsTo('App\Country' , "country_id");
+    }
+
+    public function company(){
+        return $this->belongsTo('App\Company' , 'company_id');
+    }
     
 }

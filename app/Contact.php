@@ -12,4 +12,8 @@ class Contact extends Model
         $data = Contact::select('id','first_name')->where('company_id',$id)->get();
         return $data;
     }
+
+    public function title(){
+        return $this->belongsTo('App\Title' , "title_id");
+    }
 }

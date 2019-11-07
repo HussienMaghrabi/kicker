@@ -420,7 +420,6 @@ export const searchForLead = (data) => {
 export const searchForCompany = (data) => {
     return axios.post('/admin/searchForCompany',data)
 }
-
 // Add New ToDo
 export const addToDo = (data) => {
     return axios.post('/admin/addToDo',data)
