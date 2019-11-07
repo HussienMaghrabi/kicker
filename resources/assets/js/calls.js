@@ -2762,5 +2762,9 @@ export const getContactPerson=(id)=>{
     return axios.get('/api/contactBYId/'+id)
     
 };
+export const getselectitem=(id)=>{
+    return axios.get('/api/itemById/'+id)
+    
+};
 
 
