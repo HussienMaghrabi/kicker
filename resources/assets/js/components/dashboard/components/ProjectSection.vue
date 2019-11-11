@@ -15,7 +15,7 @@
     <div>
        <p> Happy Birthday,,10 July</p>
        <p>Wish him a happy birthday <i class="fas fa-birthday-cake"></i></p>
-       <b-button style="margin-top: 3%;" type="is-primary" outlined>Submit</b-button>
+       <b-button  type="is-primary" outlined>Submit</b-button>
     </div>
 
   </div>
@@ -24,7 +24,7 @@
 <style scoped>
 .birthday
 {
-    width: 27.5%;
+    width: 28.3%;
     border: 1px solid #ccc;
     margin-left: 0.5%;
     margin-top: 0.5%;
@@ -32,7 +32,9 @@
     display: inline-block;
     background-color: white;
     position: absolute;
-    padding-bottom: 0.8%
+    padding-bottom: 0.8%;
+    text-align: center;
+    /* z-index: 3333333333333; */
 }
 .pipeline-info
 {
@@ -42,14 +44,16 @@
 }
  .pipline
  {
-    width: 69%;
+     width: 69%;
     border: 1px solid #ccc;
     margin-left: 2%;
-    margin-top: 0.5%;
-    margin-bottom: 0.5;
+    /* margin-top: -110.5%; */
+    /* margin-bottom: -374.5px; */
     display: inline-block;
     background-color: white;
     position: relative;
+    top: 6px;
+    height: 295px;
  }
  
 @media (max-width:414px)

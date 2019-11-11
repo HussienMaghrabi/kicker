@@ -148,17 +148,19 @@
 .proposals
 {
     height: 300px;
-    width: 97%;
+    width: 99%;
     border: 1px solid #ccc;
     margin-left: 2%;
     margin-top: 1%;
     position: relative;
+    overflow: scroll;
 
 }
 .unfinishedprojects
 {
     height: 300px;
-    width: 74%;
+    overflow: scroll;
+    width: 75.4%;
     border: 1px solid #ccc;
     margin-left: 2%;
     display: inline-block
@@ -173,11 +175,11 @@
 
 .pendingprojects
 {
-    height: 300px;
+    height: 298px;
     width: 21%;
     border: 1px solid #ccc;
     border-top: none;
-    margin-left: 2%;
+    margin-left: 1.7%;
     display: inline-block;
     position: absolute;
     background-color: white;

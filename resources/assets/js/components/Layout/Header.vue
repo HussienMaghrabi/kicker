@@ -1114,10 +1114,7 @@ nav.navbar
       top: 17% !important;
       left: 18% !important;
     }
-    .hide_mobile
-    {
-      display: none
-    }
+    
   }
 
   .followUpDivs {

@@ -57,7 +57,7 @@ padding: 2px;
     border: 1px solid #ccc;
     position: absolute;
     right: 2%;
-    top: 1%;
+    top: 2.5%;
 }
 .headerr
 {

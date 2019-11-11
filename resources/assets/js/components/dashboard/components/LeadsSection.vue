@@ -113,7 +113,7 @@
 }
 .selected_items
 {
-    width: 13%;
+    width: 15%;
     border: 1px solid #ccc;
     margin-left: 0.5%;
     margin-top: 1%;
@@ -130,7 +130,7 @@
     display: inline-block; 
     height: 294px;
     background-color: white;
-    width: 14%;
+    width: 13%;
     position: absolute;
     right: 2%;
     margin-top: 1%;
