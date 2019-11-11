@@ -273,17 +273,10 @@ export default {
             // discountValue:null,
             invoice: '',
             invoices: [],
-<<<<<<< HEAD
-          xtotal:0,
-          final_total:0,
-          final_disc:0,
-=======
-
           xtotal:0,
           final_total:0,
           final_disc:0,
 
->>>>>>> Maghrabi
             proposedCompanies:[],
             proposedCompanyId:null,
             companies:[],
