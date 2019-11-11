@@ -17,6 +17,8 @@ class InvoicesController extends Controller
     public function index()
     {
         //
+        $data = Invoices::getIndex();
+        return $this->successResponse($data);
     }
 
 

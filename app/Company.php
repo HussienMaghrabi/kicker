@@ -206,7 +206,6 @@ class Company extends Model
         ->orwhere('lead_type', 'LIKE', '%' . $request->searchInput . '%')
         ->orwhere('phone', 'LIKE', '%' . $request->searchInput . '%')
         ->orwhere('mobile', 'LIKE', '%' . $request->searchInput . '%')
-        ->orwhere('mobile', 'LIKE', '%' . $request->searchInput . '%')
         ->orwhere('email', 'LIKE', '%' . $request->searchInput . '%')
         ->orwhere('lead_privacy', 'LIKE', '%' . $request->searchInput . '%')
         ->get();

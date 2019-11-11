@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class CurrenciesController extends Controller
 {
-    public function currency_by_id($id){
+    public function getCurrency($id){
         $data = Currency::currencyByCompany($id);
         return $this->successResponse($data);
     }

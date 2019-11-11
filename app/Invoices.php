@@ -11,8 +11,13 @@ class Invoices extends Model
         return $this->hasMany('App\Collection');
     }
 
+    static function getIndex(){
+        $data= Invoices::orderBy("id")->get();
+        return $data;
+    }
+
     static function getShow($id){
-        $data= Item::orderBy("id")->where('id',$id)->get();
+        $data= Invoices::orderBy("id")->where('id',$id)->get();
         return $data;
     }
 

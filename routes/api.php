@@ -23,7 +23,7 @@ Route::middleware('api')->namespace('Api')->group(function () {
     Route::get('itemById/{id}', 'ItemController@itemCompany');
     Route::get('editProposal/{id}', 'ProposalController@show');
     Route::get('contactBYId/{id}', 'contactsController@contact_by_id');
-    Route::get('currencyById/{id}', 'CurrenciesController@currency_by_id');
+    Route::get('currencyById/{id}', 'CurrenciesController@getCurrency');
     Route::post('searchFormLead', 'LeadsController@Search');
     Route::post('searchFormItem', 'ItemController@Search');
 });
