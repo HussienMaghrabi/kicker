@@ -209,26 +209,26 @@ class proposed_company extends Model
          $data = proposed_company::select("id", 'name as Company Name', 'activity', "introduction",'closing', 'policy', 'image')
              ->where('id', $id)
              ->get();
-         $data->map(function ($item) {
-             $item->first_name = $item->Contact[0]['first_name'];
-             $item->last_name = $item->Contact[0]['last_name'];
-             $item->website = $item->Contact[0]['website'];
-             $item->position = $item->Contact[0]['position'];
-             $item->nationality = $item->Contact[0]->nationality['nationality'];
-             $item->personal_phone = $item->phone[0]['phone'];
-             $item->personal_mail = $item->email[0]['email'];
-             $item->personal_fax = $item->fax[0]['fax'];
-             $item->street = $item->address[0]['street'];
-             $item->state = $item->address[0]['state'];
-             $item->zip_code = $item->address[0]['zip_code'];
-             $item->city = $item->address[0]->city['name'];
-             $item->country = $item->address[0]->country['name'];
-             unset($item->Contact);
-             unset($item->phone);
-             unset($item->email);
-             unset($item->fax);
-             unset($item->address);
-         });
+             $data->map(function ($item) {
+                $item->first_name = $item->Contact[0]['first_name'];
+                $item->last_name = $item->Contact[0]['last_name'];
+                $item->website = $item->Contact[0]['website'];
+                $item->position = $item->Contact[0]['position'];
+                $item->nationality = $item->Contact[0]->nationality['nationality'];
+                $item->personal_phone = $item->phone[0]['phone'];
+                $item->personal_mail = $item->email[0]['email'];
+                $item->personal_fax = $item->fax[0]['fax'];
+                $item->street = $item->address[0]['street'];
+                $item->state = $item->address[0]['state'];
+                $item->zip_code = $item->address[0]['zip_code'];
+                $item->city = $item->address[0]->city['name'];
+                $item->country = $item->address[0]->country['name'];
+                unset($item->Contact);
+                unset($item->phone);
+                unset($item->email);
+                unset($item->fax);
+                unset($item->address);
+            });
          return $data ;
      }
 
