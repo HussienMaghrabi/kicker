@@ -206,7 +206,7 @@ class proposed_company extends Model
      }
 
      static function getShow($id){
-         $data = proposed_company::select("id", 'name as Company Name', 'activity', "introduction",'closing', 'policy', 'image')
+         $data = proposed_company::select("id", 'name as Company_Name', 'activity', "introduction",'closing', 'policy', 'image')
              ->where('id', $id)
              ->get();
              $data->map(function ($item) {
