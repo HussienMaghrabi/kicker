@@ -2665,15 +2665,12 @@ export const getAllProposals = (id) => {
 export const getAllCompanies = () => {
     return axios.get('/admin/getAllCompanies')
 }
-export const getAllCurrency=()=>{
-    return axios.get('/admin/getAllCurrency')
+
+//showcompany_nationality
+export const getAllNationality = () =>{
+    return axios.get('/api/company/'+71)
 }
-export const getAllNationality=()=>{
-    return axios.get('/admin/getAllNationality')
-}
-export const getAllCountries=()=>{
-    return axios.get('/admin/getAllCountries')
-}
+
 export const addNewProposedCompany=(data)=>{
     return axios.post('/admin/addNewProposedCompany',data)
 }
@@ -2740,12 +2737,10 @@ export const Getproposed=(id)=>{
 export const getAllProposalCompanies=()=>{
     return axios.get('/admin/getAllProposalCompanies')
 }
-export const getProposedCompanyData=(id)=>{
-    return axios.get('/admin/getProposalCompanyById/'+id)
+export const getProposedCompanyData=()=>{
+    return axios.get('/api/company/'+71)
 }
-export const getAllCities=(id)=>{
-    return axios.get('/admin/getAllCities/'+id)
-};
+
 export const getMyItem=()=>{
     return axios.get('/admin/getMyItem')
 };
@@ -2766,5 +2761,21 @@ export const getselectitem=(id)=>{
     return axios.get('/api/itemById/'+id)
     
 };
+//showcomapny_companyname
+export const ShowCompanyData=()=>{
+    return axios.get('/api/company/'+71)
+    
+};
 
-
+//showcomapny_currency
+export const getAllCurrency=()=>{
+    return axios.get('/api/company/'+71)
+}
+//showcomapny_country
+export const getAllCountries=()=>{
+    return axios.get('/api/company/'+71)
+}
+//showcomapny_city
+export const getAllCities=(id)=>{
+    return axios.get('/api/company/'+71)
+};

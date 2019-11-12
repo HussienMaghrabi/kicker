@@ -13,12 +13,12 @@
         <div class="columns is-12" style="margin-top:10px;padding-bottom:15px">
             <div class="column is-2">
                 <b-field style="padding-right: 6px; max-height: 200px; max-width: 200px;">
-                    <b-upload v-model="NewCompany.dropFiles"
+                    <b-upload v-model="NewCompany"
                               multiple
-                              drag-drop  @change="onFileChange" required>
+                              drag-drop  @change="" required>
                         <section class="section">
                             <div class="content has-text-centered">
-                                <img thumbnail fluid  :src="`/img/${companyImage}`" alt="Image 1"/>
+                                <img thumbnail fluid  :src="`/img/${NewCompany.image}`" alt="Image 1"/>
                             </div>
                         </section>
                     </b-upload>
@@ -42,17 +42,19 @@
                  
                 <b-field>
                     <label class="column is-3">Company Name</label>
-                    <b-input  expanded  v-model="companyName" type="text"  ></b-input>
+                    <b-input  expanded  v-model="companies.Company_Name" type="text"> </b-input>
+
+                 
                 </b-field>   
                 <b-field>
                     <label class="column is-3">Activity</label>
-                    <b-input type="text" v-model="activity" expanded ></b-input>
+                    <b-input v-model="activity.activity"  type="text" expanded  ></b-input>
                 </b-field>
 
                  <b-field>
                      <label  class="column is-3">Currency</label>
                      <b-select v-model="currencyId" placeholder="Select Currency"  expanded>
-                         <option v-for="currency in currencies " :key="currency.id" :value="currency.id" >{{currency.name}}</option>
+                         <option v-for="currency in currencies " :key="currency.id" :value="currency.id" >{{currency.activity}}</option>
                      </b-select>
                  </b-field>
             </div>
@@ -80,18 +82,18 @@
             <div class="column is-5"  style="margin-top:6%">
                 <b-field >
                     <label class="column is-4">First Name</label>
-                    <b-input class="company" type="text" style="margin-left:5%;" v-model="first_name"></b-input>
+                    <b-input class="company" type="text" style="margin-left:5%;" v-model="first_name.first_name"></b-input>
                 </b-field>
 
                 <b-field>
                     <label class="column is-4">Last Name</label>
-                    <b-input class="company" type="text" style="margin-left:5%;" v-model="last_name"></b-input>
+                    <b-input class="company" type="text" style="margin-left:5%;" v-model="last_name.last_name"></b-input>
                 </b-field>
 
                 <b-field v-for="(data, index) in phones" :key="'a'+index"  >
 
                     <label class="column is-4">Phone</label>
-                    <b-input class="Leaad" type="number" style="margin-left:5%;"   min="0"  v-model="phone" ></b-input>
+                    <b-input class="Leaad" type="number" style="margin-left:5%;"   min="0"  v-model="phone.personal_phone" ></b-input>
                     <div class="column is-1">
                         <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removePhoneField(index,data)"></span>
                         <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addPhoneField"></span>
@@ -109,7 +111,7 @@
 
                  <b-field>
                       <label class="column is-4">Position</label>
-                      <b-input class="company" type="text" style="margin-left:5%;" v-model="position"></b-input>
+                      <b-input class="company" type="text" style="margin-left:5%;" v-model="position.position"></b-input>
                 </b-field>
             </div>
 
@@ -117,7 +119,7 @@
 
                  <b-field v-for="(data, index) in faxes" :key="'c'+index" >
                       <label class="column is-4">Fax</label>
-                      <b-input class="Leaad" type="number" style="margin-left:5%;" min="0"   v-model="faxArr[index]" ></b-input>
+                      <b-input class="Leaad" type="number" style="margin-left:5%;" min="0"   v-model="faxArr.personal_fax" ></b-input>
                       <div class="column is-1">
                         <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeFaxField(index,data)"></span> 
                         <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addFaxField"></span> 
@@ -126,7 +128,7 @@
 
                 <b-field v-for="(data, index) in emails" :key="'d'+index" >
                       <label class="column is-4">Email</label>
-                      <b-input class="Leaad" type="email" style="margin-left:5%;"   v-model="email" ></b-input>
+                      <b-input class="Leaad" type="email" style="margin-left:5%;"   v-model="email.personal_mail" ></b-input>
                       <div class="column is-1">
                         <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeMailField(index,data)"></span> 
                         <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addMailField"></span> 
@@ -142,7 +144,7 @@
 
                  <b-field>
                     <label class="column is-4">WebSite</label>
-                    <b-input class="company" type="text" style="margin-left:5%;" v-model="website"></b-input>
+                    <b-input class="company" type="text" style="margin-left:5%;" v-model="website.website"></b-input>
                 </b-field>
             </div>
         </div>
@@ -170,18 +172,18 @@
             <div class="column is-5" style="margin-top:5%">
                 <b-field>
                     <label class="column is-4">Street</label>
-                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="street"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="street.street"></b-input>
                 </b-field>
 
                 <b-field>
                     <label class="column is-4">State</label>
-                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="state"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="state.state"></b-input>
                 </b-field>
 
                  <b-field>
                     <label  class="column is-3">Country</label>
                     <b-select v-model="country_id" placeholder="Select Country"  expanded>
-                       <option v-for="country in countries " :key="country.id" :value="country.id" >{{country.name}}</option>
+                       <option v-for="country in countries " :key="country.id" :value="country.id" >{{country.country}}</option>
                     </b-select>
                 </b-field>
 
@@ -191,12 +193,12 @@
                 <b-field>
                     <label  class="column is-3">City</label>
                     <b-select v-model="city_id" placeholder="Select City"  expanded>
-                       <option v-for="city in cities " :key="city.id" :value="city.id" >{{city.name}}</option>
+                       <option v-for="city in cities " :key="city.id" :value="city.id" >{{city.city}}</option>
                     </b-select>
                 </b-field>
                 <b-field>
                     <label class="column is-4">Zip Code</label>
-                    <b-input class="Leaad" type="number" style="margin-left:5%;" min="0"  v-model="zip_code"></b-input>
+                    <b-input class="Leaad" type="number" style="margin-left:5%;" min="0"  v-model="zip_code.zip_code"></b-input>
                 </b-field>
 
             </div>
@@ -216,7 +218,7 @@
               <div class="column is-2"></div>
               <b-field  class="column is-9">
                  <label class="column is-1">Introduction</label>
-                 <b-input type="textarea" style="margin-left:5%;" v-model="Introduction" class="column is-9"></b-input>
+                 <b-input type="textarea" style="margin-left:5%;" v-model="Introduction.introduction" class="column is-9"></b-input>
               </b-field>
          </div>
 
@@ -224,7 +226,7 @@
               <div class="column is-2"></div>
               <b-field  class="column is-9">
                  <label class="column is-1">Closing</label>
-                 <b-input type="textarea" style="margin-left:5%;" v-model="Closing" class="column is-9"></b-input>
+                 <b-input type="textarea" style="margin-left:5%;" v-model="Closing.closing" class="column is-9"></b-input>
               </b-field>
          </div>
 
@@ -232,7 +234,7 @@
               <div class="column is-2"></div>
               <b-field  class="column is-9">
                  <label class="column is-1">Policy</label>
-                 <b-input type="textarea" style="margin-left:5%;" v-model="Policy" class="column is-9"></b-input>
+                 <b-input type="textarea" style="margin-left:5%;" v-model="Policy.policy" class="column is-9"></b-input>
               </b-field>
          </div>
 
@@ -258,7 +260,10 @@
 </template>
 
 <script>
-    import{getAllCurrency,getAllNationality,getAllCities,getAllCountries, dashgetstatus,addNewProposedCompany,updateCompany,getProposedCompanyData}   from './../../calls'
+    import{getAllCurrency,getAllNationality,getAllCities,getAllCountries, dashgetstatus,
+    addNewProposedCompany,updateCompany,getProposedCompanyData,
+    
+    ShowCompanyData, getActivity ,getCurrency}   from './../../calls'
     export default {
         data() {
             return {
@@ -267,11 +272,11 @@
                 contactsArray:[],
                 removebtn:'',
                 title:'',
-                first_name:'',
+                first_name:[],
                 last_name:[],
-                email:'',
+                email:[],
                 nationality:'',
-                phone:'',
+                phone:[],
                 mobile:'',
                 leadStatus:'',
                 position:[],
@@ -288,15 +293,18 @@
                 nationalities:[],
                 cities:[],
                 countries:[],
-                activity:'',
+                activity:[],
                 currencyId:null,
                 nationality_id:[],
-                cityId:[],
-                countryId:[],
+                city_id:[],
+                country_id:[],
+                website:[],
                 companyName:'',
-                Policy:'',
-                Closing:'',
-                Introduction:'',
+                companies: [],
+                activities:[],
+                Policy:[],
+                Closing:[],
+                Introduction:[],
                 dropFiles: [],
                 phones:[{ phone:[] }],
 
@@ -331,6 +339,9 @@
             this.getAllCities()
             this.getAllCountries()
             this.getData()
+            this.ShowCompanyData()
+            this.getActivity()
+         
 
         },
         created() {
@@ -338,90 +349,72 @@
         },
         methods: {
             getData(){
-                getProposedCompanyData(this.id).then(Response=>{
-                    //   console.log("fffff",Response);
-                    this.companyImage=Response.data.data.image;
-                    this.companyName=Response.data.data.name;
-                    this.activity=Response.data.data.activity;
-                    this.currencyId=Response.data.data.currencyId;
-                    this.Introduction=Response.data.data.introduction;
-                    this.Closing=Response.data.data.closing;
-                    this.Policy=Response.data.data.policy;
-                    if(Response.data.data.proposalContacts !=null)
-                        this.contact_array=Response.data.data.proposalContacts;
-                    this.address_array=Response.data.data.proposalAddress;
-
-
+                 ShowCompanyData(this.id).then(Response=>{
+                
                 }).catch(error=>{
-                    console,log(error);
-                })
+                     console,log(error);
+             })
+
+                
             },
-            addNewProposedCompany(){
-                //   var contactsArray=this.contacts.length+1;
-                //   var p;
-                //  for (let key in this.phones) {
-                //     const value = this.phones[key];
-                //   p=this.phones[key].phone;
-                //     }
-                // for (var i = 1; i < contactsArray; i++) {
-
-
-                //   this.contactsArray.push({
-                //   contactindex:i,
-                //   firstName: this.firstName[i],
-                //   lastName:this.lastName[i],
-                //   pArray:this.p,
-
-                //   mArray:this.mobileArr[i],
-                //   fArray:this.faxArr[i],
-                //   eArray:this.emailArr[i],
-                //   nationality:this.nationalityId[i],
-                //   webiste:this.WebSite[i]
-                //  });
-
-
-                // }
-                const bodyFormData = new FormData();
-                for (let key in this.NewCompany) {
-                    const value = this.NewCompany[key];
-                    this.id = this.$route.params.id
-
-                    // bodyFormData.set(key, value);
-                }
-                bodyFormData.append('image',this.NewCompany.dropFiles[0])
-                bodyFormData.append('companyName',this.companyName);
-                bodyFormData.append('id', this.id);
-
-
-
-                //     '_token':this.token,
-                bodyFormData.append('activity',this.activity)
-                bodyFormData.append('currencyId',this.currencyId)
-                bodyFormData.append('first_name',this.first_name)
-                bodyFormData.append('last_name',this.last_name)
-                bodyFormData.append('phone',this.phone)
-                bodyFormData.append('position',this.position)
-                bodyFormData.append('faxies',this.faxArr)
-                bodyFormData.append('email',this.email)
-                bodyFormData.append('nationality_id',this.nationality_id)
-                bodyFormData.append('website',this.website)
-                bodyFormData.append('street',this.street)
-                bodyFormData.append('state',this.state)
-                bodyFormData.append('country_id',this.country_id)
-                bodyFormData.append('city_id',this.city_id)
-                bodyFormData.append('zip_code',this.zip_code)
-                bodyFormData.append( 'introduction',this.Introduction)
-                bodyFormData.append( 'closing',this.Closing)
-                bodyFormData.append('policy',this.Policy)
-                bodyFormData.append('contactsArray',JSON.stringify(this.contactsArray))
-
-
-                updateCompany(bodyFormData).then(Response=>{
-                    //   console.log("the returned Value is ",Response.data)
-                    window.location.href="/admin/vue/allCompanies"
-                })
-
+            
+        ShowCompanyData(){
+            ShowCompanyData().then(Response=>{
+                  this.NewCompany=Response.data.data[0]
+                 this.companies=Response.data.data[0]
+                  this.activity=Response.data.data[0]
+                 this.first_name=Response.data.data[0]
+                 this.last_name=Response.data.data[0]
+                 this.phone=Response.data.data[0]
+                this.faxArr=Response.data.data[0]
+                this.email=Response.data.data[0]
+                 this.position=Response.data.data[0]
+                 this.website=Response.data.data[0]
+                 this.street=Response.data.data[0]
+                 this.state=Response.data.data[0]
+                this.zip_code=Response.data.data[0]
+                 this.Introduction=Response.data.data[0]
+                this.Closing=Response.data.data[0]
+                this.Policy=Response.data.data[0]
+            
+                 console.log("dataaaaaaaaaaaaaaaaaaaaaa",this.companies)
+                  console.log("ressssssssss",Response.data.data)
+             }).catch(error=>{
+                  console.log(error);
+             })
             },
+
+        // getActivity() {
+        //     getActivity().then(Response=>{
+        //          this.activity=Response.data.data[0]
+        //          console.log("aaaaaaaaaaaaaaaaaaaaa",this.activity)
+        //           console.log("ressssssssss",Response)
+        //      }).catch(error=>{
+        //           console.log(error);
+        //      })
+        //     },
+
+             getAllCurrency(){
+              getAllCurrency().then(Response=>{
+                  this.currencies=Response.data.data
+              }).catch(error=>{
+                  console.log(error);
+              })
+          },
+          
+          getAllNationality(){
+              getAllNationality().then(Response=>{
+                  this.nationalities=Response.data.data
+                  console.log("--------------------",Response);
+                  console.log("sssssssssssssssssssssssssssssss",this.nationalities);
+
+              }).catch(error=>{
+                  console.log(error);
+              })
+          },
+
+
+
         getAllCities(){
               getAllCities().then(Response=>{
                   this.cities=Response.data.data
@@ -436,20 +429,8 @@
                   console.log(error);
               })
           },
-          getAllNationality(){
-              getAllNationality().then(Response=>{
-                  this.nationalities=Response.data.data
-              }).catch(error=>{
-                  console.log(error);
-              })
-          },
-          getAllCurrency(){
-              getAllCurrency().then(Response=>{
-                  this.currencies=Response.data.data
-              }).catch(error=>{
-                  console.log(error);
-              })
-          },
+         
+         
         removeAddressfield(indexAddress,address){
            var idx = this.addresses.indexOf(address);
             console.log(idx, indexAddress);

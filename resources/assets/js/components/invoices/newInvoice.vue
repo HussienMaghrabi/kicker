@@ -257,7 +257,7 @@
 </template>
 
 <script>
-import {addNewInvoice,getAllCompanies,getAllContactPerson,getAllCurrency,getAllProposedCompany,getallporposal ,getcompanyname,getContactPerson ,getselectitem} from './../../calls'
+import {addNewInvoice,getAllContactPerson,getAllCurrency,getAllProposedCompany,getallporposal ,getcompanyname,getContactPerson ,getselectitem} from './../../calls'
 export default {
     data() {
         return {
@@ -465,6 +465,7 @@ discount_calc()
         getAllProposedCompany(){
             getAllProposedCompany().then(Response=>{
                 this.proposedCompanies=Response.data.data
+                console.log(Response)
             }).catch(error => {
                 console.log("there are error ".error)
             })
