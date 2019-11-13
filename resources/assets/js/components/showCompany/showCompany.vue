@@ -18,7 +18,9 @@
                               drag-drop  @change="" required>
                         <section class="section">
                             <div class="content has-text-centered">
-                                <img thumbnail fluid  :src="`/img/${NewCompany.image}`" alt="Image 1"/>
+                                <img thumbnail fluid  
+                                v-for="newcomp in NewCompany" :key="newcomp.id"
+                                :src="`/img/${newcomp.image}`" alt="Image 1"/>
                             </div>
                         </section>
                     </b-upload>
@@ -42,19 +44,19 @@
                  
                 <b-field>
                     <label class="column is-3">Company Name</label>
-                    <b-input  expanded  v-model="companies.Company_Name" type="text"> </b-input>
+                    <b-input  expanded v-for="company in companies" :key="company.id" v-model="company.Company_Name" type="text"> </b-input>
 
                  
                 </b-field>   
                 <b-field>
                     <label class="column is-3">Activity</label>
-                    <b-input v-model="activity.activity"  type="text" expanded  ></b-input>
+                    <b-input v-for="activit in activity "  :key="activit.id" v-model="activit.activity"  type="text" expanded  ></b-input>
                 </b-field>
 
                  <b-field>
                      <label  class="column is-3">Currency</label>
                      <b-select v-model="currencyId" placeholder="Select Currency"  expanded>
-                         <option v-for="currency in currencies " :key="currency.id" :value="currency.id" >{{currency.activity}}</option>
+                         <option v-for="currency in currencies " :key="currency.id" :value="currency.id" >{{currency.currencies}}</option>
                      </b-select>
                  </b-field>
             </div>
@@ -82,18 +84,24 @@
             <div class="column is-5"  style="margin-top:6%">
                 <b-field >
                     <label class="column is-4">First Name</label>
-                    <b-input class="company" type="text" style="margin-left:5%;" v-model="first_name.first_name"></b-input>
+                    <b-input class="company" type="text" style="margin-left:5%;" 
+                    v-for="first in first_name " :key="first.id"
+                    v-model="first.first_name"></b-input>
                 </b-field>
 
                 <b-field>
                     <label class="column is-4">Last Name</label>
-                    <b-input class="company" type="text" style="margin-left:5%;" v-model="last_name.last_name"></b-input>
+                    <b-input class="company" type="text" style="margin-left:5%;" 
+                      v-for="last in last_name " :key="last.id"
+                    v-model="last.last_name"></b-input>
                 </b-field>
 
                 <b-field v-for="(data, index) in phones" :key="'a'+index"  >
 
                     <label class="column is-4">Phone</label>
-                    <b-input class="Leaad" type="number" style="margin-left:5%;"   min="0"  v-model="phone.personal_phone" ></b-input>
+                    <b-input class="Leaad" type="number" style="margin-left:5%;"   min="0" 
+                       v-for="phone in phoness " :key="phone.id"
+                     v-model="phone.personal_phone" ></b-input>
                     <div class="column is-1">
                         <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removePhoneField(index,data)"></span>
                         <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addPhoneField"></span>
@@ -111,7 +119,9 @@
 
                  <b-field>
                       <label class="column is-4">Position</label>
-                      <b-input class="company" type="text" style="margin-left:5%;" v-model="position.position"></b-input>
+                      <b-input class="company" type="text" style="margin-left:5%;" 
+                       v-for="pos in position " :key="pos.id"
+                      v-model="pos.position"></b-input>
                 </b-field>
             </div>
 
@@ -119,7 +129,9 @@
 
                  <b-field v-for="(data, index) in faxes" :key="'c'+index" >
                       <label class="column is-4">Fax</label>
-                      <b-input class="Leaad" type="number" style="margin-left:5%;" min="0"   v-model="faxArr.personal_fax" ></b-input>
+                      <b-input class="Leaad" type="number" style="margin-left:5%;" min="0"  
+                       v-for="fax in faxArr " :key="fax.id"
+                       v-model="fax.personal_fax" ></b-input>
                       <div class="column is-1">
                         <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeFaxField(index,data)"></span> 
                         <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addFaxField"></span> 
@@ -128,7 +140,9 @@
 
                 <b-field v-for="(data, index) in emails" :key="'d'+index" >
                       <label class="column is-4">Email</label>
-                      <b-input class="Leaad" type="email" style="margin-left:5%;"   v-model="email.personal_mail" ></b-input>
+                      <b-input class="Leaad" type="email" style="margin-left:5%;"  
+                      v-for="mail in email " :key="mail.id"
+                       v-model="mail.personal_mail" ></b-input>
                       <div class="column is-1">
                         <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeMailField(index,data)"></span> 
                         <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addMailField"></span> 
@@ -144,7 +158,9 @@
 
                  <b-field>
                     <label class="column is-4">WebSite</label>
-                    <b-input class="company" type="text" style="margin-left:5%;" v-model="website.website"></b-input>
+                    <b-input class="company" type="text" style="margin-left:5%;" 
+                      v-for="web in website " :key="web.id"
+                    v-model="web.website"></b-input>
                 </b-field>
             </div>
         </div>
@@ -172,12 +188,16 @@
             <div class="column is-5" style="margin-top:5%">
                 <b-field>
                     <label class="column is-4">Street</label>
-                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="street.street"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;" 
+                    v-for="street in streets " :key="street.id"
+                    v-model="street.street"></b-input>
                 </b-field>
 
                 <b-field>
                     <label class="column is-4">State</label>
-                    <b-input class="Leaad" type="text" style="margin-left:5%;" v-model="state.state"></b-input>
+                    <b-input class="Leaad" type="text" style="margin-left:5%;" 
+                    v-for="state in states" :key="state.id"                    
+                    v-model="state.state"></b-input>
                 </b-field>
 
                  <b-field>
@@ -198,7 +218,10 @@
                 </b-field>
                 <b-field>
                     <label class="column is-4">Zip Code</label>
-                    <b-input class="Leaad" type="number" style="margin-left:5%;" min="0"  v-model="zip_code.zip_code"></b-input>
+                    <b-input class="Leaad" type="number" style="margin-left:5%;" min="0"  
+                       v-for="zip in zip_code " :key="zip.id"
+                    
+                    v-model="zip.zip_code"></b-input>
                 </b-field>
 
             </div>
@@ -218,7 +241,9 @@
               <div class="column is-2"></div>
               <b-field  class="column is-9">
                  <label class="column is-1">Introduction</label>
-                 <b-input type="textarea" style="margin-left:5%;" v-model="Introduction.introduction" class="column is-9"></b-input>
+                 <b-input type="textarea" style="margin-left:5%;" 
+                 v-for="intro in Introduction " :key="intro.id"                 
+                 v-model="intro.introduction" class="column is-9"></b-input>
               </b-field>
          </div>
 
@@ -226,7 +251,9 @@
               <div class="column is-2"></div>
               <b-field  class="column is-9">
                  <label class="column is-1">Closing</label>
-                 <b-input type="textarea" style="margin-left:5%;" v-model="Closing.closing" class="column is-9"></b-input>
+                 <b-input type="textarea" style="margin-left:5%;" 
+                 v-for="close in Closing " :key="close.id"                                  
+                 v-model="close.closing" class="column is-9"></b-input>
               </b-field>
          </div>
 
@@ -234,7 +261,10 @@
               <div class="column is-2"></div>
               <b-field  class="column is-9">
                  <label class="column is-1">Policy</label>
-                 <b-input type="textarea" style="margin-left:5%;" v-model="Policy.policy" class="column is-9"></b-input>
+                 <b-input type="textarea" style="margin-left:5%;"
+                 v-for="Policy in Policies " :key="Policy.id"                                  
+                 
+                  v-model="Policy.policy" class="column is-9"></b-input>
               </b-field>
          </div>
 
@@ -276,13 +306,13 @@
                 last_name:[],
                 email:[],
                 nationality:'',
-                phone:[],
+                phoness:[],
                 mobile:'',
                 leadStatus:'',
                 position:[],
                 WebSite:[],
-                street:[],
-                state:[],
+                streets:[],
+                states:[],
                 country:'',
                 city:'',
                 zip_code:[],
@@ -302,7 +332,7 @@
                 companyName:'',
                 companies: [],
                 activities:[],
-                Policy:[],
+                Policies:[],
                 Closing:[],
                 Introduction:[],
                 dropFiles: [],
@@ -358,24 +388,24 @@
                 
             },
             
-        ShowCompanyData(){
-            ShowCompanyData().then(Response=>{
-                  this.NewCompany=Response.data.data[0]
-                 this.companies=Response.data.data[0]
-                  this.activity=Response.data.data[0]
-                 this.first_name=Response.data.data[0]
-                 this.last_name=Response.data.data[0]
-                 this.phone=Response.data.data[0]
-                this.faxArr=Response.data.data[0]
-                this.email=Response.data.data[0]
-                 this.position=Response.data.data[0]
-                 this.website=Response.data.data[0]
-                 this.street=Response.data.data[0]
-                 this.state=Response.data.data[0]
-                this.zip_code=Response.data.data[0]
-                 this.Introduction=Response.data.data[0]
-                this.Closing=Response.data.data[0]
-                this.Policy=Response.data.data[0]
+        ShowCompanyData(id){
+            ShowCompanyData(this.id).then(Response=>{
+                  this.NewCompany=Response.data.data
+                 this.companies=Response.data.data
+                  this.activity=Response.data.data
+                 this.first_name=Response.data.data
+                 this.last_name=Response.data.data
+                 this.phoness=Response.data.data
+                this.faxArr=Response.data.data
+                this.email=Response.data.data
+                 this.position=Response.data.data
+                 this.website=Response.data.data
+                 this.streets=Response.data.data
+                 this.states=Response.data.data
+                this.zip_code=Response.data.data
+                 this.Introduction=Response.data.data
+                this.Closing=Response.data.data
+                this.Policies=Response.data.data
             
                  console.log("dataaaaaaaaaaaaaaaaaaaaaa",this.companies)
                   console.log("ressssssssss",Response.data.data)
@@ -394,16 +424,20 @@
         //      })
         //     },
 
-             getAllCurrency(){
-              getAllCurrency().then(Response=>{
+             getAllCurrency(id){
+              getAllCurrency(this.id).then(Response=>{
+                  console.log("id--------------------",this.id)
                   this.currencies=Response.data.data
+                  console.log(Response)
+                  console.log("currencies--------------------",this.currencies)
+
               }).catch(error=>{
                   console.log(error);
               })
           },
           
-          getAllNationality(){
-              getAllNationality().then(Response=>{
+          getAllNationality(id){
+              getAllNationality(this.id).then(Response=>{
                   this.nationalities=Response.data.data
                   console.log("--------------------",Response);
                   console.log("sssssssssssssssssssssssssssssss",this.nationalities);
@@ -415,15 +449,15 @@
 
 
 
-        getAllCities(){
-              getAllCities().then(Response=>{
+        getAllCities(id){
+              getAllCities(this.id).then(Response=>{
                   this.cities=Response.data.data
               }).catch(error=>{
                   console.log(error);
               })
           },
-         getAllCountries(){
-              getAllCountries().then(Response=>{
+         getAllCountries(id){
+              getAllCountries(this.id).then(Response=>{
                   this.countries=Response.data.data
               }).catch(error=>{
                   console.log(error);

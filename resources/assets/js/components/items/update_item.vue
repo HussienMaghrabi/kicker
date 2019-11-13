@@ -49,12 +49,17 @@
             <div class="column is-12">
                 <b-field >  
                     <label class="column is-2 filter_label">Item name</label>
-                    <b-input  class="column is-4" type="text" style="margin-left: -10%;"  placeholder="item name"></b-input>
+                    <b-input  class="column is-4" type="text" style="margin-left: -9%;"  placeholder="item name"
+                    
+                    v-for="item in items" :key="item.id" v-model="item.name" 
+                    ></b-input>
                 </b-field>       
 
                 <b-field>
                     <label class="column is-2 filter_label">Description</label>
-                    <b-input class="column is-4"  type="textarea" style="margin-left:-10%;" ></b-input>
+                    <b-input class="column is-4"  type="textarea" style="margin-left:-9%;" 
+                     v-for="desc in description" :key="desc.id" v-model="desc.description" 
+                    ></b-input>
                 </b-field>
             </div>
 
@@ -100,9 +105,12 @@
 </template>
 
 <script>
+import {getItemName ,getDescription } from './../../calls'
 export default {
      data() {
         return {
+            items:[],
+            description:[],
             dropFiles: [],
             phones:[{
                 newPhone:''
@@ -138,7 +146,51 @@ export default {
             seen:false,
         }
      },
+    mounted() {
+            this.getItemName()
+            this.getDescription()
+        },
+        
+    created() {
+            this.id = this.$route.params.id
+        },
+
       methods: {
+        
+        //   getItemName(){
+        //     getItemName(this.id)-then(Response=>{ 
+        //           this.items=Response.data.data
+        //           console.log("items---------------------------------",Response)
+        //           console.log("items---------------------------------")
+
+        //       }).catch(error=>{
+        //           console.log(error);
+        //       })
+
+        // },
+
+        getItemName(id){
+              getItemName(this.id).then(Response=>{
+                  console.log(Response)
+                  this.items=Response.data.data
+                  console.log("--------------------",this.items)
+
+              }).catch(error=>{
+                  console.log(error);
+              })
+          },
+
+          getDescription(id){
+              getDescription(this.id).then(Response=>{
+                  console.log(Response)
+                  this.description=Response.data.data
+                  console.log("--------------------",this.items)
+
+              }).catch(error=>{
+                  console.log(error);
+              })
+          },
+          
         removeAddressfield(indexAddress,address){
            var idx = this.addresses.indexOf(address);
             console.log(idx, indexAddress);
@@ -156,8 +208,12 @@ export default {
                 zipCode:''  
             });
             
-        }
-      }
+        },
+
+        
+        
+      },
+    
     
 }
 </script>
