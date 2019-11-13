@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 class ItemController extends Controller
 {
 
+    public function index(){
+        //
+    }
+
     public function itemCompany($id){
         $data = propsal_item::getItem($id);
         return $this->successResponse($data);

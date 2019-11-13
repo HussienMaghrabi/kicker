@@ -290,7 +290,7 @@ export const changeLeadHot = (data) => {
 }
 
 // Change Lead Hot Status
-export const getCountries = () => {
+export const getCountry = () => {
     return axios.get('/admin/getCountries')
 }
 export const getcities = () => {
@@ -329,7 +329,7 @@ export const deleteRental = (id) => {
 }
 // Change Lead Hot Status
 export const getLeadData = (id) => {
-    return axios.get('/admin/getLeadData/'+id)
+    return axios.get('/api/lead/'+id)
 }
 
 // Add Call
@@ -2667,8 +2667,8 @@ export const getAllCompanies = () => {
 }
 
 //showcompany_nationality
-export const getAllNationality = () =>{
-    return axios.get('/api/company/'+71)
+export const getAllNationality = (id) =>{
+    return axios.get('/api/company/'+id)
 }
 
 export const addNewProposedCompany=(data)=>{
@@ -2716,13 +2716,13 @@ export const getAllItem=(id)=>{
     return axios.get('/admin/getAllItem/'+id)
 }
 // edit lead
-export const edit_comapany_data = (data) => {
-    return axios.post('/admin/edit_comapany_data', data)
+export const edit_comapany_data = (id) => {
+    return axios.post('/api/lead/'+id)
 }
 
 // edit address
-export const edit_address = (data) => {
-    return axios.post('/admin/edit_address', data)
+export const edit_address = (id) => {
+    return axios.post('/api/lead'+id)
 }
 
 export const getAllContactPerson=(id)=>{
@@ -2736,9 +2736,6 @@ export const Getproposed=(id)=>{
 }
 export const getAllProposalCompanies=()=>{
     return axios.get('/admin/getAllProposalCompanies')
-}
-export const getProposedCompanyData=()=>{
-    return axios.get('/api/company/'+71)
 }
 
 export const getMyItem=()=>{
@@ -2761,21 +2758,52 @@ export const getselectitem=(id)=>{
     return axios.get('/api/itemById/'+id)
     
 };
-//showcomapny_companyname
-export const ShowCompanyData=()=>{
-    return axios.get('/api/company/'+71)
+//showcomapny_allinputdata
+export const ShowCompanyData=(id)=>{
+    return axios.get('/api/company/'+id)
     
 };
 
 //showcomapny_currency
-export const getAllCurrency=()=>{
-    return axios.get('/api/company/'+71)
+export const getAllCurrency=(id)=>{
+    return axios.get('/api/currencyById/'+id)
 }
 //showcomapny_country
-export const getAllCountries=()=>{
-    return axios.get('/api/company/'+71)
+export const getAllCountries=(id)=>{
+    return axios.get('/api/company/'+id)
 }
 //showcomapny_city
 export const getAllCities=(id)=>{
-    return axios.get('/api/company/'+71)
+    return axios.get('/api/company/'+id)
+};
+
+
+//updateitem _itemname
+export const getItemName=(id)=>{
+    return axios.get('/api/item/'+id)
+};
+
+
+//updateitem _description
+export const getDescription=(id)=>{
+    return axios.get('/api/item/'+id)
+};
+
+//showlead_allinputdata
+export const ShowLeadData=(id)=>{
+    return axios.get('/api/lead/'+id)
+    
+};
+
+//showlead_countries
+export const getcountry=(id)=>{
+    return axios.get('/api/lead/'+id)
+    
+};
+
+
+//showlead_city
+export const getcity=(id)=>{
+    return axios.get('/api/lead/'+id)
+    
 };
