@@ -290,7 +290,7 @@ export const changeLeadHot = (data) => {
 }
 
 // Change Lead Hot Status
-export const getCountry = () => {
+export const getCountries = () => {
     return axios.get('/admin/getCountries')
 }
 export const getcities = () => {

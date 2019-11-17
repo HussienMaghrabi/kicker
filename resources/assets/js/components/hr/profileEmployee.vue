@@ -6,7 +6,7 @@
            </div>
 
            <div style="margin-top:5%;" class="is-4">
-               <i class="far fa-user"></i>    <h4 style="display:-webkit-inline-box;color:#b07d12;font-weight:700;"> 
+               <i class="far fa-user"></i>    <h4 style="display:-webkit-inline-box;color:#b07d12;font-weight:700;">
                    {{ employees.en_first_name }}
                </h4>
            </div> 

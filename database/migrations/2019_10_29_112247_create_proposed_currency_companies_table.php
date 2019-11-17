@@ -16,10 +16,11 @@ class CreateProposedCurrencyCompaniesTable extends Migration
         Schema::create('proposedCurrency_companies', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('currency_id')->nullable($value=true);
-            $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
             $table->unsignedInteger('proposed_company_id')->nullable($value=true);
-            $table->foreign('proposed_company_id')->references('id')->on('proposed_company')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
+            $table->foreign('proposed_company_id')->references('id')->on('proposed_company')->onDelete('cascade');
         });
     }
 

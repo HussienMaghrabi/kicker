@@ -15,12 +15,6 @@ class ProposedCompanyTable extends Migration
     {
         Schema::create('proposed_company', function (Blueprint $table) {
             $table->increments('id');
-            //$table->unsignedInteger('company_id');
-           // $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
-            // $table->unsignedInteger('contact_id');
-            // $table->foreign('contact_id')->references('id')->on('contacts_proposed')->onDelete('cascade');
-            // $table->unsignedInteger('address_id');
-            // $table->foreign('address_id')->references('id')->on('proposedCompany_addresses')->onDelete('cascade');
             $table->string('name');
             $table->string('activity');
             $table->string('introduction');
