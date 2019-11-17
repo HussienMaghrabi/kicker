@@ -1,5 +1,5 @@
   <template>
-    <div class="container" style="background-color:#fff;padding:3%">
+    <div class="container" style="background-color:#fff;padding:1%">
         <div class="columns is-12 is-mobile" style="margin-bottom:3%">
             <div class="column is-2">
                 <b class="newCompany" style="font-size:18px">New Lead</b>
@@ -11,83 +11,127 @@
         </div>
 
         <div class="columns is-12" style="margin-top:10px;padding-bottom:15px">
-            <div class="column is-2">
-                <!-- <b-field style="padding-right: 6px; max-height: 200px; max-width: 200px;">
-                    <b-upload v-model="NewCompany"
-                              multiple
-                              drag-drop  @change="" required>
-                        <section class="section">
-                            <div class="content has-text-centered">
-                                <img thumbnail fluid  
-                                v-for="newcomp in NewCompany" :key="newcomp.id"
-                                :src="`/img/${newcomp.image}`" alt="Image 1"/>
-                            </div>
-                        </section>
-                    </b-upload>
-
-
-                    <div class="tags" >
-                        <span v-for="(file, index) in NewCompany.dropFiles"
-                              :key="index"
-                              class="tag is-primary" >
-                            {{file.name}}
-                            <button class="delete is-small"
-                                    type="button"
-                                    @click="deleteDropFile(index)">
-                            </button>
-                        </span>
-                    </div>
-                </b-field> -->
-            </div>
+            <div class="column is-2" style="margin-top:6%">  </div>
             
-             <div class="column is-6">
-                 
+             <div class="column is-5" style="margin-top:6%">
+
                 <b-field>
-                    <label class="column is-3">Company Name</label>
-                    <b-input  expanded v-for="company in companies" :key="company.id" v-model="company.company_name" type="text"> </b-input>
+                    <label class="column is-4">Company Name</label>
+                    <b-input style="margin-left:5%"  
+                     v-for="company in companies" :key="company.id"
+                      v-model="company.company_name" type="text"> </b-input>
 
                  
                 </b-field>   
                 <b-field>
-                    <label class="column is-3">Lead Type</label>
-                    <b-input v-for="lead in leads "  :key="lead.id" v-model="lead.lead_type"  type="text" expanded  ></b-input>
+                    <label class="column is-4">Lead Type</label>
+                    <b-input  style="margin-left:5%; " v-for="lead in leads "
+                     :key="lead.id" v-model="lead.lead_type"  type="text"   ></b-input>
                 </b-field>
-                <b-field>
-                    <label class="column is-3">Lead Status</label>
-                    <b-input v-for="lead in lead_status "  :key="lead.id" v-model="lead.lead_status"  type="text" expanded  ></b-input>
-                </b-field>
-                 <b-field v-for="(data, index) in phones" :key="'a'+index"  >
+             
+                 <b-field v-for="(data, index) in companyphones" :key="'a'+index"  >
 
-                    <label class="column is-3">Phone</label>
+                    <label class="column is-4">Phone</label>
                     <b-input class="Leaad" type="number" style="margin-left:5%;"   min="0" 
                        v-for="phone in company_phone " :key="phone.id"
                      v-model="phone.phone" ></b-input>
-                    <div class="column is-3">
-                        <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removePhoneField(index,data)"></span>
-                        <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addPhoneField"></span>
+                    <div class="column is-4">
+                        <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeCompanyPhone(index,data)"></span>
+                        <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addCompanyPhone"></span>
                     </div>
                 </b-field>
 
-                 <b-field v-for="(data, index) in mobiles" :key="'b'+index" >
-                      <label class="column is-3">Mobile</label>
+                 <b-field v-for="(data, index) in companymobiles" :key="'b'+index" >
+                      <label class="column is-4">Mobile</label>
                       <b-input class="Leaad" type="number" style="margin-left:5%;" min="0" 
                           v-for="mob in company_mobile " :key="mob.id"
                      v-model="mob.mobile" ></b-input>
-                      <div class="column is-3">
-                        <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeMobileField(index,data)"></span>
-                        <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addMobileField"></span> 
+                      <div class="column is-4">
+                        <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeCompanyMobile(index,data)"></span>
+                        <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addCompanyMobile"></span> 
                       </div>
                 </b-field>
 
-                <b-field v-for="(data, index) in emails" :key="'d'+index" >
-                      <label class="column is-3">Email</label>
-                      <b-input class="Leaad" type="email" style="margin-left:5%;"  
+                <b-field v-for="(data, index) in companyemails" :key="'d'+index" >
+                      <label class="column is-4">Email</label>
+                      <b-input class="Leaad" type="email" style="margin-left:5%;"   min="0" 
                       v-for="mail in company_email " :key="mail.id"
                        v-model="mail.compamymail" ></b-input>
-                      <div class="column is-3">
-                        <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeMailField(index,data)"></span> 
-                        <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addMailField"></span> 
+                      <div class="column is-4">
+                        <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeCompanyMail(index,data)"></span> 
+                        <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addCompanyMail"></span> 
                       </div>
+                </b-field>
+
+                <b-field v-for="(data, index) in companyfaxes" :key="'b'+index" >
+                      <label class="column is-4">Fax</label>
+                      <b-input class="Leaad" type="number" style="margin-left:5%;" min="0" 
+                          v-for="fax in faxes " :key="fax.id"
+                     v-model="fax.mobile" ></b-input>
+                      <div class="column is-4">
+                        <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeFaxField(index,data)"></span>
+                        <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addFaxField"></span> 
+                      </div>
+                </b-field>
+                
+
+            
+
+            </div>
+
+            <div class="column is-5" style="margin-top:6%">
+                
+                
+                  <b-field style="padding-bottom: 1%;">
+                    <label class="column is-4">Webiste</label>
+                    <b-input style="margin-left:5%"  
+                     v-for="company in companies" :key="company.id"
+                      v-model="company.company_name" type="text"> </b-input>
+
+                 
+                </b-field>   
+
+                <b-field style="padding-bottom: 1%;">
+                    <label class="column is-4">Industry</label>
+                    <b-input style="margin-left:5%"  
+                     v-for="company in companies" :key="company.id"
+                      v-model="company.company_name" type="text"> </b-input>
+
+                 
+                </b-field>   
+
+                   <b-field style="padding-bottom: 1%;">
+                    <label class="column is-4">Annual Revenu</label>
+                    <b-input style="margin-left:5%"  
+                     v-for="company in companies" :key="company.id"
+                      v-model="company.company_name" type="text"> </b-input>
+
+                 
+                </b-field>   
+
+                  <b-field style="padding-bottom: 1%;">
+                    <label class="column is-4">Employees</label>
+                    <b-input style="margin-left:5%"  
+                     v-for="company in companies" :key="company.id"
+                      v-model="company.company_name" type="text"> </b-input>
+
+                 
+                </b-field>   
+                 <b-field style="padding-bottom: 1%;">
+                    <label class="column is-4">Commercial registration</label>
+                    <b-input style="margin-left:5%"  
+                     v-for="company in companies" :key="company.id"
+                      v-model="company.company_name" type="text"> </b-input>
+
+                 
+                </b-field>   
+
+                 
+                 <b-field style="padding-bottom: 1%;">
+                    <label  class="column is-3">Rating</label>
+                    <b-select v-model="nationality_id" placeholder="Select Rating " expanded>
+                       <option v-for="nationality in nationalities " :key="nationality.id" :value="nationality.id" >{{nationality.nationality}}</option>
+                    </b-select>
                 </b-field>
 
             </div>
@@ -159,17 +203,6 @@
             </div>
 
             <div class="column is-5"  style="margin-top:6%">
-<!-- 
-                 <b-field v-for="(data, index) in faxes" :key="'c'+index" >
-                      <label class="column is-4">Fax</label>
-                      <b-input class="Leaad" type="number" style="margin-left:5%;" min="0"  
-                       v-for="fax in faxArr " :key="fax.id"
-                       v-model="fax.personal_fax" ></b-input>
-                      <div class="column is-1">
-                        <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeFaxField(index,data)"></span> 
-                        <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addFaxField"></span> 
-                      </div>
-                </b-field> -->
 
                 <b-field v-for="(data, index) in emails" :key="'d'+index" >
                       <label class="column is-4">Email</label>
@@ -199,7 +232,7 @@
             </div>
         </div>
         </div>
-
+<!-- begin address section -->
         <div class="columns is-12 plusSign" style="padding-bottom: 28px;border-bottom: solid 1px lightgray;">
             <h4 style="color:#9A9A9A">Address</h4>
             <div class="column is-1">
@@ -261,8 +294,256 @@
             </div>
          </div>
         </div>
+<br><br><br>
+         <!-- begin notes -->
+        
+      <div class="columns is-12 plusSign" style="padding-bottom: 28px;border-bottom: solid 1px lightgray;">
+         
+               <h4 style="color:#9A9A9A;">Notes for this lead</h4>
+              <div class="column is-1">
+             <i class="fas fa-angle-double-down" style="font-size: 31px; margin-left: 14%;" 
+               v-on:click="isHiddenNotes = !isHiddenNotes"></i>
+             
+            </div>
+          
+      </div>
 
-    
+      <div  class="columns is-12" style="background-color:#F3F3F3;margin-top:3% ; padding:4%" v-if="!isHiddenNotes"> 
+                
+                <div class=" columns is-6 notes">
+                     <b-field v-for="(data, index) in companymobiles" :key="'b'+index" >
+                    
+                      <b-input class="Leaad" type="text" style="margin-left:5%;" 
+                          v-for="mob in company_mobile " :key="mob.id" placeholder="Add new note"> </b-input>
+                      <div class="">
+                        <span v-if="index > 0"><img src="/images/remove.png" style="cursor:pointer;margin-top:5px" @click="removeCompanyMobile(index,data)"></span>
+                        <span v-else><img src="/images/add.png" style="cursor:pointer;margin-top:5px" @click="addCompanyMobile"></span> 
+                      </div>
+                </b-field>
+                </div>
+
+
+      </div>
+
+     <!-- end notes -->
+
+     <br><br><br>
+  <!-- begin attachment -->
+     <div class="columns is-12 plusSign" style="padding-bottom: 28px;border-bottom: solid 1px lightgray;">
+         
+               <h4 style="color:#9A9A9A;">Attachements</h4>
+              <div class="column is-1">
+             <i class="fas fa-angle-double-down" style="font-size: 31px; margin-left: 14%;" 
+               v-on:click ="isHiddenAttach=!isHiddenAttach"></i>
+             
+            </div>
+          
+      </div>
+      
+     <div class="columns is-12 is-mobile" style="margin-top:1% ; padding:4%" v-if="isHiddenAttach">
+       <div class="column is-8">
+              <b-field class="file">
+                    <b-upload v-model="file">
+                        <a class="button is-primary">
+                            <i class="fas fa-paperclip"></i>&nbsp &nbsp
+                            <span>Add An Attachement</span>
+                        </a>
+                    </b-upload>
+                    <span class="file-name" v-if="file">
+                        {{ file.name }}
+                    </span>
+              </b-field>
+        </div>
+     </div>
+
+     <!-- end attachment -->
+       <br><br><br>
+
+       <!-- begin events -->
+
+        <div class="columns is-12 is-mobile plusSign" style="padding-bottom: 28px;border-bottom: solid 1px lightgray;">
+               <h4 style="color:#9A9A9A;">Open activities and Events</h4>
+      
+           <div class="column is-1">
+               <i class="fas fa-angle-double-down" style="font-size: 31px; margin-left: 14%;" 
+               v-on:click="isHiddenEvents = !isHiddenEvents"></i>
+           </div>
+        </div>
+
+         <div class="columns is-12" style="margin-bottom:2%" v-if="!isHiddenEvents">
+            <div class="column is-2">
+                <b-field>
+                    <i class="fas fa-tasks"></i>&nbsp &nbsp
+                    <span style="color:rgb(100, 136, 213);cursor:pointer" @click="openModal">New Task</span>
+                </b-field>
+            </div>
+             <div class="column is-2">
+                <b-field>
+                    <i class="fas fa-calendar-alt"></i>&nbsp &nbsp
+                    <span  style="color:rgb(100, 136, 213);cursor:pointer" @click="openEventModal">New Event</span>
+                </b-field>
+            </div>
+            <!-- task model -->
+
+           <b-modal :active.sync="isComponentModalActive" has-modal-card>
+                        <div class="modal-card" style="width: 400px">
+                            <header class="modal-card-head">
+                                <p class="modal-card-title">Kickers</p>
+                            </header>
+                            <section class="modal-card-body">
+                            <b-field>
+                                <b-select v-model="task_contact" placeholder="Select Contact" expanded>
+                                    <option>Mohamed</option>
+                                </b-select>
+                            </b-field>
+
+                            <b-field>
+                                <b-input v-model="task_note" type="textarea" placeholder="Activity Description"></b-input>                                 
+                            </b-field>
+
+                            <b-field>
+                                <b-datepicker v-model="task_date"
+                                    icon="calendar-today">
+                                </b-datepicker>
+                            </b-field>
+                             
+                            <b-field>
+                                <i class="fas fa-bell"></i>&nbsp &nbsp
+                                <span  style="color:rgb(100, 136, 213)" v-on:click="isHiddenNotifications = !isHiddenNotifications">Notifications</span>
+                            </b-field>
+
+                            <div class="field" v-if="!isHiddenNotifications">
+                                <b-checkbox>Notify Me By System Notification</b-checkbox><br>
+                                <b-checkbox>Notify Me By SMS</b-checkbox><br>
+                                <b-checkbox>Notify Me By Mail</b-checkbox>
+                            </div>                   
+                            
+                            </section>
+                            <footer class="modal-card-foot">
+                                <b-button @click="savetask" type="is-info"><i class="fas fa-save"></i>&nbsp Save</b-button>
+                                <button class="button" type="button" @click="isComponentModalActive = false">Cancel</button>
+                            </footer>
+                        </div>
+                </b-modal>
+
+                  <!-- modal event -->
+
+                 <b-modal :active.sync="isComponentModalEventActive" has-modal-card>
+                        <div class="modal-card" style="width: 400px">
+                    
+                            <section class="modal-card-body">
+
+                                <b-field>
+                                    <b-select placeholder="Select Contact" expanded>
+                                        <option>Mohamed</option>
+                                    </b-select>
+                                </b-field>
+                                
+                                <h4>Kickers</h4>
+                                <b-field>
+                                    <b-select placeholder="Select Contact" expanded>
+                                        <option>Mohamed</option>
+                                        <option>Kirolos</option>
+                                    </b-select>
+                                </b-field>
+
+                                <b-field>
+                                    <b-input type="text" placeholder="Event Name"></b-input>                                 
+                                </b-field>
+                                
+                                <b-field>
+                                    <b-input type="textarea" placeholder="Details"></b-input>                                 
+                                </b-field>
+
+                                <b-field>
+                                    <b-select placeholder="Where" expanded>
+                                        <option>Cairo</option>
+                                    </b-select>
+                                </b-field>
+
+                                <b-field>
+                                    <b-datepicker
+                                        icon="calendar-today">
+                                    </b-datepicker>
+                                </b-field>
+
+                                <b-field>
+                                    <b-select placeholder="AT" expanded>
+                                        <option>12:00 pm</option>
+                                        <option>11:00 pm</option>
+                                    </b-select>
+                                </b-field>
+
+                                <b-field>
+                                    <b-datepicker
+                                        icon="calendar-today">
+                                    </b-datepicker>
+                                </b-field>
+
+                                <b-field>
+                                    <b-select placeholder="AT" expanded>
+                                        <option>12:00 pm</option>
+                                        <option>11:00 pm</option>
+                                    </b-select>
+                                </b-field>
+                                
+                                <b-field>
+                                    <i class="fas fa-bell"></i>&nbsp &nbsp
+                                    <span  style="color:rgb(100, 136, 213)" v-on:click="isHiddenNotificationsEvents = !isHiddenNotificationsEvents">Notifications</span>
+                                </b-field>
+
+                                <div class="field" v-if="!isHiddenNotificationsEvents">
+                                    <b-checkbox>Notify Me By System Notification</b-checkbox><br>
+                                    <b-checkbox>Notify Me By SMS</b-checkbox><br>
+                                    <b-checkbox>Notify Me By Mail</b-checkbox>
+                                </div>                   
+                                
+                            </section>
+                            <footer class="modal-card-foot">
+                                <b-button type="is-info"><i class="fas fa-save"></i>&nbsp Save</b-button>
+                                <button class="button" type="button" @click="isComponentModalEventActive = false">Cancel</button>
+                            </footer>
+                        </div>
+                </b-modal>
+
+                <!-- end modal event -->
+
+
+         </div>
+        <!--end events -->
+    <br><br><br>
+
+
+         <!-- begin Closed activities and Past Events -->
+         
+     <div class="columns is-12 is-mobile plusSign" style="padding-bottom: 28px;border-bottom: solid 1px lightgray;">
+          
+               <h4 style="color:#9A9A9A;">Closed activities and Past Events </h4>
+ 
+           <div class="column is-1">
+                <i class="fas fa-angle-double-down" style="font-size: 31px; margin-left: 14%;" 
+               v-on:click="isHiddenActivity = !isHiddenActivity"></i>
+           </div>
+
+            
+    </div>
+
+     <div class="columns is-12" style="margin-bottom:2%" v-if="!isHiddenActivity">
+            <div class="column is-2">
+                <b-field>
+                    <i class="fas fa-tasks"></i>&nbsp; &nbsp;
+                    <span style="color:rgb(100, 136, 213);cursor:pointer" >Add Closed Activity</span>
+                </b-field>
+            </div>
+             <div class="column is-2">
+                <b-field>
+                    <i class="fas fa-calendar-alt"></i>&nbsp; &nbsp;
+                    <span  style="color:rgb(100, 136, 213);cursor:pointer" >Add Past Event</span>
+                </b-field>
+            </div>
+            </div>
+    <!-- end closed activity modal -->
+    <br><br><br>
          <div class="level">
              <div class="level-item filters">
                  <div class="field  mr-10">
@@ -285,14 +566,12 @@
 </template>
 
 <script>
-    import{getcity,getcountry, dashgetstatus,
-    addNewProposedCompany,updateCompany,getProposedCompanyData,
-    
-    ShowLeadData, getActivity ,getCurrency}   from './../../calls'
+    import{getcity,getcountry,
+    ShowLeadData }   from './../../calls'
     export default {
         data() {
             return {
-              
+                task_contact:"",
                 contactsArray:[],
                 removebtn:'',
                 title:'',
@@ -329,7 +608,9 @@
                 nationality_id:[],
                 city_id:[],
                 country_id:[],
-               
+               ComMobileArr:[],
+               ComPhoneArr:[],
+               ComemailArr:[],
                 companyName:'',
                 companies: [],
                 activities:[],
@@ -338,30 +619,45 @@
                 Introduction:[],
                 dropFiles: [],
                 phones:[{ phone:[] }],
-
+                companyphones:[ {companyphone:[]} ],
+                companymobiles:[{ companymobile:[] }],
+                companyemails:[{companyemail:[]}],
+                companyfaxes:[
+                    {
+                        companyfax:[]
+                    }
+                ],
+                faxes:[],
                 mobileArr:[],
                 emailArr:[],
                 faxArr:[],
                 contact_array: [],
                 address_array:[],
-                // newPhoneArr:[],
-                // newPhone:null,
-
+                isHiddenAttach:false,
+                isHiddenNotes:true,
                 mobiles:[{
                     mobiles:[]
                 }],
                 emails:[{
                     emails:[]
                 }],
-                faxes:[{
-                    faxes:[]
-                }],
+                
                 addresses:[{
                     addresses:[]
                 }],
                 contacts:[{
                     contacts:[]
                 }],
+                file: null,
+                isHiddenEvents:true,
+                isComponentModalActive: false,  
+                isComponentModalEventActive: false,  
+                isHiddenActivity:true,
+                isComponentModalColsedActivity:false,
+                isHiddenNotificationsEvents:true,
+                isHiddenNotifications:true,
+                 task_date:"",
+                 task_note:'',
             }
         },
         mounted() {
@@ -378,6 +674,14 @@
             this.id = this.$route.params.id
         },
         methods: {
+            savetask(){
+                     this.task_array.push({
+                        task_contact:this.task_contact,
+                        task_note:this.task_note,
+                        task_date:this.task_date
+                     })
+                     console.log("task",this.task_array)
+        },
             getData(){
                  ShowLeadData(this.id).then(Response=>{
                 
@@ -396,7 +700,7 @@
                  this.first_name=Response.data.data
                  this.last_name=Response.data.data
                  this.phoness=Response.data.data
-                this.faxArr=Response.data.data
+             
                 this.email=Response.data.data
                  this.position=Response.data.data
                  this.status=Response.data.data
@@ -410,6 +714,8 @@
                 this.company_phone=Response.data.data
                 this.company_mobile=Response.data.data
                 this.company_email=Response.data.data
+                 this.faxes=Response.data.data
+
 
 
             
@@ -453,6 +759,30 @@
                 this.contacts.splice(idx, 1);
             }
         },
+         removeCompanyPhone(indexph,data){
+
+            var idx = this.companyphones.indexOf(data);
+            if (idx > -1) {
+             this.companyphones.splice(idx,1);
+             this.ComPhoneArr[indexph]='';
+            }
+
+        },
+         removeCompanyMobile(index,data){
+            var idx = this.companymobiles.indexOf(data);
+            if (idx > -1) {
+                this.companymobiles.splice(idx, 1);
+                 this.ComMobileArr[index]='';
+            }
+        },
+         removeCompanyMail(indexMail,email){
+            var idx = this.companyemails.indexOf(email);
+            console.log(idx, indexMail);
+            if (idx > -1) {
+                this.companyemails.splice(idx, 1);
+                this.ComemailArr[indexMail]='';
+            }
+        },
         removePhoneField(index,data){
 
             var idx = this.phones.indexOf(data);
@@ -468,7 +798,7 @@
             console.log(idx, indexMob);
             if (idx > -1) {
                 this.mobiles.splice(idx, 1);
-                 this.mobiles[indexMob]='';
+                 this.mobileArr[indexMob]='';
             }
         },
         removeMailField(indexMail,email){
@@ -476,33 +806,47 @@
             console.log(idx, indexMail);
             if (idx > -1) {
                 this.emails.splice(idx, 1);
-                this.emails[indexMail]='';
+                this.emailArr[indexMail]='';
             }
         },
         removeFaxField(indexFax,fax){
-             var idx = this.faxes.indexOf(fax);
+             var idx = this.companyfaxes.indexOf(fax);
             console.log(idx, indexFax);
             if (idx > -1) {
-                this.faxes.splice(idx, 1);
-                this.faxes[indexFax]='';
+                this.companyfaxes.splice(idx, 1);
+                this.faxArr[indexFax]='';
 
             }
         },
         deleteDropFile(index) {
             this.dropFiles.splice(index, 1)
         },
+        addCompanyPhone(){
+            this.companyphones.push(this.companyphones.length+1)
+            this.flag+=1;
+        },
+         addCompanyMobile(){
+            this.companymobiles.push(this.companymobiles.length+1)
+            this.flag+=1;
+        },
+         addCompanyMail(){
+         this.companyemails.push(this.companyemails.length+1)
+        },
+
         addPhoneField(){
             this.phones.push(this.phones.length+1)
             this.flag+=1;
         },
         addMobileField(){
-        this.mobiles.push(this.mobiles.length+1)
+            this.mobiles.push(this.mobiles.length+1)
+
+
         },
         addMailField(){
          this.emails.push(this.emails.length+1)
         },
         addFaxField(){
-            this.faxes.push( this.faxes.length+1)
+            this.companyfaxes.push( this.companyfaxes.length+1)
         },
          addAddress(){
          this.addresses.push( this.addresses.length+1)
@@ -512,7 +856,20 @@
          this.contacts.push( this.contacts.length+1)
 
 
-        }
+        },
+         toggleInputsActive(){
+                this.disabled = !this.disabled
+        },
+
+        openModal(){
+            this.isComponentModalActive = true
+        },
+        openEventModal(){
+            this.isComponentModalEventActive = true
+        },
+             openColsedActivityModal(){
+            this.isComponentModalColsedActivity = true
+        },
       }
 }
 </script>
@@ -551,6 +908,14 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
     margin-bottom: 2rem;
     margin-left: -2% !important;
+}
+
+.notes{
+    width: 100% !important;
+    /* margin-left: -28%; */
+}
+.file-name {
+    margin-left: 3% !important; 
 }
 </style>
 
