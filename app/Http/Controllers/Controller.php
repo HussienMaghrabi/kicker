@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Session;
+use App\AgentToken;
 
 class Controller extends BaseController
 {
@@ -30,6 +31,20 @@ class Controller extends BaseController
             'data'    => $data
         );
         return response()->json($response);
+    }
+
+    #------------------ Auth ----------------
+    public function auth()
+    {
+        if (request()->header('Authorization'))
+        {
+            $user = AgentToken::where('token', request()->header('Authorization'))->first();
+            if ($user)
+            {
+                return $user->user_id;
+            }
+        }
+        return 0;
     }
 
 

@@ -18,7 +18,7 @@ class CreateMeetingsTable extends Migration
             $table->text('duration');
             $table->date('date');
             $table->time('time');
-            $table->integer('probability');
+            $table->text('probability');
             $table->integer('projects');
             $table->text('Description');
             $table->unsignedInteger('user_id')->nullable($value=true);
@@ -27,7 +27,7 @@ class CreateMeetingsTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('lead_id')->references('id')->on('leads')->onDelete('cascade');
+            $table->foreign('lead_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
 
         });

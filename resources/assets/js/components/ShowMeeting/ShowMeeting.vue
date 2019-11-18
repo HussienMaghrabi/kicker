@@ -22,13 +22,13 @@
                                 </div>
                             </div>
                             <hr>
-                             <div class="column is-12">
-                                <b><label> Agent: </label></b>
-                                <div class="column is-6">
-                                    <b-input type="text"  :disabled="disabled" v-model="meetings.agent"/>
-                                </div>
-                            </div>
-                            <hr>
+<!--                             <div class="column is-12">-->
+<!--                                <b><label> Agent: </label></b>-->
+<!--                                <div class="column is-6">-->
+<!--                                    <b-input type="text"  :disabled="disabled" v-model="meetings.agent"/>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <hr>-->
                               <div class="column is-12">
                                 <b><label> Duration: </label></b>
                                 <div class="column is-6">
@@ -49,13 +49,13 @@
                                     <b-input type="text"  :disabled="disabled" v-model="meetings.location"/>
                                 </div>
                             </div>
-                            <hr>
-                              <div class="column is-12">
-                                <b><label> Projects: </label></b>
-                                <div class="column is-6">
-                                    <b-input type="text"  :disabled="disabled" v-model="meetings.projects"/>
-                                </div>
-                            </div>
+<!--                            <hr>-->
+<!--                              <div class="column is-12">-->
+<!--                                <b><label> Projects: </label></b>-->
+<!--                                <div class="column is-6">-->
+<!--                                    <b-input type="text"  :disabled="disabled" v-model="meetings.projects"/>-->
+<!--                                </div>-->
+<!--                            </div>-->
                             <hr>
                               <div class="column is-12">
                                 <b><label> Probability: </label></b>

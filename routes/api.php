@@ -19,6 +19,7 @@ Route::middleware('api')->namespace('Api')->group(function () {
     Route::resource('item', 'ItemController');
     Route::resource('company', 'ProposedCompanyController');
     Route::resource('invoice', 'InvoicesController');
+    Route::resource('meeting', 'MeetingController');
     Route::get('allProposalById/{id}', 'ProposalController@all_proposal_by_id');
     Route::get('itemById/{id}', 'ItemController@itemCompany');
     Route::get('editProposal/{id}', 'ProposalController@show');
